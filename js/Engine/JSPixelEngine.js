@@ -1,7 +1,7 @@
 import {JSPixelApp} from "./JSPixelApp";
-import {Layer} from "../Enums/Layer";
+import {Layer} from "../Enum/Layer";
 import {GraphicsManager} from "./GraphicsManager";
-import {ResourceManager} from "../Resources/ResourceManager";
+import {ResourceManager} from "../Resource/ResourceManager";
 
 let JSPixelEngine = class JSPixelEngine {
     constructor() {

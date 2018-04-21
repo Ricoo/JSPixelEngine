@@ -40,8 +40,8 @@ let ResourceManager = class ResourceManager {
 
     }
 
-    get sounds() {return this._sounds;}
-    get sprites() {return this._sprites;}
+    static get sounds() {return ResourceManager.instance._sounds;}
+    static get sprites() {return ResourceManager.instance._sprites;}
     get done() {return (this._sprites instanceof SpriteList &&
                         this._sounds instanceof SoundList);}
 

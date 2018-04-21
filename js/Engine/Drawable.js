@@ -1,8 +1,8 @@
-import {ResourceManager} from "../Resources/ResourceManager";
+import {ResourceManager} from "../Resource/ResourceManager";
 
 let Drawable = class Drawable {
     constructor(sprite, name, layer, posX=0, posY=0, scale=1) {
-        this._sprite = ResourceManager.instance.sprites.findByName(sprite);
+        this._sprite = ResourceManager.sprites.findByName(sprite);
         this._x = posX;
         this._y = posY;
         this._scale = scale;
