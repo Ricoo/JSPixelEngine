@@ -1,8 +1,14 @@
 import {Drawable} from "./Drawable";
+import {JSPixelEngine} from "./JSPixelEngine";
 
-let DrawableList = class DrawableList {
+let GraphicsManager = class GraphicsManager {
     constructor() {
+        if (GraphicsManager.instance !== undefined) {
+            return GraphicsManager.instance;
+        }
         this._list = [];
+
+        GraphicsManager.instance = this;
     }
 
     add(drawable) {
@@ -27,6 +33,8 @@ let DrawableList = class DrawableList {
         return this._list.find(function(elem) {return elem.name === name;});
     }
 
+    static register(drawable) {GraphicsManager.instance.add(drawable);}
+
 };
 
-export {DrawableList};
+export {GraphicsManager};

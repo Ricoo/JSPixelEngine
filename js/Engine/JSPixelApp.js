@@ -36,7 +36,7 @@ let JSPixelApp = class JSPixelApp {
     getEngine(){return this._engine;}
     get context(){return this._context;}
     addDrawable(drawable) {
-        this._engine.drawables.add(drawable);
+        this._engine.drawables.register(drawable);
     }
     removeDrawable(drawable){this._engine.drawables.remove(drawable)}
 };

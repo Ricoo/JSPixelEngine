@@ -1,6 +1,6 @@
 import {JSPixelApp} from "./JSPixelApp";
 import {Layer} from "../Enums/Layer";
-import {DrawableList} from "./DrawableList";
+import {GraphicsManager} from "./GraphicsManager";
 import {ResourceManager} from "../Resources/ResourceManager";
 
 let JSPixelEngine = class JSPixelEngine {
@@ -10,7 +10,7 @@ let JSPixelEngine = class JSPixelEngine {
         }
 
         this._registeredApps = []; //This is a list in case we need to manage several canvas at once
-        this._drawables = new DrawableList();
+        this._drawables = new GraphicsManager();
 
         //TODO manage all stuff
         JSPixelEngine.instance = this;
