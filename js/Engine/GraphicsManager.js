@@ -1,14 +1,13 @@
 import {Drawable} from "./Drawable";
-import {JSPixelEngine} from "./JSPixelEngine";
 
 let GraphicsManager = class GraphicsManager {
     constructor() {
         if (GraphicsManager.instance !== undefined) {
             return GraphicsManager.instance;
         }
-        this._list = [];
-
         GraphicsManager.instance = this;
+
+        this._list = [];
     }
 
     add(drawable) {
@@ -34,6 +33,7 @@ let GraphicsManager = class GraphicsManager {
     }
 
     static register(drawable) {GraphicsManager.instance.add(drawable);}
+    static unregister(drawable) {GraphicsManager.instance.remove(drawable.name)}
 
 };
 

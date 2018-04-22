@@ -1,5 +1,6 @@
 import {JSPixelSettings} from "./JSPixelSettings";
 import {JSPixelEngine} from "./JSPixelEngine";
+import {GraphicsManager} from "./GraphicsManager";
 
 let JSPixelApp = class JSPixelApp {
     constructor(canvasName, settings = null) {
@@ -16,7 +17,7 @@ let JSPixelApp = class JSPixelApp {
         this._canvas = document.getElementById(canvasName);
         this._context = this._canvas.getContext("2d");
 
-        this._engine = JSPixelEngine.getInstance();
+        this._engine = new JSPixelEngine();
         this._engine.register(this);
 
         this._context.webkitImageSmoothingEnabled = false;
@@ -35,10 +36,10 @@ let JSPixelApp = class JSPixelApp {
     get name(){return this._name;}
     getEngine(){return this._engine;}
     get context(){return this._context;}
-    addDrawable(drawable) {
-        this._engine.drawables.register(drawable);
+    registerDrawable(drawable) {
+        GraphicsManager.register(drawable);
     }
-    removeDrawable(drawable){this._engine.drawables.remove(drawable)}
+    unregisterDrawable(drawable){GraphicsManager.unregister(drawable)}
 };
 
 export {JSPixelApp};

@@ -26,23 +26,23 @@ let Game = class Game extends JSPixelApp {
         let wand = new Drawable("wood_wand","wand", Layer.GUI, 0, 0, 10);
         GraphicsManager.register(wand);
 
-        window.onclick = () => {clickSound.play();};
-        window.onkeydown = (ev) => {
+  //      window.onclick = () => {clickSound.play();};
+ /*       window.onkeydown = (ev) => {
             switch (ev.keyCode) {
                 case KeyCode.arrowUp:
-                    wand.y--;
+                    wand.y-=5;
                     break;
                 case KeyCode.arrowDown:
-                    wand.y++;
+                    wand.y+=5;
                     break;
                 case KeyCode.arrowRight:
-                    wand.x++;
+                    wand.x+=5;
                     break;
                 case KeyCode.arrowLeft:
-                    wand.x--;
+                    wand.x-=5;
                     break;
             }
-        };
+        };*/
         console.log("game initialized");
     }
 

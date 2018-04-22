@@ -2,18 +2,19 @@ import {JSPixelApp} from "./JSPixelApp";
 import {Layer} from "../Enum/Layer";
 import {GraphicsManager} from "./GraphicsManager";
 import {ResourceManager} from "../Resource/ResourceManager";
+import {EventManager} from "./EventManager";
 
 let JSPixelEngine = class JSPixelEngine {
     constructor() {
+        //Singleton
         if (JSPixelEngine.instance !== undefined) {
             return JSPixelEngine.instance;
         }
+        JSPixelEngine.instance = this;
 
         this._registeredApps = []; //This is a list in case we need to manage several canvas at once
-        this._drawables = new GraphicsManager();
-
-        //TODO manage all stuff
-        JSPixelEngine.instance = this;
+        new GraphicsManager();
+        new EventManager();
     }
 
     register(app) {
@@ -53,19 +54,12 @@ let JSPixelEngine = class JSPixelEngine {
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
         this._registeredApps[0].frame();
         for (let layer in Layer) {
-            let list = this._drawables.layer(Layer[layer]);
+            let list = GraphicsManager.instance.layer(Layer[layer]);
             for (let i = 0; i < list.length; i++) {
                 list[i].draw(context);
             }
         }
         //TODO Implement Layer drawing system
-    }
-
-    get drawables() {return this._drawables;}
-
-
-    static getInstance() {
-        return new JSPixelEngine();
     }
 };
 
