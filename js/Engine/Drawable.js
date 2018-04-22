@@ -1,6 +1,15 @@
 import {ResourceManager} from "../Resource/ResourceManager";
 
 let Drawable = class Drawable {
+    /**
+     *
+     * @param sprite : String
+     * @param name : String
+     * @param layer : Layer
+     * @param posX : int
+     * @param posY : int
+     * @param scale : float
+     */
     constructor(sprite, name, layer, posX=0, posY=0, scale=1) {
         this._sprite = ResourceManager.sprites.findByName(sprite);
         this._x = posX;
@@ -11,9 +20,9 @@ let Drawable = class Drawable {
         this._name = name;
     }
 
-    draw() {
+    draw(context) {
         if (this._visible) {
-            this._sprite.draw(this._x, this._y, this._scale);
+            this._sprite.draw(context, this._x, this._y, this._scale);
         }
     }
 

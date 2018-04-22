@@ -4,11 +4,10 @@ import {SoundList} from "./SoundList";
 import {Sound} from "./Sound";
 
 let ResourceManager = class ResourceManager {
-    constructor(context) {
+    constructor() {
         if (ResourceManager.instance !== undefined) {
             return ResourceManager.instance;
         }
-        this._context = context;
         this._sprites = [];
         this._sounds = [];
         //this._progress = 0.0;
@@ -21,8 +20,7 @@ let ResourceManager = class ResourceManager {
         let soundList = [];
         let self = this;
         packageDescriptor.sprites.forEach(function(elem, index, array) {
-            spriteList.push(new Sprite(self._context,
-                elem["src"],elem["name"],elem["res"]));
+            spriteList.push(new Sprite(elem["src"],elem["name"],elem["res"]));
             if (index === array.length - 1) {
                 self._sprites = new SpriteList(spriteList);
             }
@@ -36,16 +34,10 @@ let ResourceManager = class ResourceManager {
         });
     }
 
-    resourceLoaded() {
-
-    }
-
     static get sounds() {return ResourceManager.instance._sounds;}
     static get sprites() {return ResourceManager.instance._sprites;}
     get done() {return (this._sprites instanceof SpriteList &&
                         this._sounds instanceof SoundList);}
-
-    static getInstance(){return ResourceManager.instance;}
 };
 
 export {ResourceManager}

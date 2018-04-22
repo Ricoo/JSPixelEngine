@@ -25,9 +25,9 @@ let JSPixelEngine = class JSPixelEngine {
         else {throw TypeError("Cannot register this, you may only register a JSPixelApp instance")}
     }
 
-    preStart(context, resourcePack) {
+    preStart(resourcePack) {
         if (this._resourceManager === undefined) {
-            this._resourceManager = new ResourceManager(context);
+            this._resourceManager = new ResourceManager();
             this._resourceManager.loadResources(resourcePack);
         }
         if (this._resourceManager.done === false) {
@@ -55,7 +55,7 @@ let JSPixelEngine = class JSPixelEngine {
         for (let layer in Layer) {
             let list = this._drawables.layer(Layer[layer]);
             for (let i = 0; i < list.length; i++) {
-                list[i].draw();
+                list[i].draw(context);
             }
         }
         //TODO Implement Layer drawing system

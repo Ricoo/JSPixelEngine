@@ -21,9 +21,9 @@ let Game = class Game extends JSPixelApp {
     }
 
     initialize() {
-        this.getEngine().preStart(this.context, resourceList);
+        this.getEngine().preStart(resourceList);
         let clickSound = ResourceManager.sounds.findByName("click");
-        let wand = new Drawable("wood_wand","wand", Layer.GUI, 0, 0, 4);
+        let wand = new Drawable("wood_wand","wand", Layer.GUI, 0, 0, 10);
         GraphicsManager.register(wand);
 
         window.onclick = () => {clickSound.play();};
