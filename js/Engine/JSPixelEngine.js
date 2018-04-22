@@ -59,7 +59,6 @@ let JSPixelEngine = class JSPixelEngine {
                 list[i].draw(context);
             }
         }
-        //TODO Implement Layer drawing system
     }
 };
 

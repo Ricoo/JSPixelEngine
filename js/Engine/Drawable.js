@@ -10,7 +10,7 @@ let Drawable = class Drawable {
      * @param posY : int
      * @param scale : float
      */
-    constructor(sprite, name, layer, posX=0, posY=0, scale=1) {
+    constructor(sprite, name, layer, posX=0, posY=0, scale=1.0) {
         this._sprite = ResourceManager.sprites.findByName(sprite);
         this._x = posX;
         this._y = posY;

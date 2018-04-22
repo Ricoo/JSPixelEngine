@@ -28,8 +28,8 @@ let Game = class Game extends JSPixelApp {
     initialize() {
         this.getEngine().preStart(resourceList);
         let clickSound = ResourceManager.sounds.findByName("click");
-        this.wand = new Drawable("wood_wand","wand", Layer.GUI, 0, 0, 1);
-        this.button = new GUIButton("button","button", "BUTTON", 50, 50, 4, "#000000", 55);
+        this.wand = new Drawable("wood_wand","wand", Layer.CHARACTERS, 0, 0, 2);
+        this.button = new GUIButton("button","button", "BUTTON", 50, 50, 2, "#000000", 27);
         this.text = new GUIText("randomText", "Hello i'm a text !", 200, 200);
 
         GraphicsManager.register(this.wand);
@@ -60,7 +60,7 @@ let Game = class Game extends JSPixelApp {
 };
 
 function init(){
-    let game = new Game();
+    new Game();
 }
 
 window.onload = init;

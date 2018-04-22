@@ -1,6 +1,5 @@
 import {JSPixelSettings} from "./JSPixelSettings";
 import {JSPixelEngine} from "./JSPixelEngine";
-import {GraphicsManager} from "./GraphicsManager";
 
 let JSPixelApp = class JSPixelApp {
     constructor(canvasName, settings = null) {

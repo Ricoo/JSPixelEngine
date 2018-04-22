@@ -69,3 +69,11 @@ x : int, the x position within the window
 y : int, the y position within the window
 ```
 For KeyUp and KeyDown, keys is an array containing the keys currently pressed
+```
+keys = [KeyCode.ctrl, Keycode.shift, KeyCode.t];
+```
+You can also get the current state of both mouse and keyboard using
+```
+let mouse = EventManager.mouse;
+let keyPressed = EventManager.keys;
+```

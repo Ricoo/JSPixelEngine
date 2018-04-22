@@ -2,7 +2,7 @@ import {Drawable} from "../Drawable";
 import {Layer} from "../../Enum/Layer";
 
 let GUIButton = class GUIButton extends Drawable {
-    constructor(sprite, name, text, posX, posY, scale = 1, textColor = "black", fontSize = 30) {
+    constructor(sprite, name, text, posX, posY, scale = 1.0, textColor = "black", fontSize = 30) {
         super(sprite, name, Layer.GUI, posX, posY, scale);
 
         this._text = text;

@@ -1,5 +1,4 @@
 import {Event} from "../Enum/Event";
-import {KeyCode} from "../Enum/KeyCode";
 
 let EventManager = class EventManager {
     constructor(){
@@ -67,14 +66,12 @@ let EventManager = class EventManager {
 
     addHandler(event, handler) {this._handlers[event].push(handler);}
     removeHandler(event, handler) {this._handlers[event].splice(this._handlers.indexOf(handler), 1);}
-    removeAllHandlers(event) {this._handlers[event] = []}
 
     static get mouse(){return EventManager.instance._mouse;}
     static get keys(){return EventManager.instance._keysPressed;}
 
     static registerHandler(event, handler) {EventManager.instance.addHandler(event, handler)}
     static unregisterHandler(event, handler) {EventManager.instance.removeHandler(event,handler);}
-    static removeAllHandlers(event) {}
 };
 
 export {EventManager};
