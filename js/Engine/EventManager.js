@@ -16,21 +16,23 @@ let EventManager = class EventManager {
         window.onkeyup = (ev) => {this.keyUp(ev)};
 
         this._keysPressed = [];
-        this._mouse = {click:"false",x:0,y:0};
+        this._mouse = {click:false,x:0,y:0};
         this._handlers = {};
         for (let ev in Event) {
             this._handlers[Event[ev]] = [];
         }
     }
 
-    mouseDown() {
+    mouseDown(ev) {
+        //ev.preventDefault();
         this._mouse.click = true;
         for (let handler of this._handlers[Event.MouseDown]) {
             handler(this._mouse);
         }
     }
 
-    mouseUp() {
+    mouseUp(ev) {
+        //ev.preventDefault();
         this._mouse.click = false;
         for (let handler of this._handlers[Event.MouseUp]) {
             handler(this._mouse);
@@ -46,6 +48,7 @@ let EventManager = class EventManager {
     }
 
     keyDown(ev) {
+        //ev.preventDefault();
         if (!this._keysPressed.includes(ev.keyCode))
             this._keysPressed.push(ev.keyCode);
         for (let handler of this._handlers[Event.KeyDown]) {
@@ -55,6 +58,7 @@ let EventManager = class EventManager {
     }
 
     keyUp(ev) {
+        //ev.preventDefault();
         this._keysPressed.splice(this._keysPressed.indexOf(ev.keyCode), 1);
         for (let handler of this._handlers[Event.KeyUp]) {
             handler(this._keysPressed);
@@ -64,6 +68,9 @@ let EventManager = class EventManager {
     addHandler(event, handler) {this._handlers[event].push(handler);}
     removeHandler(event, handler) {this._handlers[event].splice(this._handlers.indexOf(handler), 1);}
     removeAllHandlers(event) {this._handlers[event] = []}
+
+    static get mouse(){return EventManager.instance._mouse;}
+    static get keys(){return EventManager.instance._keysPressed;}
 
     static registerHandler(event, handler) {EventManager.instance.addHandler(event, handler)}
     static unregisterHandler(event, handler) {EventManager.instance.removeHandler(event,handler);}

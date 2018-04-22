@@ -4,15 +4,11 @@ import {GraphicsManager} from "./GraphicsManager";
 
 let JSPixelApp = class JSPixelApp {
     constructor(canvasName, settings = null) {
-        if (new.target === JSPixelApp) {
-            throw TypeError("You have to implement this class first")
-        }
-        if (this.initialize === undefined) {
-            throw SyntaxError("You cannot leave the void:initialize() method unimplemented")
-        }
-        if (this.frame === undefined) {
-            throw SyntaxError("You cannot leave the void:frame() method unimplemented")
-        }
+        //Abstract class
+        if (new.target === JSPixelApp) {throw TypeError("You have to implement this class first")}
+        if (this.initialize === undefined) {throw SyntaxError("You cannot leave the void:initialize() method unimplemented")}
+        if (this.frame === undefined) {throw SyntaxError("You cannot leave the void:frame() method unimplemented")}
+
         this._name = canvasName;
         this._canvas = document.getElementById(canvasName);
         this._context = this._canvas.getContext("2d");
@@ -36,11 +32,6 @@ let JSPixelApp = class JSPixelApp {
     get name(){return this._name;}
     getEngine(){return this._engine;}
     get context(){return this._context;}
-
-    static registerDrawable(drawable) {
-        GraphicsManager.register(drawable);
-    }
-    static unregisterDrawable(drawable){GraphicsManager.unregister(drawable)}
 };
 
 export {JSPixelApp};

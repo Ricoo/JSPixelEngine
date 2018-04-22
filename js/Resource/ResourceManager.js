@@ -5,14 +5,15 @@ import {Sound} from "./Sound";
 
 let ResourceManager = class ResourceManager {
     constructor() {
+        //Singleton
         if (ResourceManager.instance !== undefined) {
             return ResourceManager.instance;
         }
-        this._sprites = [];
-        this._sounds = [];
-        //this._progress = 0.0;
-
         ResourceManager.instance = this;
+
+        this._sprites = null;
+        this._sounds = null;
+        //this._progress = 0.0;
     }
 
     loadResources(packageDescriptor) {
