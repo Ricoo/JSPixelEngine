@@ -4,6 +4,8 @@ import {GraphicsManager} from "../js/Engine/GraphicsManager";
 import {Drawable} from "../js/Engine/Drawable";
 import {Layer} from "../js/Enum/Layer";
 import {KeyCode} from "../js/Enum/KeyCode";
+import {EventManager} from "../js/Engine/EventManager";
+import {Event} from "../js/Enum/Event";
 
 const resourceList = {
     audio:[
@@ -27,22 +29,21 @@ let Game = class Game extends JSPixelApp {
         GraphicsManager.register(wand);
 
   //      window.onclick = () => {clickSound.play();};
- /*       window.onkeydown = (ev) => {
-            switch (ev.keyCode) {
-                case KeyCode.arrowUp:
-                    wand.y-=5;
-                    break;
-                case KeyCode.arrowDown:
-                    wand.y+=5;
-                    break;
-                case KeyCode.arrowRight:
-                    wand.x+=5;
-                    break;
-                case KeyCode.arrowLeft:
-                    wand.x-=5;
-                    break;
+        EventManager.registerHandler(Event.MouseDown, (mouse) => {clickSound.play();})
+        EventManager.registerHandler(Event.KeyDown, (keys) => {
+            if (keys.includes(KeyCode.arrowRight)) {
+                wand.x += 5;
             }
-        };*/
+            if (keys.includes(KeyCode.arrowLeft)) {
+                wand.x -= 5;
+            }
+            if (keys.includes(KeyCode.arrowUp)) {
+                wand.y -= 5;
+            }
+            if (keys.includes(KeyCode.arrowDown)) {
+                wand.y += 5;
+            }
+        });
         console.log("game initialized");
     }
 

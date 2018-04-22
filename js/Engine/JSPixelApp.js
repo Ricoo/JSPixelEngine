@@ -36,10 +36,11 @@ let JSPixelApp = class JSPixelApp {
     get name(){return this._name;}
     getEngine(){return this._engine;}
     get context(){return this._context;}
-    registerDrawable(drawable) {
+
+    static registerDrawable(drawable) {
         GraphicsManager.register(drawable);
     }
-    unregisterDrawable(drawable){GraphicsManager.unregister(drawable)}
+    static unregisterDrawable(drawable){GraphicsManager.unregister(drawable)}
 };
 
 export {JSPixelApp};
