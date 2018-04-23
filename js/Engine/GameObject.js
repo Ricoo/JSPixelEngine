@@ -1,6 +1,7 @@
 import {ResourceManager} from "../Resource/ResourceManager";
+import {Properties} from "./Properties/Properties";
 
-let Drawable = class Drawable {
+let GameObject = class Drawable {
     /**
      *
      * @param sprite : String
@@ -18,6 +19,7 @@ let Drawable = class Drawable {
         this._visible = true;
         this._layer = layer;
         this._name = name;
+        this._properties = {};
     }
 
     draw(context) {
@@ -31,6 +33,21 @@ let Drawable = class Drawable {
         return (x > this._x && x < this._x + this._scale * this._sprite.res.x &&
                 y > this._y && y < this._y + this._scale * this._sprite.res.y
         );
+    }
+
+    attach(property) {
+        if (!property instanceof Properties) {
+            throw TypeError("You can only attach instances of Properties objects");
+        }
+        this._properties[property.name] = property;
+    }
+
+    property(name) {
+        return (this._properties[name]);
+    }
+
+    hasProperty(name) {
+        return this._properties.hasOwnProperty(name);
     }
 
     hide() {this._visible = false;}
@@ -50,4 +67,4 @@ let Drawable = class Drawable {
     get layer(){return this._layer;}
 };
 
-export {Drawable};
+export {GameObject};

@@ -1,4 +1,4 @@
-import {Drawable} from "./Drawable";
+import {GameObject} from "./GameObject";
 
 let GraphicsManager = class GraphicsManager {
     constructor() {
@@ -11,11 +11,11 @@ let GraphicsManager = class GraphicsManager {
     }
 
     add(drawable) {
-        if (drawable instanceof Drawable) {
+        if (drawable instanceof GameObject) {
             this._list.push(drawable);
         }
         else {
-            throw TypeError("You must provide an Drawable object");
+            throw TypeError("You must provide an GameObject object");
         }
     }
 

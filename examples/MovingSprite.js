@@ -2,7 +2,7 @@ import {JSPixelApp} from "../js/Engine/JSPixelApp";
 import {ResourceManager} from "../js/Resource/ResourceManager";
 import {GraphicsManager} from "../js/Engine/GraphicsManager";
 import {EventManager} from "../js/Engine/EventManager";
-import {Drawable} from "../js/Engine/Drawable";
+import {GameObject} from "../js/Engine/GameObject";
 import {Layer} from "../js/Enum/Layer";
 import {KeyCode} from "../js/Enum/KeyCode";
 import {Event} from "../js/Enum/Event";
@@ -28,7 +28,7 @@ let Game = class Game extends JSPixelApp {
     initialize() {
         this.getEngine().preStart(resourceList);
         let clickSound = ResourceManager.sounds.findByName("click");
-        this.wand = new Drawable("wood_wand","wand", Layer.CHARACTERS, 0, 0, 2);
+        this.wand = new GameObject("wood_wand","wand", Layer.CHARACTERS, 0, 0, 2);
         this.button = new GUIButton("button","button", "BUTTON", 50, 50, 2, "#000000", 27);
         this.text = new GUIText("randomText", "Hello i'm a text !", 200, 200);
 

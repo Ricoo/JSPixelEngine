@@ -1,7 +1,7 @@
-import {Drawable} from "../Drawable";
+import {GameObject} from "../GameObject";
 import {Layer} from "../../Enum/Layer";
 
-let GUIButton = class GUIButton extends Drawable {
+let GUIButton = class GUIButton extends GameObject {
     constructor(sprite, name, text, posX, posY, scale = 1.0, textColor = "black", fontSize = 30) {
         super(sprite, name, Layer.GUI, posX, posY, scale);
 

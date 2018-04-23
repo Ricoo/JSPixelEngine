@@ -51,7 +51,7 @@ const resourceList = {
 ```
 Then we need to add some stuff to be drawn and register it
 ```
-let menu = new Drawable("menu_icon", "menu", Layer.GUI)
+let menu = new GameObject("menu_icon", "menu", Layer.GUI)
 GraphicsManager.register(menu);
 ```
 

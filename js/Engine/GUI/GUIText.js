@@ -1,7 +1,7 @@
-import {Drawable} from "../Drawable";
+import {GameObject} from "../GameObject";
 import {Layer} from "../../Enum/Layer";
 
-let GUIText = class GUIText extends Drawable {
+let GUIText = class GUIText extends GameObject {
     constructor(name, text, posX, posY, textAlign = "left", textColor = "black", fontSize = 30) {
         super(null, name, Layer.ABOVEGUI, posX, posY);
 
