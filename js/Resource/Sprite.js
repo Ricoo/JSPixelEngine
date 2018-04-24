@@ -22,6 +22,8 @@ let Sprite = class Sprite {
     get width(){return this._width;}
     get height(){return this._height;}
     get name(){return this._name;}
+    get src(){return this._image.src;}
+    get image(){return this._image;}
 };
 
 export {Sprite}

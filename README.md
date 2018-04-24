@@ -10,10 +10,13 @@ JSPixelEngine is a pixel-art based game engine being developped in JavaScript
 
 ### Upcoming features
 
-- Hitboxes for sprites
-- Filters and matrices for sprite manipulation
-- Sprite atlases system
-- Management of two or more canvas instances running at once (to run a minimap for example)
+- Dynamic components for game objects :
+  - Colliders
+  - Animation management
+  - Event triggering
+  - Image/sprite filters
+- Sprite atlas system
+- Management of two or more canvas instances running at once (to run a minimap or for multiboxing/screen splitting for example)
 
 ### Usage
 

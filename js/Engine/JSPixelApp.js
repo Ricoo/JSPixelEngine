@@ -15,16 +15,16 @@ let JSPixelApp = class JSPixelApp {
         this._engine = new JSPixelEngine();
         this._engine.register(this);
 
-        this._context.webkitImageSmoothingEnabled = false;
-        this._context.mozImageSmoothingEnabled = false;
-        this._context.imageSmoothingEnabled = false;
-
         if (settings === null) {
             settings = new JSPixelSettings();
         }
+
         this._settings = settings;
         this._context.canvas.width = this._settings.resX;
         this._context.canvas.height = this._settings.resY;
+        this._context.webkitImageSmoothingEnabled = false;
+        this._context.mozImageSmoothingEnabled = false;
+        this._context.imageSmoothingEnabled = false;
     }
     
     set name(name) {this._name = name;}
