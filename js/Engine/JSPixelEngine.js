@@ -1,6 +1,6 @@
 import {JSPixelApp} from "./JSPixelApp";
 import {Layer} from "../Enum/Layer";
-import {GraphicsManager} from "./GraphicsManager";
+import {GameObjectManager} from "./GameObjectManager";
 import {ResourceManager} from "../Resource/ResourceManager";
 import {EventManager} from "./EventManager";
 
@@ -13,7 +13,7 @@ let JSPixelEngine = class JSPixelEngine {
         JSPixelEngine.instance = this;
 
         this._registeredApps = []; //This is a list in case we need to manage several canvas at once
-        new GraphicsManager();
+        new GameObjectManager();
         new EventManager();
     }
 
@@ -54,7 +54,7 @@ let JSPixelEngine = class JSPixelEngine {
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
         this._registeredApps[0].frame();
         for (let layer in Layer) {
-            let list = GraphicsManager.instance.layer(Layer[layer]);
+            let list = GameObjectManager.instance.layer(Layer[layer]);
             for (let i = 0; i < list.length; i++) {
                 list[i].draw(context);
             }

@@ -1,11 +1,11 @@
 import {GameObject} from "./GameObject";
 
-let GraphicsManager = class GraphicsManager {
+let GameObjectManager = class GameObjectManager {
     constructor() {
-        if (GraphicsManager.instance !== undefined) {
-            return GraphicsManager.instance;
+        if (GameObjectManager.instance !== undefined) {
+            return GameObjectManager.instance;
         }
-        GraphicsManager.instance = this;
+        GameObjectManager.instance = this;
 
         this._list = [];
     }
@@ -25,16 +25,16 @@ let GraphicsManager = class GraphicsManager {
     }
 
     layer(nb) {
-        return this._list.filter(elem => elem.layer === nb);
+        return this._list.filter(elem => elem.hasProperty("graphic") && elem.layer === nb);
     }
 
     find(name) {
         return this._list.find(function(elem) {return elem.name === name;});
     }
 
-    static register(drawable) {GraphicsManager.instance.add(drawable);}
-    static unregister(drawable) {GraphicsManager.instance.remove(drawable.name)}
+    static register(drawable) {GameObjectManager.instance.add(drawable);}
+    static unregister(drawable) {GameObjectManager.instance.remove(drawable.name);}
 
 };
 
-export {GraphicsManager};
+export {GameObjectManager};

@@ -40,6 +40,11 @@ let GameObject = class Drawable {
             throw TypeError("You can only attach instances of Properties objects");
         }
         this._properties[property.name] = property;
+        property.attachTo(this);
+    }
+
+    detach(name) {
+        delete this._properties[name];
     }
 
     property(name) {

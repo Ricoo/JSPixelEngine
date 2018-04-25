@@ -4,6 +4,10 @@ let Properties = class Properties {
             throw TypeError("You have to extend this class");
         }
     }
+
+    attachTo(gameObject) {
+        this._gameObject = gameObject
+    }
 };
 
 export {Properties};

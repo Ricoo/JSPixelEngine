@@ -8,6 +8,7 @@ import {KeyCode} from "../js/Enum/KeyCode";
 import {Event} from "../js/Enum/Event";
 import {GUIButton} from "../js/Engine/GUI/GUIButton";
 import {GUIText} from "../js/Engine/GUI/GUIText";
+import {Graphic} from "../js/Engine/Properties/Graphic";
 
 const resourceList = {
     audio:[
@@ -27,10 +28,13 @@ let Game = class Game extends JSPixelApp {
 
     initialize() {
         this.getEngine().preStart(resourceList);
-        let clickSound = ResourceManager.sounds.findByName("click");
+        let clickSound = ResourceManager.getSound("click");
         this.wand = new GameObject("wood_wand","wand", Layer.CHARACTERS, 0, 0, 4);
+        //TODO rework GUI elemnents so they match the new property system
         this.button = new GUIButton("button","button", "BUTTON", 50, 50, 2, "#000000", 27);
         this.text = new GUIText("randomText", "Hello i'm a text !", 200, 200);
+
+        this.wand.attach(new Graphic(ResourceManager.getSprite("wand"), Layer.CHARACTERS));
 
         GameObjectManager.register(this.wand);
         GameObjectManager.register(this.button);
@@ -54,6 +58,9 @@ let Game = class Game extends JSPixelApp {
         }
         if (keys.includes(KeyCode.arrowDown)) {
             this.wand.y += 5;
+        }
+        if (keys.includes(KeyCode.spacebar)) {
+            this.wand.detach("graphic");
         }
     }
 
