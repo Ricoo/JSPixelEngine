@@ -1,5 +1,6 @@
 import {GameObject} from "../GameObject";
 import {Layer} from "../../Enum/Layer";
+import {Graphic} from "../Properties/Graphic";
 
 let GUIButton = class GUIButton extends GameObject {
     constructor(sprite, name, text, posX, posY, scale = 1.0, textColor = "black", fontSize = 30) {
@@ -8,6 +9,7 @@ let GUIButton = class GUIButton extends GameObject {
         this._text = text;
         this._fontSize = fontSize;
         this._textColor = textColor;
+        this.attach(new Graphic(sprite, Layer.GUI))
     }
 
     draw(context) {

@@ -11,21 +11,12 @@ let GameObject = class Drawable {
      * @param posY : int
      * @param scale : float
      */
-    constructor(sprite, name, layer, posX=0, posY=0, scale=1.0) {
-        this._sprite = ResourceManager.sprites.findByName(sprite);
+    constructor(name, posX=0, posY=0) {
         this._x = posX;
         this._y = posY;
-        this._scale = scale;
         this._visible = true;
-        this._layer = layer;
         this._name = name;
         this._properties = {};
-    }
-
-    draw(context) {
-        if (this._visible) {
-            this._sprite.draw(context, this._x, this._y, this._scale);
-        }
     }
 
     raycast(x, y) {
