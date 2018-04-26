@@ -10,9 +10,9 @@ let GameObjectManager = class GameObjectManager {
         this._list = [];
     }
 
-    add(drawable) {
-        if (drawable instanceof GameObject) {
-            this._list.push(drawable);
+    add(gameObject) {
+        if (gameObject instanceof GameObject) {
+            this._list.push(gameObject);
         }
         else {
             throw TypeError("You must provide an GameObject object");
@@ -25,7 +25,7 @@ let GameObjectManager = class GameObjectManager {
     }
 
     layer(nb) {
-        return this._list.filter(elem => elem.hasProperty("graphic") && elem.layer === nb);
+        return this._list.filter(elem => elem.hasProperty("graphic") && elem.property("graphic").layer === nb);
     }
 
     find(name) {

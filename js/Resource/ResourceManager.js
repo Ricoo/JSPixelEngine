@@ -35,8 +35,8 @@ let ResourceManager = class ResourceManager {
         });
     }
 
-    static getSprite(name){return ResourceManager.instance._sprites.findByName(name)};
-    static getSound(name){return ResourceManager.instance._sounds.findByName(name)};
+    static getSprite(name){return ResourceManager.sprites.findByName(name)};
+    static getSound(name){return ResourceManager.sounds.findByName(name)};
 
     static get sounds() {return ResourceManager.instance._sounds;}
     static get sprites() {return ResourceManager.instance._sprites;}

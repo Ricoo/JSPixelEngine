@@ -2,7 +2,7 @@ import {JSPixelSettings} from "./JSPixelSettings";
 import {JSPixelEngine} from "./JSPixelEngine";
 
 let JSPixelApp = class JSPixelApp {
-    constructor(canvasName, settings = null) {
+    constructor(canvasName, resourcePack, settings = null) {
         //Abstract class
         if (new.target === JSPixelApp) {throw TypeError("You have to implement this class first")}
         if (this.initialize === undefined) {throw SyntaxError("You cannot leave the void:initialize() method unimplemented")}
@@ -14,6 +14,7 @@ let JSPixelApp = class JSPixelApp {
 
         this._engine = new JSPixelEngine();
         this._engine.register(this);
+        this._engine.preLoad(resourcePack);
 
         if (settings === null) {
             settings = new JSPixelSettings();

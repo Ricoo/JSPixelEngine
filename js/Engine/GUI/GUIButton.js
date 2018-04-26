@@ -1,6 +1,7 @@
 import {GameObject} from "../GameObject";
 import {Layer} from "../../Enum/Layer";
 import {Graphic} from "../Properties/Graphic";
+import {Collider} from "../Properties/Collider";
 
 let GUIButton = class GUIButton extends GameObject {
     constructor(sprite, name, text, posX, posY, scale = 1.0, textColor = "black", fontSize = 30) {
@@ -9,18 +10,25 @@ let GUIButton = class GUIButton extends GameObject {
         this._text = text;
         this._fontSize = fontSize;
         this._textColor = textColor;
-        this.attach(new Graphic(sprite, Layer.GUI))
+//        this.attach(new Graphic(sprite, Layer.GUI));
+        this.attach(new Collider(sprite.width, sprite.height));
     }
 
+    /**
+     * @deprecated because the graphic rework made it incoherent
+     */
     draw(context) {
         super.draw(context);
         context.fillStyle = this._textColor;
         context.font = this._fontSize + "px Comic Sans MS";
         context.textAlign = "center";
         context.textBaseline="middle";
-        context.fillText(this._text,this._x + this.sprite.width * this._scale / 2, this._y + this.sprite.height * this._scale / 2);
+        context.fillText(this._text,this.position.x + this.sprite.width * this._scale / 2, this.position.y + this.sprite.height * this._scale / 2);
     }
 
+    /**
+     * @deprecated because the collider system made it incoherent
+     */
     raycast(x, y) {
         return super.raycast(x, y);
     }

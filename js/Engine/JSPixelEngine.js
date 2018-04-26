@@ -21,12 +21,11 @@ let JSPixelEngine = class JSPixelEngine {
         if (app instanceof JSPixelApp) {
             this._registeredApps.push(app);
             console.log("registered " + app.name + " in apps list");
-            app.initialize();
         }
         else {throw TypeError("Cannot register this, you may only register a JSPixelApp instance")}
     }
 
-    preStart(resourcePack) {
+    preLoad(resourcePack) {
         if (this._resourceManager === undefined) {
             this._resourceManager = new ResourceManager();
             this._resourceManager.loadResources(resourcePack);
@@ -37,15 +36,17 @@ let JSPixelEngine = class JSPixelEngine {
         else {
             this.start();
         }
-
     }
 
     start() {
+        for (let app of this._registeredApps) {
+            app.initialize();
+        }
         if (this._loop === undefined) {
             this._loop = setInterval(() => {
                 this.loop();
             }, 17);
-            console.log("started engine loop");
+            console.log("JSPixelEngine main loop started");
         }
     }
 
@@ -56,7 +57,7 @@ let JSPixelEngine = class JSPixelEngine {
         for (let layer in Layer) {
             let list = GameObjectManager.instance.layer(Layer[layer]);
             for (let i = 0; i < list.length; i++) {
-                list[i].draw(context);
+                list[i].property("graphic").draw(context);
             }
         }
     }

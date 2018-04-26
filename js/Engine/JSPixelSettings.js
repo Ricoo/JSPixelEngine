@@ -1,7 +1,7 @@
 let JSPixelSettings = class JSPixelSettings {
     constructor() {
-        this._resX = 1600;
-        this._resY = 900;
+        this._resX = window.innerWidth / 2;
+        this._resY = window.innerHeight / 2;
     }
 
     get resX() {return this._resX;}

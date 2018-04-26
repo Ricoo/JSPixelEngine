@@ -23,18 +23,17 @@ const resourceList = {
 
 let Game = class Game extends JSPixelApp {
     constructor() {
-        super("game");
+        super("game", resourceList);
     }
 
     initialize() {
-        this.getEngine().preStart(resourceList);
         let clickSound = ResourceManager.getSound("click");
-        this.wand = new GameObject("wood_wand","wand", Layer.CHARACTERS, 0, 0, 4);
+        this.wand = new GameObject("wand", 0, 0);
+        this.wand.attach(new Graphic(ResourceManager.getSprite("wood_wand"), Layer.CHARACTERS, 1));
+
         //TODO rework GUI elemnents so they match the new property system
         this.button = new GUIButton("button","button", "BUTTON", 50, 50, 2, "#000000", 27);
         this.text = new GUIText("randomText", "Hello i'm a text !", 200, 200);
-
-        this.wand.attach(new Graphic(ResourceManager.getSprite("wand"), Layer.CHARACTERS));
 
         GameObjectManager.register(this.wand);
         GameObjectManager.register(this.button);
@@ -48,16 +47,16 @@ let Game = class Game extends JSPixelApp {
     frame() {
         let keys = EventManager.keys;
         if (keys.includes(KeyCode.arrowRight)) {
-            this.wand.x += 5;
+            this.wand.position.x += 5;
         }
         if (keys.includes(KeyCode.arrowLeft)) {
-            this.wand.x -= 5;
+            this.wand.position.x -= 5;
         }
         if (keys.includes(KeyCode.arrowUp)) {
-            this.wand.y -= 5;
+            this.wand.position.y -= 5;
         }
         if (keys.includes(KeyCode.arrowDown)) {
-            this.wand.y += 5;
+            this.wand.position.y += 5;
         }
         if (keys.includes(KeyCode.spacebar)) {
             this.wand.detach("graphic");
@@ -66,8 +65,11 @@ let Game = class Game extends JSPixelApp {
 
 };
 
+
+// Simply create a new instance of your inherited JSPixelApp class
 function init(){
     new Game();
 }
 
+// Ensures all the page content have been loaded, you shouldn't run any code before that
 window.onload = init;

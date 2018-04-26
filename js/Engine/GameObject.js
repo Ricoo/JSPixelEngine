@@ -1,29 +1,19 @@
 import {ResourceManager} from "../Resource/ResourceManager";
 import {Properties} from "./Properties/Properties";
+import {Vector2} from "./Vector2";
 
-let GameObject = class Drawable {
+let GameObject = class GameObject {
     /**
      *
-     * @param sprite : String
      * @param name : String
-     * @param layer : Layer
-     * @param posX : int
-     * @param posY : int
-     * @param scale : float
+     * @param x : int
+     * @param y : int
      */
-    constructor(name, posX=0, posY=0) {
-        this._x = posX;
-        this._y = posY;
+    constructor(name, x, y) {
+        this._position = new Vector2(x, y);
         this._visible = true;
         this._name = name;
         this._properties = {};
-    }
-
-    raycast(x, y) {
-        if (x === undefined || y === undefined) {return false;}
-        return (x > this._x && x < this._x + this._scale * this._sprite.res.x &&
-                y > this._y && y < this._y + this._scale * this._sprite.res.y
-        );
     }
 
     attach(property) {
@@ -53,10 +43,8 @@ let GameObject = class Drawable {
     get scale() {return this._scale;}
     set scale(newScale) {this._scale = newScale;}
 
-    get x(){return this._x;}
-    set x(newX) {this._x = newX;}
-    get y(){return this._y;}
-    set y(newY) {this._y = newY;}
+    get position(){return this._position;}
+    set position(position){this._position = position;}
 
     get name(){return this._name;}
     get sprite(){return this._sprite;}
