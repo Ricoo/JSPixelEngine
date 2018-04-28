@@ -7,10 +7,12 @@ let Graphic = class Graphic extends Properties {
         this._sprite = sprite;
         this._layer = layer;
         this._scale = scale;
+        this._visible = true;
     }
 
     draw(context) {
-        this._sprite.draw(context, this._gameObject.position.x, this._gameObject.position.y, this._scale);
+        if (this._visible)
+            this._sprite.draw(context, this._gameObject.position.x, this._gameObject.position.y, this._scale);
     }
 
     set scale(s) {this._scale = s;}
@@ -18,6 +20,9 @@ let Graphic = class Graphic extends Properties {
 
     get layer(){return this._layer;}
     get sprite(){return this._sprite;}
+
+    get visible(){return this._visible;}
+    set visible(v){this._visible = v;}
 };
 
 export {Graphic};

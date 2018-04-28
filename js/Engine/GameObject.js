@@ -1,6 +1,7 @@
 import {ResourceManager} from "../Resource/ResourceManager";
 import {Properties} from "./Properties/Properties";
 import {Vector2} from "./Vector2";
+import {GameObjectManager} from "./GameObjectManager";
 
 let GameObject = class GameObject {
     /**
@@ -9,11 +10,12 @@ let GameObject = class GameObject {
      * @param x : int
      * @param y : int
      */
-    constructor(name, x, y) {
+    constructor(name, x = 0, y = 0) {
         this._position = new Vector2(x, y);
         this._visible = true;
         this._name = name;
         this._properties = {};
+        GameObjectManager.register(this);
     }
 
     attach(property) {
@@ -36,15 +38,11 @@ let GameObject = class GameObject {
         return this._properties.hasOwnProperty(name);
     }
 
-    hide() {this._visible = false;}
-    show() {this._visible = true;}
-    toggleVisible() {this._visible = !this._visible;}
-
-    get scale() {return this._scale;}
-    set scale(newScale) {this._scale = newScale;}
-
     get position(){return this._position;}
-    set position(position){this._position = position;}
+    set position(position) {
+        this._position.x = position.x;
+        this._position.y = position.y;
+    }
 
     get name(){return this._name;}
     get sprite(){return this._sprite;}

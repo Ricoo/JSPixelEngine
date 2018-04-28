@@ -1,7 +1,7 @@
-import {SpriteList} from "./SpriteList";
-import {Sprite} from "./Sprite";
-import {SoundList} from "./SoundList";
-import {Sound} from "./Sound";
+import {SpriteList} from "./Sprite/SpriteList";
+import {Sprite} from "./Sprite/Sprite";
+import {SoundList} from "./Sound/SoundList";
+import {Sound} from "./Sound/Sound";
 
 let ResourceManager = class ResourceManager {
     constructor() {

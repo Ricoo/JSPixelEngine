@@ -28,6 +28,8 @@ let Game = class Game extends JSPixelApp {
 
     initialize() {
         let clickSound = ResourceManager.getSound("click");
+        clickSound.volume = 0.2;
+        clickSound.speed = 1;
         this.wand = new GameObject("wand", 0, 0);
         this.wand.attach(new Graphic(ResourceManager.getSprite("wood_wand"), Layer.CHARACTERS, 1));
 
@@ -35,9 +37,9 @@ let Game = class Game extends JSPixelApp {
         this.button = new GUIButton("button","button", "BUTTON", 50, 50, 2, "#000000", 27);
         this.text = new GUIText("randomText", "Hello i'm a text !", 200, 200);
 
-        GameObjectManager.register(this.wand);
-        GameObjectManager.register(this.button);
-        GameObjectManager.register(this.text);
+        // GameObjectManager.register(this.wand);
+        // GameObjectManager.register(this.button);
+        // GameObjectManager.register(this.text);
 
         EventManager.registerHandler(Event.MouseDown, (mouse) => {clickSound.play();});
 
