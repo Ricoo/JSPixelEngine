@@ -15,10 +15,6 @@ let Sprite = class Sprite {
             size*this._width,size*this._height);
     }
 
-    drawPart(context,posX,posY, cutX,cutY, part, size = 1) {
-        context.drawImage(this._image);
-    }
-
     get width(){return this._width;}
     get height(){return this._height;}
     get name(){return this._name;}

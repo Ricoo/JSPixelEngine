@@ -2,6 +2,7 @@ import {SpriteList} from "./Sprite/SpriteList";
 import {Sprite} from "./Sprite/Sprite";
 import {SoundList} from "./Sound/SoundList";
 import {Sound} from "./Sound/Sound";
+import {SpriteAtlas} from "./Sprite/SpriteAtlas";
 
 let ResourceManager = class ResourceManager {
     constructor() {
@@ -20,8 +21,14 @@ let ResourceManager = class ResourceManager {
         let spriteList = [];
         let soundList = [];
         let self = this;
+        let callback = () => {};
         packageDescriptor.sprites.forEach(function(elem, index, array) {
-            spriteList.push(new Sprite(elem["src"],elem["name"],elem["res"]));
+            if (elem.hasOwnProperty("atlas")) {
+                spriteList.push(new SpriteAtlas(elem["src"],elem["name"],elem["res"], callback, elem["atlas"]));
+            }
+            else {
+                spriteList.push(new Sprite(elem["src"],elem["name"],elem["res"], callback));
+            }
             if (index === array.length - 1) {
                 self._sprites = new SpriteList(spriteList);
             }

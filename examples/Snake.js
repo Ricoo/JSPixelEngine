@@ -18,10 +18,10 @@ let resourcePack = {
 };
 
 let Direction = {
-    UP:0,
+    UP:-1,
     DOWN:1,
-    LEFT:2,
-    RIGHT:3
+    LEFT:-2,
+    RIGHT:2
 };
 
 class Apple extends GameObject {
@@ -92,7 +92,8 @@ class Head extends GameObject {
     }
 
     setDirection (direction) {
-        this._direction = direction;
+        if (this._direction + direction !== 0)
+            this._direction = direction;
     }
 
     eat() {

@@ -23,6 +23,26 @@ let ImageFactory = class ImageFactory {
         //TODO use previous version filter system to add text
 
     }
+
+    static cut(image, start, end) {
+        if (!ImageFactory.instance) {
+            new ImageFactory();
+        }
+        let context = ImageFactory.instance.canvas.getContext("2d");
+        let canvas = ImageFactory.instance.canvas;
+        let sprite = new Image();
+
+        canvas.width = end.x - start.x;
+        canvas.height = end.y - start.y;
+
+        context.drawImage(image, start.x,start.y,
+            canvas.width,canvas.height,
+            0,0,
+            canvas.width,canvas.height);
+
+        sprite.src = canvas.toDataURL("image/png");
+        return sprite;
+    }
 };
 
 export {ImageFactory};

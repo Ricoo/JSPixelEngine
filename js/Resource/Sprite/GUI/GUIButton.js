@@ -1,7 +1,7 @@
-import {GameObject} from "../GameObject";
-import {Layer} from "../../Enum/Layer";
-import {Graphic} from "../Properties/Graphic";
-import {Collider} from "../Properties/Collider";
+import {GameObject} from "../../../Engine/GameObject";
+import {Layer} from "../../../Enum/Layer";
+import {Graphic} from "../../../Engine/Properties/Graphic";
+import {Collider} from "../../../Engine/Properties/Collider";
 
 let GUIButton = class GUIButton extends GameObject {
     constructor(sprite, name, text, posX, posY, scale = 1.0, textColor = "black", fontSize = 30) {

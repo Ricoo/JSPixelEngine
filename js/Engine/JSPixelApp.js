@@ -30,7 +30,7 @@ let JSPixelApp = class JSPixelApp {
     
     set name(name) {this._name = name;}
     get name(){return this._name;}
-    getEngine(){return this._engine;}
+
     get context(){return this._context;}
 };
 

@@ -5,7 +5,6 @@ import {GameObjectManager} from "./GameObjectManager";
 
 let GameObject = class GameObject {
     /**
-     *
      * @param name : String
      * @param x : int
      * @param y : int
