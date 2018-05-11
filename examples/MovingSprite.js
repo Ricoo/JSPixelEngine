@@ -11,6 +11,7 @@ import {GUIText} from "../js/Resource/Sprite/GUI/GUIText";
 import {Graphic} from "../js/Engine/Properties/Graphic";
 import {Animator} from "../js/Engine/Properties/Animator";
 import {Animation} from "../js/Resource/Sprite/Animation";
+import {Lerp} from "../js/Engine/Lerp";
 
 const resourceList = {
     audio:[
@@ -21,9 +22,26 @@ const resourceList = {
         {src:"./resource/texture/menu.png",name:"menu",res:[64,32]},
         {src:"./resource/texture/button.png",name:"button",res:[64,32]},
         {src:"./resource/texture/button.png",name:"atlas_button",res:[64,64],atlas:[1,2]},
-        {src:"./resource/texture/pikachu.png",name:"pikachu",res:[96,128],atlas:[3,4]}
+        {src:"./resource/texture/female-full.png",name:"female-full",res:[560,280],atlas:[8,4]},
+        {src:"./resource/texture/female2-full.png",name:"female-full2",res:[560,280],atlas:[8,4]},
+        {src:"./resource/texture/pikachu.png",name:"pikachu",res:[96,128],atlas:[3,4]},
+        {src:"./resource/texture/crocodil.png",name:"crocodil",res:[96,128],atlas:[3,4]}
     ]
 };
+
+class Girl extends GameObject {
+    constructor(x,y) {
+        super("girl", x, y);
+        this.attach(new Graphic("female-full", Layer.CHARACTERS, 4, 1));
+        this.attach(new Animator());
+
+        this.property("animator").add(new Animation("walk_forward", [0,1,2,3,4,5,6,7], 100, 0));
+        this.property("animator").add(new Animation("walk_left", [8,9,10,11,12,13,14,15], 100, 8));
+        this.property("animator").add(new Animation("walk_right", [16,17,18,19,20,21,22,23], 100, 16));
+        this.property("animator").add(new Animation("walk_backward", [24,25,26,27,28,29,30,31], 100, 24));
+
+    }
+}
 
 let Game = class Game extends JSPixelApp {
     constructor() {
@@ -34,63 +52,67 @@ let Game = class Game extends JSPixelApp {
         let clickSound = ResourceManager.getSound("click");
         clickSound.volume = 0.2;
         clickSound.speed = 1;
-        this.wand = new GameObject("wand", 0, 0);
-        this.wand.attach(new Graphic(ResourceManager.getSprite("wood_wand"), Layer.CHARACTERS, 1));
-        this.button = new GameObject("button", 50, 50);
-        this.button.attach(new Graphic(ResourceManager.getSprite("atlas_button"), Layer.GUI, 1));
 
-        this.pikachu = new GameObject("pika", 100, 100);
-        this.pikachu.attach(new Graphic(ResourceManager.getSprite("pikachu"), Layer.CHARACTERS, 4));
-        this.pikachu.attach(new Animator());
-        this.pikachu.property("animator").add(new Animation("walk_forward", [0,1,2,1], 250));
-        this.pikachu.property("animator").add(new Animation("walk_left", [3,4,5,4], 250));
-        this.pikachu.property("animator").add(new Animation("walk_right", [6,7,8,7], 250));
-        this.pikachu.property("animator").add(new Animation("walk_backward", [9,10,11,10], 250));
-        this.pikachu.property("animator").play("walk_forward");
+        this.button = new GameObject("button", 0, 0);
+        this.button.attach(new Graphic("atlas_button", Layer.GUI, 1));
 
-        //TODO rework GUI elemnents so they match the new property system
-        //this.button = new GUIButton("button","button", "BUTTON", 50, 50, 2, "#000000", 27);
-        this.text = new GUIText("randomText", "Hello i'm a text !", 200, 200);
+        this.moveX = new Lerp(this.button.position, "x", ()=>{this.move();});
+        this.moved = true;
+        this.move();
+
+        this.character = new Girl(100, 100);
 
         EventManager.registerHandler(Event.MouseDown, (mouse) => {clickSound.play(); this.button.property("graphic").sprite.next();});
 
         console.log("game initialized");
     }
 
-    frame() {
-        let keys = EventManager.keys;
-        if (keys.includes(KeyCode.arrowRight)) {
-            this.wand.position.x += 5;
-            this.pikachu.property("animator").play("walk_right");
+    move() {
+        this.moved = !this.moved;
+        if (this.moved) {
+            this.moveX.run(0,1000);
         }
-        if (keys.includes(KeyCode.arrowLeft)) {
-            this.wand.position.x -= 5;
-            this.pikachu.property("animator").play("walk_left");
-        }
-        if (keys.includes(KeyCode.arrowUp)) {
-            this.wand.position.y -= 5;
-            this.pikachu.property("animator").play("walk_backward");
-        }
-        if (keys.includes(KeyCode.arrowDown)) {
-            this.wand.position.y += 5;
-            this.pikachu.property("animator").play("walk_forward");
-
-        }
-        //zooms in and out
-        if (keys.includes(KeyCode.i)) {
-            this.wand.property("graphic").scale += 0.1;
-        }
-        if (keys.includes(KeyCode.o)) {
-            this.wand.property("graphic").scale -= 0.1;
-        }
-        // removes the graphic property
-        if (keys.includes(KeyCode.spacebar)) {
-            this.wand.detach("graphic");
+        else {
+            this.moveX.run(400,1000);
         }
     }
 
-};
+    frame() {
+        let keys = EventManager.keys;
+        if (keys.includes(KeyCode.arrowRight)) {
+            this.character.position.x += 5;
+            this.character.property("animator").play("walk_right");
+        }
+        else if (keys.includes(KeyCode.arrowLeft)) {
+            this.character.position.x -= 5;
+            this.character.property("animator").play("walk_left");
+        }
+        else if (keys.includes(KeyCode.arrowUp)) {
+            this.character.position.y -= 5;
+            this.character.property("animator").play("walk_backward");
+        }
+        else if (keys.includes(KeyCode.arrowDown)) {
+            this.character.position.y += 5;
+            this.character.property("animator").play("walk_forward");
+        }
+        else {
+            this.character.property("animator").stop();
+        }
 
+        //fades in and out
+        if (keys.includes(KeyCode.i)) {
+            this.character.property("graphic").alpha += 0.01;
+            this.character.angle += 1;
+        }
+        if (keys.includes(KeyCode.o)) {
+            this.character.property("graphic").alpha -= 0.01;
+        }
+
+        // toggles graphic property when spacebar is pressed/released
+        this.character.property("graphic").visible = !keys.includes(KeyCode.spacebar);
+    }
+
+};
 
 // Simply create a new instance of your inherited JSPixelApp class
 function init(){

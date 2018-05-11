@@ -9,9 +9,9 @@ let GameObject = class GameObject {
      * @param x : int
      * @param y : int
      */
-    constructor(name, x = 0, y = 0) {
+    constructor(name, x = 0, y = 0, angle = 0) {
         this._position = new Vector2(x, y);
-        this._visible = true;
+        this._angle = angle;
         this._name = name;
         this._properties = {};
         GameObjectManager.register(this);
@@ -42,6 +42,8 @@ let GameObject = class GameObject {
         this._position.x = position.x;
         this._position.y = position.y;
     }
+    get angle() {return this._angle;}
+    set angle(a){this._angle = (a > 360 ? a - 360 : (a < 0 ? a + 360 : a));}
 
     get name(){return this._name;}
     get sprite(){return this._sprite;}

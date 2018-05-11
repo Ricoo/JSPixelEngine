@@ -7,7 +7,8 @@ let Animator = class Animator extends Properties {
         this.name = "animator";
         this._animations = [];
         this._running = null;
-        this._current = "";
+        this._playing = null;
+        this._current = 0;
     }
 
     attachTo(gameObject) {
@@ -22,14 +23,15 @@ let Animator = class Animator extends Properties {
     }
 
     play(name) {
-        if (this._current === name) return;
+        if (this._playing !== null && this._playing.name === name) return;
         let animation = this._animations.find((anim) => {return anim.name === name});
         if (animation === undefined) {
             console.error("Couldn't play " + name + ": animation doesn't exist")
         }
         this.stop();
+        this._playing = animation;
+        this._animate(animation);
         this._running = setInterval(() => {this._animate(animation)},animation.delay);
-        this._current = name;
     }
 
     add(animation) {
@@ -38,15 +40,19 @@ let Animator = class Animator extends Properties {
 
     stop() {
         if (this._running !== null) {
+            if (this._playing !== null) {
+                this._element.tileId = this._playing.frames[0];
+            }
             clearInterval(this._running);
             this._running = null;
-            this._current = "";
+            this._playing = null;
+            this._current = 0;
         }
     }
 
     _animate(animation) {
-        this._element.tileId = animation.frames[animation.current];
-        animation.next();
+        this._element.tileId = animation.frames[this._current];
+        this._current = (this._current === animation.size - 1 ? 0 : this._current + 1);
     }
 };
 

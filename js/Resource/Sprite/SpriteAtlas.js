@@ -7,7 +7,7 @@ let SpriteAtlas = class SpriteAtlas extends Sprite {
         super(src, name, size, () => {this._build();});
 
         this._dimensions = new Vector2(atlas[0], atlas[1]);
-        this._current = 0;
+        this._playing = 0;
         this._callback = callback;
         this._partW = this.width / this._dimensions.x;
         this._partH = this.height / this._dimensions.y;
@@ -23,30 +23,32 @@ let SpriteAtlas = class SpriteAtlas extends Sprite {
                         new Vector2((x + 1) * this._partW, (y + 1) * this._partH));
             }
         }
+        this._width = this._partW;
+        this._height = this._partH;
         this._callback();
     }
 
     draw(context, posX, posY, size = 1) {
-        context.drawImage(this[this._current], 0,0,
+        context.drawImage(this[this._playing], 0,0,
             this._partW,this._partH,
             posX,posY,
             size*this._partW,size*this._partH);
     }
 
-    set tileId(id) {this._current = id;}
-    get tileId() {return this._current;}
+    set tileId(id) {this._playing = id;}
+    get tileId() {return this._playing;}
 
     next() {
-        this._current += 1;
-        if (this._current >= this._sprites) {
-            this._current = 0;
+        this._playing += 1;
+        if (this._playing >= this._sprites) {
+            this._playing = 0;
         }
     }
 
     prev() {
-        this._current += 1;
-        if (this._current < 0) {
-            this._current = this._sprites - 1;
+        this._playing += 1;
+        if (this._playing < 0) {
+            this._playing = this._sprites - 1;
         }
     }
 };

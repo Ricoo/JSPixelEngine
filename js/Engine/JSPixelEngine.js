@@ -52,7 +52,10 @@ let JSPixelEngine = class JSPixelEngine {
 
     loop() {
         let context = this._registeredApps[0].context;
+        context.save();
+        context.setTransform(1, 0, 0, 1, 0, 0);
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+        context.restore();
         this._registeredApps[0].frame();
         for (let layer in Layer) {
             let list = GameObjectManager.instance.layer(Layer[layer]);
