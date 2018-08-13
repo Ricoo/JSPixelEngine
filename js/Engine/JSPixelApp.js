@@ -2,6 +2,12 @@ import {JSPixelSettings} from "./JSPixelSettings";
 import {JSPixelEngine} from "./JSPixelEngine";
 
 let JSPixelApp = class JSPixelApp {
+    /**
+     *
+     * @param canvasName : string name of the canvas
+     * @param resourcePack : {audio:*[],sprites:*[]}
+     * @param settings : JSPixelSettings | null
+     */
     constructor(canvasName, resourcePack, settings = null) {
         //Abstract class
         if (new.target === JSPixelApp) {throw TypeError("You have to implement this class first")}
@@ -27,10 +33,10 @@ let JSPixelApp = class JSPixelApp {
         this._context.mozImageSmoothingEnabled = false;
         this._context.imageSmoothingEnabled = false;
     }
-    
+
+    //Getters and setters
     set name(name) {this._name = name;}
     get name(){return this._name;}
-
     get context(){return this._context;}
 };
 

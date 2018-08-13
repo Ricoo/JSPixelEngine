@@ -20,8 +20,7 @@ const resourceList = {
     sprites:[
         {src:"./resource/texture/wand.png",name:"wood_wand",res:[18,54]},
         {src:"./resource/texture/menu.png",name:"menu",res:[64,32]},
-        {src:"./resource/texture/button.png",name:"button",res:[64,32]},
-        {src:"./resource/texture/button.png",name:"atlas_button",res:[64,64],atlas:[1,2]},
+        {src:"./resource/texture/button.png",name:"button",res:[64,64],atlas:[1,2]},
         {src:"./resource/texture/female-full.png",name:"female-full",res:[560,280],atlas:[8,4]},
         {src:"./resource/texture/female2-full.png",name:"female-full2",res:[560,280],atlas:[8,4]},
         {src:"./resource/texture/pikachu.png",name:"pikachu",res:[96,128],atlas:[3,4]},
@@ -29,17 +28,23 @@ const resourceList = {
     ]
 };
 
+const animationList = {
+    full_forward : new Animation("walk_forward",  [0, 1, 2, 3, 4, 5, 6, 7 ], 100, 0),
+    full_left : new Animation("walk_left",     [8, 9, 10,11,12,13,14,15], 100, 8),
+    full_right : new Animation("walk_right",    [16,17,18,19,20,21,22,23], 100, 16),
+    full_backward : new Animation("walk_backward", [24,25,26,27,28,29,30,31], 100, 24)
+};
+
 class Girl extends GameObject {
-    constructor(x,y) {
+    constructor(x,y, sprite) {
         super("girl", x, y);
-        this.attach(new Graphic("female-full", Layer.CHARACTERS, 4, 1));
+        this.attach(new Graphic(sprite, Layer.CHARACTERS, 4, 1));
         this.attach(new Animator());
 
-        this.property("animator").add(new Animation("walk_forward", [0,1,2,3,4,5,6,7], 100, 0));
-        this.property("animator").add(new Animation("walk_left", [8,9,10,11,12,13,14,15], 100, 8));
-        this.property("animator").add(new Animation("walk_right", [16,17,18,19,20,21,22,23], 100, 16));
-        this.property("animator").add(new Animation("walk_backward", [24,25,26,27,28,29,30,31], 100, 24));
-
+        this.property("animator").add(animationList.full_forward);
+        this.property("animator").add(animationList.full_left);
+        this.property("animator").add(animationList.full_right);
+        this.property("animator").add(animationList.full_backward);
     }
 }
 
@@ -53,17 +58,14 @@ let Game = class Game extends JSPixelApp {
         clickSound.volume = 0.2;
         clickSound.speed = 1;
 
-        this.button = new GameObject("button", 0, 0);
-        this.button.attach(new Graphic("atlas_button", Layer.GUI, 1));
+        this.girl2 = new Girl(100, 200, "female-full");
+        this.girl1 = new Girl(100, 100, "female-full2");
 
-        this.moveX = new Lerp(this.button.position, "x", ()=>{this.move();});
+        this.moveX = new Lerp(this.girl2.position, "x", () => {this.move();});
         this.moved = true;
         this.move();
 
-        this.character = new Girl(100, 100);
-
-        EventManager.registerHandler(Event.MouseDown, (mouse) => {clickSound.play(); this.button.property("graphic").sprite.next();});
-
+        EventManager.registerHandler(Event.MouseDown, (mouse) => {clickSound.play();});
         console.log("game initialized");
     }
 
@@ -71,47 +73,48 @@ let Game = class Game extends JSPixelApp {
         this.moved = !this.moved;
         if (this.moved) {
             this.moveX.run(0,1000);
+            this.girl2.property("animator").play("walk_left");
         }
         else {
             this.moveX.run(400,1000);
+            this.girl2.property("animator").play("walk_right");
         }
     }
 
     frame() {
         let keys = EventManager.keys;
         if (keys.includes(KeyCode.arrowRight)) {
-            this.character.position.x += 5;
-            this.character.property("animator").play("walk_right");
+            this.girl1.position.x += 5;
+            this.girl1.property("animator").play("walk_right");
         }
         else if (keys.includes(KeyCode.arrowLeft)) {
-            this.character.position.x -= 5;
-            this.character.property("animator").play("walk_left");
+            this.girl1.position.x -= 5;
+            this.girl1.property("animator").play("walk_left");
         }
         else if (keys.includes(KeyCode.arrowUp)) {
-            this.character.position.y -= 5;
-            this.character.property("animator").play("walk_backward");
+            this.girl1.position.y -= 5;
+            this.girl1.property("animator").play("walk_backward");
         }
         else if (keys.includes(KeyCode.arrowDown)) {
-            this.character.position.y += 5;
-            this.character.property("animator").play("walk_forward");
+            this.girl1.position.y += 5;
+            this.girl1.property("animator").play("walk_forward");
         }
         else {
-            this.character.property("animator").stop();
+            this.girl1.property("animator").stop();
         }
 
         //fades in and out
         if (keys.includes(KeyCode.i)) {
-            this.character.property("graphic").alpha += 0.01;
-            this.character.angle += 1;
+            this.girl1.property("graphic").alpha += 0.01;
+            this.girl1.angle += 1;
         }
         if (keys.includes(KeyCode.o)) {
-            this.character.property("graphic").alpha -= 0.01;
+            this.girl1.property("graphic").alpha -= 0.01;
         }
 
         // toggles graphic property when spacebar is pressed/released
-        this.character.property("graphic").visible = !keys.includes(KeyCode.spacebar);
+        this.girl1.property("graphic").visible = !keys.includes(KeyCode.spacebar);
     }
-
 };
 
 // Simply create a new instance of your inherited JSPixelApp class

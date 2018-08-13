@@ -4,6 +4,12 @@ let Vector2 = class Vector2 {
         this._y = y;
     }
 
+    add(other) {
+        this._x += other.x;
+        this._y += other.y;
+        return this;
+    }
+
     get x() {return this._x;}
     set x(value) {this._x = value;}
     get y() {return this._y;}
