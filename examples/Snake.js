@@ -27,7 +27,7 @@ let Direction = {
 class Apple extends GameObject {
     constructor() {
         super();
-        this.attach(new Graphic(ResourceManager.getSprite("apple"), Layer.CHARACTERS, 20));
+        this.attach(new Graphic("apple", Layer.CHARACTERS, 20));
     }
 
     randomize(snake) {
@@ -50,7 +50,7 @@ class Head extends GameObject {
     constructor() {
         super("head");
         this._direction = Direction.DOWN;
-        this.attach(new Graphic(ResourceManager.getSprite("head"), Layer.CHARACTERS, 20));
+        this.attach(new Graphic("head", Layer.CHARACTERS, 20));
         this._body = [];
         for (let i = 0; i < 4; i++) {
             this._body.push(new Body(this.position));
@@ -87,6 +87,7 @@ class Head extends GameObject {
             if (part.position.x === this.position.x &&
                 part.position.y === this.position.y ) {
                 this._running = false;
+                alert("You lose !");
             }
         }
     }
@@ -109,7 +110,7 @@ class Head extends GameObject {
 class Body extends GameObject {
     constructor() {
         super();
-        this.attach(new Graphic(ResourceManager.getSprite("body"), Layer.CHARACTERS, 20));
+        this.attach(new Graphic("body", Layer.CHARACTERS, 20));
     }
 }
 
