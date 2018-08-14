@@ -8,6 +8,13 @@ let Sprite = class Sprite {
         this._height = size[1];
     }
 
+    /**
+     * @desc draws the sprite in our canvas
+     * @param context : CanvasRenderingContext2D
+     * @param posX : number
+     * @param posY : number
+     * @param size : number, the scale of our image
+     */
     draw(context, posX, posY, size = 1) {
         context.drawImage(this._image, 0,0,
             this._width,this._height,

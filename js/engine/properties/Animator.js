@@ -1,7 +1,7 @@
-import {Properties} from "./Properties";
-import {SpriteAtlas} from "../../Resource/Sprite/SpriteAtlas";
+import {Property} from "./Property";
+import {SpriteAtlas} from "../../resource/sprite/SpriteAtlas";
 
-let Animator = class Animator extends Properties {
+let Animator = class Animator extends Property {
     constructor() {
         super();
         this.name = "animator";

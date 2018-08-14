@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../JSPixelEditor/.idea/JSPixelEditor.iml" filepath="$PROJECT_DIR$/../JSPixelEditor/.idea/JSPixelEditor.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/JSPixelEngine.iml" filepath="$PROJECT_DIR$/.idea/JSPixelEngine.iml" />
     </modules>
   </component>

@@ -1,7 +1,7 @@
 import {JSPixelApp} from "./JSPixelApp";
-import {Layer} from "../Enum/Layer";
+import {Layer} from "../enum/Layer";
 import {GameObjectManager} from "./GameObjectManager";
-import {ResourceManager} from "../Resource/ResourceManager";
+import {ResourceManager} from "../resource/ResourceManager";
 import {EventManager} from "./EventManager";
 
 let JSPixelEngine = class JSPixelEngine {

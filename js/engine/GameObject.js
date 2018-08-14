@@ -1,6 +1,6 @@
-import {ResourceManager} from "../Resource/ResourceManager";
-import {Properties} from "./Properties/Properties";
-import {Vector2} from "./Vector2";
+import {ResourceManager} from "../resource/ResourceManager";
+import {Property} from "./properties/Property";
+import {Vector2} from "./math/Vector2";
 import {GameObjectManager} from "./GameObjectManager";
 
 let GameObject = class GameObject {
@@ -17,22 +17,40 @@ let GameObject = class GameObject {
         GameObjectManager.register(this);
     }
 
+    /**
+     * @desc adds a property to our GameObject and replaces the old property if one exists
+     * @param property : Property, the instance of Property
+     */
     attach(property) {
-        if (!property instanceof Properties) {
-            throw TypeError("You can only attach instances of Properties objects");
+        if (!property instanceof Property) {
+            throw TypeError("You can only attach instances of properties objects");
         }
         this._properties[property.name] = property;
         property.attachTo(this);
     }
 
+    /**
+     * @desc removes a property from this object
+     * @param name : string, name of the property
+     */
     detach(name) {
         delete this._properties[name];
     }
 
+    /**
+     * @desc returns the named property
+     * @param name : string
+     * @returns {Property}
+     */
     property(name) {
         return (this._properties[name]);
     }
 
+    /**
+     * @desc checks if a property exists on this GameObject
+     * @param name : string
+     * @returns {boolean}
+     */
     hasProperty(name) {
         return this._properties.hasOwnProperty(name);
     }

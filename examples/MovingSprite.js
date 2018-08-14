@@ -1,17 +1,17 @@
-import {JSPixelApp} from "../js/Engine/JSPixelApp";
-import {ResourceManager} from "../js/Resource/ResourceManager";
-import {GameObjectManager} from "../js/Engine/GameObjectManager";
-import {EventManager} from "../js/Engine/EventManager";
-import {GameObject} from "../js/Engine/GameObject";
-import {Layer} from "../js/Enum/Layer";
-import {KeyCode} from "../js/Enum/KeyCode";
-import {Event} from "../js/Enum/Event";
-import {GUIButton} from "../js/Resource/Sprite/GUI/GUIButton";
-import {GUIText} from "../js/Resource/Sprite/GUI/GUIText";
-import {Graphic} from "../js/Engine/Properties/Graphic";
-import {Animator} from "../js/Engine/Properties/Animator";
-import {Animation} from "../js/Resource/Sprite/Animation";
-import {Lerp} from "../js/Engine/Lerp";
+import {JSPixelApp} from "../js/engine/JSPixelApp";
+import {ResourceManager} from "../js/resource/ResourceManager";
+import {GameObjectManager} from "../js/engine/GameObjectManager";
+import {EventManager} from "../js/engine/EventManager";
+import {GameObject} from "../js/engine/GameObject";
+import {Layer} from "../js/enum/Layer";
+import {KeyCode} from "../js/enum/KeyCode";
+import {Event} from "../js/enum/Event";
+import {GUIButton} from "../js/resource/sprite/GUI/GUIButton";
+import {GUIText} from "../js/resource/sprite/GUI/GUIText";
+import {Graphic} from "../js/engine/properties/Graphic";
+import {Animator} from "../js/engine/properties/Animator";
+import {Animation} from "../js/resource/sprite/Animation";
+import {Lerp} from "../js/engine/math/Lerp";
 
 const resourceList = {
     audio:[
@@ -24,7 +24,8 @@ const resourceList = {
         {src:"./resource/texture/female-full.png",name:"female-full",res:[560,280],atlas:[8,4]},
         {src:"./resource/texture/female2-full.png",name:"female-full2",res:[560,280],atlas:[8,4]},
         {src:"./resource/texture/pikachu.png",name:"pikachu",res:[96,128],atlas:[3,4]},
-        {src:"./resource/texture/crocodil.png",name:"crocodil",res:[96,128],atlas:[3,4]}
+        {src:"./resource/texture/crocodil.png",name:"crocodil",res:[96,128],atlas:[3,4]},
+        {src:"./resource/texture/BasicTile.png",name:"tile",res:[32,32]}
     ]
 };
 
@@ -106,7 +107,7 @@ let Game = class Game extends JSPixelApp {
         //fades in and out
         if (keys.includes(KeyCode.i)) {
             this.girl1.property("graphic").alpha += 0.01;
-            this.girl1.angle += 1;
+//            this.girl1.angle += 1;
         }
         if (keys.includes(KeyCode.o)) {
             this.girl1.property("graphic").alpha -= 0.01;

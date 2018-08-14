@@ -1,8 +1,8 @@
-import {SpriteList} from "./Sprite/SpriteList";
-import {Sprite} from "./Sprite/Sprite";
-import {SoundList} from "./Sound/SoundList";
-import {Sound} from "./Sound/Sound";
-import {SpriteAtlas} from "./Sprite/SpriteAtlas";
+import {SpriteList} from "./sprite/SpriteList";
+import {Sprite} from "./sprite/Sprite";
+import {SoundList} from "./sound/SoundList";
+import {Sound} from "./sound/Sound";
+import {SpriteAtlas} from "./sprite/SpriteAtlas";
 
 let ResourceManager = class ResourceManager {
     constructor() {
@@ -17,6 +17,10 @@ let ResourceManager = class ResourceManager {
         //this._progress = 0.0;
     }
 
+    /**
+     * @desc loads the resources listed in the packageDescriptor into memory
+     * @param packageDescriptor : {audio:*[],sprites:*[]}, the object listing all required resources
+     */
     loadResources(packageDescriptor) {
         let spriteList = [];
         let soundList = [];

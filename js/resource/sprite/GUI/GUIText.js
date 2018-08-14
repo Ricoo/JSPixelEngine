@@ -1,5 +1,5 @@
-import {GameObject} from "../../../Engine/GameObject";
-import {Layer} from "../../../Enum/Layer";
+import {GameObject} from "../../../engine/GameObject";
+import {Layer} from "../../../enum/Layer";
 
 let GUIText = class GUIText extends GameObject {
     constructor(name, text, posX, posY, textAlign = "left", textColor = "black", fontSize = 30) {

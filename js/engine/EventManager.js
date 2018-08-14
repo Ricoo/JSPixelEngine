@@ -1,4 +1,4 @@
-import {Event} from "../Enum/Event";
+import {Event} from "../enum/Event";
 
 let EventManager = class EventManager {
     constructor(){

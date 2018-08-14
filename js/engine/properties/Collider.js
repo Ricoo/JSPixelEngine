@@ -1,6 +1,6 @@
-import {Properties} from "./Properties";
+import {Property} from "./Property";
 
-let Collider = class Collider extends Properties {
+let Collider = class Collider extends Property {
     constructor(width, height) {
         super();
         this.name = "collider";

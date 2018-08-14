@@ -23,7 +23,7 @@ JSPixelEngine is a pixel-art based game engine being developped in JavaScript
 
 ##### 1. _First class_
 
-Create a class that extends JSPixelApp, and implement both initialize and frame functions
+Create a class that extends JSPixelApp, and implement both initialize() and frame() functions
 ```
 class Game extends JSPixelApp {
   constructor() {

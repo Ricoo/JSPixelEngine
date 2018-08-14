@@ -1,7 +1,7 @@
-import {Properties} from "./Properties";
-import {ResourceManager} from "../../Resource/ResourceManager";
+import {Property} from "./Property";
+import {ResourceManager} from "../../resource/ResourceManager";
 
-let Graphic = class Graphic extends Properties {
+let Graphic = class Graphic extends Property {
     constructor(spriteName, layer, scale=1.0, alpha=1.0) {
         super();
         this.name = "graphic";
@@ -12,6 +12,10 @@ let Graphic = class Graphic extends Properties {
         this._alpha = alpha;
     }
 
+    /**
+     * @desc draws the current sprite to the context
+     * @param context : CanvasRenderingContext2D, the 2d context of our canvas
+     */
     draw(context) {
         if (this._visible) {
             context.save();

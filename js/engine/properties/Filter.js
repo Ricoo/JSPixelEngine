@@ -1,6 +1,6 @@
-import {Properties} from "./Properties";
+import {Property} from "./Property";
 
-let Filter = class Filter extends Properties {
+let Filter = class Filter extends Property {
     constructor() {
         super();
         this.name = "filter";
