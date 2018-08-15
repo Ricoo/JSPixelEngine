@@ -14,18 +14,23 @@ let ResourceManager = class ResourceManager {
 
         this._sprites = null;
         this._sounds = null;
-        //this._progress = 0.0;
+        this._count = 0;
+        this._total = 0;
+        this._done = false;
     }
 
     /**
      * @desc loads the resources listed in the packageDescriptor into memory
      * @param packageDescriptor : {audio:*[],sprites:*[]}, the object listing all required resources
+     * @callback this function sets this._done to true after the resources have been loaded
      */
     loadResources(packageDescriptor) {
+        this._done = false;
         let spriteList = [];
         let soundList = [];
         let self = this;
-        let callback = () => {};
+        this._total = packageDescriptor.sprites.length + packageDescriptor.audio.length;
+        let callback = () => {this._count += 1; if (this._count === this._total) {this._done = true;}};
         packageDescriptor.sprites.forEach(function(elem, index, array) {
             if (elem.hasOwnProperty("atlas")) {
                 spriteList.push(new SpriteAtlas(elem["src"],elem["name"],elem["res"], callback, elem["atlas"]));
@@ -39,7 +44,7 @@ let ResourceManager = class ResourceManager {
 
         });
         packageDescriptor.audio.forEach(function(elem, index, array) {
-            soundList.push(new Sound(elem["src"],elem["name"]));
+            soundList.push(new Sound(elem["src"],elem["name"], callback));
             if (index === array.length - 1) {
                 self._sounds = new SoundList(soundList);
             }
@@ -51,8 +56,10 @@ let ResourceManager = class ResourceManager {
 
     static get sounds() {return ResourceManager.instance._sounds;}
     static get sprites() {return ResourceManager.instance._sprites;}
-    get done() {return (this._sprites instanceof SpriteList &&
-                        this._sounds instanceof SoundList);}
+    get done() {return this._done;}
+
+    get count() {return this._count;}
+    get total() {return this._total;}
 };
 
 export {ResourceManager}

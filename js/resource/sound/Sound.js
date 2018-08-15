@@ -1,7 +1,8 @@
 let Sound = class Sound {
-    constructor(src, name) {
+    constructor(src, name, callback) {
         this._sound = new Audio(src);
         this._name = name;
+        callback();
     }
 
     play() {

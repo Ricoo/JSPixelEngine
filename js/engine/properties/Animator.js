@@ -41,7 +41,9 @@ let Animator = class Animator extends Property {
     stop() {
         if (this._running !== null) {
             if (this._playing !== null) {
-                this._element.tileId = this._playing.frames[0];
+                this._current = 0;
+                this._gameObject.property("graphic").image = this._element[this._playing.frames[this._current]];
+                this._gameObject.property("graphic").tile = this._playing.frames[this._current];
             }
             clearInterval(this._running);
             this._running = null;
@@ -51,7 +53,8 @@ let Animator = class Animator extends Property {
     }
 
     _animate(animation) {
-        this._element.tileId = animation.frames[this._current];
+        this._gameObject.property("graphic").image = this._element[this._playing.frames[this._current]];
+        this._gameObject.property("graphic").tile = this._playing.frames[this._current];
         this._current = (this._current === animation.size - 1 ? 0 : this._current + 1);
     }
 };

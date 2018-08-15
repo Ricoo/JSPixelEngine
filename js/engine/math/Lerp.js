@@ -14,6 +14,7 @@ let Lerp = class Lerp {
         this._object = object;
         this._property = property;
         this._callback = callback;
+        this._running = null;
     }
 
     /**
@@ -23,15 +24,20 @@ let Lerp = class Lerp {
      * @param pas : number, the value we increase our property of, If blank it is generated and delay is the total duration instead
      */
     run(target, delay, pas = null) {
-        if (pas === null) {
-            let iterations = delay / 20;
-            pas = (target - this._object[this._property]) / iterations;
+        if (this._running !== null) {
+            clearTimeout(this._running);
         }
-        if(!(this._object[this._property] === target)) {
+        if (pas === null) {
+            let iterations = 100;
+            pas = (target - this._object[this._property]) / iterations;
+            delay = delay/iterations;
+        }
+        if(Math.abs(this._object[this._property] - target) > Math.abs(pas)) {
             this._object[this._property] += pas;
-            setTimeout(() => {this.run(target, delay, pas);}, delay);
+            this._running = setTimeout(() => {this.run(target, delay, pas);}, delay);
         }
         else {
+            this._object[this._property] = target;
             this.end();
         }
     }
@@ -39,6 +45,7 @@ let Lerp = class Lerp {
     end() {
         if (this._callback !== null)
             this._callback();
+        this._running = null;
     }
 };
 

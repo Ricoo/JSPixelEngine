@@ -2,7 +2,7 @@ import {Property} from "./Property";
 import {ResourceManager} from "../../resource/ResourceManager";
 
 let Graphic = class Graphic extends Property {
-    constructor(spriteName, layer, scale=1.0, alpha=1.0) {
+    constructor(spriteName, layer, scale=1.0, alpha=1.0, tile=0) {
         super();
         this.name = "graphic";
         this._sprite = ResourceManager.getSprite(spriteName);
@@ -10,6 +10,8 @@ let Graphic = class Graphic extends Property {
         this._scale = scale;
         this._visible = true;
         this._alpha = alpha;
+        this._tile = tile;
+        this._image = this._sprite.tile(tile);
     }
 
     /**
@@ -22,10 +24,16 @@ let Graphic = class Graphic extends Property {
             context.globalAlpha = this._alpha;
             context.translate(this._gameObject.position.x ,this._gameObject.position.y);
             context.rotate(this._gameObject.angle*Math.PI/180);
-            this._sprite.draw(context, -this._sprite.width/2 * this._scale, -this._sprite.height/2 * this._scale, this._scale);
+            context.drawImage(this._image, 0,0, this._sprite.width,this._sprite.height, -this._sprite.width/2 * this._scale,-this._sprite.height/2 * this._scale, this._scale*this._sprite.width,this._scale*this._sprite.height);
             context.restore();
         }
     }
+
+    get tile() {return this._tile;}
+    set tile(id) {this._tile = id;}
+
+    get image() {return this._image;}
+    set image(i) {this._image = i;}
 
     set scale(s) {this._scale = s;}
     get scale() {return this._scale;}

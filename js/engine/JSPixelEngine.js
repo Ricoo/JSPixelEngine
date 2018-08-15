@@ -20,7 +20,7 @@ let JSPixelEngine = class JSPixelEngine {
     register(app) {
         if (app instanceof JSPixelApp) {
             this._registeredApps.push(app);
-            console.log("registered " + app.name + " in apps list");
+            console.log("Registered " + app.name + " in apps list");
         }
         else {throw TypeError("Cannot register this, you may only register a JSPixelApp instance")}
     }
@@ -31,7 +31,8 @@ let JSPixelEngine = class JSPixelEngine {
             this._resourceManager.loadResources(resourcePack);
         }
         if (this._resourceManager.done === false) {
-            setTimeout(() => { this.preStart(); }, 100);
+            console.log("Loading resources [" + this._resourceManager.count + "/" + this._resourceManager.total + "]");
+            setTimeout(() => { this.preLoad(); }, 50);
         }
         else {
             this.start();

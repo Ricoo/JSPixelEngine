@@ -60,24 +60,24 @@ let Game = class Game extends JSPixelApp {
         clickSound.speed = 1;
 
         this.girl2 = new Girl(100, 200, "female-full");
-        this.girl1 = new Girl(100, 100, "female-full2");
+        this.girl1 = new Girl(100, 100, "female-full");
 
         this.moveX = new Lerp(this.girl2.position, "x", () => {this.move();});
         this.moved = true;
         this.move();
 
         EventManager.registerHandler(Event.MouseDown, (mouse) => {clickSound.play();});
-        console.log("game initialized");
+        console.log("my super game have been initialized !");
     }
 
     move() {
         this.moved = !this.moved;
         if (this.moved) {
-            this.moveX.run(0,1000);
+            this.moveX.run(0,2000);
             this.girl2.property("animator").play("walk_left");
         }
         else {
-            this.moveX.run(400,1000);
+            this.moveX.run(400,2000);
             this.girl2.property("animator").play("walk_right");
         }
     }
