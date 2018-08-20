@@ -4,16 +4,12 @@ import {Vector2} from "./math/Vector2";
 import {GameObjectManager} from "./GameObjectManager";
 
 let GameObject = class GameObject {
-    /**
-     * @param name : String
-     * @param x : int
-     * @param y : int
-     */
     constructor(name, x = 0, y = 0, angle = 0) {
         this._position = new Vector2(x, y);
         this._angle = angle;
         this._name = name;
         this._properties = {};
+        this._positionUpdate = false;
         GameObjectManager.register(this);
     }
 
@@ -55,7 +51,7 @@ let GameObject = class GameObject {
         return this._properties.hasOwnProperty(name);
     }
 
-    get position(){return this._position;}
+    get position(){this._positionUpdate = true; return this._position;}
     set position(position) {
         this._position.x = position.x;
         this._position.y = position.y;

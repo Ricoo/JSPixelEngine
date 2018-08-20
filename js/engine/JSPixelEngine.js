@@ -1,5 +1,4 @@
 import {JSPixelApp} from "./JSPixelApp";
-import {Layer} from "../enum/Layer";
 import {GameObjectManager} from "./GameObjectManager";
 import {ResourceManager} from "../resource/ResourceManager";
 import {EventManager} from "./EventManager";
@@ -17,6 +16,10 @@ let JSPixelEngine = class JSPixelEngine {
         new EventManager();
     }
 
+    /**
+     * @desc registers the app into the engine
+     * @param app : JSPixelApp, the app instance
+     */
     register(app) {
         if (app instanceof JSPixelApp) {
             this._registeredApps.push(app);
@@ -25,6 +28,10 @@ let JSPixelEngine = class JSPixelEngine {
         else {throw TypeError("Cannot register this, you may only register a JSPixelApp instance")}
     }
 
+    /**
+     * @desc loads the given resource pack into memory before running the engine
+     * @param resourcePack : {audio:*[],sprites:*[]}, the resource pack descriptor
+     */
     preLoad(resourcePack) {
         if (this._resourceManager === undefined) {
             this._resourceManager = new ResourceManager();
@@ -32,13 +39,16 @@ let JSPixelEngine = class JSPixelEngine {
         }
         if (this._resourceManager.done === false) {
             console.log("Loading resources [" + this._resourceManager.count + "/" + this._resourceManager.total + "]");
-            setTimeout(() => { this.preLoad(); }, 50);
+            setTimeout(() => { this.preLoad(resourcePack); }, 50);
         }
         else {
             this.start();
         }
     }
 
+    /**
+     * @desc starts the engine, initializes the apps and launches the main loop
+     */
     start() {
         for (let app of this._registeredApps) {
             app.initialize();
@@ -51,6 +61,9 @@ let JSPixelEngine = class JSPixelEngine {
         }
     }
 
+    /**
+     * @desc the main loop of the engine
+     */
     loop() {
         let context = this._registeredApps[0].context;
         context.save();
@@ -58,11 +71,9 @@ let JSPixelEngine = class JSPixelEngine {
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
         context.restore();
         this._registeredApps[0].frame();
-        for (let layer in Layer) {
-            let list = GameObjectManager.instance.layer(Layer[layer]);
-            for (let i = 0; i < list.length; i++) {
-                list[i].property("graphic").draw(context);
-            }
+        let list = GameObjectManager.instance.graphics();
+        for (let i = 0; i < list.length; i++) {
+            list[i].property("graphic").draw(context);
         }
     }
 };

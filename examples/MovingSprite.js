@@ -18,14 +18,8 @@ const resourceList = {
         {src:"./resource/sound/click.wav",name:"click"}
     ],
     sprites:[
-        {src:"./resource/texture/wand.png",name:"wood_wand",res:[18,54]},
-        {src:"./resource/texture/menu.png",name:"menu",res:[64,32]},
-        {src:"./resource/texture/button.png",name:"button",res:[64,64],atlas:[1,2]},
         {src:"./resource/texture/female-full.png",name:"female-full",res:[560,280],atlas:[8,4]},
         {src:"./resource/texture/female2-full.png",name:"female-full2",res:[560,280],atlas:[8,4]},
-        {src:"./resource/texture/pikachu.png",name:"pikachu",res:[96,128],atlas:[3,4]},
-        {src:"./resource/texture/crocodil.png",name:"crocodil",res:[96,128],atlas:[3,4]},
-        {src:"./resource/texture/BasicTile.png",name:"tile",res:[32,32]}
     ]
 };
 
@@ -33,19 +27,18 @@ const animationList = {
     full_forward : new Animation("walk_forward",  [0, 1, 2, 3, 4, 5, 6, 7 ], 100, 0),
     full_left : new Animation("walk_left",     [8, 9, 10,11,12,13,14,15], 100, 8),
     full_right : new Animation("walk_right",    [16,17,18,19,20,21,22,23], 100, 16),
-    full_backward : new Animation("walk_backward", [24,25,26,27,28,29,30,31], 100, 24)
+    full_backward : new Animation("walk_backward", [24,25,26,27,28,29,30,31], 100, 24),
+    missile_fire : new Animation("missile_fire", [1,2,3,4],100, 4)
 };
 
 class Girl extends GameObject {
     constructor(x,y, sprite) {
         super("girl", x, y);
         this.attach(new Graphic(sprite, Layer.CHARACTERS, 4, 1));
-        this.attach(new Animator());
-
-        this.property("animator").add(animationList.full_forward);
-        this.property("animator").add(animationList.full_left);
-        this.property("animator").add(animationList.full_right);
-        this.property("animator").add(animationList.full_backward);
+        this.attach(new Animator([animationList.full_forward,
+            animationList.full_left,
+            animationList.full_right,
+            animationList.full_backward]));
     }
 }
 
@@ -107,7 +100,7 @@ let Game = class Game extends JSPixelApp {
         //fades in and out
         if (keys.includes(KeyCode.i)) {
             this.girl1.property("graphic").alpha += 0.01;
-//            this.girl1.angle += 1;
+            // this.girl1.angle += 1;
         }
         if (keys.includes(KeyCode.o)) {
             this.girl1.property("graphic").alpha -= 0.01;

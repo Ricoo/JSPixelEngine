@@ -24,6 +24,11 @@ let GameObjectManager = class GameObjectManager {
         this._list.splice(this._list.indexOf(elem), 1);
     }
 
+    graphics() {
+        this._list.sort((a,b) => {return a.position.y - b.position.y});
+        return this._list.filter(elem => elem.hasProperty("graphic"));
+    }
+
     layer(nb) {
         return this._list.filter(elem => elem.hasProperty("graphic") && elem.property("graphic").layer === nb);
     }

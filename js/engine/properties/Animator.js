@@ -2,12 +2,13 @@ import {Property} from "./Property";
 import {SpriteAtlas} from "../../resource/sprite/SpriteAtlas";
 
 let Animator = class Animator extends Property {
-    constructor() {
+    constructor(list=null) {
         super();
         this.name = "animator";
-        this._animations = [];
+        this._animations = (list ? list : []);
         this._running = null;
         this._playing = null;
+        this._loop = false;
         this._current = 0;
     }
 
@@ -22,7 +23,8 @@ let Animator = class Animator extends Property {
         }
     }
 
-    play(name) {
+    play(name, loop = true) {
+        this._loop = loop;
         if (this._playing !== null && this._playing.name === name) return;
         let animation = this._animations.find((anim) => {return anim.name === name});
         if (animation === undefined) {
@@ -42,8 +44,8 @@ let Animator = class Animator extends Property {
         if (this._running !== null) {
             if (this._playing !== null) {
                 this._current = 0;
-                this._gameObject.property("graphic").image = this._element[this._playing.frames[this._current]];
-                this._gameObject.property("graphic").tile = this._playing.frames[this._current];
+                this._gameObject.property("graphic").image = this._element[this._playing.end];
+                this._gameObject.property("graphic").tile = this._playing.end;
             }
             clearInterval(this._running);
             this._running = null;
@@ -55,7 +57,14 @@ let Animator = class Animator extends Property {
     _animate(animation) {
         this._gameObject.property("graphic").image = this._element[this._playing.frames[this._current]];
         this._gameObject.property("graphic").tile = this._playing.frames[this._current];
-        this._current = (this._current === animation.size - 1 ? 0 : this._current + 1);
+        if (this._current === animation.size - 1) {
+            this._current = 0;
+            if (this._loop === false) {
+                this.stop();
+            }
+        }
+        this._current++;
+//        this._current = (this._current === animation.size - 1 ? 0 : this._current + 1);
     }
 };
 

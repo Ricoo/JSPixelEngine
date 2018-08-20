@@ -8,7 +8,7 @@ let Collider = class Collider extends Property {
         this._height = height;
     }
 
-    collide(self, other) {
+    collide(other) {
         //TODO implement hitbox detection
         return true;
     }

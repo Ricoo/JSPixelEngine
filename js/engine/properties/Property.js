@@ -12,6 +12,12 @@ let Property = class Properties {
     attachTo(gameObject) {
         this._gameObject = gameObject
     }
+
+    /**
+     * Returns the gameObject this property is on
+     * @returns {GameObject}
+     */
+    get gameObject() {return this._gameObject;}
 };
 
 export {Property};
