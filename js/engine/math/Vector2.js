@@ -10,6 +10,7 @@ let Vector2 = class Vector2 {
         return this;
     }
 
+    get copy() {return new Vector2(this._x, this._y);}
     get x() {return this._x;}
     set x(value) {this._x = value;}
     get y() {return this._y;}

@@ -24,6 +24,10 @@ let GameObjectManager = class GameObjectManager {
         this._list.splice(this._list.indexOf(elem), 1);
     }
 
+    colliders() {
+        return this._list.filter(elem => elem.hasProperty("collider"));
+    }
+
     graphics() {
         this._list.sort((a,b) => {return a.position.y - b.position.y});
         return this._list.filter(elem => elem.hasProperty("graphic"));

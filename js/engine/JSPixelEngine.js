@@ -2,6 +2,7 @@ import {JSPixelApp} from "./JSPixelApp";
 import {GameObjectManager} from "./GameObjectManager";
 import {ResourceManager} from "../resource/ResourceManager";
 import {EventManager} from "./EventManager";
+import {CollisionManager} from "./CollisionManager";
 
 let JSPixelEngine = class JSPixelEngine {
     constructor() {
@@ -13,6 +14,7 @@ let JSPixelEngine = class JSPixelEngine {
 
         this._registeredApps = []; //This is a list in case we need to manage several canvas at once
         new GameObjectManager();
+        new CollisionManager();
         new EventManager();
     }
 
@@ -70,10 +72,15 @@ let JSPixelEngine = class JSPixelEngine {
         context.setTransform(1, 0, 0, 1, 0, 0);
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
         context.restore();
+
         this._registeredApps[0].frame();
         let list = GameObjectManager.instance.graphics();
+        CollisionManager.instance.checkCollision();
         for (let i = 0; i < list.length; i++) {
             list[i].property("graphic").draw(context);
+            if (this._registeredApps[0].debug === true && list[i].hasProperty("collider")) {
+                list[i].property("collider").show(context);
+            }
         }
     }
 };

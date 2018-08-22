@@ -12,6 +12,7 @@ import {Graphic} from "../js/engine/properties/Graphic";
 import {Animator} from "../js/engine/properties/Animator";
 import {Animation} from "../js/resource/sprite/Animation";
 import {Lerp} from "../js/engine/math/Lerp";
+import {Collider} from "../js/engine/properties/Collider";
 
 const resourceList = {
     audio:[
@@ -35,6 +36,7 @@ class Girl extends GameObject {
     constructor(x,y, sprite) {
         super("girl", x, y);
         this.attach(new Graphic(sprite, Layer.CHARACTERS, 4, 1));
+        this.attach(new Collider(100, 200));
         this.attach(new Animator([animationList.full_forward,
             animationList.full_left,
             animationList.full_right,
@@ -53,7 +55,7 @@ let Game = class Game extends JSPixelApp {
         clickSound.speed = 1;
 
         this.girl2 = new Girl(100, 200, "female-full");
-        this.girl1 = new Girl(100, 100, "female-full");
+        this.girl1 = new Girl(100, 100, "female-full2");
 
         this.moveX = new Lerp(this.girl2.position, "x", () => {this.move();});
         this.moved = true;
@@ -106,8 +108,16 @@ let Game = class Game extends JSPixelApp {
             this.girl1.property("graphic").alpha -= 0.01;
         }
 
+        if (keys.includes(KeyCode.num1)) {
+            this._debug = false;
+        }
+        if (keys.includes(KeyCode.num2)) {
+            this._debug = true;
+        }
+
         // toggles graphic property when spacebar is pressed/released
         this.girl1.property("graphic").visible = !keys.includes(KeyCode.spacebar);
+        this.girl1.property("collider").collide(this.girl2.property("collider"));
     }
 };
 

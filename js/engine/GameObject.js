@@ -9,7 +9,6 @@ let GameObject = class GameObject {
         this._angle = angle;
         this._name = name;
         this._properties = {};
-        this._positionUpdate = false;
         GameObjectManager.register(this);
     }
 
@@ -51,7 +50,17 @@ let GameObject = class GameObject {
         return this._properties.hasOwnProperty(name);
     }
 
-    get position(){this._positionUpdate = true; return this._position;}
+    /**
+     * @desc deletes the GameObjects and cleans every property
+     * @returns {Vector2}
+     */
+    delete() {
+        for (let prop in this._properties) {
+            delete this._properties[prop];
+        }
+    }
+
+    get position(){return this._position;}
     set position(position) {
         this._position.x = position.x;
         this._position.y = position.y;

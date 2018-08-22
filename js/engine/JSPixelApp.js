@@ -32,12 +32,15 @@ let JSPixelApp = class JSPixelApp {
         this._context.webkitImageSmoothingEnabled = false;
         this._context.mozImageSmoothingEnabled = false;
         this._context.imageSmoothingEnabled = false;
+
+        this._debug = false;
     }
 
     //Getters and setters
     set name(name) {this._name = name;}
     get name(){return this._name;}
     get context(){return this._context;}
+    get debug(){return this._debug;}
 };
 
 export {JSPixelApp};
