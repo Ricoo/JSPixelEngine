@@ -11,8 +11,8 @@ let Particle = class Particle extends Property {
      * @param lifetime : number, time during which the particle should stay alive
      * @param period : number, time after which the particle should repeat, 0 if no repeat
      * @param fadeout : boolean, should the particle fade out before disappearing
-     * @param scale : number, scale of the graphics we want to draw
-     * @param tileId : number, if the graphic used is an atlas, the id of the sprite we need
+     * @param scale : number|number[], scale or scale range of the graphics we want to draw
+     * @param tileId : number|number[], if the graphic used is an atlas, the id of the sprite we need or a range for a randomized particle
      * @param speed : number[], the particle's range of velocity
      */
     constructor(spriteName, type, amount, lifetime, period, fadeout, scale=1.0, tileId=0, speed=undefined) {
@@ -60,19 +60,29 @@ let Particle = class Particle extends Property {
         if (this._running && this._period > 0) {
             this._timeout = setTimeout(()=>{this.generate()}, this._period);
         }
+        else {
+            this._running = 0;
+        }
     }
 
-
+    /**
+     * @desc creates a new GameObject which will be a particle
+     * @returns {GameObject}
+     * @private
+     */
     _createObject() {
         let obj = new GameObject("particle", this._gameObject.position.x, this._gameObject.position.y);
-        if (Array.isArray(this._tile)) {
-            obj.attach(new Graphic(this._spriteName, this._layer, this._scale, 1.0,
-                this._tile[Math.floor(Math.random() * this._tile.length)]));
+        let tile = this._tile;
+        let scale = this._scale;
 
+        if (Array.isArray(this._tile)) {
+            tile = this._tile[Math.floor(Math.random() * this._tile.length)]
         }
-        else {
-            obj.attach(new Graphic(this._spriteName, this._layer, this._scale, 1.0, this._tile));
+        if (Array.isArray(this._scale)) {
+            scale = Math.random() * (this._scale[1] - this._scale[0]) + this._scale[0];
         }
+
+        obj.attach(new Graphic(this._spriteName, this._layer, scale, 1.0, tile));
 
         obj.speed = Math.random() * (this._speed[1] - this._speed[0]) + this._speed[0];
         obj.angle = Math.random() * (this._angle[1] - this._angle[0]) + this._angle[0];

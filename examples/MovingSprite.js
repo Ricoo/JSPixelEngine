@@ -44,7 +44,7 @@ class Girl extends GameObject {
             animationList.full_left,
             animationList.full_right,
             animationList.full_backward]));
-        this.attach(new Particle("ship", ParticleType.Source, 40, 1500, 200, false, .5, [2,3,4], [100,200]))
+        this.attach(new Particle("ship", ParticleType.Source, 1, 1500, 10, false, [.2,.7], [2,3,4], [100,200]))
     }
 }
 
