@@ -3,7 +3,6 @@ import {JSPixelEngine} from "./JSPixelEngine";
 
 let JSPixelApp = class JSPixelApp {
     /**
-     *
      * @param canvasName : string name of the canvas
      * @param resourcePack : {audio:*[],sprites:*[]}
      * @param settings : JSPixelSettings | null

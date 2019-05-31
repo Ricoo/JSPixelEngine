@@ -19,9 +19,9 @@ let GameObjectManager = class GameObjectManager {
         }
     }
 
-    remove(name) {
-        let elem = this._list.find(function(elem) {return elem.name === name;});
-        this._list.splice(this._list.indexOf(elem), 1);
+    remove(rem) {
+//        let elem = this._list.find(function(elem) {return elem === rem;});
+        this._list.splice(this._list.indexOf(rem), 1);
     }
 
     colliders() {

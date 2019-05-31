@@ -13,6 +13,8 @@ import {Animator} from "../js/engine/properties/Animator";
 import {Animation} from "../js/resource/sprite/Animation";
 import {Lerp} from "../js/engine/math/Lerp";
 import {Collider} from "../js/engine/properties/Collider";
+import {Particle} from "../js/engine/properties/Particle";
+import {ParticleType} from "../js/enum/ParticleType";
 
 const resourceList = {
     audio:[
@@ -21,15 +23,16 @@ const resourceList = {
     sprites:[
         {src:"./resource/texture/female-full.png",name:"female-full",res:[560,280],atlas:[8,4]},
         {src:"./resource/texture/female2-full.png",name:"female-full2",res:[560,280],atlas:[8,4]},
+        {src:"./resource/texture/Basicship.png",name:"ship",res:[318,64],atlas:[5,1]}
     ]
 };
 
 const animationList = {
-    full_forward : new Animation("walk_forward",  [0, 1, 2, 3, 4, 5, 6, 7 ], 100, 0),
-    full_left : new Animation("walk_left",     [8, 9, 10,11,12,13,14,15], 100, 8),
-    full_right : new Animation("walk_right",    [16,17,18,19,20,21,22,23], 100, 16),
+    full_forward :  new Animation("walk_forward",  [0, 1, 2, 3, 4, 5, 6, 7 ], 100, 0),
+    full_left :     new Animation("walk_left",     [8, 9, 10,11,12,13,14,15], 100, 8),
+    full_right :    new Animation("walk_right",    [16,17,18,19,20,21,22,23], 100, 16),
     full_backward : new Animation("walk_backward", [24,25,26,27,28,29,30,31], 100, 24),
-    missile_fire : new Animation("missile_fire", [1,2,3,4],100, 4)
+    missile_fire :  new Animation("missile_fire",  [1,2,3,4],100, 4)
 };
 
 class Girl extends GameObject {
@@ -41,6 +44,7 @@ class Girl extends GameObject {
             animationList.full_left,
             animationList.full_right,
             animationList.full_backward]));
+        this.attach(new Particle("ship", ParticleType.Source, 40, 1500, 200, false, .5, [2,3,4], [100,200]))
     }
 }
 
@@ -103,9 +107,11 @@ let Game = class Game extends JSPixelApp {
         if (keys.includes(KeyCode.i)) {
             this.girl1.property("graphic").alpha += 0.01;
             // this.girl1.angle += 1;
+            this.girl1.property("particle").run();
         }
         if (keys.includes(KeyCode.o)) {
             this.girl1.property("graphic").alpha -= 0.01;
+            this.girl1.property("particle").stop();
         }
 
         if (keys.includes(KeyCode.num1)) {

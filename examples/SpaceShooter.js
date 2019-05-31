@@ -13,6 +13,7 @@ import {Animator} from "../js/engine/properties/Animator";
 import {Animation} from "../js/resource/sprite/Animation";
 import {Lerp} from "../js/engine/math/Lerp";
 import {Collider} from "../js/engine/properties/Collider";
+import {CollisionManager} from "../js/engine/CollisionManager";
 
 const resourceList = {
     audio:[
@@ -50,12 +51,41 @@ class Ship extends GameObject {
     }
 }
 
+class Enemy extends GameObject {
+    constructor(x,y) {
+        super("ship", x, y, 180);
+        this.attach(new Graphic("ship", Layer.CHARACTERS,2,1));
+        this.attach(new Collider(120,100, ()=>{
+            this.generate();
+        }));
+        this._loop = setInterval(() => {this.move()}, 20);
+    }
+
+    move() {
+        this.position.x -= 5;
+        if (this.position.x < 100) {
+            this.generate();
+        }
+    }
+
+    generate() {
+        new Enemy(1000, Math.floor((Math.random() * 800) + 1));
+        clearInterval(this._loop);
+        this.delete();
+    }
+
+    delete() {
+        clearInterval(this._loop);
+        super.delete();
+    }
+}
+
 class Missile extends GameObject {
     constructor(x,y) {
         super("missile", x, y);
         this.attach(new Graphic("ship", Layer.BACKGROUND,1,1,1));
         this.attach(new Animator([animationList.missile_fire]));
-        this.attach(new Collider(50, 20));
+        this.attach(new Collider(50, 20, ()=>{this.delete()}));
         this.property("animator").play("missile_fire", false);
         this._i = setInterval(() => {this.update()}, 5);
     }
@@ -63,11 +93,14 @@ class Missile extends GameObject {
     update () {
         this.position.x += 5;
         if (this.position.x > 2000) {
-            clearInterval(this._i);
-            this.delete();
+            this.delete()
         }
     }
 
+    delete() {
+        clearInterval(this._i);
+        super.delete();
+    }
 }
 
 let Game = class Game extends JSPixelApp {
@@ -84,7 +117,12 @@ let Game = class Game extends JSPixelApp {
         this.drag = false;
 
         EventManager.registerHandler(Event.MouseDown, (mouse) => {clickSound.play();});
+
+        CollisionManager.instance.addGroup(["Enemy","Missile"]);
+
         console.log("my super game have been initialized !");
+        new Enemy(1000, Math.floor((Math.random() * 500) + 1));
+
     }
 
     frame() {
@@ -99,6 +137,9 @@ let Game = class Game extends JSPixelApp {
         }
         if (keys.includes(KeyCode.spacebar)) {
             this.ship.fire();
+        }
+        if (keys.includes(KeyCode.num3)) {
+            console.log(GameObjectManager.instance._list);
         }
         if (keys.includes(KeyCode.num1)) {
             this._debug = false;

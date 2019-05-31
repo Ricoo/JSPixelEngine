@@ -12,7 +12,7 @@ let JSPixelEngine = class JSPixelEngine {
         }
         JSPixelEngine.instance = this;
 
-        this._registeredApps = []; //This is a list in case we need to manage several canvas at once
+        this._app = []; //This might be changed into a list in case we need to manage several canvas at once
         new GameObjectManager();
         new CollisionManager();
         new EventManager();
@@ -24,8 +24,8 @@ let JSPixelEngine = class JSPixelEngine {
      */
     register(app) {
         if (app instanceof JSPixelApp) {
-            this._registeredApps.push(app);
-            console.log("Registered " + app.name + " in apps list");
+            this._app = app;
+            console.log("Registered " + app.name + " as the current application");
         }
         else {throw TypeError("Cannot register this, you may only register a JSPixelApp instance")}
     }
@@ -52,37 +52,81 @@ let JSPixelEngine = class JSPixelEngine {
      * @desc starts the engine, initializes the apps and launches the main loop
      */
     start() {
-        for (let app of this._registeredApps) {
-            app.initialize();
-        }
-        if (this._loop === undefined) {
-            this._loop = setInterval(() => {
-                this.loop();
+            this._app.initialize();
+        if (this._eventloop === undefined) {
+            this._eventloop = setInterval(() => {
+                this.eventLoop();
+            }, 1);
+            this._displayLoop = setInterval(() => {
+                this.displayLoop();
             }, 17);
             console.log("JSPixelEngine main loop started");
         }
     }
 
     /**
-     * @desc the main loop of the engine
+     * The event loop of the engine, running once every ms
      */
-    loop() {
-        let context = this._registeredApps[0].context;
+    eventLoop() {
+        CollisionManager.instance.checkCollision();
+    }
+
+    /**
+     * The display loop of the engine, running slower than the event loop
+     */
+    displayLoop() {
+        let context = this._app.context;
         context.save();
         context.setTransform(1, 0, 0, 1, 0, 0);
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
         context.restore();
+        this._app.frame();
 
-        this._registeredApps[0].frame();
+
         let list = GameObjectManager.instance.graphics();
-        CollisionManager.instance.checkCollision();
         for (let i = 0; i < list.length; i++) {
             list[i].property("graphic").draw(context);
-            if (this._registeredApps[0].debug === true && list[i].hasProperty("collider")) {
-                list[i].property("collider").show(context);
+            // console.log(list[i].name);
+        }
+
+        // Debug colliders
+        if (this._app.debug === true) {
+            for (let i = 0; i < list.length; i++) {
+                if (list[i].hasProperty("collider")) {
+                    list[i].property("collider").show(context);
+                }
             }
         }
+
+        // list = GameObjectManager.instance.ui();
+        // for (let i = 0; i < list.length; i++) {
+        //     list[i].property("graphic").draw(context);
+        // }
     }
+
+    /**
+     * @desc the main loop of the engine
+    //  */
+    // loop() {
+    //     let context = this._app.context;
+    //     context.save();
+    //     context.setTransform(1, 0, 0, 1, 0, 0);
+    //     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+    //     context.restore();
+    //
+    //     this._app.frame();
+    //     let list = GameObjectManager.instance.graphics();
+    //     CollisionManager.instance.checkCollision();
+    //     for (let i = 0; i < list.length; i++) {
+    //         if (this._app.debug === true && list[i].hasProperty("collider")) {
+    //             list[i].property("collider").show(context);
+    //         }
+    //         if (list[i] && list[i].hasProperty("graphic")) {
+    //             list[i].property("graphic").draw(context);
+    //
+    //         }
+    //     }
+    // }
 };
 
 export {JSPixelEngine};

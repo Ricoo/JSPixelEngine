@@ -66,6 +66,11 @@ let Animator = class Animator extends Property {
         this._current++;
 //        this._current = (this._current === animation.size - 1 ? 0 : this._current + 1);
     }
+
+    delete() {
+        clearInterval(this._running);
+        super.delete();
+    }
 };
 
 export {Animator};

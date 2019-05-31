@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/examples/MovingSprite.js" line="67" />
+    <bookmark url="file://$PROJECT_DIR$/examples/MovingSprite.js" line="71" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f048b09b-c3d9-416b-823c-bcc5e7a288b1" name="Default" comment="Working hitboxes&#10;+ added CollisionManager&#10;+ debug mode on colliders">
-      <change afterPath="$PROJECT_DIR$/js/engine/gui/GUIObject.js" afterDir="false" />
+    <list default="true" id="f048b09b-c3d9-416b-823c-bcc5e7a288b1" name="Default" comment="GUI wip">
+      <change afterPath="$PROJECT_DIR$/js/engine/gui/GUIButton.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/engine/gui/GUIText.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/engine/properties/Particle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/engine/properties/Text.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/enum/ParticleType.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/JSPixelEngine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/JSPixelEngine.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/MovingSprite.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/MovingSprite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/SpaceShooter.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/SpaceShooter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/snake.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/snake.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/spaceshooter.html" beforeDir="false" afterPath="$PROJECT_DIR$/examples/spaceshooter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/engine/CollisionManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/CollisionManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/engine/GameObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/GameObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/engine/GameObjectManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/GameObjectManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/engine/JSPixelApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/JSPixelApp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/engine/JSPixelEngine.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/JSPixelEngine.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/engine/gui/GUIObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/gui/GUIObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/engine/properties/Animator.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/properties/Animator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/engine/properties/Property.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/properties/Property.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,39 +37,60 @@
     <session id="-322740552">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
-          <entry key="project.open.time.33" value="1" />
+          <entry key="project.closed" value="22" />
+          <entry key="project.open.time.27" value="1" />
+          <entry key="project.open.time.29" value="1" />
+          <entry key="project.open.time.30" value="2" />
+          <entry key="project.open.time.31" value="1" />
+          <entry key="project.open.time.32" value="3" />
+          <entry key="project.open.time.33" value="6" />
+          <entry key="project.open.time.34" value="4" />
+          <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.39" value="1" />
+          <entry key="project.open.time.45" value="1" />
+          <entry key="project.open.time.46" value="1" />
           <entry key="project.open.time.48" value="1" />
+          <entry key="project.open.time.56" value="1" />
+          <entry key="project.open.time.67" value="1" />
+          <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.open.time.85" value="1" />
+          <entry key="project.opened" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="11" />
-          <entry key="JavaScript" value="5014" />
-          <entry key="PLAIN_TEXT" value="198" />
+          <entry key="CSS" value="6951" />
+          <entry key="HTML" value="4672" />
+          <entry key="JavaScript" value="28302" />
+          <entry key="PLAIN_TEXT" value="233" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="html" value="1" />
-          <entry key="js" value="15" />
+          <entry key="css" value="12" />
+          <entry key="htm" value="7" />
+          <entry key="html" value="23" />
+          <entry key="ico" value="1" />
+          <entry key="js" value="115" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="11" />
-          <entry key="js" value="5014" />
-          <entry key="txt" value="198" />
+          <entry key="css" value="6951" />
+          <entry key="htm" value="1528" />
+          <entry key="html" value="3144" />
+          <entry key="js" value="28302" />
+          <entry key="txt" value="233" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.php.composer.actions" />
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="HTML" value="1" />
-          <entry key="JavaScript" value="15" />
+          <entry key="CSS" value="12" />
+          <entry key="HTML" value="30" />
+          <entry key="Image" value="1" />
+          <entry key="JavaScript" value="115" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.php.composer.command.options" />
@@ -58,6 +98,7 @@
       <usages-collector id="statistics.js.language.service.starts" />
       <usages-collector id="statistics.php.new.test" />
       <usages-collector id="statistics.php.rename.constructor" />
+      <usages-collector id="statistics.vcs.git.usages" />
     </session>
   </component>
   <component name="FavoritesManager">
@@ -104,104 +145,154 @@
     </favorites_list>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/engine/GameObject.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="62" column="42" lean-forward="true" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
-              <folding>
-                <element signature="e#0#60#0" expanded="true" />
-                <element signature="e#512#674#0" />
-                <element signature="e#933#1043#0" />
-                <element signature="e#1113#1219#0" />
-                <element signature="e#1293#1418#0" />
-                <element signature="e#1508#1608#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/engine/gui/GUIObject.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/examples/SpaceShooter.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-508">
-              <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/engine/CollisionManager.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/engine/GameObjectManager.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="22" column="71" lean-forward="true" selection-start-line="22" selection-start-column="71" selection-end-line="22" selection-end-column="71" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/engine/EventManager.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1104">
-              <caret line="69" column="15" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/engine/JSPixelEngine.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="644">
-              <caret line="77" column="51" selection-start-line="77" selection-start-column="51" selection-end-line="77" selection-end-column="51" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-                <element signature="e#603#710#0" />
-                <element signature="e#1006#1181#0" />
-                <element signature="e#1704#1795#0" />
-                <element signature="e#2113#2165#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/engine/JSPixelApp.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="656">
-              <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.4627404">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/engine/gui/GUIObject.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="192">
+                  <caret line="12" column="43" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/examples/SpaceShooter.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="320">
+                  <caret line="23" selection-start-line="22" selection-end-line="23" />
+                  <folding>
+                    <element signature="e#0#51#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/examples/MovingSprite.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="480">
+                  <caret line="46" column="60" selection-start-line="46" selection-start-column="60" selection-end-line="46" selection-end-column="60" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/engine/properties/Graphic.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="160">
+                  <caret line="10" column="25" selection-start-line="10" selection-end-line="11" />
+                  <folding>
+                    <element signature="e#0#36#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/engine/properties/Text.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="80">
+                  <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/engine/JSPixelEngine.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="694">
+                  <caret line="89" selection-start-line="89" selection-end-line="89" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/engine/GameObject.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-362">
+                  <caret line="7" column="43" lean-forward="true" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
+                  <folding>
+                    <element signature="e#0#60#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/js/engine/GameObjectManager.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="768">
+                  <caret line="48" column="27" lean-forward="true" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/engine/gui/GUIText.js">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/engine/gui/GUIButton.js">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/enum/Event.js">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/enum/ParticleType.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="32">
+                  <caret line="2" column="61" selection-start-line="2" selection-start-column="61" selection-end-line="2" selection-end-column="61" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/js/engine/properties/Particle.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="848">
+                  <caret line="71" column="9" lean-forward="true" selection-start-line="71" selection-start-column="9" selection-end-line="71" selection-end-column="9" />
+                  <folding>
+                    <element signature="e#0#36#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/engine/properties/Property.js">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/js/engine/properties/Animator.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="886">
+                  <caret line="70" column="35" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript class" />
         <option value="HTML File" />
+        <option value="CSS File" />
         <option value="JavaScript File" />
         <option value="JS Class" />
       </list>
@@ -212,6 +303,19 @@
     <findStrings>
       <find>getInstance</find>
       <find>_x</find>
+      <find>li</find>
+      <find>addEnd</find>
+      <find>conten</find>
+      <find>#2b2b2b</find>
+      <find>jsPlumbInstance</find>
+      <find>group</find>
+      <find>renderer</find>
+      <find>container</find>
+      <find>.text</find>
+      <find>.icon</find>
+      <find>z-index</find>
+      <find>.action</find>
+      <find>jtk</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\Ricoo\PhpstormProjects\JSPixelEngine</dir>
@@ -223,57 +327,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/js/Engine/GUI/GUIButton.js" />
-        <option value="$PROJECT_DIR$/js/Resource/Sound.js" />
-        <option value="$PROJECT_DIR$/js/Resource/Sound/Sound.js" />
-        <option value="$PROJECT_DIR$/examples/snake.html" />
-        <option value="$PROJECT_DIR$/js/Resource/Sprite/SpriteManager.js" />
-        <option value="$PROJECT_DIR$/js/Resource/Sound/SoundManager.js" />
-        <option value="$PROJECT_DIR$/../JSCodeWorker/index.html" />
-        <option value="$PROJECT_DIR$/../JSPixelEditor/elements.html" />
-        <option value="$PROJECT_DIR$/../WebGLPlayground/index.html" />
-        <option value="$PROJECT_DIR$/../JSPixelEditor/Test.js" />
-        <option value="$PROJECT_DIR$/../JSPixelEditor/index.html" />
-        <option value="$PROJECT_DIR$/js/Resource/ResourceManager.js" />
-        <option value="$PROJECT_DIR$/js/Resource/Sprite/ImageFactory.js" />
-        <option value="$PROJECT_DIR$/js/Resource/Sprite/Animation.js" />
-        <option value="$PROJECT_DIR$/js/Engine/JSPixelEngine.js" />
-        <option value="$PROJECT_DIR$/js/Engine/JSPixelSettings.js" />
-        <option value="$PROJECT_DIR$/js/Engine/Timer.js" />
-        <option value="$PROJECT_DIR$/js/Engine/Lerp.js" />
-        <option value="$PROJECT_DIR$/js/Engine/Vector2.js" />
-        <option value="$PROJECT_DIR$/js/Resource/Sprite/Sprite.js" />
-        <option value="$PROJECT_DIR$/js/Resource/Sprite/SpriteAtlas.js" />
-        <option value="$PROJECT_DIR$/js/Engine/JSPixelApp.js" />
-        <option value="$PROJECT_DIR$/js/Engine/Properties/Animator.js" />
-        <option value="$PROJECT_DIR$/js/Engine/Properties/Graphic.js" />
-        <option value="$PROJECT_DIR$/js/Resource/Sprite/SpriteList.js" />
-        <option value="$PROJECT_DIR$/examples/Snake.js" />
-        <option value="$PROJECT_DIR$/js/Engine/GameObject.js" />
-        <option value="$PROJECT_DIR$/js/Engine/properties/Property.js" />
-        <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/js/engine/math/Lerp.js" />
-        <option value="$PROJECT_DIR$/js/resource/sound/Sound.js" />
-        <option value="$PROJECT_DIR$/js/resource/sprite/Sprite.js" />
-        <option value="$PROJECT_DIR$/js/resource/sprite/SpriteAtlas.js" />
-        <option value="$PROJECT_DIR$/js/engine/properties/Graphic.js" />
-        <option value="$PROJECT_DIR$/js/resource/ResourceManager.js" />
-        <option value="$PROJECT_DIR$/js/engine/EventManager.js" />
         <option value="$PROJECT_DIR$/js/engine/properties/Property.js" />
-        <option value="$PROJECT_DIR$/js/resource/sprite/Animation.js" />
-        <option value="$PROJECT_DIR$/js/engine/properties/Animator.js" />
+        <option value="$USER_HOME$/Downloads/scroll_background.html" />
+        <option value="$USER_HOME$/PhpstormProjects/ThreadTest/thread.js" />
+        <option value="$USER_HOME$/PhpstormProjects/ThreadTest/index.html" />
+        <option value="$USER_HOME$/PhpstormProjects/ThreadTest/main.js" />
+        <option value="$PROJECT_DIR$/examples/SpaceShooter.js" />
+        <option value="$PROJECT_DIR$/examples/index.html" />
+        <option value="$PROJECT_DIR$/examples/snake.html" />
         <option value="$PROJECT_DIR$/examples/spaceshooter.html" />
         <option value="$PROJECT_DIR$/js/engine/JSPixelApp.js" />
-        <option value="$PROJECT_DIR$/js/engine/math/Vector2.js" />
-        <option value="$PROJECT_DIR$/examples/MovingSprite.js" />
-        <option value="$PROJECT_DIR$/js/engine/GameObject.js" />
-        <option value="$PROJECT_DIR$/js/engine/properties/Collider.js" />
+        <option value="$USER_HOME$/PhpstormProjects/ThreadTest/Exo_JS_semaine1.html" />
+        <option value="$USER_HOME$/PhpstormProjects/GamProjet/css/style.css" />
+        <option value="$USER_HOME$/PhpstormProjects/GamProjet/index.html" />
+        <option value="$USER_HOME$/PhpstormProjects/GamProjet/a-propos.html" />
+        <option value="$USER_HOME$/PhpstormProjects/GamProjet/css/mobile.css" />
+        <option value="$USER_HOME$/PhpstormProjects/GamProjet/renovation-dinterieur.html" />
+        <option value="$USER_HOME$/PhpstormProjects/GamProjet/home-staging.html" />
+        <option value="$USER_HOME$/PhpstormProjects/GamProjet/creation-mobilier.html" />
+        <option value="$USER_HOME$/PhpstormProjects/GamProjet/contact.html" />
+        <option value="$USER_HOME$/PhpstormProjects/GamProjet/architecture-dinterieur.html" />
+        <option value="$USER_HOME$/PhpstormProjects/GamProjet/css/common.css" />
+        <option value="$USER_HOME$/PhpstormProjects/GamProjet/css/desktop.css" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/jsplumb.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/editor.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/vars/Mouse.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/BlockType.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/BlockSaver.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/css/editortest.css" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/testground.htm" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/newcontent.html" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/vars/Params.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/AdventureEditor.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/editor.htm" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/EncounterBlock.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/GameOverBlock.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/LootBlock.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/MerchantBlock.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/content.html" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/GroupBlock.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/ParagraphBlock.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/Block.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/VariableBlock.js" />
+        <option value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/css/editor.css" />
+        <option value="$PROJECT_DIR$/js/engine/properties/Text.js" />
+        <option value="$PROJECT_DIR$/js/engine/gui/GUIObject.js" />
         <option value="$PROJECT_DIR$/js/engine/GameObjectManager.js" />
         <option value="$PROJECT_DIR$/js/engine/JSPixelEngine.js" />
-        <option value="$PROJECT_DIR$/examples/SpaceShooter.js" />
-        <option value="$PROJECT_DIR$/js/engine/GUIObject.js" />
-        <option value="$PROJECT_DIR$/js/engine/gui/GUIObject.js" />
-        <option value="$PROJECT_DIR$/js/engine/CollisionManager.js" />
+        <option value="$PROJECT_DIR$/js/enum/ParticleType.js" />
+        <option value="$PROJECT_DIR$/js/engine/properties/Particle.js" />
+        <option value="$PROJECT_DIR$/examples/MovingSprite.js" />
       </list>
     </option>
   </component>
@@ -287,10 +391,10 @@
     <servers />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="300" />
+    <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1614" />
-    <option name="height" value="858" />
+    <option name="width" value="736" />
+    <option name="height" value="466" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -344,6 +448,11 @@
             <path>
               <item name="JSPixelEngine" type="b2602c69:ProjectViewProjectNode" />
               <item name="JSPixelEngine" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JSPixelEngine" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JSPixelEngine" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -359,6 +468,19 @@
               <item name="engine" type="462c0819:PsiDirectoryNode" />
               <item name="gui" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="JSPixelEngine" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JSPixelEngine" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="math" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JSPixelEngine" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JSPixelEngine" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="enum" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -371,22 +493,26 @@
     <property name="SearchEverywhereHistoryKey" value="?&#9;null&#9;null" />
     <property name="ToolWindowTerminal.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Recovery/Projects/AdventureJS" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Ricoo\Documents\Projects\JSPixelEngine\js\engine\gui" />
-      <recent name="C:\Users\Ricoo\Documents\Projects\JSPixelEngine\js\Engine\Math" />
-      <recent name="C:\Users\Ricoo\PhpstormProjects\JSPixelEngine\js\Resource\Sprite" />
-      <recent name="C:\Users\Ricoo\PhpstormProjects\JSPixelEngine\examples\resource\texture" />
-      <recent name="C:\Users\Ricoo\PhpstormProjects\JSPixelEngine\js\Resource\Sound" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ricoo\Documents\Recovery\Projects\AdventureJS" />
+      <recent name="C:\Users\Ricoo\PhpstormProjects\GamProjet" />
+      <recent name="C:\Users\Ricoo\PhpstormProjects\GamProjet\css" />
       <recent name="C:\Users\Ricoo\Documents\Projects\JSPixelEngine\examples" />
       <recent name="C:\Users\Ricoo\PhpstormProjects\JSPixelEngine\examples" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ricoo\Documents\Recovery\Projects\AdventureJS\js" />
+      <recent name="C:\Users\Ricoo\Documents\Recovery\Projects\AdventureJS" />
+      <recent name="C:\Users\Ricoo\Documents\Recovery\Projects\AdventureJS\js\Block" />
+      <recent name="C:\Users\Ricoo\PhpstormProjects\ThreadTest" />
+      <recent name="C:\Users\Ricoo\Documents\Projects\JSPixelEngine\examples" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -400,6 +526,16 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/JSPixelEngine/index.html">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -440,7 +576,31 @@
       <workItem from="1534522331053" duration="4129000" />
       <workItem from="1534685633342" duration="15020000" />
       <workItem from="1534815843785" duration="12538000" />
-      <workItem from="1534902212036" duration="9411000" />
+      <workItem from="1534902212036" duration="12689000" />
+      <workItem from="1535373022033" duration="1837000" />
+      <workItem from="1535734349991" duration="5781000" />
+      <workItem from="1535740329411" duration="10586000" />
+      <workItem from="1535961754787" duration="8689000" />
+      <workItem from="1536592874793" duration="636000" />
+      <workItem from="1538672061753" duration="1643000" />
+      <workItem from="1538909032718" duration="6605000" />
+      <workItem from="1538985070231" duration="2565000" />
+      <workItem from="1539073351369" duration="599000" />
+      <workItem from="1539173268599" duration="1367000" />
+      <workItem from="1539336937042" duration="602000" />
+      <workItem from="1539958238890" duration="2268000" />
+      <workItem from="1540472946215" duration="2400000" />
+      <workItem from="1542908067518" duration="3600000" />
+      <workItem from="1543492241678" duration="1836000" />
+      <workItem from="1546351240132" duration="22538000" />
+      <workItem from="1547086035763" duration="595000" />
+      <workItem from="1548085422741" duration="3138000" />
+      <workItem from="1556122696521" duration="47475000" />
+      <workItem from="1556238263956" duration="11057000" />
+      <workItem from="1556392159668" duration="123200000" />
+      <workItem from="1558618698985" duration="657000" />
+      <workItem from="1558967730374" duration="866000" />
+      <workItem from="1559074215437" duration="27720000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1524350001453</created>
@@ -589,16 +749,32 @@
       <option name="project" value="LOCAL" />
       <updated>1534940679484</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="GUI wip">
+      <created>1535078153965</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1535078153965</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221401000" />
+    <option name="totallyTimeSpent" value="512939000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12846482" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1130064" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -607,11 +783,11 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32939914" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32965517" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4989339" weight="0.32939914" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5010661" side_tool="true" weight="0.3297414" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32939914" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4978678" weight="0.32939914" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.32939914" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32956153" />
@@ -620,6 +796,29 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
     </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13113007" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3286638" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32939914" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32939914" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.4978678" weight="0.32939914" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.32939914" />
+      <window_info anchor="bottom" id="Messages" order="11" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32956153" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -685,306 +884,304 @@
     <MESSAGE value="Reworked SpriteAtlas, Sprite and Animations&#10;+ Tweaked ResourceManager&#10;+ Lerp cannot overlap anymore" />
     <MESSAGE value="Added new SpaceShooter example&#10;+ added loop parameter to Animator" />
     <MESSAGE value="Working hitboxes&#10;+ added CollisionManager&#10;+ debug mode on colliders" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working hitboxes&#10;+ added CollisionManager&#10;+ debug mode on colliders" />
+    <MESSAGE value="GUI wip" />
+    <option name="LAST_COMMIT_MESSAGE" value="GUI wip" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/js/Engine/Test.js" />
-    <entry file="file://$PROJECT_DIR$/js/enum/Layer.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/fileTemplates/JS Class.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/enum/KeyCode.js">
+    <entry file="file://$USER_HOME$/PhpstormProjects/GamProjet/a-propos.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-480">
-          <caret column="4" selection-start-column="4" selection-end-column="4" />
+        <state relative-caret-position="384">
+          <caret line="57" column="8" selection-start-line="57" selection-start-column="8" selection-end-line="57" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/resource/sprite/GUI/GUIText.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/Engine/Drawable.js" />
-    <entry file="file://$PROJECT_DIR$/js/resource/sound/SoundList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../webrpg/js/Game.js" />
-    <entry file="file://$PROJECT_DIR$/js/engine/properties/Filter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/resource/texture/snake_body.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/enum/Event.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/resource/sound/SoundManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="31" lean-forward="true" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../JSPixelEditor/elements.html" />
-    <entry file="file://$PROJECT_DIR$/../JSPixelEditor/Test.js" />
-    <entry file="file://$PROJECT_DIR$/../JSPixelEditor/index.html" />
-    <entry file="file://$PROJECT_DIR$/js/resource/sprite/GUI/GUIButton.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/resource/sprite/SpriteManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/resource/sprite/ImageFactory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="114" column="4" selection-start-line="114" selection-start-column="4" selection-end-line="114" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/engine/JSPixelSettings.js">
+    <entry file="file://$USER_HOME$/PhpstormProjects/GamProjet/architecture-dinterieur.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+          <caret line="44" column="41" selection-start-line="44" selection-start-column="41" selection-end-line="44" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../webrpg/js/Filter.js" />
-    <entry file="file://$PROJECT_DIR$/../JSPixelEditor/.idea/JSPixelEditor.iml" />
-    <entry file="file://$PROJECT_DIR$/examples/snake.html">
+    <entry file="file://$USER_HOME$/PhpstormProjects/GamProjet/contact.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+        <state relative-caret-position="272">
+          <caret line="50" column="15" selection-start-line="50" selection-start-column="15" selection-end-line="50" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+    <entry file="file://$USER_HOME$/PhpstormProjects/GamProjet/creation-mobilier.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="848">
-          <caret line="15912" column="17" selection-start-line="15912" selection-start-column="17" selection-end-line="15912" selection-end-column="17" />
+        <state relative-caret-position="208">
+          <caret line="46" column="25" selection-start-line="46" selection-start-column="25" selection-end-line="46" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.webworker.d.ts">
+    <entry file="file://$USER_HOME$/PhpstormProjects/GamProjet/home-staging.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="1584" column="4" selection-start-line="1584" selection-start-column="4" selection-end-line="1584" selection-end-column="4" />
+        <state relative-caret-position="416">
+          <caret line="59" selection-start-line="59" selection-end-line="59" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/resource/sprite/Sprite.js">
+    <entry file="file://$USER_HOME$/PhpstormProjects/GamProjet/css/mobile.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+        <state relative-caret-position="484">
+          <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/resource/sprite/SpriteAtlas.js">
+    <entry file="file://$USER_HOME$/PhpstormProjects/GamProjet/css/common.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
+        <state>
+          <caret column="65" selection-start-column="65" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/PhpstormProjects/GamProjet/css/desktop.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="32" column="7" lean-forward="true" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/resource/ResourceManager.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5">
-          <caret column="41" lean-forward="true" selection-start-column="41" selection-end-column="41" />
+        <state relative-caret-position="352">
+          <caret line="26" column="4" lean-forward="true" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/resource/sound/Sound.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/Snake.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2416">
-          <caret line="157" selection-start-line="157" selection-end-line="157" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/spaceshooter.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="24" column="12" lean-forward="true" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/engine/properties/Property.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-          <folding>
-            <element signature="e#52#170#0" />
-            <element signature="e#176#317#0" />
-            <element signature="e#394#484#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/resource/sprite/SpriteList.js">
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/editor_old.htm">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
+          <caret line="13" column="19" lean-forward="true" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/engine/properties/Animator.js">
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/vars/Mouse.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="47" column="78" lean-forward="true" selection-start-line="47" selection-start-column="78" selection-end-line="47" selection-end-column="78" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="32">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/resource/sprite/Animation.js">
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/BlockLoader.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/BlockType.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
+        <state relative-caret-position="48">
+          <caret line="9" column="16" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="144">
-            <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/engine/math/Lerp.js">
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/testground.htm">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        <state relative-caret-position="400">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/engine/properties/Graphic.js">
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/content_old.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="49" column="2" lean-forward="true" selection-start-line="49" selection-start-column="2" selection-end-line="49" selection-end-column="2" />
-          <folding>
-            <element signature="e#528#671#0" />
-          </folding>
+        <state relative-caret-position="512">
+          <caret line="139" selection-start-line="139" selection-end-line="144" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/jsplumb.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116816">
+          <caret line="10754" column="23" selection-start-line="10754" selection-start-column="15" selection-end-line="10754" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/LootBlock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/MerchantBlock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/GroupBlock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="38" lean-forward="true" selection-start-line="36" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/Block.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="34" selection-start-line="33" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/editor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2752">
+          <caret line="220" column="27" lean-forward="true" selection-start-line="220" selection-start-column="27" selection-end-line="220" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/BlockSaver.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/css/editor_old.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5360">
+          <caret line="335" selection-start-line="329" selection-end-line="335" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/engine/JSPixelApp.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="42" column="35" selection-start-line="42" selection-start-column="35" selection-end-line="42" selection-end-column="35" />
+        <state relative-caret-position="48">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/css/editor.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="895">
+          <caret line="439" column="28" selection-start-line="439" selection-start-column="28" selection-end-line="439" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/content.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/EncounterBlock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="23" column="39" selection-start-line="23" selection-start-column="39" selection-end-line="23" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/GameOverBlock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="23" column="4" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/editor.htm">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/VariableBlock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="768">
+          <caret line="48" column="23" lean-forward="true" selection-start-line="48" selection-start-column="23" selection-end-line="48" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/vars/Params.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="20" column="16" lean-forward="true" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/Block/ParagraphBlock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="852">
+          <caret line="78" selection-start-line="77" selection-end-line="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Recovery/Projects/AdventureJS/js/AdventureEditor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/engine/properties/Filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="6" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/engine/properties/Text.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/engine/gui/GUIButton.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/engine/gui/GUIText.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/enum/Layer.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/engine/gui/GUIObject.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="12" column="43" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/enum/Event.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/engine/properties/Animator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="886">
+          <caret line="70" column="35" selection-start-line="70" selection-start-column="35" selection-end-line="70" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/engine/properties/Property.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/engine/GameObject.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-362">
+          <caret line="7" column="43" lean-forward="true" selection-start-line="7" selection-start-column="43" selection-end-line="7" selection-end-column="43" />
           <folding>
-            <element signature="e#0#50#0" expanded="true" />
+            <element signature="e#0#60#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/MovingSprite.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="117" lean-forward="true" selection-start-line="117" selection-end-line="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/engine/EventManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1104">
-          <caret line="69" column="15" selection-start-line="69" selection-start-column="15" selection-end-line="69" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/engine/GameObjectManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="22" column="71" lean-forward="true" selection-start-line="22" selection-start-column="71" selection-end-line="22" selection-end-column="71" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/engine/JSPixelEngine.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="77" column="51" selection-start-line="77" selection-start-column="51" selection-end-line="77" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-            <element signature="e#603#710#0" />
-            <element signature="e#1006#1181#0" />
-            <element signature="e#1704#1795#0" />
-            <element signature="e#2113#2165#0" />
-          </folding>
+        <state relative-caret-position="694">
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/engine/GameObject.js">
+    <entry file="file://$PROJECT_DIR$/js/engine/properties/Graphic.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="62" column="42" lean-forward="true" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#60#0" expanded="true" />
-            <element signature="e#512#674#0" />
-            <element signature="e#933#1043#0" />
-            <element signature="e#1113#1219#0" />
-            <element signature="e#1293#1418#0" />
-            <element signature="e#1508#1608#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/engine/math/Vector2.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/engine/properties/Collider.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="20" column="41" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
+        <state relative-caret-position="160">
+          <caret line="10" column="25" selection-start-line="10" selection-end-line="11" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
@@ -993,22 +1190,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/SpaceShooter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-508">
-          <caret line="46" column="8" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+        <state relative-caret-position="320">
+          <caret line="23" selection-start-line="22" selection-end-line="23" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/engine/CollisionManager.js">
+    <entry file="file://$PROJECT_DIR$/js/enum/ParticleType.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+        <state relative-caret-position="32">
+          <caret line="2" column="61" selection-start-line="2" selection-start-column="61" selection-end-line="2" selection-end-column="61" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/engine/gui/GUIObject.js">
+    <entry file="file://$PROJECT_DIR$/js/engine/properties/Particle.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+        <state relative-caret-position="848">
+          <caret line="71" column="9" lean-forward="true" selection-start-line="71" selection-start-column="9" selection-end-line="71" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/MovingSprite.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="46" column="60" selection-start-line="46" selection-start-column="60" selection-end-line="46" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/engine/GameObjectManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="768">
+          <caret line="48" column="27" lean-forward="true" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
         </state>
       </provider>
     </entry>

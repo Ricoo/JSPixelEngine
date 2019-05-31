@@ -56,8 +56,11 @@ let GameObject = class GameObject {
      */
     delete() {
         for (let prop in this._properties) {
+            this._properties[prop].delete();
             delete this._properties[prop];
         }
+        GameObjectManager.instance.remove(this);
+        delete this;
     }
 
     get position(){return this._position;}

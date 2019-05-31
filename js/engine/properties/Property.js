@@ -18,6 +18,8 @@ let Property = class Properties {
      * @returns {GameObject}
      */
     get gameObject() {return this._gameObject;}
+
+    delete() {}
 };
 
 export {Property};
