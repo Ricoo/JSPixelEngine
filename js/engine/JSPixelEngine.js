@@ -3,6 +3,8 @@ import {GameObjectManager} from "./GameObjectManager";
 import {ResourceManager} from "../resource/ResourceManager";
 import {EventManager} from "./EventManager";
 import {CollisionManager} from "./CollisionManager";
+import {Layer} from "../enum/Layer";
+import {GUIObject} from "./gui/GUIObject";
 
 let JSPixelEngine = class JSPixelEngine {
     constructor() {
@@ -69,6 +71,7 @@ let JSPixelEngine = class JSPixelEngine {
      */
     eventLoop() {
         CollisionManager.instance.checkCollision();
+        //TODO add custom event handling from EventManager
     }
 
     /**
@@ -83,25 +86,28 @@ let JSPixelEngine = class JSPixelEngine {
         this._app.frame();
 
 
-        let list = GameObjectManager.instance.graphics();
-        for (let i = 0; i < list.length; i++) {
-            list[i].property("graphic").draw(context);
-            // console.log(list[i].name);
+        for (let layer in Layer) {
+            let list = GameObjectManager.instance.layer(Layer[layer]);
+            for (let i = 0; i < list.length; i++) {
+                list[i].property("graphic").draw(context);
+                if (list[i] instanceof GUIObject &&
+                    list[i].hasProperty("text")) {
+                    list[i].property("text").write(context);
+                }
+                // console.log(list[i].name);
+            }
+
         }
 
         // Debug colliders
         if (this._app.debug === true) {
+            let list = GameObjectManager.instance.graphics();
             for (let i = 0; i < list.length; i++) {
                 if (list[i].hasProperty("collider")) {
                     list[i].property("collider").show(context);
                 }
             }
         }
-
-        // list = GameObjectManager.instance.ui();
-        // for (let i = 0; i < list.length; i++) {
-        //     list[i].property("graphic").draw(context);
-        // }
     }
 
     /**

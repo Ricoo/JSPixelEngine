@@ -29,6 +29,7 @@ let GameObject = class GameObject {
      * @param name : string, name of the property
      */
     detach(name) {
+        this._properties[name].delete();
         delete this._properties[name];
     }
 

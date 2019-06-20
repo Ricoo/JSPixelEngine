@@ -1,13 +1,15 @@
 import {Property} from "./Property";
 import {Vector2} from "../math/Vector2";
+import {Trigger} from "../../enum/Trigger";
 
 let Collider = class Collider extends Property {
-    constructor(width, height, callback=()=>{}) {
+    constructor(width, height, callback=()=>{}, trigger=Trigger.COLLIDER) {
         super();
         this.name = "collider";
         this._width = width;
         this._height = height;
         this._callback = callback;
+        this._trigger = trigger;
     }
 
     collide(other) {
@@ -26,10 +28,18 @@ let Collider = class Collider extends Property {
 
     raycast(x, y) {
         let pos = this.gameObject.position;
-        return (x > pos.x - this._width / 2 &&
-                x < pos.x + this._width / 2 &&
-                y > pos.y - this._height / 2 &&
-                y < pos.y + this._height / 2);
+        if (x > pos.x - this._width / 2 &&
+            x < pos.x + this._width / 2 &&
+            y > pos.y - this._height / 2 &&
+            y < pos.y + this._height / 2) {
+            this._callback(this);
+            return true;
+        }
+        return false;
+        // return (x > pos.x - this._width / 2 &&
+        //         x < pos.x + this._width / 2 &&
+        //         y > pos.y - this._height / 2 &&
+        //         y < pos.y + this._height / 2);
     }
 
     show(context) {
@@ -40,6 +50,9 @@ let Collider = class Collider extends Property {
         context.stroke();
         context.closePath();
     }
+
+    get trigger() {return this._trigger}
+    set trigger(value) {this._trigger = value}
 };
 
 export {Collider};

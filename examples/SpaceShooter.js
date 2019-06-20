@@ -6,7 +6,7 @@ import {GameObject} from "../js/engine/GameObject";
 import {Layer} from "../js/enum/Layer";
 import {KeyCode} from "../js/enum/KeyCode";
 import {Event} from "../js/enum/Event";
-import {GUIButton} from "../js/resource/sprite/GUI/GUIButton";
+import {GUIButton} from "../js/engine/gui/GUIButton";
 import {GUIText} from "../js/resource/sprite/GUI/GUIText";
 import {Graphic} from "../js/engine/properties/Graphic";
 import {Animator} from "../js/engine/properties/Animator";
@@ -14,13 +14,16 @@ import {Animation} from "../js/resource/sprite/Animation";
 import {Lerp} from "../js/engine/math/Lerp";
 import {Collider} from "../js/engine/properties/Collider";
 import {CollisionManager} from "../js/engine/CollisionManager";
+import {Text} from "../js/engine/properties/Text";
+import {Vector2} from "../js/engine/math/Vector2";
 
 const resourceList = {
     audio:[
         {src:"./resource/sound/click.wav",name:"click"}
     ],
     sprites:[
-         {src:"./resource/texture/Basicship.png",name:"ship",res:[318,64],atlas:[5,1]}
+        {src:"./resource/texture/Basicship.png",name:"ship",res:[318,64],atlas:[5,1]},
+        {src:"./resource/texture/button.png",name:"button",res:[64,64],atlas:[1,2]}
     ]
 };
 
@@ -122,6 +125,9 @@ let Game = class Game extends JSPixelApp {
 
         console.log("my super game have been initialized !");
         new Enemy(1000, Math.floor((Math.random() * 500) + 1));
+
+        this.button = new GUIButton("test", "button", 100,100, () => {console.log("test clicked")}, Layer.GUI, 2.0);
+        this.button.attach(new Text(["test","test2"], new Vector2(-60,-10)));
 
     }
 

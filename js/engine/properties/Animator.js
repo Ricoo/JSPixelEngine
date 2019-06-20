@@ -57,13 +57,14 @@ let Animator = class Animator extends Property {
     _animate(animation) {
         this._gameObject.property("graphic").image = this._element[this._playing.frames[this._current]];
         this._gameObject.property("graphic").tile = this._playing.frames[this._current];
-        if (this._current === animation.size - 1) {
+        this._current++;
+        if (this._current === animation.size) {
             this._current = 0;
             if (this._loop === false) {
                 this.stop();
             }
         }
-        this._current++;
+        // this._current++;
 //        this._current = (this._current === animation.size - 1 ? 0 : this._current + 1);
     }
 

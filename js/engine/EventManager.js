@@ -1,4 +1,5 @@
 import {Event} from "../enum/Event";
+import {CollisionManager} from "./CollisionManager";
 
 let EventManager = class EventManager {
     constructor(){
@@ -36,6 +37,7 @@ let EventManager = class EventManager {
         for (let handler of this._handlers[Event.MouseUp]) {
             handler(this._mouse);
         }
+        CollisionManager.instance.checkRaycast(this._mouse.x, this._mouse.y);
     }
 
     mouseMove(ev) {

@@ -34,6 +34,7 @@ let GameObjectManager = class GameObjectManager {
     }
 
     layer(nb) {
+        this._list.sort((a,b) => {return a.position.y - b.position.y});
         return this._list.filter(elem => elem.hasProperty("graphic") && elem.property("graphic").layer === nb);
     }
 

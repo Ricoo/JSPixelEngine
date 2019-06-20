@@ -5,5 +5,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="JSCodeWorker" />
+    <orderEntry type="module" module-name="GamProjet" />
+    <orderEntry type="module" module-name="ThreadTest" />
+    <orderEntry type="module" module-name="AdventureJS" />
   </component>
 </module>

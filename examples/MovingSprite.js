@@ -32,7 +32,7 @@ const animationList = {
     full_left :     new Animation("walk_left",     [8, 9, 10,11,12,13,14,15], 100, 8),
     full_right :    new Animation("walk_right",    [16,17,18,19,20,21,22,23], 100, 16),
     full_backward : new Animation("walk_backward", [24,25,26,27,28,29,30,31], 100, 24),
-    missile_fire :  new Animation("missile_fire",  [1,2,3,4],100, 4)
+    missile_fire :  new Animation("missile_fire",  [1,2,3,4]                , 100, 4)
 };
 
 class Girl extends GameObject {
@@ -44,7 +44,7 @@ class Girl extends GameObject {
             animationList.full_left,
             animationList.full_right,
             animationList.full_backward]));
-        this.attach(new Particle("ship", ParticleType.Source, 1, 1500, 10, false, [.2,.7], [2,3,4], [100,200]))
+        this.attach(new Particle("ship", ParticleType.Explode, 1, 1500, 10, false, [.4,.6], [2,3,4], [100,200]))
     }
 }
 

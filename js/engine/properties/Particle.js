@@ -28,7 +28,7 @@ let Particle = class Particle extends Property {
         this._scale = scale;
         this._speed = (speed === undefined ? type.speed : speed);
         this._angle = type.angle;
-        this._layer = Layer.ANIMATION;
+        this._layer = Layer.PARTICLE;
         this._running = false;
     }
 
@@ -109,6 +109,13 @@ let Particle = class Particle extends Property {
         }
     }
 
+    delete() {
+        if (this._timeout !== undefined) {
+            clearTimeout(this._timeout);
+            this._timeout = undefined;
+        }
+    }
+
     get spriteName() {return this._spriteName;}
     set spriteName(value) {this._spriteName = value;}
 
@@ -129,6 +136,9 @@ let Particle = class Particle extends Property {
 
     get speed() {return this._speed}
     set speed(value) {this._speed = value;}
+
+    get layer() {return this._layer;}
+    set layer(value) {this._layer = value;}
 
 };
 
