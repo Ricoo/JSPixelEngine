@@ -1,16 +1,11 @@
 export default class Lerp {
     /**
      * @desc Lerp is an over-time linear property modifier
-     * @param object : Object, the object we want to change the property of
-     * @param property : string, the property name
-     * @param callback : function, the callback after the completion
-     * @returns {Lerp|*}
+     * @param {Object} object the object we want to change the property of
+     * @param {string} property the property name
+     * @param {function} callback the callback after completion
      */
     constructor(object, property, callback=null) {
-        if (Lerp.instance)
-            return Lerp.instance;
-        else
-            Lerp.instance = this;
         this._object = object;
         this._property = property;
         this._callback = callback;
@@ -19,9 +14,9 @@ export default class Lerp {
 
     /**
      * @desc runs the modification from starting value to target value
-     * @param target : number, the target value
-     * @param delay : number, the delay between two iterations | The total duration of our modification
-     * @param pas : number, the value we increase our property of, If blank it is generated and delay is the total duration instead
+     * @param {number} target the target value
+     * @param {number} delay the delay between two iterations | The total duration of our modification
+     * @param {number} pas the value we increase our property of, If blank it is generated and delay is the total duration instead
      */
     run(target, delay, pas = null) {
         if (this._running !== null) {

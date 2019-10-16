@@ -1,7 +1,7 @@
 import Property from "./Property";
 import Vector2 from "../math/Vector2";
-import {TextType}from "../../enum/TextType";
-import {TextAlign}from "../../enum/TextAlign";
+import {TextType} from "../../enum/TextType";
+import {TextAlign} from "../../enum/TextAlign";
 
 export default class Text extends Property {
     constructor(txt, offset=new Vector2(0,0), font="Arial", size=20, color="black", type=TextType.fill, align=TextAlign.start) {

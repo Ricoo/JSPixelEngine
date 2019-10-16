@@ -1,6 +1,6 @@
 import Property from "./Property";
 import Vector2 from "../math/Vector2";
-import {Trigger}from "../../enum/Trigger";
+import {Trigger} from "../../enum/Trigger";
 
 export default class Collider extends Property {
     constructor(width, height, callback=()=>{}, trigger=Trigger.COLLIDER, rigid=false) {
@@ -37,10 +37,6 @@ export default class Collider extends Property {
             return true;
         }
         return false;
-        // return (x > pos.x - this._width / 2 &&
-        //         x < pos.x + this._width / 2 &&
-        //         y > pos.y - this._height / 2 &&
-        //         y < pos.y + this._height / 2);
     }
 
     show(context) {

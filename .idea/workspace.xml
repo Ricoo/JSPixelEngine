@@ -3,45 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="f048b09b-c3d9-416b-823c-bcc5e7a288b1" name="Default" comment="Working GUI&#10;+ Text property working&#10;+ reworked colliders to raycast on click&#10;+ modified example to showcase new button&#10;+ fixed property deletion">
       <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Ricoo.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/js/engine/properties/Weight.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/MovingSprite.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/MovingSprite.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/Snake.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/Snake.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/SpaceShooter.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/SpaceShooter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/CollisionManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/CollisionManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/EventManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/EventManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/GameObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/GameObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/GameObjectManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/GameObjectManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/JSPixelApp.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/JSPixelApp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/JSPixelEngine.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/JSPixelEngine.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/JSPixelSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/JSPixelSettings.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/engine/gui/GUIButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/gui/GUIButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/gui/GUIObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/gui/GUIObject.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/engine/gui/GUIText.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/gui/GUIText.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/engine/math/Lerp.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/math/Lerp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/math/Vector2.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/math/Vector2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/properties/Animator.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/properties/Animator.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/engine/properties/Collider.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/properties/Collider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/properties/Filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/properties/Filter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/properties/Graphic.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/properties/Graphic.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/engine/properties/Particle.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/properties/Particle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/properties/Property.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/properties/Property.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/engine/properties/Text.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/properties/Text.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resource/ResourceManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resource/ResourceManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resource/sound/Sound.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resource/sound/Sound.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resource/sound/SoundList.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resource/sound/SoundList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resource/sound/SoundManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resource/sound/SoundManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resource/sprite/Animation.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resource/sprite/Animation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resource/sprite/GUI/GUIButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resource/sprite/GUI/GUIButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resource/sprite/GUI/GUIText.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resource/sprite/GUI/GUIText.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resource/sprite/ImageFactory.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resource/sprite/ImageFactory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resource/sprite/Sprite.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resource/sprite/Sprite.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resource/sprite/SpriteAtlas.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resource/sprite/SpriteAtlas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resource/sprite/SpriteList.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resource/sprite/SpriteList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/resource/sprite/SpriteManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/resource/sprite/SpriteManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/enum/Layer.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/enum/Layer.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -252,7 +222,7 @@
       <workItem from="1571132910153" duration="1135000" />
       <workItem from="1571134078158" duration="4210000" />
       <workItem from="1571139053295" duration="2300000" />
-      <workItem from="1571142213904" duration="7736000" />
+      <workItem from="1571142213904" duration="13934000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1524350001453</created>
@@ -429,7 +399,14 @@
       <option name="project" value="LOCAL" />
       <updated>1561005533630</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Cleaned code&#10;- reworked exports&#10;- reworked comments">
+      <created>1571252727649</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1571252727650</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TodoView">
@@ -468,7 +445,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initial commit" />
     <MESSAGE value="Updated components to handle drawables from a singleton" />
     <MESSAGE value="Added examples" />
     <MESSAGE value="Modified draw parameters" />
@@ -493,6 +469,7 @@
     <MESSAGE value="Added particle system&#10;+ Improved GameObject cleanup process" />
     <MESSAGE value="Updated Particle system&#10;+added random scales for particles" />
     <MESSAGE value="Working GUI&#10;+ Text property working&#10;+ reworked colliders to raycast on click&#10;+ modified example to showcase new button&#10;+ fixed property deletion" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working GUI&#10;+ Text property working&#10;+ reworked colliders to raycast on click&#10;+ modified example to showcase new button&#10;+ fixed property deletion" />
+    <MESSAGE value="Cleaned code&#10;- reworked exports&#10;- reworked comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned code&#10;- reworked exports&#10;- reworked comments" />
   </component>
 </project>

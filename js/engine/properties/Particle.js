@@ -1,6 +1,6 @@
 import Property from "./Property";
-import {ParticleType}from "../../enum/ParticleType";
-import {Layer}from "../../enum/Layer";
+import {ParticleType} from "../../enum/ParticleType";
+import {Layer} from "../../enum/Layer";
 import GameObject from "../GameObject";
 import Graphic from "./Graphic";
 

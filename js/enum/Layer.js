@@ -4,8 +4,11 @@ let Layer = {
     CHARACTERS:2,
     PARTICLE:3,
     GUI:4,
-    ABOVEGUI:5,
-    POPUP:6
+    GUI2:5,
+    GUI3:6,
+    ABOVEGUI:7,
+    POPUP:8,
+    ABOVEPOPUP:9
 };
 
 export {Layer};

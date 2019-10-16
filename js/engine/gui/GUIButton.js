@@ -1,8 +1,8 @@
 import GUIObject from "./GUIObject";
 import Graphic from "../properties/Graphic";
-import {Layer}from "../../enum/Layer";
 import Collider from "../properties/Collider";
-import {Trigger}from "../../enum/Trigger";
+import {Layer} from "../../enum/Layer";
+import {Trigger} from "../../enum/Trigger";
 
 export default class GUIButton extends GUIObject {
     constructor(name, spriteName, x, y, callback=()=>{}, layer=Layer.GUI, scale=1.0) {
