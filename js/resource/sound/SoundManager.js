@@ -1,4 +1,4 @@
-let SoundManager = class SoundManager {
+export default class SoundManager {
     constructor(soundList) {
         if (SoundManager.instance)
             return SoundManager.instance;

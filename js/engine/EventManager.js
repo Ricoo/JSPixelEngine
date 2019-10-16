@@ -1,7 +1,7 @@
-import {Event} from "../enum/Event";
-import {CollisionManager} from "./CollisionManager";
+import {Event}from "../enum/Event";
+import CollisionManager from "./CollisionManager";
 
-let EventManager = class EventManager {
+export default class EventManager {
     constructor(){
         // Singleton
         if (EventManager.instance) {
@@ -75,5 +75,3 @@ let EventManager = class EventManager {
     static registerHandler(event, handler) {EventManager.instance.addHandler(event, handler)}
     static unregisterHandler(event, handler) {EventManager.instance.removeHandler(event,handler);}
 };
-
-export {EventManager};

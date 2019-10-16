@@ -1,4 +1,4 @@
-let Vector2 = class Vector2 {
+export default class Vector2 {
     constructor(x, y) {
         this._x = x;
         this._y = y;
@@ -16,5 +16,3 @@ let Vector2 = class Vector2 {
     get y() {return this._y;}
     set y(value) {this._y = value;}
 };
-
-export {Vector2};

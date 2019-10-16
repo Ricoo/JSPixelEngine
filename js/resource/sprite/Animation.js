@@ -1,4 +1,4 @@
-let Animation = class Animation {
+export default class Animation {
     constructor(name, frames, delay, end) {
         this._name = name;
         this._frames = frames;

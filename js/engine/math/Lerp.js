@@ -1,4 +1,4 @@
-let Lerp = class Lerp {
+export default class Lerp {
     /**
      * @desc Lerp is an over-time linear property modifier
      * @param object : Object, the object we want to change the property of
@@ -48,5 +48,3 @@ let Lerp = class Lerp {
         this._running = null;
     }
 };
-
-export {Lerp};

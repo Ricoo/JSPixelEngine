@@ -1,21 +1,21 @@
-import {JSPixelApp} from "../js/engine/JSPixelApp";
-import {ResourceManager} from "../js/resource/ResourceManager";
-import {GameObjectManager} from "../js/engine/GameObjectManager";
-import {EventManager} from "../js/engine/EventManager";
-import {GameObject} from "../js/engine/GameObject";
-import {Layer} from "../js/enum/Layer";
-import {KeyCode} from "../js/enum/KeyCode";
-import {Event} from "../js/enum/Event";
-import {GUIButton} from "../js/engine/gui/GUIButton";
-import {GUIText} from "../js/resource/sprite/GUI/GUIText";
-import {Graphic} from "../js/engine/properties/Graphic";
-import {Animator} from "../js/engine/properties/Animator";
-import {Animation} from "../js/resource/sprite/Animation";
-import {Lerp} from "../js/engine/math/Lerp";
-import {Collider} from "../js/engine/properties/Collider";
-import {CollisionManager} from "../js/engine/CollisionManager";
-import {Text} from "../js/engine/properties/Text";
-import {Vector2} from "../js/engine/math/Vector2";
+import JSPixelApp from "../js/engine/JSPixelApp";
+import ResourceManager from "../js/resource/ResourceManager";
+import GameObjectManager from "../js/engine/GameObjectManager";
+import EventManager from "../js/engine/EventManager";
+import GameObject from "../js/engine/GameObject";
+import {Layer}from "../js/enum/Layer";
+import {KeyCode}from "../js/enum/KeyCode";
+import {Event}from "../js/enum/Event";
+import GUIButton from "../js/engine/gui/GUIButton";
+import GUIText from "../js/resource/sprite/GUI/GUIText";
+import Graphic from "../js/engine/properties/Graphic";
+import Animator from "../js/engine/properties/Animator";
+import Animation from "../js/resource/sprite/Animation";
+import Lerp from "../js/engine/math/Lerp";
+import Collider from "../js/engine/properties/Collider";
+import CollisionManager from "../js/engine/CollisionManager";
+import Text from "../js/engine/properties/Text";
+import Vector2 from "../js/engine/math/Vector2";
 
 const resourceList = {
     audio:[
@@ -106,7 +106,7 @@ class Missile extends GameObject {
     }
 }
 
-let Game = class Game extends JSPixelApp {
+export default class Game extends JSPixelApp {
     constructor() {
         super("game", resourceList);
     }
@@ -126,7 +126,10 @@ let Game = class Game extends JSPixelApp {
         console.log("my super game have been initialized !");
         new Enemy(1000, Math.floor((Math.random() * 500) + 1));
 
-        this.button = new GUIButton("test", "button", 100,100, () => {console.log("test clicked")}, Layer.GUI, 2.0);
+
+        var textList = ["Click here","again","again !!!",["Lol there's","nothing here"]];
+
+        this.button = new GUIButton("test", "button", 100,100, () => {console.log("test clicked"),this.button.property("text").color="red"}, Layer.GUI, 2.0);
         this.button.attach(new Text(["test","test2"], new Vector2(-60,-10)));
 
     }

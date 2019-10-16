@@ -1,4 +1,4 @@
-let SpriteManager = class SpriteManager {
+export default class SpriteManager {
     constructor(spriteList, atlasList) {
         if (SpriteManager.instance)
             return SpriteManager.instance;

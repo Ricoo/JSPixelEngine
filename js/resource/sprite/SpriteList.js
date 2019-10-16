@@ -1,4 +1,4 @@
-let SpriteList = class SpriteList {
+export default class SpriteList {
     constructor(list) {
         this._list = list;
     }

@@ -1,9 +1,8 @@
-import {ResourceManager} from "../resource/ResourceManager";
-import {Property} from "./properties/Property";
-import {Vector2} from "./math/Vector2";
-import {GameObjectManager} from "./GameObjectManager";
+import Property from "./properties/Property";
+import Vector2 from "./math/Vector2";
+import GameObjectManager from "./GameObjectManager";
 
-let GameObject = class GameObject {
+export default class GameObject {
     constructor(name, x = 0, y = 0, angle = 0) {
         this._position = new Vector2(x, y);
         this._angle = angle;
@@ -14,11 +13,14 @@ let GameObject = class GameObject {
 
     /**
      * @desc adds a property to our GameObject and replaces the old property if one exists
-     * @param property : Property, the instance of Property
+     * @param {Property} property the instance of Property
      */
     attach(property) {
         if (!property instanceof Property) {
             throw TypeError("You can only attach instances of properties objects");
+        }
+        if (this._properties[property.name] !== undefined) {
+            this.detach(property.name);
         }
         this._properties[property.name] = property;
         property.attachTo(this);
@@ -26,7 +28,7 @@ let GameObject = class GameObject {
 
     /**
      * @desc removes a property from this object
-     * @param name : string, name of the property
+     * @param {string} name the name of the property
      */
     detach(name) {
         this._properties[name].delete();
@@ -35,7 +37,7 @@ let GameObject = class GameObject {
 
     /**
      * @desc returns the named property
-     * @param name : string
+     * @param {string} name
      * @returns {Property}
      */
     property(name) {
@@ -44,7 +46,7 @@ let GameObject = class GameObject {
 
     /**
      * @desc checks if a property exists on this GameObject
-     * @param name : string
+     * @param {string} name
      * @returns {boolean}
      */
     hasProperty(name) {
@@ -73,8 +75,4 @@ let GameObject = class GameObject {
     set angle(a){this._angle = (a > 360 ? a - 360 : (a < 0 ? a + 360 : a));}
 
     get name(){return this._name;}
-    get sprite(){return this._sprite;}
-    get layer(){return this._layer;}
 };
-
-export {GameObject};

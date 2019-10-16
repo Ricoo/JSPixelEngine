@@ -1,19 +1,20 @@
-import {Property} from "./Property";
-import {Layer} from "../../enum/Layer";
-import {GameObject} from "../GameObject";
-import {Graphic} from "./Graphic";
+import Property from "./Property";
+import {ParticleType}from "../../enum/ParticleType";
+import {Layer}from "../../enum/Layer";
+import GameObject from "../GameObject";
+import Graphic from "./Graphic";
 
-let Particle = class Particle extends Property {
+export default class Particle extends Property {
     /**
-     * @param spriteName : string the sprite to use
-     * @param type : ParticleType, the desired type of particle
-     * @param amount : number, the quantity of desired particles
-     * @param lifetime : number, time during which the particle should stay alive
-     * @param period : number, time after which the particle should repeat, 0 if no repeat
-     * @param fadeout : boolean, should the particle fade out before disappearing
-     * @param scale : number|number[], scale or scale range of the graphics we want to draw
-     * @param tileId : number|number[], if the graphic used is an atlas, the id of the sprite we need or a range for a randomized particle
-     * @param speed : number[], the particle's range of velocity
+     * @param {string} spriteName string the sprite to use
+     * @param {ParticleType} type the desired type of particle
+     * @param {number} amount the quantity of desired particles
+     * @param {number} lifetime time during which the particle should stay alive
+     * @param {number} period time after which the particle should repeat, 0 if no repeat
+     * @param {boolean} fadeout should the particle fade out before disappearing
+     * @param {number|number[]} scale scale or scale range of the graphics we want to draw
+     * @param {number|number[]} tileId if the graphic used is an atlas, the id of the sprite we need or a range for a randomized particle
+     * @param {number[]} speed : the particle's range of velocity
      */
     constructor(spriteName, type, amount, lifetime, period, fadeout, scale=1.0, tileId=0, speed=undefined) {
         super();
@@ -141,5 +142,3 @@ let Particle = class Particle extends Property {
     set layer(value) {this._layer = value;}
 
 };
-
-export {Particle};

@@ -1,8 +1,8 @@
-import {Sprite} from "./Sprite";
-import {Vector2} from "../../engine/math/Vector2";
-import {ImageFactory} from "./ImageFactory";
+import Sprite from "./Sprite";
+import Vector2 from "../../engine/math/Vector2";
+import ImageFactory from "./ImageFactory";
 
-let SpriteAtlas = class SpriteAtlas extends Sprite {
+export default class SpriteAtlas extends Sprite {
     constructor(src, name, size, callback, atlas) {
         super(src, name, size, () => {this._build();});
 

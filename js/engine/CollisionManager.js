@@ -1,6 +1,6 @@
-import {GameObjectManager} from "./GameObjectManager";
+import GameObjectManager from "./GameObjectManager";
 
-let CollisionManager = class CollisionManager {
+export default class CollisionManager {
     constructor() {
         if (CollisionManager.instance)
             return CollisionManager.instance;
@@ -39,12 +39,10 @@ let CollisionManager = class CollisionManager {
 
     /**
      * @desc adds a group to the manager, group 1 will detect if it's colliding with group 2
-     * @param group : String[] an array of two classnames that are supposed to collide
+     * @param {String[]} group an array of two classnames that are supposed to collide
      */
     addGroup(group) {
         this._groups.push(group);
         console.log(this._groups);
     }
 };
-
-export {CollisionManager};

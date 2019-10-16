@@ -1,4 +1,4 @@
-let JSPixelSettings = class JSPixelSettings {
+export default class JSPixelSettings {
     constructor() {
         this._resX = window.innerWidth;
         this._resY = window.innerHeight;
@@ -10,5 +10,3 @@ let JSPixelSettings = class JSPixelSettings {
     set resX(resX){this._resX = resX}
     set resY(resY){this._resY = resY}
 };
-
-export {JSPixelSettings};

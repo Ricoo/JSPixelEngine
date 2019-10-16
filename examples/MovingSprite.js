@@ -1,20 +1,20 @@
-import {JSPixelApp} from "../js/engine/JSPixelApp";
-import {ResourceManager} from "../js/resource/ResourceManager";
-import {GameObjectManager} from "../js/engine/GameObjectManager";
-import {EventManager} from "../js/engine/EventManager";
-import {GameObject} from "../js/engine/GameObject";
-import {Layer} from "../js/enum/Layer";
-import {KeyCode} from "../js/enum/KeyCode";
-import {Event} from "../js/enum/Event";
-import {GUIButton} from "../js/resource/sprite/GUI/GUIButton";
-import {GUIText} from "../js/resource/sprite/GUI/GUIText";
-import {Graphic} from "../js/engine/properties/Graphic";
-import {Animator} from "../js/engine/properties/Animator";
-import {Animation} from "../js/resource/sprite/Animation";
-import {Lerp} from "../js/engine/math/Lerp";
-import {Collider} from "../js/engine/properties/Collider";
-import {Particle} from "../js/engine/properties/Particle";
-import {ParticleType} from "../js/enum/ParticleType";
+import JSPixelApp from "../js/engine/JSPixelApp";
+import ResourceManager from "../js/resource/ResourceManager";
+import GameObjectManager from "../js/engine/GameObjectManager";
+import EventManager from "../js/engine/EventManager";
+import GameObject from "../js/engine/GameObject";
+import {Layer}from "../js/enum/Layer";
+import {KeyCode}from "../js/enum/KeyCode";
+import {Event}from "../js/enum/Event";
+import GUIButton from "../js/resource/sprite/GUI/GUIButton";
+import GUIText from "../js/resource/sprite/GUI/GUIText";
+import Graphic from "../js/engine/properties/Graphic";
+import Animator from "../js/engine/properties/Animator";
+import Animation from "../js/resource/sprite/Animation";
+import Lerp from "../js/engine/math/Lerp";
+import Collider from "../js/engine/properties/Collider";
+import Particle from "../js/engine/properties/Particle";
+import {ParticleType}from "../js/enum/ParticleType";
 
 const resourceList = {
     audio:[
@@ -48,7 +48,7 @@ class Girl extends GameObject {
     }
 }
 
-let Game = class Game extends JSPixelApp {
+export default class Game extends JSPixelApp {
     constructor() {
         super("game", resourceList);
     }

@@ -1,4 +1,4 @@
-let Sprite = class Sprite {
+export default class Sprite {
     constructor(src,name,size,callback) {
         this._image = new Image();
         this._image.onload = callback;

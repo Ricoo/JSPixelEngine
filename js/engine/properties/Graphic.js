@@ -1,7 +1,7 @@
-import {Property} from "./Property";
-import {ResourceManager} from "../../resource/ResourceManager";
+import Property from "./Property";
+import ResourceManager from "../../resource/ResourceManager";
 
-let Graphic = class Graphic extends Property {
+export default class Graphic extends Property {
     constructor(spriteName, layer, scale=1.0, alpha=1.0, tile=0) {
         super();
         this.name = "graphic";
@@ -16,7 +16,7 @@ let Graphic = class Graphic extends Property {
 
     /**
      * @desc draws the current sprite to the context
-     * @param context : CanvasRenderingContext2D, the 2d context of our canvas
+     * @param {CanvasRenderingContext2D} context CanvasRenderingContext2D, the 2d context of our canvas
      */
     draw(context) {
         if (this._visible) {
@@ -48,5 +48,3 @@ let Graphic = class Graphic extends Property {
     set visible(v){this._visible = v;}
     toggle(){this._visible = !this._visible;}
 };
-
-export {Graphic};

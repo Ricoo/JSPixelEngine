@@ -1,12 +1,12 @@
-import {JSPixelApp} from "./JSPixelApp";
-import {GameObjectManager} from "./GameObjectManager";
-import {ResourceManager} from "../resource/ResourceManager";
-import {EventManager} from "./EventManager";
-import {CollisionManager} from "./CollisionManager";
-import {Layer} from "../enum/Layer";
-import {GUIObject} from "./gui/GUIObject";
+import JSPixelApp from "./JSPixelApp";
+import GameObjectManager from "./GameObjectManager";
+import ResourceManager from "../resource/ResourceManager";
+import EventManager from "./EventManager";
+import CollisionManager from "./CollisionManager";
+import {Layer}from "../enum/Layer";
+import GUIObject from "./gui/GUIObject";
 
-let JSPixelEngine = class JSPixelEngine {
+export default class JSPixelEngine {
     constructor() {
         //Singleton
         if (JSPixelEngine.instance !== undefined) {
@@ -22,7 +22,7 @@ let JSPixelEngine = class JSPixelEngine {
 
     /**
      * @desc registers the app into the engine
-     * @param app : JSPixelApp, the app instance
+     * @param {JSPixelApp} app the app instance
      */
     register(app) {
         if (app instanceof JSPixelApp) {
@@ -34,7 +34,7 @@ let JSPixelEngine = class JSPixelEngine {
 
     /**
      * @desc loads the given resource pack into memory before running the engine
-     * @param resourcePack : {audio:*[],sprites:*[]}, the resource pack descriptor
+     * @param {{audio:*[],sprites:*[]}} resourcePack the resource pack descriptor
      */
     preLoad(resourcePack) {
         if (this._resourceManager === undefined) {
@@ -67,7 +67,7 @@ let JSPixelEngine = class JSPixelEngine {
     }
 
     /**
-     * The event loop of the engine, running once every ms
+     * @desc The event loop of the engine, running once every ms
      */
     eventLoop() {
         CollisionManager.instance.checkCollision();
@@ -75,7 +75,7 @@ let JSPixelEngine = class JSPixelEngine {
     }
 
     /**
-     * The display loop of the engine, running slower than the event loop
+     * @desc The display loop of the engine, running slower than the event loop
      */
     displayLoop() {
         let context = this._app.context;
@@ -134,5 +134,3 @@ let JSPixelEngine = class JSPixelEngine {
     //     }
     // }
 };
-
-export {JSPixelEngine};

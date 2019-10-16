@@ -1,6 +1,6 @@
-import {GameObject} from "../GameObject";
+import GameObject from "../GameObject";
 
-let GUIObject = class GUIObject extends GameObject {
+export default class GUIObject extends GameObject {
     constructor(name = "guiElement", x = 0, y = 0) {
         super(name, x, y);
     }
@@ -14,5 +14,3 @@ let GUIObject = class GUIObject extends GameObject {
         }
     }
 };
-
-export {GUIObject};

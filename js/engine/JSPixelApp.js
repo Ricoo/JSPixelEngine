@@ -1,7 +1,7 @@
-import {JSPixelSettings} from "./JSPixelSettings";
-import {JSPixelEngine} from "./JSPixelEngine";
+import JSPixelSettings from "./JSPixelSettings";
+import JSPixelEngine from "./JSPixelEngine";
 
-let JSPixelApp = class JSPixelApp {
+export default class JSPixelApp {
     /**
      * @param canvasName : string name of the canvas
      * @param resourcePack : {audio:*[],sprites:*[]}
@@ -41,5 +41,3 @@ let JSPixelApp = class JSPixelApp {
     get context(){return this._context;}
     get debug(){return this._debug;}
 };
-
-export {JSPixelApp};

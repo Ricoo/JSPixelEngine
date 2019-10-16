@@ -1,4 +1,4 @@
-let SoundList = class SoundList {
+export default class SoundList {
     constructor(list) {
         this._list = list;
     }

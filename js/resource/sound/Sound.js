@@ -1,4 +1,4 @@
-let Sound = class Sound {
+export default class Sound {
     constructor(src, name, callback) {
         this._sound = new Audio(src);
         this._name = name;

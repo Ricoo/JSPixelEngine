@@ -1,6 +1,6 @@
-import {GameObject} from "./GameObject";
+import GameObject from "./GameObject";
 
-let GameObjectManager = class GameObjectManager {
+export default class GameObjectManager {
     constructor() {
         if (GameObjectManager.instance !== undefined) {
             return GameObjectManager.instance;
@@ -20,7 +20,6 @@ let GameObjectManager = class GameObjectManager {
     }
 
     remove(rem) {
-//        let elem = this._list.find(function(elem) {return elem === rem;});
         this._list.splice(this._list.indexOf(rem), 1);
     }
 
@@ -46,5 +45,3 @@ let GameObjectManager = class GameObjectManager {
     static unregister(drawable) {GameObjectManager.instance.remove(drawable.name);}
 
 };
-
-export {GameObjectManager};

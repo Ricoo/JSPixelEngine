@@ -1,15 +1,16 @@
-import {Property} from "./Property";
-import {Vector2} from "../math/Vector2";
-import {Trigger} from "../../enum/Trigger";
+import Property from "./Property";
+import Vector2 from "../math/Vector2";
+import {Trigger}from "../../enum/Trigger";
 
-let Collider = class Collider extends Property {
-    constructor(width, height, callback=()=>{}, trigger=Trigger.COLLIDER) {
+export default class Collider extends Property {
+    constructor(width, height, callback=()=>{}, trigger=Trigger.COLLIDER, rigid=false) {
         super();
         this.name = "collider";
         this._width = width;
         this._height = height;
         this._callback = callback;
         this._trigger = trigger;
+        this._rigid = rigid;
     }
 
     collide(other) {
@@ -54,5 +55,3 @@ let Collider = class Collider extends Property {
     get trigger() {return this._trigger}
     set trigger(value) {this._trigger = value}
 };
-
-export {Collider};

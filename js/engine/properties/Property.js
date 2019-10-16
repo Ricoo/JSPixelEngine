@@ -1,5 +1,6 @@
-let Property = class Properties {
+export default class Property {
     constructor() {
+        this.name = undefined;
         if (new.target === Property) {
             throw TypeError("You have to extend this class");
         }
@@ -7,7 +8,7 @@ let Property = class Properties {
 
     /**
      * @desc keeps a reference to the gameObject available
-     * @param gameObject : GameObject, the reference to the gameObject
+     * @param {GameObject} gameObject, the reference to the gameObject
      */
     attachTo(gameObject) {
         this._gameObject = gameObject
@@ -21,5 +22,3 @@ let Property = class Properties {
 
     delete() {}
 };
-
-export {Property};

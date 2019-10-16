@@ -1,10 +1,10 @@
-import {SpriteList} from "./sprite/SpriteList";
-import {Sprite} from "./sprite/Sprite";
-import {SoundList} from "./sound/SoundList";
-import {Sound} from "./sound/Sound";
-import {SpriteAtlas} from "./sprite/SpriteAtlas";
+import SpriteList from "./sprite/SpriteList";
+import Sprite from "./sprite/Sprite";
+import SoundList from "./sound/SoundList";
+import Sound from "./sound/Sound";
+import SpriteAtlas from "./sprite/SpriteAtlas";
 
-let ResourceManager = class ResourceManager {
+export default class ResourceManager {
     constructor() {
         //Singleton
         if (ResourceManager.instance !== undefined) {

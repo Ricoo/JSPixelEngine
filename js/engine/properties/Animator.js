@@ -1,7 +1,7 @@
-import {Property} from "./Property";
-import {SpriteAtlas} from "../../resource/sprite/SpriteAtlas";
+import Property from "./Property";
+import SpriteAtlas from "../../resource/sprite/SpriteAtlas";
 
-let Animator = class Animator extends Property {
+export default class Animator extends Property {
     constructor(list=null) {
         super();
         this.name = "animator";
@@ -73,5 +73,3 @@ let Animator = class Animator extends Property {
         super.delete();
     }
 };
-
-export {Animator};

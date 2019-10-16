@@ -1,7 +1,7 @@
-import {GameObject} from "../../../engine/GameObject";
-import {Layer} from "../../../enum/Layer";
+import GameObject from "../../../engine/GameObject";
+import {Layer}from "../../../enum/Layer";
 
-let GUIText = class GUIText extends GameObject {
+export default class GUIText extends GameObject {
     constructor(name, text, posX, posY, textAlign = "left", textColor = "black", fontSize = 30) {
         super(null, name, Layer.ABOVEGUI, posX, posY);
 

@@ -1,9 +1,9 @@
-import {GameObject} from "../../../engine/GameObject";
-import {Layer} from "../../../enum/Layer";
-import {Graphic} from "../../../engine/properties/Graphic";
-import {Collider} from "../../../engine/properties/Collider";
+import GameObject from "../../../engine/GameObject";
+import {Layer}from "../../../enum/Layer";
+import Graphic from "../../../engine/properties/Graphic";
+import Collider from "../../../engine/properties/Collider";
 
-let GUIButton = class GUIButton extends GameObject {
+export default class GUIButton extends GameObject {
     constructor(sprite, name, text, posX, posY, scale = 1.0, textColor = "black", fontSize = 30) {
         super(sprite, name, Layer.GUI, posX, posY, scale);
 

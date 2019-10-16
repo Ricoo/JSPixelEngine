@@ -1,4 +1,4 @@
-let ImageFactory = class ImageFactory {
+export default class ImageFactory {
     constructor() {
         //Singleton
         if (ImageFactory.instance !== undefined) {
