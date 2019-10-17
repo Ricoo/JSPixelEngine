@@ -53,6 +53,5 @@ export default class CollisionManager {
      */
     addGroup(group) {
         this._groups.push(group);
-        console.log(this._groups);
     }
 };

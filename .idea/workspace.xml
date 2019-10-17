@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="f048b09b-c3d9-416b-823c-bcc5e7a288b1" name="Default" comment="Working GUI&#10;+ Text property working&#10;+ reworked colliders to raycast on click&#10;+ modified example to showcase new button&#10;+ fixed property deletion">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/Ricoo.xml" afterDir="false" />
+    <list default="true" id="f048b09b-c3d9-416b-823c-bcc5e7a288b1" name="Default" comment="Cleaned code&#10;- patched Lerp">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node_modules/node-releases/.idea/node-releases.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Ricoo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Ricoo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/fileTemplates/JS Class.js" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/fileTemplates/JS Class.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/gui/GUIButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/gui/GUIButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/MovingSprite.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/MovingSprite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/SpaceShooter.js" beforeDir="false" afterPath="$PROJECT_DIR$/examples/SpaceShooter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/engine/CollisionManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/CollisionManager.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/engine/gui/GUIText.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/gui/GUIText.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/math/Lerp.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/math/Lerp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/properties/Collider.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/properties/Collider.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/properties/Particle.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/properties/Particle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/engine/properties/Text.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/engine/properties/Text.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/enum/Layer.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/enum/Layer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/resource/sprite/GUI/GUIButton.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/resource/sprite/GUI/GUIText.js" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -68,15 +74,19 @@
         <option value="JavaScript class" />
         <option value="HTML File" />
         <option value="CSS File" />
-        <option value="JavaScript File" />
         <option value="JS Class" />
+        <option value="JavaScript File" />
       </list>
     </option>
     <option name="SCHEME" value="Project" />
   </component>
   <component name="Git.Settings">
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/.idea/fileTemplates/JS Class.js" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -98,7 +108,8 @@
     <property name="SearchEverywhereHistoryKey" value="?&#9;null&#9;null" />
     <property name="ToolWindowTerminal.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="C:/Program Files/nodejs/node.exe" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.12.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/dist" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -106,25 +117,26 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs.cucumber.cucumber_node_package_dir" value="" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Ricoo\Documents\Recovery\Projects\AdventureJS" />
-      <recent name="C:\Users\Ricoo\PhpstormProjects\GamProjet" />
-      <recent name="C:\Users\Ricoo\PhpstormProjects\GamProjet\css" />
-      <recent name="C:\Users\Ricoo\Documents\Projects\JSPixelEngine\examples" />
-      <recent name="C:\Users\Ricoo\PhpstormProjects\JSPixelEngine\examples" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Ricoo\Documents\Recovery\Projects\AdventureJS\js" />
       <recent name="C:\Users\Ricoo\Documents\Recovery\Projects\AdventureJS" />
       <recent name="C:\Users\Ricoo\Documents\Recovery\Projects\AdventureJS\js\Block" />
       <recent name="C:\Users\Ricoo\PhpstormProjects\ThreadTest" />
+      <recent name="C:\Users\Ricoo\Documents\Projects\JSPixelEngine\examples" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ricoo\Documents\Projects\JSPixelEngine\dist" />
+      <recent name="C:\Users\Ricoo\Documents\Recovery\Projects\AdventureJS" />
+      <recent name="C:\Users\Ricoo\PhpstormProjects\GamProjet" />
+      <recent name="C:\Users\Ricoo\PhpstormProjects\GamProjet\css" />
       <recent name="C:\Users\Ricoo\Documents\Projects\JSPixelEngine\examples" />
     </key>
   </component>
@@ -140,10 +152,19 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.spaceshooter.html">
     <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/JSPixelEngine/index.html">
       <method v="2" />
     </configuration>
+    <configuration name="spaceshooter.html" type="JavascriptDebugType" nameIsGenerated="true" uri="http://localhost:63342/JSPixelEngine/examples/spaceshooter.html" useBuiltInWebServerPort="true">
+      <method v="2">
+        <option name="FwBeforeLaunchTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.spaceshooter.html" />
+      <item itemvalue="JavaScript Debug.index.html" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JavaScript Debug.index.html" />
@@ -222,7 +243,8 @@
       <workItem from="1571132910153" duration="1135000" />
       <workItem from="1571134078158" duration="4210000" />
       <workItem from="1571139053295" duration="2300000" />
-      <workItem from="1571142213904" duration="13934000" />
+      <workItem from="1571142213904" duration="48051000" />
+      <workItem from="1571348058114" duration="1038000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1524350001453</created>
@@ -406,17 +428,36 @@
       <option name="project" value="LOCAL" />
       <updated>1571252727650</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Updated readme">
+      <created>1571267644648</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1571267644648</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Cleaned code&#10;- patched Lerp">
+      <created>1571267782345</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1571267782345</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Added doc">
+      <created>1571304841238</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1571304841238</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Added default transparent image&#10;- Added that image for GUIText&#10;- Added setter for Graphic property">
+      <created>1571308642997</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1571308642997</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -445,10 +486,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Updated components to handle drawables from a singleton" />
-    <MESSAGE value="Added examples" />
-    <MESSAGE value="Modified draw parameters" />
-    <MESSAGE value="Added centralized event system" />
     <MESSAGE value="Changed example to match EventManager system&#10;+ patched EventManager" />
     <MESSAGE value="added GUI elements&#10;+ patched Sprite" />
     <MESSAGE value="fixed example&#10;+ cleaned code" />
@@ -470,6 +507,10 @@
     <MESSAGE value="Updated Particle system&#10;+added random scales for particles" />
     <MESSAGE value="Working GUI&#10;+ Text property working&#10;+ reworked colliders to raycast on click&#10;+ modified example to showcase new button&#10;+ fixed property deletion" />
     <MESSAGE value="Cleaned code&#10;- reworked exports&#10;- reworked comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned code&#10;- reworked exports&#10;- reworked comments" />
+    <MESSAGE value="Updated readme" />
+    <MESSAGE value="Cleaned code&#10;- patched Lerp" />
+    <MESSAGE value="Added doc" />
+    <MESSAGE value="Added default transparent image&#10;- Added that image for GUIText&#10;- Added setter for Graphic property" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added default transparent image&#10;- Added that image for GUIText&#10;- Added setter for Graphic property" />
   </component>
 </project>

@@ -3,9 +3,6 @@ import ResourceManager from "../js/resource/ResourceManager";
 import GameObjectManager from "../js/engine/GameObjectManager";
 import EventManager from "../js/engine/EventManager";
 import GameObject from "../js/engine/GameObject";
-import {Layer}from "../js/enum/Layer";
-import {KeyCode}from "../js/enum/KeyCode";
-import {Event}from "../js/enum/Event";
 import GUIButton from "../js/resource/sprite/GUI/GUIButton";
 import GUIText from "../js/resource/sprite/GUI/GUIText";
 import Graphic from "../js/engine/properties/Graphic";
@@ -14,7 +11,10 @@ import Animation from "../js/resource/sprite/Animation";
 import Lerp from "../js/engine/math/Lerp";
 import Collider from "../js/engine/properties/Collider";
 import Particle from "../js/engine/properties/Particle";
-import {ParticleType}from "../js/enum/ParticleType";
+import {Layer} from "../js/enum/Layer";
+import {KeyCode} from "../js/enum/KeyCode";
+import {Event} from "../js/enum/Event";
+import {ParticleType} from "../js/enum/ParticleType";
 
 const resourceList = {
     audio:[

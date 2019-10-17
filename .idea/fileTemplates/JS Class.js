@@ -1,7 +1,7 @@
 #set($abstract = $Abstract)
 #set($singleton = $Singleton)
 
-let ${NAME} = class ${NAME} {
+export default class ${NAME} {
     constructor(){
         #if ($abstract == true)
         if (new.target === ${NAME}) {
@@ -17,5 +17,3 @@ let ${NAME} = class ${NAME} {
         #end
     }
 };
-
-export {${NAME}};

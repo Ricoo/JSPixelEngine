@@ -3,11 +3,8 @@ import ResourceManager from "../js/resource/ResourceManager";
 import GameObjectManager from "../js/engine/GameObjectManager";
 import EventManager from "../js/engine/EventManager";
 import GameObject from "../js/engine/GameObject";
-import {Layer}from "../js/enum/Layer";
-import {KeyCode}from "../js/enum/KeyCode";
-import {Event}from "../js/enum/Event";
 import GUIButton from "../js/engine/gui/GUIButton";
-import GUIText from "../js/resource/sprite/GUI/GUIText";
+import GUIText from "../js/engine/gui/GUIText";
 import Graphic from "../js/engine/properties/Graphic";
 import Animator from "../js/engine/properties/Animator";
 import Animation from "../js/resource/sprite/Animation";
@@ -16,6 +13,10 @@ import Collider from "../js/engine/properties/Collider";
 import CollisionManager from "../js/engine/CollisionManager";
 import Text from "../js/engine/properties/Text";
 import Vector2 from "../js/engine/math/Vector2";
+import {Layer} from "../js/enum/Layer";
+import {KeyCode} from "../js/enum/KeyCode";
+import {Event} from "../js/enum/Event";
+import {TextAlign} from "../js/enum/TextAlign";
 
 const resourceList = {
     audio:[
@@ -28,7 +29,6 @@ const resourceList = {
 };
 
 const animationList = {
-
     full_forward : new Animation("walk_forward",  [0, 1, 2, 3, 4, 5, 6, 7 ], 100, 0),
     full_left : new Animation("walk_left",     [8, 9, 10,11,12,13,14,15], 100, 8),
     full_right : new Animation("walk_right",    [16,17,18,19,20,21,22,23], 100, 16),
@@ -88,7 +88,11 @@ class Missile extends GameObject {
         super("missile", x, y);
         this.attach(new Graphic("ship", Layer.BACKGROUND,1,1,1));
         this.attach(new Animator([animationList.missile_fire]));
-        this.attach(new Collider(50, 20, ()=>{this.delete()}));
+        this.attach(new Collider(50, 20, ()=>{
+            Game.score += 1;
+            Game.scoreText.text = "Score : "+ Game.score;
+            this.delete();
+        }));
         this.property("animator").play("missile_fire", false);
         this._i = setInterval(() => {this.update()}, 5);
     }
@@ -106,7 +110,7 @@ class Missile extends GameObject {
     }
 }
 
-export default class Game extends JSPixelApp {
+ class Game extends JSPixelApp {
     constructor() {
         super("game", resourceList);
     }
@@ -126,17 +130,9 @@ export default class Game extends JSPixelApp {
         console.log("my super game have been initialized !");
         new Enemy(1000, Math.floor((Math.random() * 500) + 1));
 
-        let textList = ["Click here","again","again !!!",["Lol there's","nothing here"]];
-        let i = 0;
-        this.button = new GUIButton("test", "button", 100,100, () => {
-            console.log("test clicked");
-            ++i;
-            if (i < textList.length) {
-                this.button.property("text").text = textList[i];
-            }
-            // this.button.property("text").color="red";
-        }, Layer.GUI, 2.0);
-        this.button.attach(new Text(textList[i], new Vector2(-60,-10)));
+        Game.score = 0;
+        Game.scoreText = new GUIText("score", "Score : " + Game.score, 70, 35);
+        Game.scoreText.property("text").align = TextAlign.center;
     }
 
     frame() {
@@ -172,7 +168,7 @@ export default class Game extends JSPixelApp {
             this.ship.position.y = mouse.y;
         }
     }
-};
+}
 
 // Simply create a new instance of your inherited JSPixelApp class
 function init(){

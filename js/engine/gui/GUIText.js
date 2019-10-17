@@ -9,11 +9,11 @@ export default class GUIText extends GUIObject {
         super(name, x, y);
         this._text = new Text(text);
         this.attach(new Graphic(Values.EMPTY_IMAGE.name, layer));
-        this.attach(this._text);
+        this.attach(new Text(text));
     }
 
-    get text() {return this._text};
+    get text() {return this.property("text").text};
     set text(value) {
-        this._text.text = value;
+        this.property("text").text = value;
     }
 };

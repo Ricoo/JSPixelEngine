@@ -3,6 +3,7 @@
     <words>
       <w>collider</w>
       <w>colliders</w>
+      <w>lerp</w>
       <w>raycast</w>
     </words>
   </dictionary>
