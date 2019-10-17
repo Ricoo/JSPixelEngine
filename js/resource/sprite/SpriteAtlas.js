@@ -40,7 +40,7 @@ export default class SpriteAtlas extends Sprite {
 
     /**
      * @desc returns the tile at given index
-     * @param id : number, the index of the wanted tile
+     * @param {number} id the index of the wanted tile
      */
     tile(id){
         if (id < 0 || id > this._dimensions.x * this._dimensions.y) {

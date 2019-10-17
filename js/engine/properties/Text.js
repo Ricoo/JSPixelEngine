@@ -6,7 +6,7 @@ import {TextAlign} from "../../enum/TextAlign";
 export default class Text extends Property {
     /**
      * @desc this is a text property we can add on an object for it to display said text on draw
-     * @param {string} txt the text we want to display
+     * @param {string|string[]} txt the text we want to display
      * @param {Vector2} offset the offset with which we want to start writing
      * @param {string} font the css font we want to use
      * @param {number} size the css size of our text

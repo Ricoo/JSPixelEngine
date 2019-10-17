@@ -30,7 +30,7 @@ Create a class that extends JSPixelApp, and implement both initialize() and fram
 class Game extends JSPixelApp {
   constructor() {
     // Here, "canvas" is the id of your html5 canvas and "package" our packagedescriptor
-    super("canvas", package);
+    super("canvas", "package");
   }
   
   initialize() {

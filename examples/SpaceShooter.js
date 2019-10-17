@@ -126,12 +126,17 @@ export default class Game extends JSPixelApp {
         console.log("my super game have been initialized !");
         new Enemy(1000, Math.floor((Math.random() * 500) + 1));
 
-
-        var textList = ["Click here","again","again !!!",["Lol there's","nothing here"]];
-
-        this.button = new GUIButton("test", "button", 100,100, () => {console.log("test clicked");this.button.property("text").color="red"}, Layer.GUI, 2.0);
-        this.button.attach(new Text(["test","test2"], new Vector2(-60,-10)));
-
+        let textList = ["Click here","again","again !!!",["Lol there's","nothing here"]];
+        let i = 0;
+        this.button = new GUIButton("test", "button", 100,100, () => {
+            console.log("test clicked");
+            ++i;
+            if (i < textList.length) {
+                this.button.property("text").text = textList[i];
+            }
+            // this.button.property("text").color="red";
+        }, Layer.GUI, 2.0);
+        this.button.attach(new Text(textList[i], new Vector2(-60,-10)));
     }
 
     frame() {

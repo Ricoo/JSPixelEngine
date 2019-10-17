@@ -3,6 +3,7 @@ import Sprite from "./sprite/Sprite";
 import SoundList from "./sound/SoundList";
 import Sound from "./sound/Sound";
 import SpriteAtlas from "./sprite/SpriteAtlas";
+import {Values} from "../enum/Values";
 
 export default class ResourceManager {
     constructor() {
@@ -30,6 +31,8 @@ export default class ResourceManager {
         let self = this;
         this._total = packageDescriptor.sprites.length + packageDescriptor.audio.length;
         let callback = () => {this._count += 1; if (this._count === this._total) {this._done = true;}};
+        spriteList.push(new Sprite(Values.EMPTY_IMAGE.src,
+            Values.EMPTY_IMAGE.name,  Values.EMPTY_IMAGE.res, ()=>{}));
         packageDescriptor.sprites.forEach(function(elem, index, array) {
             if (elem.hasOwnProperty("atlas")) {
                 spriteList.push(new SpriteAtlas(elem["src"],elem["name"],elem["res"], callback, elem["atlas"]));

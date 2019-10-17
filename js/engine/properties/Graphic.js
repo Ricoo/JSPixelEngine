@@ -47,6 +47,7 @@ export default class Graphic extends Property {
     get alpha() {return this._alpha;}
     get layer(){return this._layer;}
     get sprite(){return this._sprite;}
+    set sprite(s){this._sprite = s;}
     get visible(){return this._visible;}
     set visible(v){this._visible = v;}
     toggle(){this._visible = !this._visible;}
