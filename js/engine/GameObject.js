@@ -3,6 +3,13 @@ import Vector2 from "./math/Vector2";
 import GameObjectManager from "./GameObjectManager";
 
 export default class GameObject {
+    /**
+     * @desc a gameObject, the standardized way to create and manipulate game elements
+     * @param {string} name the assigned name of this object so we can find it using its name in GameObjectManager
+     * @param {number} x the x position of our object
+     * @param {number} y the y position of our object
+     * @param {number} angle the angle our object should be displayed with (if necessary)
+     */
     constructor(name, x = 0, y = 0, angle = 0) {
         this._position = new Vector2(x, y);
         this._angle = angle;
@@ -55,7 +62,6 @@ export default class GameObject {
 
     /**
      * @desc deletes the GameObjects and cleans every property
-     * @returns {Vector2}
      */
     delete() {
         for (let prop in this._properties) {

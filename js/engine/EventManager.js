@@ -3,7 +3,6 @@ import CollisionManager from "./CollisionManager";
 
 export default class EventManager {
     constructor(){
-        // Singleton
         if (EventManager.instance) {
             return EventManager.instance;
         }

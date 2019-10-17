@@ -95,7 +95,7 @@ let keyPressed = EventManager.keys;
 So now we can move our sprite with the keys pressed every frame
 ```javascript
 let keys = EventManager.keys;
-if keys.includes(KeyCode.arrowRight) {
+if (keys.includes(KeyCode.arrowRight)) {
     pikachu.position.x += 5;
 }
 ```

@@ -37,6 +37,9 @@ export default class Lerp {
         }
     }
 
+    /**
+     * @desc stops the Lerp modification
+     */
     end() {
         if (this._callback !== null)
             this._callback();

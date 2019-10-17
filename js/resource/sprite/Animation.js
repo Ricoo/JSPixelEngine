@@ -1,4 +1,11 @@
 export default class Animation {
+    /**
+     * @desc an animation, using frames on a SpriteAtlas
+     * @param {string} name the name of our animation
+     * @param {number[]} frames the selected frames for our animation
+     * @param {number} delay the delay between each frame
+     * @param {number} end the last frame of our animation
+     */
     constructor(name, frames, delay, end) {
         this._name = name;
         this._frames = frames;

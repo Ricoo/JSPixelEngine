@@ -6,7 +6,6 @@ import SpriteAtlas from "./sprite/SpriteAtlas";
 
 export default class ResourceManager {
     constructor() {
-        //Singleton
         if (ResourceManager.instance !== undefined) {
             return ResourceManager.instance;
         }
@@ -21,7 +20,7 @@ export default class ResourceManager {
 
     /**
      * @desc loads the resources listed in the packageDescriptor into memory
-     * @param packageDescriptor : {audio:*[],sprites:*[]}, the object listing all required resources
+     * @param {{audio:*[],sprites:*[]}} packageDescriptor the object listing all required resources
      * @callback this function sets this._done to true after the resources have been loaded
      */
     loadResources(packageDescriptor) {

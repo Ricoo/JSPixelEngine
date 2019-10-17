@@ -8,7 +8,6 @@ import GUIObject from "./gui/GUIObject";
 
 export default class JSPixelEngine {
     constructor() {
-        //Singleton
         if (JSPixelEngine.instance !== undefined) {
             return JSPixelEngine.instance;
         }

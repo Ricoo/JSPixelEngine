@@ -1,11 +1,12 @@
 import Property from "./Property";
-import {ParticleType} from "../../enum/ParticleType";
-import {Layer} from "../../enum/Layer";
 import GameObject from "../GameObject";
 import Graphic from "./Graphic";
+import {ParticleType} from "../../enum/ParticleType";
+import {Layer} from "../../enum/Layer";
 
 export default class Particle extends Property {
     /**
+     * @desc the particle system, allowing us to create volatile sprites for animation purpose
      * @param {string} spriteName string the sprite to use
      * @param {ParticleType} type the desired type of particle
      * @param {number} amount the quantity of desired particles
@@ -14,7 +15,7 @@ export default class Particle extends Property {
      * @param {boolean} fadeout should the particle fade out before disappearing
      * @param {number|number[]} scale scale or scale range of the graphics we want to draw
      * @param {number|number[]} tileId if the graphic used is an atlas, the id of the sprite we need or a range for a randomized particle
-     * @param {number[]} speed : the particle's range of velocity
+     * @param {number[]} speed the particle's range of velocity
      */
     constructor(spriteName, type, amount, lifetime, period, fadeout, scale=1.0, tileId=0, speed=undefined) {
         super();
@@ -95,6 +96,9 @@ export default class Particle extends Property {
         return obj;
     }
 
+    /**
+     * @desc runs the set particle effect
+     */
     run() {
         if (this._timeout !== undefined)
             return ;
@@ -102,6 +106,9 @@ export default class Particle extends Property {
         this.generate();
     }
 
+    /**
+     * @desc stops the currently running particle effect
+     */
     stop() {
         this._running = false;
         if (this._timeout !== undefined) {
@@ -119,25 +126,18 @@ export default class Particle extends Property {
 
     get spriteName() {return this._spriteName;}
     set spriteName(value) {this._spriteName = value;}
-
     get amount() {return this._amount;}
     set amount(value) {this._amount = value;}
-
     get period() {return this._period;}
     set period(value) {this._period = value;}
-
     get lifetime() {return this._lifetime;}
     set lifetime(value) {this._lifetime = value;}
-
     get fadeout() {return this._fadeout;}
     set fadeout(value) {this._fadeout = value;}
-
     get type() {return this._type;}
     set type(value) {this._type = value}
-
     get speed() {return this._speed}
     set speed(value) {this._speed = value;}
-
     get layer() {return this._layer;}
     set layer(value) {this._layer = value;}
 

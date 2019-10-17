@@ -3,15 +3,16 @@ import JSPixelEngine from "./JSPixelEngine";
 
 export default class JSPixelApp {
     /**
-     * @param canvasName : string name of the canvas
-     * @param resourcePack : {audio:*[],sprites:*[]}
-     * @param settings : JSPixelSettings | null
+     * @desc this is the main class we must inherit to run a working app
+     * @param {string} canvasName the name of the canvas
+     * @param {{audio:*[],sprites:*[]}} resourcePack the resource pack we are using
+     * @param {JSPixelSettings|null} settings the settings we want to use for the app
      */
     constructor(canvasName, resourcePack, settings = null) {
         //Abstract class
-        if (new.target === JSPixelApp) {throw TypeError("You have to implement this class first")}
-        if (this.initialize === undefined) {throw SyntaxError("You cannot leave the void:initialize() method unimplemented")}
-        if (this.frame === undefined) {throw SyntaxError("You cannot leave the void:frame() method unimplemented")}
+        if (new.target === JSPixelApp) {throw TypeError("You have to inherit this class first");}
+        if (this.initialize === undefined) {throw SyntaxError("You cannot leave the void:initialize() method unimplemented");}
+        if (this.frame === undefined) {throw SyntaxError("You cannot leave the void:frame() method unimplemented");}
 
         this._name = canvasName;
         this._canvas = document.getElementById(canvasName);

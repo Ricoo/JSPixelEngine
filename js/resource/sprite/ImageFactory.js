@@ -24,6 +24,13 @@ export default class ImageFactory {
 
     }
 
+    /**
+     * @desc cuts a sprite in a rectangle between two points and returns the result
+     * @param {HTMLImageElement} image the image we want to cut
+     * @param {Vector2} start the starting point of our cut
+     * @param {Vector2} end the ending point of our cut
+     * @returns {HTMLImageElement}
+     */
     static cut(image, start, end) {
         if (!ImageFactory.instance) {
             new ImageFactory();

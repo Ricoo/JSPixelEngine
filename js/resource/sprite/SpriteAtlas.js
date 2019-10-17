@@ -3,6 +3,14 @@ import Vector2 from "../../engine/math/Vector2";
 import ImageFactory from "./ImageFactory";
 
 export default class SpriteAtlas extends Sprite {
+    /**
+     * @desc the SpriteAtlas is a collection of Sprites arranged in lines and columns
+     * @param {string} src the source of our atlas
+     * @param {string} name the identifier of our atlas
+     * @param {number[]} size the dimensions of our atlas
+     * @param {function} callback the function called after our atlas have been loaded
+     * @param {number[]} atlas
+     */
     constructor(src, name, size, callback, atlas) {
         super(src, name, size, () => {this._build();});
 

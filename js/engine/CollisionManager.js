@@ -9,6 +9,9 @@ export default class CollisionManager {
         this._groups = [];
     }
 
+    /**
+     * @desc checks if for any collision group, our corresponding colliders overlap
+     */
     checkCollision() {
         let list = GameObjectManager.instance.colliders().filter(elem => elem.property("collider").trigger.collide);
         for (let g = 0; g < this._groups.length; g++) {
@@ -28,13 +31,20 @@ export default class CollisionManager {
         }
     }
 
+    /**
+     * @desc checks if a point collides with any underneath collider and returns at first collision
+     * @param {number} x the x coordinate of our point
+     * @param {number} y the y coordinate of our point
+     * @returns {boolean}
+     */
     checkRaycast(x,y) {
         let list = GameObjectManager.instance.colliders().filter(elem => elem.property("collider").trigger.click);
         for (let obj of list) {
             if (obj.property("collider").raycast(x,y)) {
-                return;
+                return true;
             }
         }
+        return false;
     }
 
     /**

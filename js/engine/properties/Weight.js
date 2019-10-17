@@ -6,4 +6,6 @@ export default class Weight extends Property {
         this.name = "weight";
         this._force = force;
     }
+
+    //TODO
 };

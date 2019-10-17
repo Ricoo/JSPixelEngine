@@ -2,7 +2,11 @@ import Property from "./Property";
 import SpriteAtlas from "../../resource/sprite/SpriteAtlas";
 
 export default class Animator extends Property {
-    constructor(list=null) {
+    /**
+     * @desc an animator, managing any animation the GameObject needs
+     * @param {Animation[]} list the array of animations affected to our GameObject
+     */
+    constructor(list=undefined) {
         super();
         this.name = "animator";
         this._animations = (list ? list : []);
@@ -15,14 +19,19 @@ export default class Animator extends Property {
     attachTo(gameObject) {
         super.attachTo(gameObject);
         if (!this._gameObject.hasProperty("graphic")) {
-            console.error("Cannot animate gameObject without graphic");
+            throw TypeError("Cannot animate gameObject without graphic");
         }
         this._element = this._gameObject.property("graphic").sprite;
         if (!this._element instanceof SpriteAtlas) {
-            console.error("Cannot animate static graphic element");
+            throw TypeError("Cannot animate static graphic element");
         }
     }
 
+    /**
+     * @desc runs the given animation
+     * @param {string} name the name of the animation we want to run
+     * @param {boolean} loop whether we want our animation to loop or not
+     */
     play(name, loop = true) {
         this._loop = loop;
         if (this._playing !== null && this._playing.name === name) return;
@@ -36,10 +45,17 @@ export default class Animator extends Property {
         this._running = setInterval(() => {this._animate(animation)},animation.delay);
     }
 
+    /**
+     * @desc adds an Animation to our current set
+     * @param {Animation} animation the animation we want to add
+     */
     add(animation) {
         this._animations.push(animation);
     }
 
+    /**
+     * @desc stops the animation and sets the frame to the end frame
+     */
     stop() {
         if (this._running !== null) {
             if (this._playing !== null) {
@@ -64,8 +80,6 @@ export default class Animator extends Property {
                 this.stop();
             }
         }
-        // this._current++;
-//        this._current = (this._current === animation.size - 1 ? 0 : this._current + 1);
     }
 
     delete() {

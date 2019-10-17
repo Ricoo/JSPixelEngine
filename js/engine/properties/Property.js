@@ -1,4 +1,7 @@
 export default class Property {
+    /**
+     * @desc the mother class of all our attachable properties
+     */
     constructor() {
         this.name = undefined;
         if (new.target === Property) {

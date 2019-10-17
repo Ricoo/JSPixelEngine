@@ -10,6 +10,10 @@ export default class GameObjectManager {
         this._list = [];
     }
 
+    /**
+     * @desc adds given GameObject to the manager's list
+     * @param {GameObject} gameObject the game object to add
+     */
     add(gameObject) {
         if (gameObject instanceof GameObject) {
             this._list.push(gameObject);
@@ -19,24 +23,46 @@ export default class GameObjectManager {
         }
     }
 
+    /**
+     * @desc removes given GameObject from the manager's list
+     * @param {GameObject} rem the game object to remove
+     */
     remove(rem) {
         this._list.splice(this._list.indexOf(rem), 1);
     }
 
+    /**
+     * @desc fetches a list of all GameObjects having a Collider property and returns it
+     * @returns {GameObject[]}
+     */
     colliders() {
         return this._list.filter(elem => elem.hasProperty("collider"));
     }
 
+    /**
+     * @desc fetches a list of all GameObjects having a Graphic property and returns it
+     * @returns {GameObject[]}
+     */
     graphics() {
         this._list.sort((a,b) => {return a.position.y - b.position.y});
         return this._list.filter(elem => elem.hasProperty("graphic"));
     }
 
+    /**
+     * @desc fetches a list of all GameObjects having a Graphic property inside the given layer and returns it
+     * @param {Layer} nb the layer we want to retrieve
+     * @returns {GameObject[]}
+     */
     layer(nb) {
         this._list.sort((a,b) => {return a.position.y - b.position.y});
         return this._list.filter(elem => elem.hasProperty("graphic") && elem.property("graphic").layer === nb);
     }
 
+    /**
+     * @desc finds a GameObject by its name identifier
+     * @param {string} name the name identifier of the GameObject we are trying to find
+     * @returns {GameObject|undefined}
+     */
     find(name) {
         return this._list.find(function(elem) {return elem.name === name;});
     }

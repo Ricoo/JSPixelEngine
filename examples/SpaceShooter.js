@@ -129,7 +129,7 @@ export default class Game extends JSPixelApp {
 
         var textList = ["Click here","again","again !!!",["Lol there's","nothing here"]];
 
-        this.button = new GUIButton("test", "button", 100,100, () => {console.log("test clicked"),this.button.property("text").color="red"}, Layer.GUI, 2.0);
+        this.button = new GUIButton("test", "button", 100,100, () => {console.log("test clicked");this.button.property("text").color="red"}, Layer.GUI, 2.0);
         this.button.attach(new Text(["test","test2"], new Vector2(-60,-10)));
 
     }
