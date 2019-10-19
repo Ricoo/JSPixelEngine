@@ -3,8 +3,8 @@ import ResourceManager from "../js/resource/ResourceManager";
 import GameObjectManager from "../js/engine/GameObjectManager";
 import EventManager from "../js/engine/EventManager";
 import GameObject from "../js/engine/GameObject";
-import GUIButton from "../js/resource/sprite/GUI/GUIButton";
-import GUIText from "../js/resource/sprite/GUI/GUIText";
+import GUIButton from "../js/engine/gui/GUIButton";
+import GUIText from "../js/engine/gui/GUIText";
 import Graphic from "../js/engine/properties/Graphic";
 import Animator from "../js/engine/properties/Animator";
 import Animation from "../js/resource/sprite/Animation";
@@ -44,7 +44,7 @@ class Girl extends GameObject {
             animationList.full_left,
             animationList.full_right,
             animationList.full_backward]));
-        this.attach(new Particle("ship", ParticleType.Explode, 1, 1500, 10, false, [.4,.6], [2,3,4], [100,200]))
+        this.attach(new Particle("ship", ParticleType.Fall, 1, 1500, 10, false, [.4,.6], [2,3,4], [100,200]))
     }
 }
 
