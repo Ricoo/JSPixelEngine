@@ -60,13 +60,10 @@ export default class CollisionManager {
     checkRigid(go, newPos, prop) {
         let oldPos = go.position;
         let list = GameObjectManager.instance.rigids();
+        let tmp = oldPos.copy.sub(newPos).normalize;
         for (let obj of list) {
-            console.log("test");
-            if (go !== obj && go.property("collider").collide(obj.property("collider"), newPos)) {
-                while (go.property("collider").collide(obj.property("collider"), newPos)) {
-                    // TODO adjust position instead of resetting previous one
-                    return oldPos;
-                }
+            while (go !== obj && go.property("collider").collide(obj.property("collider"), newPos)) {
+                newPos.add(tmp);
             }
         }
         return newPos;

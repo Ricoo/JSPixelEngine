@@ -83,7 +83,6 @@ export default class Collider extends Property {
     set rigid(value) {
         this._rigid = value;
         if (value) {
-            console.log("test 1 times");
             let collider = this;
             this._gameObject._position = new Proxy(this.gameObject.position, {
                 set(target, prop, val) {
