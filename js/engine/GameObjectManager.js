@@ -40,6 +40,13 @@ export default class GameObjectManager {
     }
 
     /**
+     * @desc fetches a list of all GameObjects having a Collider with rigid property set to true
+     * @returns {GameObject[]}
+     */
+    rigids() {
+        return this._list.filter(elem => elem.hasProperty("collider") && elem.property("collider").rigid);
+    }
+    /**
      * @desc fetches a list of all GameObjects having a Graphic property and returns it
      * @returns {GameObject[]}
      */

@@ -22,6 +22,8 @@ export default class CollisionManager {
                             let c1 = list[g1].property("collider");
                             let c2 = list[g2].property("collider");
                             if (c1 && c2 && c1.collide(c2)) {
+                                c1.callback(g1, g2);
+                                c2.callback(g2, g1);
                                 console.log(list[g1].constructor.name + " collides with " + list[g2].constructor.name);
                             }
                         }
@@ -41,10 +43,33 @@ export default class CollisionManager {
         let list = GameObjectManager.instance.colliders().filter(elem => elem.property("collider").trigger.click);
         for (let obj of list) {
             if (obj.property("collider").raycast(x,y)) {
+                obj.property("collider").callback(obj);
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * @desc checks for conflicts amongst rigid colliders with our test gameObject
+     * @param {GameObject} go
+     * @param {Vector2} newPos the new position of our object
+     * @param {string} prop the property updated
+     * @returns {Vector2} the final position of our object
+     */
+    checkRigid(go, newPos, prop) {
+        let oldPos = go.position;
+        let list = GameObjectManager.instance.rigids();
+        for (let obj of list) {
+            console.log("test");
+            if (go !== obj && go.property("collider").collide(obj.property("collider"), newPos)) {
+                while (go.property("collider").collide(obj.property("collider"), newPos)) {
+                    // TODO adjust position instead of resetting previous one
+                    return oldPos;
+                }
+            }
+        }
+        return newPos;
     }
 
     /**

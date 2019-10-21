@@ -17,6 +17,7 @@ import {Layer} from "../js/enum/Layer";
 import {KeyCode} from "../js/enum/KeyCode";
 import {Event} from "../js/enum/Event";
 import {TextAlign} from "../js/enum/TextAlign";
+import {Trigger} from "../js/enum/Trigger";
 
 const resourceList = {
     audio:[
@@ -40,7 +41,7 @@ class Ship extends GameObject {
     constructor(x,y) {
         super("ship",x,y);
         this.attach(new Graphic("ship", Layer.CHARACTERS,2,1));
-        this.attach(new Collider(100,100));
+        this.attach(new Collider(100,100,()=>{}, Trigger.COLLIDER, true));
         this._fire = false;
     }
 
@@ -60,7 +61,7 @@ class Enemy extends GameObject {
         this.attach(new Graphic("ship", Layer.CHARACTERS,2,1));
         this.attach(new Collider(120,100, ()=>{
             this.generate();
-        }));
+        }, Trigger.COLLIDER, true));
         this._loop = setInterval(() => {this.move()}, 20);
     }
 
