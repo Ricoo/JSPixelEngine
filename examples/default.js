@@ -15,6 +15,7 @@ import {Layer} from "../js/enum/Layer";
 import {KeyCode} from "../js/enum/KeyCode";
 import {Event} from "../js/enum/Event";
 import {ParticleType} from "../js/enum/ParticleType";
+import {Trigger} from "../js/enum/Trigger";
 
 const resourceList = {
     audio:[
@@ -23,7 +24,8 @@ const resourceList = {
     sprites:[
         {src:"./resource/texture/female-full.png",name:"female-full",res:[560,280],atlas:[8,4]},
         {src:"./resource/texture/female2-full.png",name:"female-full2",res:[560,280],atlas:[8,4]},
-        {src:"./resource/texture/Basicship.png",name:"ship",res:[318,64],atlas:[5,1]}
+        {src:"./resource/texture/Basicship.png",name:"ship",res:[318,64],atlas:[5,1]},
+        {src:"./resource/texture/Tickbox.png",name:"tickbox",res:[32,16],atlas:[2,1]}
     ]
 };
 
@@ -35,11 +37,35 @@ const animationList = {
     missile_fire :  new Animation("missile_fire",  [1,2,3,4]                , 100, 4)
 };
 
+class Tickbox extends GameObject {
+    constructor(x, y, text="") {
+        super("tickbox", x, y);
+        this.attach(new Graphic("tickbox", Layer.GUI, 1, 1));
+
+        this.tooltip = new GUIText("tooltip", "", x + 20, y);
+        this.tooltip.property("text").size = 13;
+
+        this.attach(new Collider(20, 20, () =>{
+            let graphic = this.property("graphic");
+            if (graphic.tile === 0) {
+                graphic.tile = 1;
+                graphic.image = graphic.sprite.tile(1);
+                this.tooltip.text = text;
+            } else {
+                graphic.tile = 0;
+                graphic.image = graphic.sprite.tile(0);
+                this.tooltip.text = "";
+            }
+        }, Trigger.CLICK));
+
+    }
+}
+
 class Girl extends GameObject {
     constructor(x,y, sprite) {
         super("girl", x, y);
-        this.attach(new Graphic(sprite, Layer.CHARACTERS, 4, 1));
-        this.attach(new Collider(100, 200));
+        this.attach(new Graphic(sprite, Layer.CHARACTERS, 2, 1));
+        this.attach(new Collider(50, 130, ()=>{}, Trigger.COLLIDER, true));
         this.attach(new Animator([animationList.full_forward,
             animationList.full_left,
             animationList.full_right,
@@ -48,7 +74,7 @@ class Girl extends GameObject {
     }
 }
 
-export default class Game extends JSPixelApp {
+class Game extends JSPixelApp {
     constructor() {
         super("game", resourceList);
     }
@@ -58,8 +84,10 @@ export default class Game extends JSPixelApp {
         clickSound.volume = 0.2;
         clickSound.speed = 1;
 
-        this.girl2 = new Girl(100, 200, "female-full");
-        this.girl1 = new Girl(100, 100, "female-full2");
+        this.girl2 = new Girl(100, 300, "female-full");
+        this.girl1 = new Girl(100, 200, "female-full2");
+        this.tickbox = new Tickbox(20, 100, "Hey you ticked me !");
+        this.tickbox = new Tickbox(20, 120, "Why do you keep ticking us ??");
 
         this.moveX = new Lerp(this.girl2.position, "x", () => {this.move();});
         this.moved = true;
@@ -76,7 +104,7 @@ export default class Game extends JSPixelApp {
             this.girl2.property("animator").play("walk_left");
         }
         else {
-            this.moveX.run(400,2000);
+            this.moveX.run(350,2000);
             this.girl2.property("animator").play("walk_right");
         }
     }
@@ -84,19 +112,19 @@ export default class Game extends JSPixelApp {
     frame() {
         let keys = EventManager.keys;
         if (keys.includes(KeyCode.arrowRight)) {
-            this.girl1.position.x += 5;
+            this.girl1.position.x += 3;
             this.girl1.property("animator").play("walk_right");
         }
         else if (keys.includes(KeyCode.arrowLeft)) {
-            this.girl1.position.x -= 5;
+            this.girl1.position.x -= 3;
             this.girl1.property("animator").play("walk_left");
         }
         else if (keys.includes(KeyCode.arrowUp)) {
-            this.girl1.position.y -= 5;
+            this.girl1.position.y -= 3;
             this.girl1.property("animator").play("walk_backward");
         }
         else if (keys.includes(KeyCode.arrowDown)) {
-            this.girl1.position.y += 5;
+            this.girl1.position.y += 3;
             this.girl1.property("animator").play("walk_forward");
         }
         else {
