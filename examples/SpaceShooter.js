@@ -158,6 +158,12 @@ class Missile extends GameObject {
         if (keys.includes(KeyCode.num2)) {
             this._debug = true;
         }
+        if (keys.includes(KeyCode.i)) {
+            this.ship.property("collider").rigid = false;
+        }
+        if (keys.includes(KeyCode.o)) {
+            this.ship.property("collider").rigid = true;
+        }
         if (this.ship.property("collider").raycast(mouse.x, mouse.y) && mouse.click) {
             this.drag = true;
             this.ship.fire();

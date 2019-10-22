@@ -24,7 +24,7 @@ export default class Collider extends Property {
 
     attachTo(gameObject) {
         super.attachTo(gameObject);
-        this.rigid = this.rigid;
+        this.rigid = this.rigid; //We need this to apply a Proxy to listen for changes
     }
 
     /**
@@ -59,13 +59,13 @@ export default class Collider extends Property {
     }
 
     /**
-     * @desc this is a debug fonction to show the collider as a green rectangle. Use it to adjust your colliders
+     * @desc this is a debug function to show the collider as a green rectangle. Use it to adjust your colliders
      * @param {CanvasRenderingContext2D} context the context of our canvas
      */
     show(context) {
         let pos = this.gameObject.position;
         context.beginPath();
-        context.strokeStyle = "#00FF00";
+        context.strokeStyle = (this._rigid ? "#FF0000" : (this._trigger.click ? "#0000FF" : "#00FF00"));
         context.rect(pos.x - this._width / 2, pos.y - this._height / 2, this._width, this._height);
         context.stroke();
         context.closePath();
