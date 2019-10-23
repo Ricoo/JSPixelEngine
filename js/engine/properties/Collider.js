@@ -6,17 +6,20 @@ import {Trigger} from "../../enum/Trigger";
 export default class Collider extends Property {
     /**
      * @desc a collider to detect any collision or hit for event triggering or interaction
-     * @param {number} width the width of our collider
-     * @param {number} height the height of our collider
-     * @param {function} callback the callback to run if our collider is triggered
+     * @param {Vector2} dimensions the dimensions of our collider
+     * @param {Vector2} offset the offset of our collider
+     * @param {function(GameObject, boolean)} callback the callback to run if our collider is triggered
      * @param {Trigger} trigger the triggering type for our collider
      * @param {boolean} rigid whether our collider is physical or not
+     * @note the boolean value in the callback designs whether the mouse have been clicked or not
      */
-    constructor(width, height, callback=()=>{}, trigger=Trigger.COLLIDER, rigid=false) {
+    constructor(dimensions, offset=new Vector2(0,0), callback=()=>{}, trigger=Trigger.COLLIDER, rigid=false) {
         super();
         this.name = "collider";
-        this._width = width;
-        this._height = height;
+        this._dimensions = dimensions;
+        this._offset = offset;
+        // this._width = width;
+        // this._height = height;
         this._callback = callback;
         this._trigger = trigger;
         this._rigid = rigid;
@@ -35,12 +38,12 @@ export default class Collider extends Property {
      * @returns {boolean}
      */
     collide(other, position=undefined) {
-        let posThis = (position === undefined ? this.gameObject.position.copy : position.copy).add(new Vector2(-this._width/2,-this._height/2));
-        let posOther = other.gameObject.position.copy.add(new Vector2(-other._width/2,-other._height/2));
-        return (!(posOther.x > posThis.x + this._width ||
-            posOther.x + other._width < posThis.x ||
-            posOther.y > posThis.y + this._height ||
-            posOther.y + other._height < posThis.y));
+        let posThis = (position === undefined ? this.gameObject.position.copy : position.copy).add(new Vector2(-this.dimensions.x/2,-this.dimensions.y/2)).add(this._offset);
+        let posOther = other.gameObject.position.copy.add(new Vector2(-other.dimensions.x/2,-other.dimensions.y/2)).add(other.offset);
+        return (!(posOther.x > posThis.x + this.dimensions.x||
+            posOther.x + other.dimensions.x < posThis.x ||
+            posOther.y > posThis.y + this.dimensions.y ||
+            posOther.y + other.dimensions.y < posThis.y));
     }
 
     /**
@@ -51,11 +54,11 @@ export default class Collider extends Property {
      * @returns {boolean}
      */
     raycast(x, y, click = true) {
-        let pos = this.gameObject.position;
-        return (x > pos.x - this._width / 2 &&
-            x < pos.x + this._width / 2 &&
-            y > pos.y - this._height / 2 &&
-            y < pos.y + this._height / 2);
+        let pos = this.gameObject.position.copy.add(this._offset);
+        return (x > pos.x - this._dimensions.x / 2 &&
+            x < pos.x + this._dimensions.x / 2 &&
+            y > pos.y - this._dimensions.y / 2 &&
+            y < pos.y + this._dimensions.y / 2);
     }
 
     /**
@@ -63,10 +66,10 @@ export default class Collider extends Property {
      * @param {CanvasRenderingContext2D} context the context of our canvas
      */
     show(context) {
-        let pos = this.gameObject.position;
+        let pos = this.gameObject.position.copy.add(this.offset);
         context.beginPath();
-        context.strokeStyle = (this._rigid ? "#FF0000" : (this._trigger.click ? "#0000FF" : "#00FF00"));
-        context.rect(pos.x - this._width / 2, pos.y - this._height / 2, this._width, this._height);
+        context.strokeStyle = (this._rigid ? "#FF0000" : (this._trigger.click ? "#00ebff" : "#00FF00"));
+        context.rect(pos.x - this.dimensions.x / 2, pos.y - this.dimensions.y / 2, this.dimensions.x, this.dimensions.y);
         context.stroke();
         context.closePath();
     }
@@ -99,4 +102,6 @@ export default class Collider extends Property {
             this._gameObject._position = new Vector2(proxy.x, proxy.y);
         }
     }
+    get dimensions() {return this._dimensions;}
+    get offset() {return this._offset;}
 };

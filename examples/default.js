@@ -11,6 +11,7 @@ import Animation from "../js/resource/sprite/Animation";
 import Lerp from "../js/engine/math/Lerp";
 import Collider from "../js/engine/properties/Collider";
 import Particle from "../js/engine/properties/Particle";
+import Vector2 from "../js/engine/math/Vector2";
 import {Layer} from "../js/enum/Layer";
 import {KeyCode} from "../js/enum/KeyCode";
 import {Event} from "../js/enum/Event";
@@ -45,7 +46,7 @@ class Tickbox extends GameObject {
         this.tooltip = new GUIText("tooltip", "", x + 20, y);
         this.tooltip.property("text").size = 13;
 
-        this.attach(new Collider(20, 20, () =>{
+        this.attach(new Collider(new Vector2(20,20), undefined, () =>{
             let graphic = this.property("graphic");
             if (graphic.tile === 0) {
                 graphic.tile = 1;
@@ -65,7 +66,7 @@ class Girl extends GameObject {
     constructor(x,y, sprite) {
         super("girl", x, y);
         this.attach(new Graphic(sprite, Layer.CHARACTERS, 2, 1));
-        this.attach(new Collider(50, 130, ()=>{}, Trigger.COLLIDER, true));
+        this.attach(new Collider(new Vector2(50, 50), new Vector2(0,40), ()=>{}, Trigger.COLLIDER, true));
         this.attach(new Animator([animationList.full_forward,
             animationList.full_left,
             animationList.full_right,
@@ -87,7 +88,7 @@ class Game extends JSPixelApp {
         this.girl2 = new Girl(100, 300, "female-full");
         this.girl1 = new Girl(100, 200, "female-full2");
         this.tickbox = new Tickbox(20, 100, "Hey you ticked me !");
-        this.tickbox = new Tickbox(20, 120, "Why do you keep ticking us ??");
+        this.tickbox2 = new Tickbox(20, 120, "Why do you keep ticking us ??");
 
         this.moveX = new Lerp(this.girl2.position, "x", () => {this.move();});
         this.moved = true;
@@ -140,6 +141,7 @@ class Game extends JSPixelApp {
         if (keys.includes(KeyCode.o)) {
             this.girl1.property("graphic").alpha -= 0.01;
             this.girl1.property("particle").stop();
+            this.tickbox.toggle();
         }
 
         if (keys.includes(KeyCode.num1)) {

@@ -37,13 +37,14 @@ export default class CollisionManager {
      * @desc checks if a point collides with any underneath collider and returns at first collision
      * @param {number} x the x coordinate of our point
      * @param {number} y the y coordinate of our point
+     * @param {boolean} click whether the mouse have been clicked or not
      * @returns {boolean}
      */
-    checkRaycast(x,y) {
-        let list = GameObjectManager.instance.colliders().filter(elem => elem.property("collider").trigger.click);
+    checkRaycast(x, y, click) {
+        let list = GameObjectManager.instance.colliders().filter(elem => elem.property("collider").trigger[(click ? "click" : "hover")]);
         for (let obj of list) {
             if (obj.property("collider").raycast(x,y)) {
-                obj.property("collider").callback(obj);
+                obj.property("collider").callback(obj, click);
                 return true;
             }
         }
