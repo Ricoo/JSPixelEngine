@@ -1,10 +1,10 @@
-import GUIObject from "./GUIObject";
+import GameObject from "../GameObject";
 import Graphic from "../properties/Graphic";
 import Collider from "../properties/Collider";
 import {Layer} from "../../enum/Layer";
 import {Trigger} from "../../enum/Trigger";
 
-export default class GUIButton extends GUIObject {
+export default class GUIButton extends GameObject {
     constructor(name, spriteName, x, y, callback=()=>{}, layer=Layer.GUI, scale=1.0) {
         super(name, x, y);
         this.attach(new Graphic(spriteName, layer,scale));

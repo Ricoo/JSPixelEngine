@@ -15,6 +15,7 @@ export default class GameObject {
         this._angle = angle;
         this._name = name;
         this._properties = {};
+        this._enabled = true;
         GameObjectManager.register(this);
     }
 
@@ -52,12 +53,35 @@ export default class GameObject {
     }
 
     /**
+     * @desc toggles all properties of the GameObject
+     */
+    toggle() {
+        this._enabled = !this._enabled;
+    }
+
+    /**
+     * @desc enables all properties of the GameObject
+     */
+    enable() {
+        this._enabled = true;
+    }
+
+    /**
+     * @desc disables all properties of the GameObject
+     */
+    disable() {
+        this._enabled = false;
+    }
+
+    /**
      * @desc checks if a property exists on this GameObject
      * @param {string} name
      * @returns {boolean}
      */
     hasProperty(name) {
-        return this._properties.hasOwnProperty(name);
+        if (this._enabled)
+           return this._properties.hasOwnProperty(name);
+        return false;
     }
 
     /**
