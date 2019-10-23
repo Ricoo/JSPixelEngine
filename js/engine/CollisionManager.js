@@ -76,8 +76,14 @@ export default class CollisionManager {
         let list = GameObjectManager.instance.rigids();
         let tmp = oldPos.copy.sub(newPos).normalize;
         for (let obj of list) {
-            while (go !== obj && go.property("collider").collide(obj.property("collider"), newPos)) {
-                newPos.add(tmp);
+            if (go !== obj && go.property("collider").collide(obj.property("collider"), newPos)) {
+                if (go.hasProperty("force")) {
+                    go.property("force").stop(prop);
+                }
+                while (go.property("collider").collide(obj.property("collider"), newPos)) {
+                    newPos.add(tmp);
+                }
+                break;
             }
         }
         return newPos;

@@ -86,12 +86,17 @@ export default class JSPixelEngine {
 
         for (let layer in Layer) {
             let list = GameObjectManager.instance.layer(Layer[layer]);
-            for (let i = 0; i < list.length; i++) {
-                list[i].property("graphic").draw(context);
-                if (list[i].hasProperty("text")) {
-                    list[i].property("text").write(context);
+            for (let go of list) {
+                go.property("graphic").draw(context);
+                if (go.hasProperty("text")) {
+                    go.property("text").write(context);
                 }
             }
+        }
+
+        let list = GameObjectManager.instance.forces();
+        for (let go of list) {
+            go.property("force").update();
         }
 
         // Debug colliders

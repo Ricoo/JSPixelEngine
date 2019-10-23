@@ -41,7 +41,7 @@ class Ship extends GameObject {
     constructor(x,y) {
         super("ship",x,y);
         this.attach(new Graphic("ship", Layer.CHARACTERS,2,1));
-        this.attach(new Collider(100,100,()=>{}, Trigger.COLLIDER, true));
+        this.attach(new Collider(new Vector2(100,100), undefined, ()=>{}, Trigger.COLLIDER, true));
         this._fire = false;
     }
 
@@ -59,7 +59,7 @@ class Enemy extends GameObject {
     constructor(x,y) {
         super("ship", x, y, 180);
         this.attach(new Graphic("ship", Layer.CHARACTERS,2,1));
-        this.attach(new Collider(120,100, ()=>{
+        this.attach(new Collider(new Vector2(120,100), undefined, ()=>{
             this.generate();
         }, Trigger.COLLIDER, true));
         this._loop = setInterval(() => {this.move()}, 20);
@@ -89,7 +89,7 @@ class Missile extends GameObject {
         super("missile", x, y);
         this.attach(new Graphic("ship", Layer.BACKGROUND,1,1,1));
         this.attach(new Animator([animationList.missile_fire]));
-        this.attach(new Collider(50, 20, ()=>{
+        this.attach(new Collider(new Vector2(50,20), undefined, ()=>{
             Game.score += 1;
             Game.scoreText.text = "Score : "+ Game.score;
             this.delete();

@@ -51,10 +51,9 @@ export default class Collider extends Property {
      * @desc checks if a point is inside this collider
      * @param {number} x the x coordinate of our point
      * @param {number} y the y coordinate of our point
-     * @param {boolean} click whether the mouse have been clicked or not
      * @returns {boolean}
      */
-    raycast(x, y, click = true) {
+    raycast(x, y) {
         let pos = this.gameObject.position.copy.add(this._offset);
         return (x > pos.x - this._dimensions.x / 2 &&
             x < pos.x + this._dimensions.x / 2 &&
@@ -69,7 +68,7 @@ export default class Collider extends Property {
     show(context) {
         let pos = this.gameObject.position.copy.add(this.offset);
         context.beginPath();
-        context.strokeStyle = (this._rigid ? "#FF0000" : (this._trigger.click ? "#00ebff" : "#00FF00"));
+        context.strokeStyle = (this._rigid ? "#FF0000" : (this._trigger.click ? "#00ebff" : (this._trigger.hover ? "#ffc500" : "#00FF00")));
         context.rect(pos.x - this.dimensions.x / 2, pos.y - this.dimensions.y / 2, this.dimensions.x, this.dimensions.y);
         context.stroke();
         context.closePath();
@@ -112,5 +111,7 @@ export default class Collider extends Property {
     get rigid() {return this._rigid;}
     get callback() {return this._callback;}
     get dimensions() {return this._dimensions;}
+    set dimensions(value){this._dimensions = value;}
     get offset() {return this._offset;}
+    set offset(value) {this._offset = value;}
 };

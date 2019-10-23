@@ -56,6 +56,14 @@ export default class GameObjectManager {
     }
 
     /**
+     * @desc fetches a list of all GameObjects having a Force property and returns it
+     * @returns {GameObject[]}
+     */
+    forces() {
+        return this._list.filter(elem => elem.hasProperty("force"));
+    }
+
+    /**
      * @desc fetches a list of all GameObjects having a Graphic property inside the given layer and returns it
      * @param {Layer} nb the layer we want to retrieve
      * @returns {GameObject[]}

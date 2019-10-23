@@ -17,6 +17,7 @@ import {KeyCode} from "../js/enum/KeyCode";
 import {Event} from "../js/enum/Event";
 import {ParticleType} from "../js/enum/ParticleType";
 import {Trigger} from "../js/enum/Trigger";
+import Force from "../js/engine/properties/Force";
 
 const resourceList = {
     audio:[
@@ -45,7 +46,8 @@ class Tickbox extends GameObject {
         this._ticked = false;
 
         this.tooltip = new GUIText("tooltip", text, x + 20, y);
-        this.tooltip.attach(new Collider(new Vector2(20,20), undefined, (obj, mouse)=>{
+        let dimensions = this.tooltip.property("text").getDimensions(Game.instance.context);
+        this.tooltip.attach(new Collider(new Vector2(dimensions.x,dimensions.y), new Vector2(dimensions.x/2, 0), (obj, mouse)=>{
             if (mouse.hover) {
                 obj.property("text").color = "#FFFFFF";
             }
@@ -84,6 +86,11 @@ class Girl extends GameObject {
 class Game extends JSPixelApp {
     constructor() {
         super("game", resourceList);
+        if (Game.instance)
+            return Game.instance;
+        else
+            Game.instance = this;
+        // this._groups = [];
     }
 
     initialize() {
@@ -93,9 +100,13 @@ class Game extends JSPixelApp {
 
         this.girl2 = new Girl(100, 300, "female-full");
         this.girl1 = new Girl(100, 200, "female-full2");
+        this.jump = false;
         this.tickbox = new Tickbox(20, 100, "Hey you ticked me !");
         this.tickbox2 = new Tickbox(20, 120, "Why do you keep ticking us ??");
+        this.platform = new GUIText("platform","",300,700);
+        this.platform.attach(new Collider(new Vector2(700, 40), undefined, ()=>{}, Trigger.COLLIDER, true));
 
+        this.girl1.attach(new Force(1, 10, true));
         this.moveX = new Lerp(this.girl2.position, "x", () => {this.move();});
         this.moved = true;
         this.move();
@@ -156,8 +167,15 @@ class Game extends JSPixelApp {
             this._debug = true;
         }
 
+        if (keys.includes(KeyCode.spacebar) && !this.jump) {
+            this.jump = true;
+            console.log("jumped !");
+            this.girl1.property("force").apply(new Vector2(0,-15));
+        }
+        else if (!keys.includes(KeyCode.spacebar)){
+            this.jump = false;
+        }
         // toggles graphic property when spacebar is pressed/released
-        this.girl1.property("graphic").visible = !keys.includes(KeyCode.spacebar);
         this.girl1.property("collider").collide(this.girl2.property("collider"));
     }
 };
