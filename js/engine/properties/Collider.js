@@ -23,6 +23,7 @@ export default class Collider extends Property {
         this._callback = callback;
         this._trigger = trigger;
         this._rigid = rigid;
+        this._hover = false;
     }
 
     attachTo(gameObject) {
@@ -62,7 +63,7 @@ export default class Collider extends Property {
     }
 
     /**
-     * @desc this is a debug function to show the collider as a green rectangle. Use it to adjust your colliders
+     * @desc this is a debug function to show the collider as a outlined rectangle. Use it to adjust your colliders
      * @param {CanvasRenderingContext2D} context the context of our canvas
      */
     show(context) {
@@ -79,10 +80,6 @@ export default class Collider extends Property {
         super.delete();
     }
 
-    get trigger() {return this._trigger}
-    set trigger(value) {this._trigger = value}
-    get rigid() {return this._rigid;}
-    get callback() {return this._callback;}
     set rigid(value) {
         this._rigid = value;
         if (value) {
@@ -102,6 +99,18 @@ export default class Collider extends Property {
             this._gameObject._position = new Vector2(proxy.x, proxy.y);
         }
     }
+
+    get hover() {return this._hover;}
+    set hover(value) {
+        if (this._hover !== value) {
+            this.callback(this._gameObject, {click: false, hover: value});
+            this._hover = value;
+        }
+    }
+    get trigger() {return this._trigger;}
+    set trigger(value) {this._trigger = value}
+    get rigid() {return this._rigid;}
+    get callback() {return this._callback;}
     get dimensions() {return this._dimensions;}
     get offset() {return this._offset;}
 };

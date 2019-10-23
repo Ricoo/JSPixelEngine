@@ -17,6 +17,7 @@ export default class EventManager {
         this._keysPressed = [];
         this._mouse = {click:false,x:0,y:0};
         this._handlers = {};
+        this._queue = [];
         for (let ev in Event) {
             this._handlers[Event[ev]] = [];
         }
@@ -36,7 +37,7 @@ export default class EventManager {
         for (let handler of this._handlers[Event.MouseUp]) {
             handler(this._mouse);
         }
-        CollisionManager.instance.checkRaycast(this._mouse.x, this._mouse.y);
+        CollisionManager.instance.checkRaycast(this._mouse.x, this._mouse.y, true);
     }
 
     mouseMove(ev) {
@@ -45,6 +46,7 @@ export default class EventManager {
         for (let handler of this._handlers[Event.MouseMove]) {
             handler(this._mouse);
         }
+        CollisionManager.instance.checkRaycast(this._mouse.x, this._mouse.y, false);
     }
 
     keyDown(ev) {

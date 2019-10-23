@@ -42,21 +42,27 @@ class Tickbox extends GameObject {
     constructor(x, y, text="") {
         super("tickbox", x, y);
         this.attach(new Graphic("tickbox", Layer.GUI, 1, 1));
+        this._ticked = false;
 
-        this.tooltip = new GUIText("tooltip", "", x + 20, y);
-        this.tooltip.property("text").size = 13;
-
-        this.attach(new Collider(new Vector2(20,20), undefined, () =>{
-            let graphic = this.property("graphic");
-            if (graphic.tile === 0) {
-                graphic.tile = 1;
-                graphic.image = graphic.sprite.tile(1);
-                this.tooltip.text = text;
-            } else {
-                graphic.tile = 0;
-                graphic.image = graphic.sprite.tile(0);
-                this.tooltip.text = "";
+        this.tooltip = new GUIText("tooltip", text, x + 20, y);
+        this.tooltip.attach(new Collider(new Vector2(20,20), undefined, (obj, mouse)=>{
+            if (mouse.hover) {
+                obj.property("text").color = "#FFFFFF";
             }
+            else {
+                obj.property("text").color = "#000000";
+            }
+        }, Trigger.HOVER));
+        this.tooltip.property("text").size = 13;
+        this.tooltip.disable();
+
+        this.attach(new Collider(new Vector2(20,20), undefined, (obj, mouse) =>{
+            if (!mouse.click)
+                return;
+            let graphic = this.property("graphic");
+            this._ticked = !this._ticked;
+            graphic.image = graphic.sprite.tile((this._ticked ? 1 : 0));
+            this.tooltip.toggle();
         }, Trigger.CLICK));
 
     }
@@ -141,7 +147,6 @@ class Game extends JSPixelApp {
         if (keys.includes(KeyCode.o)) {
             this.girl1.property("graphic").alpha -= 0.01;
             this.girl1.property("particle").stop();
-            this.tickbox.toggle();
         }
 
         if (keys.includes(KeyCode.num1)) {

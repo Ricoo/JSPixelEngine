@@ -42,13 +42,26 @@ export default class CollisionManager {
      */
     checkRaycast(x, y, click) {
         let list = GameObjectManager.instance.colliders().filter(elem => elem.property("collider").trigger[(click ? "click" : "hover")]);
+        let res = undefined;
         for (let obj of list) {
             if (obj.property("collider").raycast(x,y)) {
-                obj.property("collider").callback(obj, click);
-                return true;
+                res = obj;
+                if (!click) {
+                    obj.property("collider").hover = true;
+                }
+                else {
+                    obj.property("collider").callback(obj, {click:true, hover:false});
+                }
             }
         }
-        return false;
+        if (!click) {
+            for (let reset of list) {
+                if (res !== reset) {
+                    reset.property("collider").hover = false;
+                }
+            }
+        }
+        return res !== undefined;
     }
 
     /**
