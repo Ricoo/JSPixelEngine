@@ -47,6 +47,16 @@ export default class Text extends Property {
         context.restore()
     }
 
+    getDimensions(context) {
+        context.save();
+        context.font = this._size + "px " + this._font;
+        context.textAlign = this._align;
+        context.fillStyle = this._color;
+        let dimensions = new Vector2(context.measureText(this._text).width, this._size);
+        context.restore();
+        return dimensions;
+    }
+
     get text() {return this._text;}
     set text(value) {this._text = value;}
     get offset() {return this._offset;}
