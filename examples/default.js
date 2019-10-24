@@ -18,6 +18,7 @@ import {KeyCode} from "../js/enum/KeyCode";
 import {Event} from "../js/enum/Event";
 import {ParticleType} from "../js/enum/ParticleType";
 import {Trigger} from "../js/enum/Trigger";
+import TiledGraphic from "../js/engine/properties/TiledGraphic";
 
 const resourceList = {
     audio:[
@@ -26,17 +27,20 @@ const resourceList = {
     sprites:[
         {src:"./resource/texture/Marine.png",name:"marine",res:[128,64],atlas:[8,2]},
         {src:"./resource/texture/Hero.png",name:"hero",res:[256,128],atlas:[8,4]},
+        {src:"./resource/texture/Clock.png",name:"clock",res:[128,32],atlas:[4,1]},
+        {src:"./resource/texture/Platform_stone.png",name:"platform",res:[96,32],atlas:[3,1]},
         {src:"./resource/texture/Basicship.png",name:"ship",res:[318,64],atlas:[5,1]},
         {src:"./resource/texture/Tickbox.png",name:"tickbox",res:[32,16],atlas:[2,1]}
     ]
 };
 
 const animationList = {
-    character_right :  new Animation("character_right",  [0, 1, 2, 3, 4, 5, 6, 7 ], 100, 0),
-    character_left :     new Animation("character_left",     [8, 9, 10,11,12,13,14,15], 100, 8),
-    character_idle_right :  new Animation("character_idle_right",  [16,17,18,19,20,21,22,23], 100, 16),
-    character_idle_left :     new Animation("character_idle_left",     [24,25,26,27,28,29,30,31], 100, 24),
-    missile_fire :  new Animation("missile_fire",  [1,2,3,4]                , 100, 4)
+    character_right : new Animation("character_right",[0, 1, 2, 3, 4, 5, 6, 7 ],100,0),
+    character_left : new Animation("character_left",[8, 9, 10,11,12,13,14,15],100,8),
+    character_idle_right : new Animation("character_idle_right",[16,17,18,19,20,21,22,23],100,16),
+    character_idle_left : new Animation("character_idle_left",[24,25,26,27,28,29,30,31],100,24),
+    pendulum_tick : new Animation("pendulum_tick", [0,1,2,3], 200, 0),
+    missile_fire : new Animation("missile_fire",[1,2,3,4],100,4)
 };
 
 class Tickbox extends GameObject {
@@ -70,6 +74,15 @@ class Tickbox extends GameObject {
     }
 }
 
+class Clock extends GameObject {
+    constructor(x, y) {
+        super("clock", x, y);
+        this.attach(new Graphic("clock", Layer.BACKGROUND, 4));
+        this.attach(new Animator([animationList.pendulum_tick]));
+        this.property("animator").play("pendulum_tick");
+    }
+}
+
 class Hero extends GameObject {
     constructor(x, y, sprite) {
         super("hero", x, y);
@@ -94,6 +107,14 @@ class Marine extends GameObject {
     }
 }
 
+class Platform extends GameObject {
+    constructor(x, y) {
+        super("platform", x, y);
+        this.attach(new TiledGraphic("platform", Layer.BACKGROUND, 4, 0, 1, 2, 6));
+        this.attach(new Collider(new Vector2(700, 40), new Vector2(0, -10), ()=>{}, Trigger.COLLIDER, true));
+    }
+}
+
 class Game extends JSPixelApp {
     constructor() {
         super("game", resourceList);
@@ -114,8 +135,8 @@ class Game extends JSPixelApp {
 
         this.tickbox = new Tickbox(20, 100, "Hey you ticked me !");
         this.tickbox2 = new Tickbox(20, 120, "Why do you keep ticking us ??");
-        this.platform = new GUIText("platform","",300,700);
-        this.platform.attach(new Collider(new Vector2(700, 40), undefined, ()=>{}, Trigger.COLLIDER, true));
+        this.clock = new Clock(640, 615);
+        this.test = new Platform(400,710);
 
         this.moveX = new Lerp(this.marine.position, "x", () => {this.move();});
         this.moved = true;
@@ -164,7 +185,6 @@ class Game extends JSPixelApp {
 
         if (keys.includes(KeyCode.spacebar) && !this.jump) {
             this.jump = true;
-            console.log("jumped !");
             this.hero.property("force").apply(new Vector2(0,-20));
         }
         else if (!keys.includes(KeyCode.spacebar) && this.hero.property("force").stopped){
