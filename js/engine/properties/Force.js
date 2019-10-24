@@ -14,6 +14,7 @@ export default class Force extends Property {
         this._gravity = gravity;
         this._weight = weight;
         this._force = new Vector2(0,0);
+        this._stopped = false;
     }
 
     //TODO
@@ -24,6 +25,7 @@ export default class Force extends Property {
     }
 
     apply(value) {
+        this._stopped = false;
         this._force = value;
     }
 
@@ -32,6 +34,7 @@ export default class Force extends Property {
     }
 
     stop(direction) {
+        this._stopped = true;
         if (direction === "y" && this.bounce) {
             this._force.y *= -1;
         }
@@ -52,4 +55,5 @@ export default class Force extends Property {
     set x(value){this._force.x = value;}
     get bounce(){return this._bounce;}
     set bounce(value){this._bounce = value;}
+    get stopped(){return this._stopped;}
 };
