@@ -19,7 +19,7 @@ export default class GameObjectManager {
             this._list.push(gameObject);
         }
         else {
-            throw TypeError("You must provide an GameObject object");
+            throw TypeError("You must provide an instance of GameObject");
         }
     }
 

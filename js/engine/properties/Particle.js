@@ -3,6 +3,7 @@ import GameObject from "../GameObject";
 import Graphic from "./Graphic";
 import {ParticleType} from "../../enum/ParticleType";
 import {Layer} from "../../enum/Layer";
+import Vector2 from "../math/Vector2";
 
 export default class Particle extends Property {
     /**
@@ -16,8 +17,9 @@ export default class Particle extends Property {
      * @param {number|number[]} scale scale or scale range of the graphics we want to draw
      * @param {number|number[]} tileId if the graphic used is an atlas, the id of the sprite we need or a range for a randomized particle
      * @param {number[]} speed the particle's range of velocity
+     * @param {Vector2} offset the offset of our particle
      */
-    constructor(spriteName, type, amount, lifetime, period, fadeout, scale=1.0, tileId=0, speed=undefined) {
+    constructor(spriteName, type, amount, lifetime, period, fadeout, scale=1.0, tileId=0, speed=undefined, offset=undefined) {
         super();
         this.name = "particle";
         this._spriteName = spriteName;
@@ -31,6 +33,7 @@ export default class Particle extends Property {
         this._speed = (speed === undefined ? type.speed : speed);
         this._angle = type.angle;
         this._layer = Layer.PARTICLE;
+        this._offset = (offset === undefined ? new Vector2(0,0) : offset);
         this._running = false;
     }
 
@@ -73,7 +76,7 @@ export default class Particle extends Property {
      * @private
      */
     _createObject() {
-        let obj = new GameObject("particle", this._gameObject.position.x, this._gameObject.position.y);
+        let obj = new GameObject("particle", this._gameObject.x + this._offset.x, this._gameObject.y + this._offset.y);
         let tile = this._tile;
         let scale = this._scale;
 
@@ -124,6 +127,7 @@ export default class Particle extends Property {
         }
     }
 
+    get isRunning() {return this._running;}
     get spriteName() {return this._spriteName;}
     set spriteName(value) {this._spriteName = value;}
     get amount() {return this._amount;}
