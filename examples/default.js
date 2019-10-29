@@ -30,7 +30,7 @@ const resourceList = {
         {src:"./resource/texture/Hero.png",name:"hero",res:[256,128],atlas:[8,4]},
         {src:"./resource/texture/Clock.png",name:"clock",res:[128,32],atlas:[4,1]},
         {src:"./resource/texture/Platform_stone.png",name:"platform",res:[96,32],atlas:[3,1]},
-        {src:"./resource/texture/Basicship.png",name:"ship",res:[318,64],atlas:[5,1]},
+        {src:"./resource/texture/BasicShip.png",name:"ship",res:[318,64],atlas:[5,1]},
         {src:"./resource/texture/Tickbox.png",name:"tickbox",res:[32,16],atlas:[2,1]},
         {src:"./resource/texture/Particle.png",name:"particle",res:[128,16],atlas:[4,1]}
     ]
