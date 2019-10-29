@@ -31,7 +31,8 @@ const resourceList = {
         {src:"./resource/texture/Clock.png",name:"clock",res:[128,32],atlas:[4,1]},
         {src:"./resource/texture/Platform_stone.png",name:"platform",res:[96,32],atlas:[3,1]},
         {src:"./resource/texture/Basicship.png",name:"ship",res:[318,64],atlas:[5,1]},
-        {src:"./resource/texture/Tickbox.png",name:"tickbox",res:[32,16],atlas:[2,1]}
+        {src:"./resource/texture/Tickbox.png",name:"tickbox",res:[32,16],atlas:[2,1]},
+        {src:"./resource/texture/Particle.png",name:"particle",res:[128,16],atlas:[4,1]}
     ]
 };
 
@@ -93,7 +94,7 @@ class Hero extends GameObject {
             animationList.character_right,
             animationList.character_idle_left,
             animationList.character_idle_right]));
-        this.attach(new Particle("ship", ParticleType.Fall, 1, 1500, 10, false, [.4,.6], [2,3,4], [100,200]));
+        this.attach(new Particle("particle", ParticleType.Fall, 1, 500, 30, true, [2,3], [0,1,2,3], [10,20], new Vector2(0,30)));
         this.attach(new Force(1, 10, true));
     }
 }
@@ -129,6 +130,7 @@ class Game extends JSPixelApp {
         let clickSound = ResourceManager.getSound("click");
         clickSound.volume = 0.2;
         clickSound.speed = 1;
+        this._debug = true;
 
         this.marine = new Marine(200,100, "marine");
         this.hero = new Hero(100,100, "hero");
@@ -138,7 +140,6 @@ class Game extends JSPixelApp {
         this.tickbox2 = new Tickbox(20, 120, "Why do you keep ticking us ??");
         this.clock = new Clock(640, 615);
         this.test = new Platform(400,710);
-        this.hero.addChild(this.clock);
 
         this.moveX = new Lerp(this.marine, "x", () => {this.move();});
         this.moved = true;
@@ -168,17 +169,21 @@ class Game extends JSPixelApp {
             this.hero.orientation = "right";
             this.hero.x += 3;
             this.hero.property("animator").play("character_right");
+            this.hero.property("particle").run();
         }
         else if (keys.includes(KeyCode.arrowLeft)) {
             this.hero.orientation = "left";
             this.hero.x -= 3;
             this.hero.property("animator").play("character_left");
+            this.hero.property("particle").run();
         }
         else if (this.hero.orientation === "right") {
             this.hero.property("animator").play("character_idle_right");
+            this.hero.property("particle").stop();
         }
         else {
             this.hero.property("animator").play("character_idle_left");
+            this.hero.property("particle").stop();
         }
         if (keys.includes(KeyCode.num1)) {
             this._debug = false;
