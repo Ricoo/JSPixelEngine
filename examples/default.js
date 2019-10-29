@@ -19,13 +19,14 @@ import {Event} from "../js/enum/Event";
 import {ParticleType} from "../js/enum/ParticleType";
 import {Trigger} from "../js/enum/Trigger";
 import TiledGraphic from "../js/engine/properties/TiledGraphic";
+import Scene from "../js/engine/Scene";
 
 const resourceList = {
     audio:[
         {src:"./resource/sound/click.wav",name:"click"}
     ],
     sprites:[
-        {src:"./resource/texture/Marine.png",name:"marine",res:[128,64],atlas:[8,2]},
+        {src:"./resource/texture/Knight.png",name:"marine",res:[256,64],atlas:[8,2]},
         {src:"./resource/texture/Hero.png",name:"hero",res:[256,128],atlas:[8,4]},
         {src:"./resource/texture/Clock.png",name:"clock",res:[128,32],atlas:[4,1]},
         {src:"./resource/texture/Platform_stone.png",name:"platform",res:[96,32],atlas:[3,1]},
@@ -137,13 +138,16 @@ class Game extends JSPixelApp {
         this.tickbox2 = new Tickbox(20, 120, "Why do you keep ticking us ??");
         this.clock = new Clock(640, 615);
         this.test = new Platform(400,710);
+        this.hero.addChild(this.clock);
 
-        this.moveX = new Lerp(this.marine.position, "x", () => {this.move();});
+        this.moveX = new Lerp(this.marine, "x", () => {this.move();});
         this.moved = true;
         this.move();
 
         EventManager.registerHandler(Event.MouseDown, (mouse) => {clickSound.play();});
         console.log("my super game have been initialized !");
+        let scene = new Scene();
+        scene.load();
     }
 
     move() {
@@ -162,12 +166,12 @@ class Game extends JSPixelApp {
         let keys = EventManager.keys;
         if (keys.includes(KeyCode.arrowRight)) {
             this.hero.orientation = "right";
-            this.hero.position.x += 3;
+            this.hero.x += 3;
             this.hero.property("animator").play("character_right");
         }
         else if (keys.includes(KeyCode.arrowLeft)) {
             this.hero.orientation = "left";
-            this.hero.position.x -= 3;
+            this.hero.x -= 3;
             this.hero.property("animator").play("character_left");
         }
         else if (this.hero.orientation === "right") {

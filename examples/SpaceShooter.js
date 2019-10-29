@@ -99,8 +99,8 @@ class Missile extends GameObject {
     }
 
     update () {
-        this.position.x += 5;
-        if (this.position.x > 2000) {
+        this.x += 5;
+        if (this.x > 2000) {
             this.delete()
         }
     }
@@ -141,10 +141,10 @@ class Missile extends GameObject {
         let mouse = EventManager.mouse;
 
         if (keys.includes(KeyCode.arrowUp)) {
-            this.ship.position.y -= 5;
+            this.ship.y -= 5;
         }
         else if (keys.includes(KeyCode.arrowDown)) {
-            this.ship.position.y += 5;
+            this.ship.y += 5;
         }
         if (keys.includes(KeyCode.spacebar)) {
             this.ship.fire();

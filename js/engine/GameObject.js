@@ -16,6 +16,8 @@ export default class GameObject {
         this._name = name;
         this._properties = {};
         this._enabled = true;
+        this._children = [];
+        this._parent = undefined;
         GameObjectManager.register(this);
     }
 
@@ -44,6 +46,45 @@ export default class GameObject {
     }
 
     /**
+     * @desc Adds a child to the gameObject
+     * @param {GameObject} child the child to add
+     */
+    addChild(child) {
+        this._children.push(child);
+        child.addParent(this);
+    }
+
+    /**
+     * @desc Removes a child to the gameObject
+     * @param {GameObject} child the child to remove
+     */
+    removeChild(child) {
+        if (this._children.includes(child)) {
+            this._children.splice(this._children.indexOf(child), 1);
+            if (child.parent !== undefined)
+                child.removeParent();
+        }
+    }
+
+    /**
+     * @desc Sets the parent of the gameObject
+     * @param {GameObject} parent the parent to set
+     */
+    addParent(parent) {
+        this._parent = parent;
+    }
+
+    /**
+     * @desc Removes the parent from the gameObject
+     */
+    removeParent() {
+        if (this._parent.children.includes(this)) {
+            this._parent.removeChild(this);
+        }
+        this._parent = undefined;
+    }
+
+    /**
      * @desc returns the named property
      * @param {string} name
      * @returns {Property}
@@ -57,6 +98,9 @@ export default class GameObject {
      */
     toggle() {
         this._enabled = !this._enabled;
+        for (let child of this._children) {
+            child.toggle();
+        }
     }
 
     /**
@@ -64,6 +108,9 @@ export default class GameObject {
      */
     enable() {
         this._enabled = true;
+        for (let child of this._children) {
+            child.enable();
+        }
     }
 
     /**
@@ -71,6 +118,9 @@ export default class GameObject {
      */
     disable() {
         this._enabled = false;
+        for (let child of this._children) {
+            child.disable();
+        }
     }
 
     /**
@@ -88,6 +138,9 @@ export default class GameObject {
      * @desc deletes the GameObjects and cleans every property
      */
     delete() {
+        for (let child of this._children) {
+            this.removeChild(child);
+        }
         for (let prop in this._properties) {
             this._properties[prop].delete();
             delete this._properties[prop];
@@ -96,13 +149,31 @@ export default class GameObject {
         delete this;
     }
 
-    get position(){return this._position;}
+    get x() {return this._position.x;}
+    set x(value) {
+        let base = this._position.x;
+        this._position.x = value;
+        for (let child of this._children) {
+            child.x += this._position.x - base;
+        }
+    }
+    get y() {return this._position.y;}
+    set y(value) {
+        let base = this._position.y;
+        this._position.y = value;
+        for (let child of this._children) {
+            child.y += this._position.y - base;
+        }
+    }
+    get position() {return this._position;}
     set position(position) {
         this._position.x = position.x;
         this._position.y = position.y;
     }
     get angle() {return this._angle;}
-    set angle(a){this._angle = (a > 360 ? a - 360 : (a < 0 ? a + 360 : a));}
+    set angle(a) {this._angle = (a > 360 ? a - 360 : (a < 0 ? a + 360 : a));}
 
-    get name(){return this._name;}
+    get children() {return this._children;}
+    get parent() {return this._parent;}
+    get name() {return this._name;}
 };

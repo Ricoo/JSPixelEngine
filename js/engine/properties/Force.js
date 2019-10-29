@@ -20,8 +20,8 @@ export default class Force extends Property {
     //TODO
     update() {
         this._force.add(new Vector2(0, this._gravity));
-        this.gameObject.position.x += this._force.x;
-        this.gameObject.position.y += this._force.y;
+        this._gameObject.x += this._force.x;
+        this._gameObject.y += this._force.y;
     }
 
     apply(value) {
