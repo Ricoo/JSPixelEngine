@@ -1,6 +1,6 @@
 import Property from "./properties/Property";
 import Vector2 from "./math/Vector2";
-import GameObjectManager from "./GameObjectManager";
+import GameObjectManager from "./manager/GameObjectManager";
 
 export default class GameObject {
     /**

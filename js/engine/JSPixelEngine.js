@@ -1,8 +1,8 @@
 import JSPixelApp from "./JSPixelApp";
-import GameObjectManager from "./GameObjectManager";
+import GameObjectManager from "./manager/GameObjectManager";
 import ResourceManager from "../resource/ResourceManager";
-import EventManager from "./EventManager";
-import CollisionManager from "./CollisionManager";
+import EventManager from "./manager/EventManager";
+import CollisionManager from "./manager/CollisionManager";
 import {Layer}from "../enum/Layer";
 
 export default class JSPixelEngine {

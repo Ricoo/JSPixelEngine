@@ -80,7 +80,7 @@ export default class CollisionManager {
                 if (go.hasProperty("force")) {
                     go.property("force").stop(prop);
                 }
-                while (go.property("collider").collide(obj.property("collider"), newPos)) {
+                while ((tmp.x !== 0 || tmp.y !== 0) && go.property("collider").collide(obj.property("collider"), newPos)) {
                     newPos.add(tmp);
                 }
                 break;

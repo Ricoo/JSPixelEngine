@@ -1,6 +1,6 @@
 import Property from "./Property";
 import Vector2 from "../math/Vector2";
-import CollisionManager from "../CollisionManager";
+import CollisionManager from "../manager/CollisionManager";
 import {Trigger} from "../../enum/Trigger";
 
 export default class Collider extends Property {

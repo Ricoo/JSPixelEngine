@@ -4,7 +4,7 @@ import Graphic from "../js/engine/properties/Graphic";
 import ResourceManager from "../js/resource/ResourceManager";
 import {KeyCode}from "../js/enum/KeyCode";
 import {Layer}from "../js/enum/Layer";
-import EventManager from "../js/engine/EventManager";
+import EventManager from "../js/engine/manager/EventManager";
 
 let resourcePack = {
     audio:[

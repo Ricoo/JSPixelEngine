@@ -1,4 +1,4 @@
-import {Event}from "../enum/Event";
+import {Event}from "../../enum/Event";
 import CollisionManager from "./CollisionManager";
 
 export default class EventManager {

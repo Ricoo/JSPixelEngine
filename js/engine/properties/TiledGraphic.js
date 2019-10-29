@@ -11,7 +11,6 @@ export default class TiledGraphic extends Graphic {
         this._middle = middleTile;
         this._end = endTile;
         this._amount = amount;
-        console.log(this._amount);
     }
 
     //TODO make the graphic extendable in both directions
