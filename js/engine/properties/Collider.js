@@ -4,6 +4,10 @@ import CollisionManager from "../manager/CollisionManager";
 import {Trigger} from "../../enum/Trigger";
 
 export default class Collider extends Property {
+    dimensions;
+    offset;
+    callback;
+    trigger;
     /**
      * @desc a collider to detect any collision or hit for event triggering or interaction
      * @param {Vector2} dimensions the dimensions of our collider
@@ -13,15 +17,13 @@ export default class Collider extends Property {
      * @param {boolean} rigid whether our collider is physical or not
      * @note the boolean value in the callback designs whether the mouse have been clicked or not
      */
-    constructor(dimensions, offset=new Vector2(0,0), callback=()=>{}, trigger=Trigger.COLLIDER, rigid=false) {
+    constructor(dimensions=new Vector2(), offset=new Vector2(), callback=()=>{}, trigger=Trigger.COLLIDER, rigid=false) {
         super();
-        this.name = "collider";
-        this._dimensions = dimensions;
-        this._offset = offset;
-        // this._width = width;
-        // this._height = height;
-        this._callback = callback;
-        this._trigger = trigger;
+        this._PROPERTY_NAME = "collider";
+        this.dimensions = dimensions;
+        this.offset = offset;
+        this.callback = callback;
+        this.trigger = trigger;
         this._rigid = rigid;
         this._hover = false;
     }
@@ -39,7 +41,7 @@ export default class Collider extends Property {
      * @returns {boolean}
      */
     collide(other, position=undefined) {
-        let posThis = (position === undefined ? this.gameObject.position.copy : position.copy).add(new Vector2(-this.dimensions.x/2,-this.dimensions.y/2)).add(this._offset);
+        let posThis = (position === undefined ? this.gameObject.position.copy : position.copy).add(new Vector2(-this.dimensions.x/2,-this.dimensions.y/2)).add(this.offset);
         let posOther = other.gameObject.position.copy.add(new Vector2(-other.dimensions.x/2,-other.dimensions.y/2)).add(other.offset);
         return (!(posOther.x > posThis.x + this.dimensions.x||
             posOther.x + other.dimensions.x < posThis.x ||
@@ -54,11 +56,11 @@ export default class Collider extends Property {
      * @returns {boolean}
      */
     raycast(x, y) {
-        let pos = this.gameObject.position.copy.add(this._offset);
-        return (x > pos.x - this._dimensions.x / 2 &&
-            x < pos.x + this._dimensions.x / 2 &&
-            y > pos.y - this._dimensions.y / 2 &&
-            y < pos.y + this._dimensions.y / 2);
+        let pos = this.gameObject.position.copy.add(this.offset);
+        return (x > pos.x - this.dimensions.x / 2 &&
+            x < pos.x + this.dimensions.x / 2 &&
+            y > pos.y - this.dimensions.y / 2 &&
+            y < pos.y + this.dimensions.y / 2);
     }
 
     /**
@@ -68,7 +70,7 @@ export default class Collider extends Property {
     show(context) {
         let pos = this.gameObject.position.copy.add(this.offset);
         context.beginPath();
-        context.strokeStyle = (this._rigid ? "#FF0000" : (this._trigger.click ? "#00ebff" : (this._trigger.hover ? "#ffc500" : "#00FF00")));
+        context.strokeStyle = (this._rigid ? "#FF0000" : (this.trigger.click ? "#00ebff" : (this.trigger.hover ? "#ffc500" : "#00FF00")));
         context.rect(pos.x - this.dimensions.x / 2, pos.y - this.dimensions.y / 2, this.dimensions.x, this.dimensions.y);
         context.stroke();
         context.closePath();
@@ -106,12 +108,5 @@ export default class Collider extends Property {
             this._hover = value;
         }
     }
-    get trigger() {return this._trigger;}
-    set trigger(value) {this._trigger = value}
     get rigid() {return this._rigid;}
-    get callback() {return this._callback;}
-    get dimensions() {return this._dimensions;}
-    set dimensions(value){this._dimensions = value;}
-    get offset() {return this._offset;}
-    set offset(value) {this._offset = value;}
 };

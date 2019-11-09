@@ -4,6 +4,13 @@ import {TextType} from "../../enum/TextType";
 import {TextAlign} from "../../enum/TextAlign";
 
 export default class Text extends Property {
+    text;
+    offset;
+    font;
+    type;
+    color;
+    size;
+    align;
     /**
      * @desc this is a text property we can add on an object for it to display said text on draw
      * @param {string|string[]} txt the text we want to display
@@ -16,14 +23,14 @@ export default class Text extends Property {
      */
     constructor(txt, offset=new Vector2(0,0), font="Arial", size=20, color="black", type=TextType.fill, align=TextAlign.start) {
         super();
-        this.name = "text";
-        this._text = txt;
-        this._offset = offset;
-        this._font = font;
-        this._size = size;
-        this._color = color;
-        this._type = type;
-        this._align = align;
+        this._PROPERTY_NAME = "text";
+        this.text = txt;
+        this.offset = offset;
+        this.font = font;
+        this.size = size;
+        this.color = color;
+        this.type = type;
+        this.align = align;
     }
 
     /**
@@ -32,43 +39,28 @@ export default class Text extends Property {
      */
     write(context) {
         context.save();
-        context.font = this._size + "px " + this._font;
-        context.textAlign = this._align;
-        context.fillStyle = this._color;
+        context.font = this.size + "px " + this.font;
+        context.textAlign = this.align;
+        context.fillStyle = this.color;
         if (Array.isArray(this._text)) {
-            for (let line = 0; line < this._text.length; line++) {
-                context[this._type](this._text[line], this._gameObject.position.x + this._offset.x,
-                                          this._gameObject.position.y + this._offset.y + this.size * line);
+            for (let line = 0; line < this.text.length; line++) {
+                context[this.type](this.text[line], this._gameObject.position.x + this.offset.x,
+                                          this._gameObject.position.y + this.offset.y + this.size * line);
             }
         }
         else {
-            context[this._type](this._text, this._gameObject.position.x + this._offset.x, this._gameObject.position.y + this._offset.y);
+            context[this.type](this.text, this._gameObject.x + this.offset.x, this._gameObject.y + this.offset.y);
         }
         context.restore()
     }
 
     getDimensions(context) {
         context.save();
-        context.font = this._size + "px " + this._font;
-        context.textAlign = this._align;
-        context.fillStyle = this._color;
-        let dimensions = new Vector2(context.measureText(this._text).width, this._size);
+        context.font = this._size + "px " + this.font;
+        context.textAlign = this.align;
+        context.fillStyle = this.color;
+        let dimensions = new Vector2(context.measureText(this.text).width, this.size);
         context.restore();
         return dimensions;
     }
-
-    get text() {return this._text;}
-    set text(value) {this._text = value;}
-    get offset() {return this._offset;}
-    set offset(value) {this._offset = value;}
-    get font() {return this._font;}
-    set font(value) {this._font = value;}
-    get size() {return this._size;}
-    set size(value) {this._size = value;}
-    get color() {return this._color;}
-    set color(value) {this._color = value;}
-    get type() {return this._type;}
-    set type(value) {this._type = value}
-    get align() {return this._align;}
-    set align(value) {this._align = value;}
 };

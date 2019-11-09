@@ -2,13 +2,14 @@ import Property from "./Property";
 import SpriteAtlas from "../../resource/sprite/SpriteAtlas";
 
 export default class Animator extends Property {
+    animations;
     /**
      * @desc an animator, managing any animation the GameObject needs
      * @param {Animation[]} list the array of animations affected to our GameObject
      */
     constructor(list=undefined) {
         super();
-        this.name = "animator";
+        this._PROPERTY_NAME = "animator";
         this._animations = (list ? list : []);
         this._running = null;
         this._playing = null;

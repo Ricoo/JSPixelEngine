@@ -1,7 +1,9 @@
 export default class Vector2 {
-    constructor(x, y) {
-        this._x = x;
-        this._y = y;
+    x;
+    y;
+    constructor(x = 0, y = 0) {
+        this.x = x;
+        this.y = y;
     }
 
     /**
@@ -10,8 +12,8 @@ export default class Vector2 {
      * @returns {Vector2}
      */
     add(other) {
-        this._x += other.x;
-        this._y += other.y;
+        this.x += other.x;
+        this.y += other.y;
         return this;
     }
 
@@ -21,8 +23,8 @@ export default class Vector2 {
      * @returns {Vector2}
      */
     sub(other) {
-        this._x -= other.x;
-        this._y -= other.y;
+        this.x -= other.x;
+        this.y -= other.y;
         return this;
     }
 
@@ -30,18 +32,14 @@ export default class Vector2 {
      * @desc returns a fresh copy of this Vector2
      * @returns {Vector2}
      */
-    get copy() {return new Vector2(this._x, this._y);}
+    get copy() {return new Vector2(this.x, this.y);}
 
     /**
      * @desc returns a directional vector with values between -1 and 1
      * @returns {Vector2}
      */
     get normalize() {return new Vector2(
-        (this._x > 0 ? 1 : (this._x < 0 ? -1 : 0)),
-        (this._y > 0 ? 1 : (this._y < 0 ? -1 : 0)));
+        (this.x > 0 ? 1 : (this.x < 0 ? -1 : 0)),
+        (this.y > 0 ? 1 : (this.y < 0 ? -1 : 0)));
     }
-    get x() {return this._x;}
-    set x(value) {this._x = value;}
-    get y() {return this._y;}
-    set y(value) {this._y = value;}
 };

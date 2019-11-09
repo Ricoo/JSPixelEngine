@@ -2,6 +2,9 @@ import Property from "./Property";
 import Vector2 from "../math/Vector2";
 
 export default class Force extends Property {
+    gravity;
+    weight;
+    bounce;
     /**
      * @desc adds a variable force to move an object
      * @param {number} gravity the gravity force our object must receive
@@ -10,16 +13,17 @@ export default class Force extends Property {
      */
     constructor(gravity, weight = 0, bounce=false) {
         super();
-        this.name = "force";
-        this._gravity = gravity;
-        this._weight = weight;
+        this._PROPERTY_NAME = "force";
+        this.gravity = gravity;
+        this.weight = weight;
+        this.bounce = bounce;
         this._force = new Vector2(0,0);
         this._stopped = false;
     }
 
     //TODO
     update() {
-        this._force.add(new Vector2(0, this._gravity));
+        this._force.add(new Vector2(0, this.gravity));
         this._gameObject.x += this._force.x;
         this._gameObject.y += this._force.y;
     }
@@ -53,7 +57,5 @@ export default class Force extends Property {
     set y(value){this._force.y = value;}
     get x(){return this._force.x;}
     set x(value){this._force.x = value;}
-    get bounce(){return this._bounce;}
-    set bounce(value){this._bounce = value;}
     get stopped(){return this._stopped;}
 };

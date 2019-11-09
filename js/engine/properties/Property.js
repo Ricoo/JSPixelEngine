@@ -3,7 +3,7 @@ export default class Property {
      * @desc the mother class of all our attachable properties
      */
     constructor() {
-        this.name = undefined;
+        this._PROPERTY_NAME = undefined;
         if (new.target === Property) {
             throw TypeError("You have to extend this class");
         }

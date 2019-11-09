@@ -3,6 +3,7 @@ import Vector2 from "./math/Vector2";
 import GameObjectManager from "./manager/GameObjectManager";
 
 export default class GameObject {
+    name;
     /**
      * @desc a gameObject, the standardized way to create and manipulate game elements
      * @param {string} name the assigned name of this object so we can find it using its name in GameObjectManager
@@ -10,10 +11,10 @@ export default class GameObject {
      * @param {number} y the y position of our object
      * @param {number} angle the angle our object should be displayed with (if necessary)
      */
-    constructor(name, x = 0, y = 0, angle = 0) {
+    constructor(name = "", x = 0, y = 0, angle = 0) {
         this._position = new Vector2(x, y);
         this._angle = angle;
-        this._name = name;
+        this.name = name;
         this._properties = [];
         this._enabled = true;
         this._children = [];
@@ -29,17 +30,12 @@ export default class GameObject {
         if (!property instanceof Property) {
             throw TypeError("You can only attach instances of Property objects");
         }
-        if (this[property.name] !== undefined ) {
-            this.detach(property.name);
+        if (this[property._PROPERTY_NAME] !== undefined ) {
+            this.detach(property._PROPERTY_NAME);
         }
-        this[property.name] = property;
-        this._properties.push(property.name);
+        this[property._PROPERTY_NAME] = property;
+        this._properties.push(property._PROPERTY_NAME);
         property.attachTo(this);
-        // if (this._properties[property.name] !== undefined) {
-        //     this.detach(property.name);
-        // }
-        // this._properties[property.name] = property;
-        // property.attachTo(this);
     }
 
     /**
@@ -49,13 +45,11 @@ export default class GameObject {
     detach(name) {
         if (this[name] === undefined) {
             console.trace();
-            throw ReferenceError(this._name + "." + name + " is undefined");
+            throw ReferenceError(this.name + "." + name + " is undefined");
         }
         this._properties.splice(this._properties.indexOf(name), 1);
         this[name].delete();
         delete this[name];
-        // this._properties[name].delete();
-        // delete this._properties[name];
     }
 
     /**
@@ -145,7 +139,6 @@ export default class GameObject {
     hasProperty(name) {
         if (this._enabled)
             return this.hasOwnProperty(name);
-        // return this._properties.hasOwnProperty(name);
         return false;
     }
 
@@ -190,6 +183,4 @@ export default class GameObject {
 
     get children() {return this._children;}
     get parent() {return this._parent;}
-    get name() {return this._name;}
-    set name(value) {this._name = value;}
 };

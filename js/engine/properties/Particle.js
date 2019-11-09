@@ -6,6 +6,13 @@ import {Layer} from "../../enum/Layer";
 import Vector2 from "../math/Vector2";
 
 export default class Particle extends Property {
+    amount;
+    period;
+    lifetime;
+    fadeout;
+    type;
+    speed;
+    layer;
     /**
      * @desc the particle system, allowing us to create volatile sprites for animation purpose
      * @param {string} spriteName string the sprite to use
@@ -21,7 +28,7 @@ export default class Particle extends Property {
      */
     constructor(spriteName, type, amount, lifetime, period, fadeout, scale=1.0, tileId=0, speed=undefined, offset=undefined) {
         super();
-        this.name = "particle";
+        this._PROPERTY_NAME = "particle";
         this._spriteName = spriteName;
         this._tile = tileId;
         this._amount = amount;
@@ -130,6 +137,7 @@ export default class Particle extends Property {
     get isRunning() {return this._running;}
     get spriteName() {return this._spriteName;}
     set spriteName(value) {this._spriteName = value;}
+
     get amount() {return this._amount;}
     set amount(value) {this._amount = value;}
     get period() {return this._period;}
