@@ -44,7 +44,7 @@ export default class GameObjectManager {
      * @returns {GameObject[]}
      */
     rigids() {
-        return this._list.filter(elem => elem.hasProperty("collider") && elem.property("collider").rigid);
+        return this._list.filter(elem => elem.hasProperty("collider") && elem["collider"].rigid);
     }
     /**
      * @desc fetches a list of all GameObjects having a Graphic property and returns it
@@ -70,7 +70,7 @@ export default class GameObjectManager {
      */
     layer(nb) {
         this._list.sort((a,b) => {return a.position.y - b.position.y});
-        return this._list.filter(elem => elem.hasProperty("graphic") && elem.property("graphic").layer === nb);
+        return this._list.filter(elem => elem.hasProperty("graphic") && elem["graphic"].layer === nb);
     }
 
     /**

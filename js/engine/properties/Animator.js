@@ -21,7 +21,7 @@ export default class Animator extends Property {
         if (!this._gameObject.hasProperty("graphic")) {
             throw TypeError("Cannot animate gameObject without graphic");
         }
-        this._element = this._gameObject.property("graphic").sprite;
+        this._element = this._gameObject["graphic"].sprite;
         if (!this._element instanceof SpriteAtlas) {
             throw TypeError("Cannot animate static graphic element");
         }
@@ -60,8 +60,8 @@ export default class Animator extends Property {
         if (this._running !== null) {
             if (this._playing !== null) {
                 this._current = 0;
-                this._gameObject.property("graphic").image = this._element[this._playing.end];
-                this._gameObject.property("graphic").tile = this._playing.end;
+                this._gameObject["graphic"].image = this._element[this._playing.end];
+                this._gameObject["graphic"].tile = this._playing.end;
             }
             clearInterval(this._running);
             this._running = null;
@@ -71,8 +71,8 @@ export default class Animator extends Property {
     }
 
     _animate(animation) {
-        this._gameObject.property("graphic").image = this._element[this._playing.frames[this._current]];
-        this._gameObject.property("graphic").tile = this._playing.frames[this._current];
+        this._gameObject["graphic"].image = this._element[this._playing.frames[this._current]];
+        this._gameObject["graphic"].tile = this._playing.frames[this._current];
         this._current++;
         if (this._current === animation.size) {
             this._current = 0;

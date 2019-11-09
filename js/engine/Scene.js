@@ -1,8 +1,7 @@
-// import GameObject from "./GameObject";
+import GameObject from "./GameObject";
 import Vector2 from "./math/Vector2";
 import {Layer} from "../enum/Layer";
 import {Trigger} from "../enum/Trigger";
-// import GameObject from "./GameObject";
 
 export default class Scene {
     constructor(sceneJSON) {
@@ -10,26 +9,28 @@ export default class Scene {
             "name":"Scene1",
             "gameObjects" : [
                 {
+                    "name":"figure",
                     "args":[
                         "test",
-                        "100",
-                        "200"],
+                        100,
+                        200],
                     "props":{
-                        "Graphic":["hero","Layer.CHARACTERS"],
+                        "Graphic":["hero","Layer.CHARACTERS",2],
                         "Force":["1","10"],
-                        "Collider":["new Vector2(10,10)","undefined","()=>{}","Trigger.COLLIDER","false"]
+                        "Collider":["new Vector2(10,10)","undefined","()=>{}","Trigger.COLLIDER","true"]
                     },
                     "children": [
                         {
+                            "name":"text",
                             "cls":"GUIText",
-                            "path":"./gui/GUIText.js",
+                            "path":"./gui/GUIText",
                             "args":[
                                 "test",
                                 "this is a test text",
-                                "100",
-                                "100"],
+                                100,
+                                100],
                             "props":{
-                                "Collider":["new Vector2(40,40)","undefined","()=>{}","Trigger.COLLIDER","false"]
+                                "Collider":["new Vector2(40,40)","undefined","()=>{}","Trigger.COLLIDER","true"]
                             }
                         },
                     ]
@@ -52,21 +53,19 @@ export default class Scene {
 
     async createGameObject(obj) {
         let go = {};
-        // if (obj.path !== undefined) {
-            // await import(obj.path).then(
-            await import(obj.path || "./GameObject.js").then(
+        if (obj.path !== undefined) {
+            await import(obj.path).then(
                 (cls) => {
                     go = new cls.default(...(obj.args));
                 }
             );
-        // }
-        // else {
-        //     go = new GameObject(...(obj.args));
-        // }
+        }
+        else {
+            go = new GameObject(...(obj.args));
+        }
         for (let prop in obj.props) {
             let args = [];
-            console.log(prop);
-            await import(obj.props[prop].path || "./Properties/" + prop + ".js").then(
+            await import(obj.props[prop].path || "./properties/" + prop + "").then(
                 (cls) => {
                     for (let arg of obj.props[prop]) {
                         try {
@@ -77,7 +76,6 @@ export default class Scene {
                             args.push(arg);
                         }
                     }
-                    console.log(args);
                     go.attach(new cls.default(...args));
                 }
             );

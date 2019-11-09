@@ -14,7 +14,7 @@ export default class GameObject {
         this._position = new Vector2(x, y);
         this._angle = angle;
         this._name = name;
-        this._properties = {};
+        this._properties = [];
         this._enabled = true;
         this._children = [];
         this._parent = undefined;
@@ -27,13 +27,19 @@ export default class GameObject {
      */
     attach(property) {
         if (!property instanceof Property) {
-            throw TypeError("You can only attach instances of properties objects");
+            throw TypeError("You can only attach instances of Property objects");
         }
-        if (this._properties[property.name] !== undefined) {
+        if (this[property.name] !== undefined ) {
             this.detach(property.name);
         }
-        this._properties[property.name] = property;
+        this[property.name] = property;
+        this._properties.push(property.name);
         property.attachTo(this);
+        // if (this._properties[property.name] !== undefined) {
+        //     this.detach(property.name);
+        // }
+        // this._properties[property.name] = property;
+        // property.attachTo(this);
     }
 
     /**
@@ -41,8 +47,15 @@ export default class GameObject {
      * @param {string} name the name of the property
      */
     detach(name) {
-        this._properties[name].delete();
-        delete this._properties[name];
+        if (this[name] === undefined) {
+            console.trace();
+            throw ReferenceError(this._name + "." + name + " is undefined");
+        }
+        this._properties.splice(this._properties.indexOf(name), 1);
+        this[name].delete();
+        delete this[name];
+        // this._properties[name].delete();
+        // delete this._properties[name];
     }
 
     /**
@@ -85,12 +98,13 @@ export default class GameObject {
     }
 
     /**
+     * @deprecated will be replaced by direct access to the property, use go["text"] or go.text instead of go.property("text")
      * @desc returns the named property
      * @param {string} name
      * @returns {Property}
      */
     property(name) {
-        return (this._properties[name]);
+        return (this[name]);
     }
 
     /**
@@ -130,7 +144,8 @@ export default class GameObject {
      */
     hasProperty(name) {
         if (this._enabled)
-           return this._properties.hasOwnProperty(name);
+            return this.hasOwnProperty(name);
+        // return this._properties.hasOwnProperty(name);
         return false;
     }
 
@@ -141,9 +156,9 @@ export default class GameObject {
         for (let child of this._children) {
             this.removeChild(child);
         }
-        for (let prop in this._properties) {
-            this._properties[prop].delete();
-            delete this._properties[prop];
+        for (let prop of this._properties) {
+            this[prop].delete();
+            delete this[prop];
         }
         GameObjectManager.instance.remove(this);
         delete this;
@@ -176,4 +191,5 @@ export default class GameObject {
     get children() {return this._children;}
     get parent() {return this._parent;}
     get name() {return this._name;}
+    set name(value) {this._name = value;}
 };

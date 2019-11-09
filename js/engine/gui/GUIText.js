@@ -12,8 +12,8 @@ export default class GUIText extends GameObject {
         this.attach(new Text(text));
     }
 
-    get text() {return this.property("text").text};
-    set text(value) {
-        this.property("text").text = value;
+    get txt() {return this.text.text};
+    set txt(value) {
+        this.text.text = value;
     }
 };

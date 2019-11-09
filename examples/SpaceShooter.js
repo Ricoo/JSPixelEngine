@@ -94,7 +94,7 @@ class Missile extends GameObject {
             Game.scoreText.text = "Score : "+ Game.score;
             this.delete();
         }));
-        this.property("animator").play("missile_fire", false);
+        this["animator"].play("missile_fire", false);
         this._i = setInterval(() => {this.update()}, 5);
     }
 
@@ -124,7 +124,7 @@ class Missile extends GameObject {
         this.ship = new Ship(100, 100);
         this.drag = false;
 
-        EventManager.registerHandler(Event.MouseDown, (mouse) => {clickSound.play();});
+        EventManager.registerHandler(Event.MouseDown, () => {clickSound.play();});
 
         CollisionManager.instance.addGroup(["Enemy","Missile"]);
 
@@ -133,7 +133,7 @@ class Missile extends GameObject {
 
         Game.score = 0;
         Game.scoreText = new GUIText("score", "Score : " + Game.score, 70, 35);
-        Game.scoreText.property("text").align = TextAlign.center;
+        Game.scoreText["text"].align = TextAlign.center;
     }
 
     frame() {
@@ -159,12 +159,12 @@ class Missile extends GameObject {
             this._debug = true;
         }
         if (keys.includes(KeyCode.i)) {
-            this.ship.property("collider").rigid = false;
+            this.ship["collider"].rigid = false;
         }
         if (keys.includes(KeyCode.o)) {
-            this.ship.property("collider").rigid = true;
+            this.ship["collider"].rigid = true;
         }
-        if (this.ship.property("collider").raycast(mouse.x, mouse.y) && mouse.click) {
+        if (this.ship["collider"].raycast(mouse.x, mouse.y) && mouse.click) {
             this.drag = true;
             this.ship.fire();
         }

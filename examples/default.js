@@ -52,22 +52,22 @@ class Tickbox extends GameObject {
         this._ticked = false;
 
         this.tooltip = new GUIText("tooltip", text, x + 20, y);
-        let dimensions = this.tooltip.property("text").getDimensions(Game.instance.context);
+        let dimensions = this.tooltip.text.getDimensions(Game.instance.context);
         this.tooltip.attach(new Collider(new Vector2(dimensions.x,dimensions.y), new Vector2(dimensions.x/2, 0), (obj, mouse)=>{
             if (mouse.hover) {
-                obj.property("text").color = "#FFFFFF";
+                obj.text.color = "#FFFFFF";
             }
             else {
-                obj.property("text").color = "#000000";
+                obj.text.color = "#000000";
             }
         }, Trigger.HOVER));
-        this.tooltip.property("text").size = 13;
+        this.tooltip.text.size = 13;
         this.tooltip.disable();
 
         this.attach(new Collider(new Vector2(20,20), undefined, (obj, mouse) =>{
             if (!mouse.click)
                 return;
-            let graphic = this.property("graphic");
+            let graphic = this["graphic"];
             this._ticked = !this._ticked;
             graphic.image = graphic.sprite.tile((this._ticked ? 1 : 0));
             this.tooltip.toggle();
@@ -81,7 +81,7 @@ class Clock extends GameObject {
         super("clock", x, y);
         this.attach(new Graphic("clock", Layer.BACKGROUND, 4));
         this.attach(new Animator([animationList.pendulum_tick]));
-        this.property("animator").play("pendulum_tick");
+        this["animator"].play("pendulum_tick");
     }
 }
 
@@ -145,21 +145,21 @@ class Game extends JSPixelApp {
         this.moved = true;
         this.move();
 
-        EventManager.registerHandler(Event.MouseDown, (mouse) => {clickSound.play();});
+        EventManager.registerHandler(Event.MouseDown, () => {clickSound.play();});
         console.log("my super game have been initialized !");
-        let scene = new Scene();
-        scene.load();
+        this.scene = new Scene();
+        this.scene.load();
     }
 
     move() {
         this.moved = !this.moved;
         if (this.moved) {
             this.moveX.run(100,2000);
-            this.marine.property("animator").play("character_left");
+            this.marine["animator"].play("character_left");
         }
         else {
             this.moveX.run(400,2000);
-            this.marine.property("animator").play("character_right");
+            this.marine["animator"].play("character_right");
         }
     }
 
@@ -168,22 +168,22 @@ class Game extends JSPixelApp {
         if (keys.includes(KeyCode.arrowRight)) {
             this.hero.orientation = "right";
             this.hero.x += 3;
-            this.hero.property("animator").play("character_right");
-            this.hero.property("particle").run();
+            this.hero["animator"].play("character_right");
+            this.hero["particle"].run();
         }
         else if (keys.includes(KeyCode.arrowLeft)) {
             this.hero.orientation = "left";
             this.hero.x -= 3;
-            this.hero.property("animator").play("character_left");
-            this.hero.property("particle").run();
+            this.hero["animator"].play("character_left");
+            this.hero["particle"].run();
         }
         else if (this.hero.orientation === "right") {
-            this.hero.property("animator").play("character_idle_right");
-            this.hero.property("particle").stop();
+            this.hero["animator"].play("character_idle_right");
+            this.hero["particle"].stop();
         }
         else {
-            this.hero.property("animator").play("character_idle_left");
-            this.hero.property("particle").stop();
+            this.hero["animator"].play("character_idle_left");
+            this.hero["particle"].stop();
         }
         if (keys.includes(KeyCode.num1)) {
             this._debug = false;
@@ -194,13 +194,13 @@ class Game extends JSPixelApp {
 
         if (keys.includes(KeyCode.spacebar) && !this.jump) {
             this.jump = true;
-            this.hero.property("force").apply(new Vector2(0,-20));
+            this.hero["force"].apply(new Vector2(0,-20));
         }
-        else if (!keys.includes(KeyCode.spacebar) && this.hero.property("force").stopped){
+        else if (!keys.includes(KeyCode.spacebar) && this.hero["force"].stopped){
             this.jump = false;
         }
     }
-};
+}
 
 // Simply create a new instance of your inherited JSPixelApp class
 function init(){

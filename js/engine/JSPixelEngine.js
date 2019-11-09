@@ -87,16 +87,16 @@ export default class JSPixelEngine {
         for (let layer in Layer) {
             let list = GameObjectManager.instance.layer(Layer[layer]);
             for (let go of list) {
-                go.property("graphic").draw(context);
+                go["graphic"].draw(context);
                 if (go.hasProperty("text")) {
-                    go.property("text").write(context);
+                    go["text"].write(context);
                 }
             }
         }
 
         let list = GameObjectManager.instance.forces();
         for (let go of list) {
-            go.property("force").update();
+            go["force"].update();
         }
 
         // Debug colliders
@@ -104,7 +104,7 @@ export default class JSPixelEngine {
             let list = GameObjectManager.instance.graphics();
             for (let i = 0; i < list.length; i++) {
                 if (list[i].hasProperty("collider")) {
-                    list[i].property("collider").show(context);
+                    list[i]["collider"].show(context);
                 }
             }
         }
