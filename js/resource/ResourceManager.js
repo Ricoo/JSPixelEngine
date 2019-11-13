@@ -1,6 +1,4 @@
-import SpriteList from "./sprite/SpriteList";
 import Sprite from "./sprite/Sprite";
-import SoundList from "./sound/SoundList";
 import Sound from "./sound/Sound";
 import SpriteAtlas from "./sprite/SpriteAtlas";
 import {Values} from "../enum/Values";
@@ -12,8 +10,8 @@ export default class ResourceManager {
         }
         ResourceManager.instance = this;
 
-        this._sprites = null;
-        this._sounds = null;
+        this._sprites = [];
+        this._sounds = [];
         this._count = 0;
         this._total = 0;
         this._done = false;
@@ -26,35 +24,31 @@ export default class ResourceManager {
      */
     loadResources(packageDescriptor) {
         this._done = false;
-        let spriteList = [];
-        let soundList = [];
-        let self = this;
         this._total = packageDescriptor.sprites.length + packageDescriptor.audio.length;
-        let callback = () => {this._count += 1; if (this._count === this._total) {this._done = true;}};
-        spriteList.push(new Sprite(Values.EMPTY_IMAGE.src,
+        let {sprites, audio} = packageDescriptor;
+        this._total = [...sprites, ...audio].length;
+        let callback = () => {
+            this._count += 1;
+            if (this._count === this._total) {
+                console.log("Finished loading  ["+this._total+"/"+this._total+"]");
+                this._done = true;}};
+        this._sprites.push(new Sprite(Values.EMPTY_IMAGE.src,
             Values.EMPTY_IMAGE.name,  Values.EMPTY_IMAGE.res, ()=>{}));
-        packageDescriptor.sprites.forEach(function(elem, index, array) {
+        sprites.forEach((elem) => {
             if (elem.hasOwnProperty("atlas")) {
-                spriteList.push(new SpriteAtlas(elem["src"],elem["name"],elem["res"], callback, elem["atlas"]));
+                this._sprites.push(new SpriteAtlas(elem["src"],elem["name"],elem["res"], callback, elem["atlas"]));
             }
             else {
-                spriteList.push(new Sprite(elem["src"],elem["name"],elem["res"], callback));
+                this._sprites.push(new Sprite(elem["src"],elem["name"],elem["res"], callback));
             }
-            if (index === array.length - 1) {
-                self._sprites = new SpriteList(spriteList);
-            }
-
         });
-        packageDescriptor.audio.forEach(function(elem, index, array) {
-            soundList.push(new Sound(elem["src"],elem["name"], callback));
-            if (index === array.length - 1) {
-                self._sounds = new SoundList(soundList);
-            }
+        audio.forEach((elem) => {
+            this._sounds.push(new Sound(elem["src"],elem["name"], callback));
         });
     }
 
-    static getSprite(name){return ResourceManager.sprites.findByName(name)};
-    static getSound(name){return ResourceManager.sounds.findByName(name)};
+    static getSprite(name){return ResourceManager.sprites.find(elem=> elem.name === name)};
+    static getSound(name){return ResourceManager.sounds.find(elem=> elem.name === name)};
 
     static get sounds() {return ResourceManager.instance._sounds;}
     static get sprites() {return ResourceManager.instance._sprites;}
