@@ -4,6 +4,7 @@ import Graphic from "./Graphic";
 import {ParticleType} from "../../enum/ParticleType";
 import {Layer} from "../../enum/Layer";
 import Vector2 from "../math/Vector2";
+import {Values} from "../../enum/Values";
 
 export default class Particle extends Property {
     amount;
@@ -26,7 +27,7 @@ export default class Particle extends Property {
      * @param {number[]} speed the particle's range of velocity
      * @param {Vector2} offset the offset of our particle
      */
-    constructor(spriteName, type, amount, lifetime, period, fadeout, scale=1.0, tileId=0, speed=undefined, offset=undefined) {
+    constructor(spriteName = Values.EMPTY_IMAGE.name, type=ParticleType.Fall, amount=1, lifetime=1000, period=20, fadeout=false, scale=1.0, tileId=0, speed=undefined, offset=undefined) {
         super();
         this._PROPERTY_NAME = "particle";
         this._spriteName = spriteName;

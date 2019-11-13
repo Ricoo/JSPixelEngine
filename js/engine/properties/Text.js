@@ -21,7 +21,7 @@ export default class Text extends Property {
      * @param {TextType} type whether we want to fill or stroke our text
      * @param {TextAlign} align the alignment of our text
      */
-    constructor(txt, offset=new Vector2(0,0), font="Arial", size=20, color="black", type=TextType.fill, align=TextAlign.start) {
+    constructor(txt="", offset=new Vector2(0,0), font="Arial", size=20, color="black", type=TextType.fill, align=TextAlign.start) {
         super();
         this._PROPERTY_NAME = "text";
         this.text = txt;

@@ -11,7 +11,7 @@ export default class Force extends Property {
      * @param {number} weight the weight of our object
      * @param {boolean} bounce whether our object is bouncing or not
      */
-    constructor(gravity, weight = 0, bounce=false) {
+    constructor(gravity = 1, weight = 0, bounce=false) {
         super();
         this._PROPERTY_NAME = "force";
         this.gravity = gravity;
@@ -41,9 +41,11 @@ export default class Force extends Property {
         this._stopped = true;
         if (direction === "y" && this.bounce) {
             this._force.y *= -1;
+            this.update()
         }
         else if (this.bounce) {
             this._force.x *= -1;
+            this.update()
         }
         else if (direction === "y") {
             this._force.y = 0;
