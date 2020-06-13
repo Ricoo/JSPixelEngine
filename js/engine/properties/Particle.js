@@ -1,3 +1,4 @@
+import ResourceManager from "../../resource/ResourceManager.js"
 import Property from "./Property.js";
 import GameObject from "../GameObject.js";
 import Graphic from "./Graphic.js";
@@ -51,7 +52,7 @@ export default class Particle extends Property {
         this.period = period;
         this.fadeout = fadeout;
         this._scale = scale;
-        this.speed = (speed === undefined ? new Vector2(type.speed[0],type.speed[1]) : speed);
+        this.speed = (speed === undefined ? [type.speed[0],type.speed[1]] : speed);
         this._angle = type.angle;
         this.layer = Layer.PARTICLE;
         this.offset = (offset === undefined ? new Vector2(0,0) : offset);
@@ -110,12 +111,13 @@ export default class Particle extends Property {
 
         obj.attach(new Graphic(this.sprite.name, this.layer, scale, 1.0, tile));
 
-        obj.speed = Math.random() * (this.speed.y - this.speed.x) + this.speed.x;
+        obj.speed = Math.random() * (this.speed[1] - this.speed[0]) + this.speed[0];
         obj.angle = Math.random() * (this.type.angle[1] - this.type.angle[0]) + this.type.angle[0];
         obj.gravity = this.type.gravity;
 
         obj.moveX = (Math.cos(obj.angle * Math.PI / 180)) * obj.speed / (this.lifetime / 17);
         obj.moveY = (Math.sin(obj.angle * Math.PI / 180)) * obj.speed / (this.lifetime / 17);
+
         obj.lifetime = this.lifetime;
         return obj;
     }
