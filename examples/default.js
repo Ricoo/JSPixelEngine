@@ -92,7 +92,7 @@ class Hero extends GameObject {
             animationList.character_right,
             animationList.character_idle_left,
             animationList.character_idle_right]));
-        this.attach(new Particle("particle", ParticleType.Fall, 1, 500, 30, true, [2,3], [0,1,2,3], [10,20], new Vector2(0,30)));
+        this.attach(new Particle("particle", ParticleType.Fall, 1, 500, 30, true, [2,3], [0,1,2,3], [10,20], new Vector2(0,60)));
         this.attach(new Force(1, 10, false));
     }
 }
