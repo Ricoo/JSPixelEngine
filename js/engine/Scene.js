@@ -23,7 +23,7 @@ export default class Scene {
                         {
                             "name":"text",
                             "cls":"GUIText",
-                            "path":"./gui/GUIText",
+                            "path":"./gui/GUIText.js",
                             "args":[
                                 "test",
                                 "this is a test text",
@@ -65,7 +65,7 @@ export default class Scene {
         }
         for (let prop in obj.props) {
             let args = [];
-            await import(obj.props[prop].path || "./properties/" + prop + "").then(
+            await import(obj.props[prop].path || "./properties/" + prop + ".js").then(
                 (cls) => {
                     for (let arg of obj.props[prop]) {
                         try {

@@ -241,6 +241,9 @@ import {ParticleType} from "../js/enum/ParticleType.js";
 
         deleteGameObject() {
             if (this._selected !== undefined) {
+                for (let child of this._selected.children) {
+                    child.delete();
+                }
                 this._selected.delete();
                 this._selected = undefined;
             }
