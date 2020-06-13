@@ -1,6 +1,6 @@
 import Property from "./Property.js";
 import ResourceManager from "../../resource/ResourceManager.js";
-import {Values} from "../../enum/DefaultValues.js";
+import {DefaultValues} from "../../enum/DefaultValues.js";
 import {Layer} from "../../enum/Layer.js";
 
 export default class Graphic extends Property {

@@ -1,4 +1,4 @@
-import Enum from "./Enum";
+import Enum from "./Enum.js";
 
 const TextType = new Enum({
     fill : "fillText",

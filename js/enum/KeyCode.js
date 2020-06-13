@@ -1,4 +1,4 @@
-import Enum from "./Enum";
+import Enum from "./Enum.js";
 
 const KeyCode = new Enum({
     arrowUp : 38,

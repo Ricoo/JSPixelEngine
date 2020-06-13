@@ -1,14 +1,7 @@
-<<<<<<< Updated upstream
 import Sprite from "./sprite/Sprite.js";
 import Sound from "./sound/Sound.js";
 import SpriteAtlas from "./sprite/SpriteAtlas.js";
-import {Values} from "../enum/Values.js";
-=======
-import Sprite from "./sprite/Sprite";
-import Sound from "./sound/Sound";
-import SpriteAtlas from "./sprite/SpriteAtlas";
-import {DefaultValues} from "../enum/DefaultValues";
->>>>>>> Stashed changes
+import {DefaultValues} from "../enum/DefaultValues.js";
 
 export default class ResourceManager {
     constructor() {

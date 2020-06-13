@@ -1,4 +1,4 @@
-import Enum from "./Enum";
+import Enum from "./Enum.js";
 
 const Layer = new Enum({
     BACKGROUND:0,

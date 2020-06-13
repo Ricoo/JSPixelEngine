@@ -4,7 +4,7 @@ import Graphic from "./Graphic.js";
 import {ParticleType} from "../../enum/ParticleType.js";
 import {Layer} from "../../enum/Layer.js";
 import Vector2 from "../math/Vector2.js";
-import {Values} from "../../enum/DefaultValues.js";
+import {DefaultValues} from "../../enum/DefaultValues.js";
 
 export default class Particle extends Property {
     sprite;

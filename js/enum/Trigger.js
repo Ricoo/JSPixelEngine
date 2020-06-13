@@ -1,4 +1,4 @@
-import Enum from "./Enum";
+import Enum from "./Enum.js";
 
 const Trigger = new Enum({
     CLICK : {click:true, hover:false, collide:false},

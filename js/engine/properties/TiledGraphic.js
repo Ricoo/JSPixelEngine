@@ -1,6 +1,6 @@
 import Graphic from "./Graphic.js";
 import SpriteAtlas from "../../resource/sprite/SpriteAtlas.js";
-import {Values} from "../../enum/DefaultValues.js";
+import {DefaultValues} from "../../enum/DefaultValues.js";
 import {Layer} from "../../enum/Layer.js";
 
 export default class TiledGraphic extends Graphic {

@@ -1,6 +1,6 @@
-import Sprite from "./Sprite";
-import Vector2 from "../../engine/math/Vector2";
-import ImageFactory from "./ImageFactory";
+import Sprite from "./Sprite.js";
+import Vector2 from "../../engine/math/Vector2.js";
+import ImageFactory from "./ImageFactory.js";
 
 export default class SpriteAtlas extends Sprite {
     /**

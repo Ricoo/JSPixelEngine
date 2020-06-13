@@ -1,4 +1,4 @@
-import Enum from "./Enum";
+import Enum from "./Enum.js";
 
 const ParticleType = new Enum({
     Fall : {type:"fall", angle: [90,90], speed:[10,100], gravity:true},
