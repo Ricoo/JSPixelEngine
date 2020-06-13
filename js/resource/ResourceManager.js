@@ -1,7 +1,7 @@
-import Sprite from "./sprite/Sprite";
-import Sound from "./sound/Sound";
-import SpriteAtlas from "./sprite/SpriteAtlas";
-import {Values} from "../enum/Values";
+import Sprite from "./sprite/Sprite.js";
+import Sound from "./sound/Sound.js";
+import SpriteAtlas from "./sprite/SpriteAtlas.js";
+import {Values} from "../enum/Values.js";
 
 export default class ResourceManager {
     constructor() {

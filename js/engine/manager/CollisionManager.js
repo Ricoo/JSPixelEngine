@@ -1,4 +1,4 @@
-import GameObjectManager from "./GameObjectManager";
+import GameObjectManager from "./GameObjectManager.js";
 
 export default class CollisionManager {
     constructor() {

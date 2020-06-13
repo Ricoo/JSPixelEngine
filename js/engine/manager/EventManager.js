@@ -1,5 +1,5 @@
-import {Event}from "../../enum/Event";
-import CollisionManager from "./CollisionManager";
+import {Event}from "../../enum/Event.js";
+import CollisionManager from "./CollisionManager.js";
 
 export default class EventManager {
     constructor(){

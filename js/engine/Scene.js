@@ -1,7 +1,7 @@
-import GameObject from "./GameObject";
-import Vector2 from "./math/Vector2";
-import {Layer} from "../enum/Layer";
-import {Trigger} from "../enum/Trigger";
+import GameObject from "./GameObject.js";
+import Vector2 from "./math/Vector2.js";
+import {Layer} from "../enum/Layer.js";
+import {Trigger} from "../enum/Trigger.js";
 
 export default class Scene {
     constructor(sceneJSON) {

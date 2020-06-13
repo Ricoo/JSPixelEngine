@@ -1,7 +1,7 @@
-import Property from "./Property";
-import Vector2 from "../math/Vector2";
-import {TextType} from "../../enum/TextType";
-import {TextAlign} from "../../enum/TextAlign";
+import Property from "./Property.js";
+import Vector2 from "../math/Vector2.js";
+import {TextType} from "../../enum/TextType.js";
+import {TextAlign} from "../../enum/TextAlign.js";
 
 export default class Text extends Property {
     text;

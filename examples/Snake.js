@@ -1,10 +1,10 @@
-import JSPixelApp from "../js/engine/JSPixelApp";
-import GameObject from "../js/engine/GameObject";
-import Graphic from "../js/engine/properties/Graphic";
-import ResourceManager from "../js/resource/ResourceManager";
-import {KeyCode}from "../js/enum/KeyCode";
-import {Layer}from "../js/enum/Layer";
-import EventManager from "../js/engine/manager/EventManager";
+import JSPixelApp from "../js/engine/JSPixelApp.js";
+import GameObject from "../js/engine/GameObject.js";
+import Graphic from "../js/engine/properties/Graphic.js";
+import ResourceManager from "../js/resource/ResourceManager.js";
+import {KeyCode} from "../js/enum/KeyCode.js";
+import {Layer} from "../js/enum/Layer.js";
+import EventManager from "../js/engine/manager/EventManager.js";
 
 let resourcePack = {
     audio:[

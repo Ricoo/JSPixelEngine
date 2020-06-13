@@ -1,5 +1,5 @@
-import Property from "./Property";
-import SpriteAtlas from "../../resource/sprite/SpriteAtlas";
+import Property from "./Property.js";
+import SpriteAtlas from "../../resource/sprite/SpriteAtlas.js";
 
 export default class Animator extends Property {
     animations;

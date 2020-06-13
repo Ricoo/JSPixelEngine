@@ -1,10 +1,10 @@
-import Property from "./Property";
-import GameObject from "../GameObject";
-import Graphic from "./Graphic";
-import {ParticleType} from "../../enum/ParticleType";
-import {Layer} from "../../enum/Layer";
-import Vector2 from "../math/Vector2";
-import {Values} from "../../enum/Values";
+import Property from "./Property.js";
+import GameObject from "../GameObject.js";
+import Graphic from "./Graphic.js";
+import {ParticleType} from "../../enum/ParticleType.js";
+import {Layer} from "../../enum/Layer.js";
+import Vector2 from "../math/Vector2.js";
+import {Values} from "../../enum/Values.js";
 
 export default class Particle extends Property {
     amount;

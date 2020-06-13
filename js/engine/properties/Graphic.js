@@ -1,7 +1,7 @@
-import Property from "./Property";
-import ResourceManager from "../../resource/ResourceManager";
-import {Values} from "../../enum/Values";
-import {Layer} from "../../enum/Layer";
+import Property from "./Property.js";
+import ResourceManager from "../../resource/ResourceManager.js";
+import {Values} from "../../enum/Values.js";
+import {Layer} from "../../enum/Layer.js";
 
 export default class Graphic extends Property {
     sprite;

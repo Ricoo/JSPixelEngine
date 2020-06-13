@@ -1,6 +1,6 @@
-import GameObject from "../GameObject";
-import Graphic from "../properties/Graphic";
-import {Layer} from "../../enum/Layer";
+import GameObject from "../GameObject.js";
+import Graphic from "../properties/Graphic.js";
+import {Layer} from "../../enum/Layer.js";
 
 export default class GUIImage extends GameObject {
     constructor(name, x, y, sprite, layer=Layer.GUI) {

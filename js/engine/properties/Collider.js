@@ -1,7 +1,7 @@
-import Property from "./Property";
-import Vector2 from "../math/Vector2";
-import CollisionManager from "../manager/CollisionManager";
-import {Trigger} from "../../enum/Trigger";
+import Property from "./Property.js";
+import Vector2 from "../math/Vector2.js";
+import CollisionManager from "../manager/CollisionManager.js";
+import {Trigger} from "../../enum/Trigger.js";
 
 export default class Collider extends Property {
     dimensions;

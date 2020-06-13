@@ -1,5 +1,5 @@
-import JSPixelSettings from "./JSPixelSettings";
-import JSPixelEngine from "./JSPixelEngine";
+import JSPixelSettings from "./JSPixelSettings.js";
+import JSPixelEngine from "./JSPixelEngine.js";
 
 export default class JSPixelApp {
     /**

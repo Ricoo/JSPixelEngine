@@ -1,5 +1,5 @@
-import Property from "./Property";
-import Vector2 from "../math/Vector2";
+import Property from "./Property.js";
+import Vector2 from "../math/Vector2.js";
 
 export default class Force extends Property {
     gravity;

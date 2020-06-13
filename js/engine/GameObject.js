@@ -1,6 +1,6 @@
-import Property from "./properties/Property";
-import Vector2 from "./math/Vector2";
-import GameObjectManager from "./manager/GameObjectManager";
+import Property from "./properties/Property.js";
+import Vector2 from "./math/Vector2.js";
+import GameObjectManager from "./manager/GameObjectManager.js";
 
 export default class GameObject {
     name;
