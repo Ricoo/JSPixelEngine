@@ -1,4 +1,6 @@
-let Layer = {
+import Enum from "./Enum";
+
+const Layer = new Enum({
     BACKGROUND:0,
     ANIMATION:1,
     CHARACTERS:2,
@@ -9,6 +11,6 @@ let Layer = {
     ABOVEGUI:7,
     POPUP:8,
     ABOVEPOPUP:9
-};
+});
 
 export {Layer};

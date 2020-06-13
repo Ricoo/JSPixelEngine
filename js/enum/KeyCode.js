@@ -1,4 +1,6 @@
-let KeyCode = {
+import Enum from "./Enum";
+
+const KeyCode = new Enum({
     arrowUp : 38,
     arrowDown : 40,
     arrowLeft : 37,
@@ -64,6 +66,6 @@ let KeyCode = {
     x : 88,
     y : 89,
     z : 90
-};
+});
 
 export {KeyCode};
