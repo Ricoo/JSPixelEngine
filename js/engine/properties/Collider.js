@@ -8,6 +8,12 @@ export default class Collider extends Property {
     offset;
     callback;
     trigger;
+    _valueType = {
+        dimensions:"Vector2",
+        offset:"Vector2",
+        callback:"Function",
+        trigger:"Trigger"
+    };
     /**
      * @desc a collider to detect any collision or hit for event triggering or interaction
      * @param {Vector2} dimensions the dimensions of our collider

@@ -4,9 +4,10 @@ import Graphic from "./Graphic.js";
 import {ParticleType} from "../../enum/ParticleType.js";
 import {Layer} from "../../enum/Layer.js";
 import Vector2 from "../math/Vector2.js";
-import {Values} from "../../enum/Values.js";
+import {Values} from "../../enum/DefaultValues.js";
 
 export default class Particle extends Property {
+    sprite;
     amount;
     period;
     lifetime;
@@ -14,6 +15,18 @@ export default class Particle extends Property {
     type;
     speed;
     layer;
+    offset;
+    _valueType = {
+        amount:"Number",
+        sprite:"Sprite",
+        period:"Number",
+        lifetime:"Number",
+        fadeout:"Boolean",
+        type:"ParticleType",
+        speed:"Vector2",
+        layer:"Layer",
+        offset:"Vector2"
+    };
     /**
      * @desc the particle system, allowing us to create volatile sprites for animation purpose
      * @param {string} spriteName string the sprite to use
@@ -27,21 +40,21 @@ export default class Particle extends Property {
      * @param {number[]} speed the particle's range of velocity
      * @param {Vector2} offset the offset of our particle
      */
-    constructor(spriteName = Values.EMPTY_IMAGE.name, type=ParticleType.Fall, amount=1, lifetime=1000, period=20, fadeout=false, scale=1.0, tileId=0, speed=undefined, offset=undefined) {
+    constructor(spriteName = DefaultValues.EMPTY_IMAGE.name, type=ParticleType.Fall, amount=1, lifetime=1000, period=20, fadeout=false, scale=1.0, tileId=0, speed=undefined, offset=undefined) {
         super();
         this._PROPERTY_NAME = "particle";
-        this._spriteName = spriteName;
+        this.sprite = ResourceManager.getSprite(spriteName);
         this._tile = tileId;
-        this._amount = amount;
-        this._type = type;
-        this._lifetime = lifetime;
-        this._period = period;
-        this._fadeout = fadeout;
+        this.amount = amount;
+        this.type = type;
+        this.lifetime = lifetime;
+        this.period = period;
+        this.fadeout = fadeout;
         this._scale = scale;
-        this._speed = (speed === undefined ? type.speed : speed);
+        this.speed = (speed === undefined ? new Vector2(type.speed[0],type.speed[1]) : speed);
         this._angle = type.angle;
-        this._layer = Layer.PARTICLE;
-        this._offset = (offset === undefined ? new Vector2(0,0) : offset);
+        this.layer = Layer.PARTICLE;
+        this.offset = (offset === undefined ? new Vector2(0,0) : offset);
         this._running = false;
     }
 
@@ -49,7 +62,7 @@ export default class Particle extends Property {
      * @desc generating the particle GameObjects we need
      */
     generate() {
-        for (let x = 0; x < this._amount; x++) {
+        for (let x = 0; x < this.amount; x++) {
             let obj = this._createObject();
             let interval = setInterval(() => {
                 obj.position.x += obj.moveX;
@@ -58,8 +71,8 @@ export default class Particle extends Property {
                     obj.moveY += .1;
                 }
 
-                if (this._fadeout) {
-                    obj["graphic"].alpha = obj.lifetime / this._lifetime;
+                if (this.fadeout) {
+                    obj["graphic"].alpha = obj.lifetime / this.lifetime;
                 }
                 obj.lifetime -= 17;
 
@@ -67,11 +80,11 @@ export default class Particle extends Property {
             setTimeout(() => {
                 clearInterval(interval);
                 obj.delete();
-            }, this._lifetime);
+            }, this.lifetime);
         }
 
-        if (this._running && this._period > 0) {
-            this._timeout = setTimeout(()=>{this.generate()}, this._period);
+        if (this._running && this.period > 0) {
+            this._timeout = setTimeout(()=>{this.generate()}, this.period);
         }
         else {
             this._running = 0;
@@ -84,7 +97,7 @@ export default class Particle extends Property {
      * @private
      */
     _createObject() {
-        let obj = new GameObject("particle", this._gameObject.x + this._offset.x, this._gameObject.y + this._offset.y);
+        let obj = new GameObject("particle", this._gameObject.x + this.offset.x, this._gameObject.y + this.offset.y);
         let tile = this._tile;
         let scale = this._scale;
 
@@ -95,15 +108,15 @@ export default class Particle extends Property {
             scale = Math.random() * (this._scale[1] - this._scale[0]) + this._scale[0];
         }
 
-        obj.attach(new Graphic(this._spriteName, this._layer, scale, 1.0, tile));
+        obj.attach(new Graphic(this.sprite.name, this.layer, scale, 1.0, tile));
 
-        obj.speed = Math.random() * (this._speed[1] - this._speed[0]) + this._speed[0];
-        obj.angle = Math.random() * (this._angle[1] - this._angle[0]) + this._angle[0];
-        obj.gravity = this._type.gravity;
+        obj.speed = Math.random() * (this.speed.y - this.speed.x) + this.speed.x;
+        obj.angle = Math.random() * (this.type.angle[1] - this.type.angle[0]) + this.type.angle[0];
+        obj.gravity = this.type.gravity;
 
-        obj.moveX = (Math.cos(obj.angle * Math.PI / 180)) * obj.speed / (this._lifetime / 17);
-        obj.moveY = (Math.sin(obj.angle * Math.PI / 180)) * obj.speed / (this._lifetime / 17);
-        obj.lifetime = this._lifetime;
+        obj.moveX = (Math.cos(obj.angle * Math.PI / 180)) * obj.speed / (this.lifetime / 17);
+        obj.moveY = (Math.sin(obj.angle * Math.PI / 180)) * obj.speed / (this.lifetime / 17);
+        obj.lifetime = this.lifetime;
         return obj;
     }
 
@@ -136,22 +149,27 @@ export default class Particle extends Property {
     }
 
     get isRunning() {return this._running;}
-    get spriteName() {return this._spriteName;}
-    set spriteName(value) {this._spriteName = value;}
+    // set type(value) {
+    //     this.type = value;
+    //     this._angle = value.angle;
+    // }
 
-    get amount() {return this._amount;}
-    set amount(value) {this._amount = value;}
-    get period() {return this._period;}
-    set period(value) {this._period = value;}
-    get lifetime() {return this._lifetime;}
-    set lifetime(value) {this._lifetime = value;}
-    get fadeout() {return this._fadeout;}
-    set fadeout(value) {this._fadeout = value;}
-    get type() {return this._type;}
-    set type(value) {this._type = value}
-    get speed() {return this._speed}
-    set speed(value) {this._speed = value;}
-    get layer() {return this._layer;}
-    set layer(value) {this._layer = value;}
-
+    get customEditorDisplay() {
+        let display = document.createElement("div");
+        let button = document.createElement("button");
+        button.onclick = ()=>{
+            if (this._running) {
+                button.innerHTML = "PLAY";
+                this.stop();
+            }
+            else {
+                button.innerHTML = "STOP";
+                this.run();
+            }
+        };
+        button.innerHTML = "PLAY";
+        display.appendChild(document.createTextNode("Test : "));
+        display.appendChild(button);
+        return display;
+    }
 };

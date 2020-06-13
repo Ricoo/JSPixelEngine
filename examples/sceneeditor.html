@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/png">
+    <title>JSPixelEngine Scene Editor</title>
+    <style>
+        * {margin:0;padding:0;}
+        body, html {
+            background-color: black;
+            overflow: auto;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            color: white;
+        }
+        canvas {
+            position:absolute;
+            width:100%;
+            height:100%;
+            background-color: #2b2b2b;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: -webkit-crisp-edges;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+        }
+        a {
+            cursor:pointer;
+        }
+        .left{
+            overflow:hidden;
+            background:green;
+            height:100%;
+        }
+        .right{
+            position:absolute;
+            right:0;
+            top:0;
+            float:right;
+            width:300px;
+            height:100%;
+            background:#333333;
+            outline:1px solid black;
+        }
+        #gameObjectList {
+            min-height: 200px;
+            width:100%;
+            outline:1px solid black;
+            background:#222222;
+            resize:vertical;
+        }
+        #attributes {
+            width:100%;
+            min-height: 200px;
+            padding:5px;
+        }
+        .managego {
+            float:right;
+            width:20px;
+            height:20px;
+            text-align: center;
+        }
+        .gameObjectNode {
+            font-family: "Playfair Display", Arial, Helvetica, sans-serif;
+            font-size: 15px;
+            color: gray;
+            border:1px solid slategray;
+        }
+        .property {
+            border:1px solid white;
+            padding:5px;
+            background: #222222;
+            border-radius: 4px;
+            /*width: 10px;*/
+            /*height: 10px;*/
+        }
+        .attrContainer {
+            -webkit-transition: all 1s ease-in;
+            -moz-transition: all 1s ease-in;
+            -o-transition: all 1s ease-in;
+            transition: all 1s ease-in;
+            overflow:hidden;
+            height:fit-content;
+        }
+        .collapsed {
+            height:0;
+        }
+        .selected {
+            border:1px solid lightskyblue;
+            color:lightskyblue;
+        }
+        input, select, button {
+            background-color : #222222;
+            color: white;
+            border-color: black;
+            min-width: 20px;
+            min-height: 20px;
+        }
+        button {
+            border-radius: 5px;
+        }
+        .vector2 {
+            width:40px;
+            display:inline;
+        }
+        input[type=number] {
+            width:40px;
+        }
+        a.collapse:before {
+            content:" ⌄ ";
+        }
+        a.collapse.activated:before {
+            content:" › ";
+        }
+        a.remove {
+            float:right;
+            content:"X";
+        }
+        #gameObjectName input {
+            /*width:100px;*/
+        }
+        #attributes div:not(#propertySelect){
+            margin:5px;
+        }
+    </style>
+</head>
+<body>
+<div class="left">
+    <canvas id="editor" width="800" height="400" >You need to upgrade your potato</canvas>
+</div>
+<div class="right">
+    <div id="gameObjectList">
+        <button class="managego" id="addGameObject">+</button>
+        <button class="managego" id="removeGameObject">-</button>
+    </div>
+    <div id="attributes">
+        <div id="gameObjectName">
+            name :<input type="text">
+        </div>
+        <div id="gameObjectPosition">
+            x :<input type="number" class="vector2">
+            y :<input type="number" class="vector2">
+        </div>
+            <select id="propertySelect"></select><button id="addProperty"> + </button>
+        <div id="gameObjectProperties"></div>
+    </div>
+</div>
+<script type="module" src="editor.js"> </script>
+</body>
+</html>

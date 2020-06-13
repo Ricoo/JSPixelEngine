@@ -1,6 +1,6 @@
 import Property from "./Property.js";
 import ResourceManager from "../../resource/ResourceManager.js";
-import {Values} from "../../enum/Values.js";
+import {Values} from "../../enum/DefaultValues.js";
 import {Layer} from "../../enum/Layer.js";
 
 export default class Graphic extends Property {
@@ -9,6 +9,13 @@ export default class Graphic extends Property {
     tile;
     scale;
     visible = true;
+    _valueType = {
+        sprite:"Sprite",
+        layer:"Layer",
+        tile:"Number",
+        scale:"Number",
+        visible:"Boolean"
+    };
     /**
      * @desc the displayable format of property, allowing us to show our GameObject
      * @param {string} spriteName the identifying string of the desired sprite
@@ -17,7 +24,7 @@ export default class Graphic extends Property {
      * @param {number} alpha the transparency of our display
      * @param {number} tile if we plan on using a SpriteAtlas, the tile id of our sprite within the atlas
      */
-    constructor(spriteName = Values.EMPTY_IMAGE.name, layer=Layer.CHARACTERS, scale=1.0, alpha=1.0, tile=0) {
+    constructor(spriteName = DefaultValues.EMPTY_IMAGE.name, layer=Layer.CHARACTERS, scale=1.0, alpha=1.0, tile=0) {
         super();
         this._PROPERTY_NAME = "graphic";
         this._spriteName = spriteName;

@@ -5,13 +5,18 @@ export default class Force extends Property {
     gravity;
     weight;
     bounce;
+    _valueType = {
+        gravity:"Number",
+        weight:"Number",
+        bounce:"Boolean"
+    };
     /**
      * @desc adds a variable force to move an object
      * @param {number} gravity the gravity force our object must receive
      * @param {number} weight the weight of our object
      * @param {boolean} bounce whether our object is bouncing or not
      */
-    constructor(gravity = 1, weight = 0, bounce=false) {
+    constructor(gravity = 0, weight = 0, bounce=false) {
         super();
         this._PROPERTY_NAME = "force";
         this.gravity = gravity;

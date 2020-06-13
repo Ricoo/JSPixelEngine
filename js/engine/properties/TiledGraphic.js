@@ -1,10 +1,23 @@
 import Graphic from "./Graphic.js";
 import SpriteAtlas from "../../resource/sprite/SpriteAtlas.js";
-import {Values} from "../../enum/Values.js";
+import {Values} from "../../enum/DefaultValues.js";
 import {Layer} from "../../enum/Layer.js";
 
 export default class TiledGraphic extends Graphic {
+    start;
+    middle;
+    end;
     amount;
+    _valueType = {
+        sprite:"Sprite",
+        layer:"Layer",
+        start:"Number",
+        middle:"Number",
+        end:"Number",
+        scale:"Number",
+        visible:"Boolean",
+        amount:"3"
+    };
     /**
      * @desc inherits from Graphic property
      * @param {string} spriteName inherited
@@ -15,7 +28,7 @@ export default class TiledGraphic extends Graphic {
      * @param {number} endTile the ending tile
      * @param {number} amount the number of repeats
      */
-    constructor(spriteName=Values.EMPTY_IMAGE.name, layer=Layer.BACKGROUND, scale=1, startingTile=0, middleTile=1, endTile=2, amount=3) {
+    constructor(spriteName=DefaultValues.EMPTY_IMAGE.name, layer=Layer.BACKGROUND, scale=1, startingTile=0, middleTile=1, endTile=2, amount=3) {
         super(spriteName, layer, scale);
         if (!this.sprite instanceof SpriteAtlas) {
             throw TypeError("Cannot have a TiledGraphic without a SpriteAtlas !");

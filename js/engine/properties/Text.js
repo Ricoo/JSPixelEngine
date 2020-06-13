@@ -11,6 +11,15 @@ export default class Text extends Property {
     color;
     size;
     align;
+    _valueType = {
+        text:"String",
+        offset:"Vector2",
+        font:"String",
+        type:"TextType",
+        color:"String",
+        size:"Number",
+        align:"TextAlign"
+    };
     /**
      * @desc this is a text property we can add on an object for it to display said text on draw
      * @param {string|string[]} txt the text we want to display

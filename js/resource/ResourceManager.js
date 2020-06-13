@@ -1,7 +1,14 @@
+<<<<<<< Updated upstream
 import Sprite from "./sprite/Sprite.js";
 import Sound from "./sound/Sound.js";
 import SpriteAtlas from "./sprite/SpriteAtlas.js";
 import {Values} from "../enum/Values.js";
+=======
+import Sprite from "./sprite/Sprite";
+import Sound from "./sound/Sound";
+import SpriteAtlas from "./sprite/SpriteAtlas";
+import {DefaultValues} from "../enum/DefaultValues";
+>>>>>>> Stashed changes
 
 export default class ResourceManager {
     constructor() {
@@ -32,8 +39,8 @@ export default class ResourceManager {
             if (this._count === this._total) {
                 console.log("Finished loading  ["+this._total+"/"+this._total+"]");
                 this._done = true;}};
-        this._sprites.push(new Sprite(Values.EMPTY_IMAGE.src,
-            Values.EMPTY_IMAGE.name,  Values.EMPTY_IMAGE.res, ()=>{}));
+        this._sprites.push(new Sprite(DefaultValues.EMPTY_IMAGE.src,
+            DefaultValues.EMPTY_IMAGE.name,  DefaultValues.EMPTY_IMAGE.res, ()=>{}));
         sprites.forEach((elem) => {
             if (elem.hasOwnProperty("atlas")) {
                 this._sprites.push(new SpriteAtlas(elem["src"],elem["name"],elem["res"], callback, elem["atlas"]));
