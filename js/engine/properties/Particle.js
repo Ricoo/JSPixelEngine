@@ -38,7 +38,7 @@ export default class Particle extends Property {
      * @param {boolean} fadeout should the particle fade out before disappearing
      * @param {number|number[]} scale scale or scale range of the graphics we want to draw
      * @param {number|number[]} tileId if the graphic used is an atlas, the id of the sprite we need or a range for a randomized particle
-     * @param {number[]} speed the particle's range of velocity
+     * @param {Vector2} speed the particle's range of velocity
      * @param {Vector2} offset the offset of our particle
      */
     constructor(spriteName = DefaultValues.EMPTY_IMAGE.name, type=ParticleType.Fall, amount=1, lifetime=1000, period=20, fadeout=false, scale=1.0, tileId=0, speed=undefined, offset=undefined) {
@@ -52,7 +52,7 @@ export default class Particle extends Property {
         this.period = period;
         this.fadeout = fadeout;
         this._scale = scale;
-        this.speed = (speed === undefined ? [type.speed[0],type.speed[1]] : speed);
+        this.speed = (speed === undefined ? new Vector2(type.speed[0],type.speed[1]) : speed);
         this._angle = type.angle;
         this.layer = Layer.PARTICLE;
         this.offset = (offset === undefined ? new Vector2(0,0) : offset);
@@ -111,7 +111,7 @@ export default class Particle extends Property {
 
         obj.attach(new Graphic(this.sprite.name, this.layer, scale, 1.0, tile));
 
-        obj.speed = Math.random() * (this.speed[1] - this.speed[0]) + this.speed[0];
+        obj.speed = Math.random() * (this.speed.y - this.speed.x) + this.speed.x;
         obj.angle = Math.random() * (this.type.angle[1] - this.type.angle[0]) + this.type.angle[0];
         obj.gravity = this.type.gravity;
 
