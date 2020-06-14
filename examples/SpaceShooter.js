@@ -88,7 +88,7 @@ class Missile extends GameObject {
         this.attach(new Animator([animationList.missile_fire]));
         this.attach(new Collider(new Vector2(50,20), undefined, ()=>{
             Game.score += 1;
-            Game.scoreText.text = "Score : "+ Game.score;
+            Game.scoreText.txt = "Score : "+ Game.score;
             this.delete();
         }));
         this["animator"].play("missile_fire", false);
