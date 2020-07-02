@@ -65,9 +65,8 @@ class Tickbox extends GameObject {
         this.attach(new Collider(new Vector2(20,20), undefined, (obj, mouse) =>{
             if (!mouse.click)
                 return;
-            let graphic = this["graphic"];
             this._ticked = !this._ticked;
-            graphic.image = graphic.sprite.tile((this._ticked ? 1 : 0));
+            this["graphic"].tile = this._ticked ? 1 : 0;
             this.tooltip.toggle();
         }, Trigger.CLICK));
 
