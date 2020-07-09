@@ -21,8 +21,8 @@ const resourceList = {
         {src:"./resource/sound/click.wav",name:"click"}
     ],
     sprites:[
-        {src:"./resource/texture/Basicship.png",name:"ship",res:[318,64],atlas:[5,1]},
-        {src:"./resource/texture/button.png",name:"button",res:[64,64],atlas:[1,2]}
+        {src:"./resource/texture/BasicShip.png",name:"ship",res:[318,64],atlas:[5,1]},
+        {src:"./resource/texture/Tickbox.png",name:"button",res:[64,64],atlas:[1,2]}
     ]
 };
 
