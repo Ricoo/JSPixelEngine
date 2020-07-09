@@ -2,3 +2,8 @@ C:\Users\Ricoo\Documents\Projects\JSPixelEngine\.idea
 C:\Users\Ricoo\Documents\Projects\JSPixelEngine\node_modules
 C:\Users\Ricoo\Documents\Projects\JSPixelEngine\package-lock.json
 C:\Users\Ricoo\Documents\Projects\JSPixelEngine\rollup.config.js
+
+.idea
+node_modules
+package-lock.json
+rollup.config.js
