@@ -34,7 +34,6 @@ export default class JSPixelCanvas {
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
         context.restore();
 
-        console.log(context.canvas.height)
         for (const layer in Layer) {
             GameObjectManager.instance.layer(Layer[layer]).forEach(go=>{
                 go.graphic.draw(context);

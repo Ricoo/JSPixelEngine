@@ -16,7 +16,7 @@ export default class Scene {
                         200],
                     "props":{
                         "Graphic":["hero","Layer.CHARACTERS",2],
-                        "Force":["1","10"],
+                        "Force":["20","10"],
                         "Collider":["new Vector2(10,10)","undefined","()=>{}","Trigger.COLLIDER","true"]
                     },
                     "children": [

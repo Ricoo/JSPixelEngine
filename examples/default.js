@@ -92,7 +92,7 @@ class Hero extends GameObject {
             animationList.character_idle_left,
             animationList.character_idle_right]));
         this.attach(new Particle("particle", ParticleType.Fall, 1, 500, 30, true, [2,3], [0,1,2,3], new Vector2(10,20), new Vector2(0,60)));
-        this.attach(new Force(1, 10, false));
+        this.attach(new Force(20, 10, false));
     }
 }
 
@@ -102,7 +102,7 @@ class Marine extends GameObject {
         this.attach(new Graphic(sprite, Layer.CHARACTERS, 4));
         this.attach(new Collider(new Vector2(50, 90), new Vector2(0,0), ()=>{}, Trigger.COLLIDER, true));
         this.attach(new Animator([animationList.character_left, animationList.character_right]));
-        this.attach(new Force(1, 10, true));
+        this.attach(new Force(20, 10, true));
     }
 }
 
@@ -129,7 +129,7 @@ class Game extends JSPixelApp {
         clickSound.speed = 1;
         this._debug = true;
 
-        this.marine = new Marine(200,100, "marine");
+        this.marine = new Marine(300,100, "marine");
         this.hero = new Hero(100,100, "hero");
         this.jump = false;
 
@@ -191,7 +191,7 @@ class Game extends JSPixelApp {
 
         if (keys.includes(KeyCode.spacebar) && !this.jump) {
             this.jump = true;
-            this.hero["force"].apply(new Vector2(0,-20));
+            this.hero["force"].apply(new Vector2(0,-5));
         }
         else if (!keys.includes(KeyCode.spacebar) && this.hero["force"].stopped){
             this.jump = false;
