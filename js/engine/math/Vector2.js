@@ -52,7 +52,7 @@ export default class Vector2 {
      get length() {return Math.sqrt(this.x**2 + this.y**2)}
 
     /**
-     * @desc returns a directional vector with values between -1 and 1
+     * @desc returns a directional vector with length 1
      * @returns {Vector2}
      */
     get normalize() {
@@ -60,5 +60,17 @@ export default class Vector2 {
             return new Vector2(0,0);
         }
         return new Vector2(this.x, this.y).mult(1/this.length);
+    }
+
+    /**
+     * @desc returns a directional vector with values either 0, -1 and 1
+     * @returns {Vector2}
+     */
+     get cardinal() {
+        const {x, y} = this
+        return new Vector2(
+            (x > 0 ? 1 : x < 0 ? -1 : 0),
+            (y > 0 ? 1 : y < 0 ? -1 : 0)
+            )
     }
 };
