@@ -1,3 +1,4 @@
+import Vector2 from "../math/Vector2.js";
 import GameObjectManager from "./GameObjectManager.js";
 
 export default class CollisionManager {
@@ -72,20 +73,22 @@ export default class CollisionManager {
      * @returns {Vector2} the final position of our object
      */
     checkRigid(go, newPos, prop) {
-        let oldPos = go.position;
-        let list = GameObjectManager.instance.rigids();
-        let tmp = oldPos.copy.sub(newPos).normalize;
-        for (let obj of list) {
-            if (go !== obj && go["collider"].collide(obj["collider"], newPos)) {
-                if (go.hasProperty("force")) {
-                    go["force"].stop(prop);
+        let oldPos = go.position.copy;
+        let tmp = oldPos.sub(newPos).normalize;
+
+        if (tmp.length) {
+            GameObjectManager.instance.rigids().forEach(obj => {
+                if (go !== obj && go.collider.collide(obj.collider, newPos)) {
+                    go.force?.stop(prop)
+                    while ((tmp.length !== 0) && go.collider.collide(obj.collider, newPos)) {
+                        newPos.add(tmp);
+                    }
+                    // return true;
                 }
-                while ((tmp.x !== 0 || tmp.y !== 0) && go["collider"].collide(obj["collider"], newPos)) {
-                    newPos.add(tmp);
-                }
-                break;
-            }
+                // return false;
+            })
         }
+        // console.log(newPos)
         return newPos;
     }
 

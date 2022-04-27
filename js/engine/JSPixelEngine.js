@@ -14,6 +14,7 @@ export default class JSPixelEngine {
         JSPixelEngine.instance = this;
 
         this._app = []; //This might be changed into a list in case we need to manage several canvas at once
+        this._time = undefined;
         new JSPixelCanvas();
         new GameObjectManager();
         new CollisionManager();
@@ -68,7 +69,16 @@ export default class JSPixelEngine {
      * @desc The event loop of the engine, running once every ms
      */
     eventLoop() {
+        if (!this._time) {
+            this._time = Date.now();
+        }
+        const time = Date.now();
+        const delta = time - this._time;
+        this._time = time;
+
+        GameObjectManager.instance.forces().forEach(go => go.force.update(delta));
         CollisionManager.instance.checkCollision();
+
         //TODO add custom event handling from EventManager
     }
 
@@ -76,8 +86,6 @@ export default class JSPixelEngine {
      * @desc The display loop of the engine, running slower than the event loop
      */
     displayLoop() {
-        GameObjectManager.instance.forces().forEach(go => go.force.update());
-
         JSPixelCanvas.draw(this._app)
             .then(()=> {
                 const {context} = this._app;
