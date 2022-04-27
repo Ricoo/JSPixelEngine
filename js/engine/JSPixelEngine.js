@@ -1,9 +1,10 @@
-import JSPixelApp from "./JSPixelApp.js";
-import GameObjectManager from "./manager/GameObjectManager.js";
-import ResourceManager from "../resource/ResourceManager.js";
-import EventManager from "./manager/EventManager.js";
 import CollisionManager from "./manager/CollisionManager.js";
-import {Layer}from "../enum/Layer.js";
+import EventManager from "./manager/EventManager.js";
+import GameObjectManager from "./manager/GameObjectManager.js";
+import JSPixelApp from "./JSPixelApp.js";
+import JSPixelCanvas from "./JSPixelCanvas.js";
+import ResourceManager from "../resource/ResourceManager.js";
+import {Layer} from "../enum/Layer.js";
 
 export default class JSPixelEngine {
     constructor() {
@@ -13,6 +14,7 @@ export default class JSPixelEngine {
         JSPixelEngine.instance = this;
 
         this._app = []; //This might be changed into a list in case we need to manage several canvas at once
+        new JSPixelCanvas();
         new GameObjectManager();
         new CollisionManager();
         new EventManager();
@@ -57,9 +59,7 @@ export default class JSPixelEngine {
             this._eventloop = setInterval(() => {
                 this.eventLoop();
             }, 1);
-            this._displayLoop = setInterval(() => {
-                this.displayLoop();
-            }, 17);
+            window.requestAnimationFrame(this.displayLoop.bind(this))
             console.log("JSPixelEngine main loop started");
         }
     }
@@ -76,37 +76,18 @@ export default class JSPixelEngine {
      * @desc The display loop of the engine, running slower than the event loop
      */
     displayLoop() {
-        let context = this._app.context;
-        context.save();
-        context.setTransform(1, 0, 0, 1, 0, 0);
-        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-        context.restore();
-        this._app.frame();
+        GameObjectManager.instance.forces().forEach(go => go.force.update());
 
+        JSPixelCanvas.draw(this._app)
+            .then(()=> {
+                const {context} = this._app;
+                const {canvas} = context;
 
-        for (let layer in Layer) {
-            let list = GameObjectManager.instance.layer(Layer[layer]);
-            for (let go of list) {
-                go["graphic"].draw(context);
-                if (go.hasProperty("text")) {
-                    go["text"].write(context);
-                }
-            }
-        }
+                this._app.frame();
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.drawImage(JSPixelCanvas.image(), 0,0)
 
-        let list = GameObjectManager.instance.forces();
-        for (let go of list) {
-            go["force"].update();
-        }
-
-        // Debug colliders
-        if (this._app.debug === true) {
-            let list = GameObjectManager.instance.graphics();
-            for (let i = 0; i < list.length; i++) {
-                if (list[i].hasProperty("collider")) {
-                    list[i]["collider"].show(context);
-                }
-            }
-        }
+                window.requestAnimationFrame(this.displayLoop.bind(this));
+            })
     }
 };

@@ -29,9 +29,6 @@ export default class JSPixelApp {
         this._settings = settings;
         this._context.canvas.width = this._settings.resX;
         this._context.canvas.height = this._settings.resY;
-        this._context.webkitImageSmoothingEnabled = false;
-        this._context.mozImageSmoothingEnabled = false;
-        this._context.imageSmoothingEnabled = false;
         window.onresize = ()=>{
             if (this._settings.resize) {
                 this._settings.resX = window.innerWidth;
