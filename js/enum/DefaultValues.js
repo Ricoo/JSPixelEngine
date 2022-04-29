@@ -14,6 +14,9 @@ const DefaultValues = new Enum({
         color: "#000000",
         type: TextType.fill,
         align: TextAlign.start,
+    },
+    LOGO_JSPENGINE: {
+        src: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAyAQMAAACEQrBZAAAABlBMVEX///////9VfPVsAAAAAXRSTlMAQObYZgAAAAlwSFlzAAAOxAAADsQBlSsOGwAAAOtJREFUKJHt0bFOwzAQBuCLMnhLXsBVn4GtDKivROUBBiSnS7uVF4rQRR28oOsLIOipQ9ZkiqtGHHbUARpYWeBfLH2Sdb/uAP7zO9HzSlx4jSBAdjbLUl/asa320YpPf/cLHFuCd/fsTZE3liRtovkE6+tDH8wLydoPM5bbeuKejDyWHZ12D0OXMHe6yoxs9IH4WUdLW3F5/m6KbFIRv/XRYIHqqymNV8E2cLYXiBb6qel6MCamaOWxRXXjXoPpjnhXAqS9ZVSz0E9IC7EL/RI/r1Ddtj6aJd42F3tLcLzLrhibfGP2x2v8tXwABYCCcqjYH4kAAAAASUVORK5CYII="
     }
 });
 
