@@ -38,7 +38,7 @@ export default class JSPixelApp {
             }
         }
 
-        this._debug = false;
+        this._debug = {colliders: false, fps: false, events: false};
     }
 
     //Getters and setters

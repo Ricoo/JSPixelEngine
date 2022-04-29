@@ -39,7 +39,7 @@ export default class JSPixelCanvas {
             })
         }
 
-        if (debug) {
+        if (debug && debug !== {}) {
             JSPixelCanvas.debug(debug);
         }
         JSPixelCanvas.instance._framesElapsed += 1;
@@ -65,7 +65,6 @@ export default class JSPixelCanvas {
         if (debug.events) {
             context.drawImage(eventGraph, x, 5);
         }
-
     }
 
     static collectData() {
