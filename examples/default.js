@@ -18,6 +18,8 @@ import {ParticleType} from "../js/enum/ParticleType.js";
 import {Trigger} from "../js/enum/Trigger.js";
 import TiledGraphic from "../js/engine/properties/TiledGraphic.js";
 import Scene from "../js/engine/Scene.js";
+import { TextType } from "../js/enum/TextType.js";
+import { TextAlign } from "../js/enum/TextAlign.js";
 
 const resourceList = {
     audio:[
@@ -31,6 +33,9 @@ const resourceList = {
         {src:"./resource/texture/BasicShip.png",name:"ship",res:[318,64],atlas:[5,1]},
         {src:"./resource/texture/Tickbox.png",name:"tickbox",res:[32,16],atlas:[2,1]},
         {src:"./resource/texture/Particle.png",name:"particle",res:[128,16],atlas:[4,1]}
+    ],
+    styles:[
+        {name:"tooltipText",font: "Arial",size: 13,color: "#000000",type: TextType.fill,align: TextAlign.start}
     ]
 };
 
@@ -49,7 +54,7 @@ class Tickbox extends GameObject {
         this.attach(new Graphic("tickbox", Layer.GUI, 1, 1));
         this._ticked = false;
 
-        this.tooltip = new GUIText("tooltip", text, x + 20, y);
+        this.tooltip = new GUIText("tooltip", text, x + 20, y, ResourceManager.getStyle("tooltipText"));
         let dimensions = this.tooltip.text.getDimensions(Game.instance.context);
         this.tooltip.attach(new Collider(new Vector2(dimensions.x,dimensions.y), new Vector2(dimensions.x/2, 0), (obj, mouse)=>{
             if (mouse.hover) {
@@ -59,7 +64,6 @@ class Tickbox extends GameObject {
                 obj.text.setStyle({color: "#000000"})
             }
         }, Trigger.HOVER));
-        this.tooltip.text.size = 13;
         this.tooltip.disable();
 
         this.attach(new Collider(new Vector2(20,20), undefined, (obj, mouse) =>{
@@ -133,7 +137,7 @@ class Game extends JSPixelApp {
         this.hero = new Hero(100,100, "hero");
         this.jump = false;
 
-        this.tickbox = new Tickbox(20, 100, "Hey you ticked me !");
+        this.tickbox = new Tickbox(20, 100, ["Hey you ticked me !", "test"]);
         this.tickbox2 = new Tickbox(20, 120, "Why do you keep ticking us ??");
         this.clock = new Clock(640, 615);
         this.test = new Platform(400,710);
