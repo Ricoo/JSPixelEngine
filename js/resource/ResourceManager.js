@@ -27,7 +27,7 @@ export default class ResourceManager {
      * @callback this function sets this._done to true after the resources have been loaded
      */
     loadResources(packageDescriptor) {
-        const testPromises = 100;
+        const testPromises = 0;
         this._done = false;
         let {sprites, audio, styles} = packageDescriptor;
         this._total = [...sprites, ...audio].length + testPromises;
