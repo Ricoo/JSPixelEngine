@@ -56,7 +56,6 @@ export default class EventManager {
         for (let handler of this._handlers[Event.KeyDown]) {
             handler(this._keysPressed);
         }
-        console.log(this._keysPressed);
     }
 
     keyUp(ev) {
