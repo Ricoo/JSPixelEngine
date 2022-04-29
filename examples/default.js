@@ -53,10 +53,10 @@ class Tickbox extends GameObject {
         let dimensions = this.tooltip.text.getDimensions(Game.instance.context);
         this.tooltip.attach(new Collider(new Vector2(dimensions.x,dimensions.y), new Vector2(dimensions.x/2, 0), (obj, mouse)=>{
             if (mouse.hover) {
-                obj.text.color = "#FFFFFF";
+                obj.text.setStyle({color: "#FFFFFF"})
             }
             else {
-                obj.text.color = "#000000";
+                obj.text.setStyle({color: "#000000"})
             }
         }, Trigger.HOVER));
         this.tooltip.text.size = 13;
