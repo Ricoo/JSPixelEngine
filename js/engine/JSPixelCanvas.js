@@ -8,14 +8,7 @@ export default class JSPixelCanvas {
         }
         JSPixelCanvas.instance = this;
         
-        this._canvas = document.createElement("canvas");
-        this._canvas.width = window.innerWidth
-        this._canvas.height = window.innerHeight
-        
-        this._context = this._canvas.getContext("2d");
-        this._context.webkitImageSmoothingEnabled = false;
-        this._context.mozImageSmoothingEnabled = false;
-        this._context.imageSmoothingEnabled = false;        
+        [this._canvas, this._context] = JSPixelCanvas.canvasFactory(window.innerWidth, window.innerHeight)
     }
 
     static setRes({ x, y }) {
@@ -47,5 +40,23 @@ export default class JSPixelCanvas {
 
     static image() {
         return JSPixelCanvas.instance._canvas;
+    }
+
+    static context() {
+        return JSPixelCanvas.instance._context;
+    }
+    
+    static canvasFactory(width = window.innerWidth, height = window.innerHeight) {
+        const canvas = document.createElement("canvas")
+        canvas.width = width
+        canvas.height = height
+        
+        const context = canvas.getContext("2d")
+
+        context.webkitImageSmoothingEnabled = false;
+        context.mozImageSmoothingEnabled = false;
+        context.imageSmoothingEnabled = false;   
+
+        return [canvas, context]
     }
 }
