@@ -2,6 +2,7 @@ import Property from "./Property.js";
 import Vector2 from "../math/Vector2.js";
 import {TextType} from "../../enum/TextType.js";
 import {TextAlign} from "../../enum/TextAlign.js";
+import ResourceManager from "../../resource/ResourceManager.js";
 
 export default class Text extends Property {
     text;
@@ -20,17 +21,14 @@ export default class Text extends Property {
         size:"Number",
         align:"TextAlign"
     };
+
     /**
      * @desc this is a text property we can add on an object for it to display said text on draw
      * @param {string|string[]} txt the text we want to display
+     * @param {font: string, size: number, color: string, type: TextType, align: TextAlign} style the style to use
      * @param {Vector2} offset the offset with which we want to start writing
-     * @param {string} font the css font we want to use
-     * @param {number} size the css size of our text
-     * @param {string} color the css color we want to use
-     * @param {TextType} type whether we want to fill or stroke our text
-     * @param {TextAlign} align the alignment of our text
      */
-    constructor(txt="", offset=new Vector2(0,0), font="Arial", size=20, color="black", type=TextType.fill, align=TextAlign.start) {
+    constructor(txt="", {font, size, color, type, align} = ResourceManager.getStyle("DEFAULT_STYLE"), offset=new Vector2(0,0)) {
         super();
         this._PROPERTY_NAME = "text";
         this.text = txt;
@@ -71,5 +69,11 @@ export default class Text extends Property {
         let dimensions = new Vector2(context.measureText(this.text).width, this.size);
         context.restore();
         return dimensions;
+    }
+
+    setStyle(style) {
+        Object.keys(style).forEach(key => {
+            this[key] = style[key]
+        })
     }
 };
