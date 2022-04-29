@@ -1,6 +1,7 @@
 import { Layer } from "../enum/Layer.js";
 import ImageFactory from "../resource/sprite/ImageFactory.js";
 import JSPixelEngine from "./JSPixelEngine.js";
+import EventManager from "./manager/EventManager.js";
 import GameObjectManager from "./manager/GameObjectManager.js";
 
 export default class JSPixelCanvas {
@@ -64,6 +65,15 @@ export default class JSPixelCanvas {
         }
         if (debug.events) {
             context.drawImage(eventGraph, x, 5);
+            x += frameGraph.width + 5;
+        }
+        if (debug.keys) {
+            context.font = "10px Arial"
+            context.fillStyle = "#ffffff"
+            context.textBaseLine = "top"
+            EventManager.keys.forEach((value, index)=>{
+                context.fillText(value, x, 10 + 10 * index)
+            })
         }
     }
 
