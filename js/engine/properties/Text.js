@@ -72,8 +72,8 @@ export default class Text extends Property {
     }
 
     setStyle(style) {
-        Object.keys(style).forEach(key => {
-            this[key] = style[key]
+        Object.keys(ResourceManager.getStyle("DEFAULT_STYLE")).forEach(key => {
+            this[key] = style[key] || this[key]
         })
     }
 };
