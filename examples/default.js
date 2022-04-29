@@ -131,7 +131,6 @@ class Game extends JSPixelApp {
         let clickSound = ResourceManager.getSound("click");
         clickSound.volume = 0.2;
         clickSound.speed = 1;
-        this._debug = true;
 
         this.marine = new Marine(300,100, "marine");
         this.hero = new Hero(100,100, "hero");
@@ -187,12 +186,20 @@ class Game extends JSPixelApp {
             this.hero["particle"].stop();
         }
         if (keys.includes(KeyCode.num1)) {
-            this._debug = false;
+            this._debug = {};
         }
         if (keys.includes(KeyCode.num2)) {
-            this._debug = true;
+            this._debug.colliders = true;
         }
-
+        if (keys.includes(KeyCode.num3)) {
+            this._debug.fps = true;
+        }
+        if (keys.includes(KeyCode.num4)) {
+            this._debug.events = true;
+        }
+        if (keys.includes(KeyCode.num5)) {
+            this._debug = {colliders: true, fps: true, events: true}
+        }
         if (keys.includes(KeyCode.spacebar) && !this.jump) {
             this.jump = true;
             this.hero["force"].apply(new Vector2(0,-5));

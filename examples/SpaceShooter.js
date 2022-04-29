@@ -156,10 +156,10 @@ class Missile extends GameObject {
             console.log(GameObjectManager.instance._list);
         }
         if (keys.includes(KeyCode.num1)) {
-            this._debug = false;
+            this._debug.colliders = false;
         }
         if (keys.includes(KeyCode.num2)) {
-            this._debug = true;
+            this._debug.colliders = true;
         }
         if (keys.includes(KeyCode.i)) {
             this.ship["collider"].rigid = false;
