@@ -97,6 +97,16 @@ export default class CollisionManager {
      * @param {String[]} group an array of two classnames that are supposed to collide
      */
     addGroup(group) {
-        this._groups.push(group);
+        if (this._groups.every(([g1, g2]) => g1 !== group[0] && g2 !== group[1])) {
+            this._groups.push(group);
+        }
+    }
+
+    /**
+     * @desc removes a group from the manager
+     * @param {String[]} group an array of two classnames that are supposed to collide
+     */
+    removeGroup(group) {
+        this._groups = this._groups.filter(([g1, g2]) => g1 !== group[0] && g2 !== group[1])
     }
 };
