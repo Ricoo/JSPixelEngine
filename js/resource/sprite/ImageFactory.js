@@ -1,3 +1,5 @@
+import JSPixelCanvas from "../../engine/JSPixelCanvas.js";
+
 export default class ImageFactory {
     constructor() {
         //Singleton
@@ -6,7 +8,7 @@ export default class ImageFactory {
         }
         ImageFactory.instance = this;
 
-        this._canvas = document.createElement("canvas");
+        [this._canvas] = JSPixelCanvas.canvasFactory();
 
     }
 
@@ -22,6 +24,38 @@ export default class ImageFactory {
     static addText(image, text) {
         //TODO use previous version filter system to add text
 
+    }
+
+    /**
+     * @desc cuts a sprite in a rectangle between two points and returns the result
+     * @param {Text} text the text property to render
+     * @param {any} style the ending point of our cut
+     * @returns {HTMLImageElement}
+     */
+    static renderText({text, dimensions, font, size, color, type}) {
+        const context = ImageFactory.instance.canvas.getContext("2d");
+        const canvas = ImageFactory.instance.canvas;
+        let renderedText = new Image();
+
+        context.save()
+        canvas.width = dimensions.x
+        canvas.height = dimensions.y
+        
+        context.font = size + "px " + font;
+        context.textAlign = "left";
+        context.textBaseline = "top"
+        context.fillStyle = color;
+        if (Array.isArray(text)) {
+            console.log(dimensions.y / text.length)
+            text.forEach((line, index) => context[type](line, 0, (dimensions.y / text.length) * (index)))
+        }
+        else {
+            context[type](text, 0, 0);
+        }
+        context.restore()
+        
+        renderedText.src = canvas.toDataURL("image/png");
+        return renderedText
     }
 
     /**
