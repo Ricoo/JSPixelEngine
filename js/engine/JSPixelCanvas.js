@@ -29,14 +29,11 @@ export default class JSPixelCanvas {
      */
     static async draw({ debug }) {
         const context = JSPixelCanvas.instance._context;
-        context.save();
-        context.setTransform(1, 0, 0, 1, 0, 0);
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-        context.restore();
 
         for (const layer in Layer) {
             GameObjectManager.instance.layer(Layer[layer]).forEach(go=>{
-                go.graphic.draw(context);
+                go.graphic?.draw(context);
                 go.text?.write(context);
             })
         }
