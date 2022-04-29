@@ -12,6 +12,7 @@ export default class ResourceManager {
 
         this._sprites = [];
         this._sounds = [];
+        this._styles = [];
         this._count = 0;
         this._total = 0;
         this._done = false;
@@ -25,7 +26,7 @@ export default class ResourceManager {
     loadResources(packageDescriptor) {
         this._done = false;
         this._total = packageDescriptor.sprites.length + packageDescriptor.audio.length;
-        let {sprites, audio} = packageDescriptor;
+        let {sprites, audio, styles} = packageDescriptor;
         this._total = [...sprites, ...audio].length;
         let callback = () => {
             this._count += 1;
@@ -34,7 +35,7 @@ export default class ResourceManager {
                 this._done = true;}};
         this._sprites.push(new Sprite(DefaultValues.EMPTY_IMAGE.src,
             DefaultValues.EMPTY_IMAGE.name,  DefaultValues.EMPTY_IMAGE.res, ()=>{}));
-        sprites.forEach((elem) => {
+        sprites?.forEach((elem) => {
             if (elem.hasOwnProperty("atlas")) {
                 this._sprites.push(new SpriteAtlas(elem["src"],elem["name"],elem["res"], callback, elem["atlas"]));
             }
@@ -42,16 +43,20 @@ export default class ResourceManager {
                 this._sprites.push(new Sprite(elem["src"],elem["name"],elem["res"], callback));
             }
         });
-        audio.forEach((elem) => {
+        audio?.forEach((elem) => {
             this._sounds.push(new Sound(elem["src"],elem["name"], callback));
         });
+        this._styles.push(DefaultValues.DEFAULT_STYLE)
+        styles?.forEach(elem => this._styles.push(elem))
     }
 
     static getSprite(name){return ResourceManager.sprites.find(elem=> elem.name === name)};
     static getSound(name){return ResourceManager.sounds.find(elem=> elem.name === name)};
+    static getStyle(name) {return ResourceManager.styles.find(elem => elem.name === name)};
 
     static get sounds() {return ResourceManager.instance._sounds;}
     static get sprites() {return ResourceManager.instance._sprites;}
+    static get styles() {return ResourceManager.instance._styles;}
     get done() {return this._done;}
 
     get count() {return this._count;}
