@@ -83,6 +83,55 @@ export default class ImageFactory {
         sprite.src = canvas.toDataURL("image/png");
         return sprite;
     }
+
+    static renderDataGraph(dataName, frames) {
+        if (!ImageFactory.instance) {
+            new ImageFactory();
+        }
+        const context = ImageFactory.instance.canvas.getContext("2d");
+        const canvas = ImageFactory.instance.canvas;
+        const highest = Math.max(...frames);
+        const sprite = new Image();
+        const height = 60
+
+        canvas.width = 242;
+        canvas.height = height + 20;
+
+        context.beginPath();
+        context.strokeStyle = "#ffffff";
+        context.rect(0, 0, canvas.width, height);
+        context.stroke();
+        context.closePath();
+
+        frames.forEach((amount, index) => {
+            if (!highest) {
+                return;
+            }
+            context.beginPath();
+            const {width} = canvas;
+            const x = width + 4 * (- frames.length + index) + 1;
+            context.moveTo(x, height - 1);
+            context.lineTo(x, height - (height  - 1) * (amount / highest));
+            context.lineWidth = 4;
+            context.strokeStyle = `rgb(
+                ${(255 - (255 * amount / highest))},
+                ${((255 * amount / highest))},
+                0
+                )`
+            context.stroke();
+            context.closePath();
+        })
+
+        context.font = "10px Arial";
+        context.fillStyle = "#ffffff"
+        context.textBaseline = "bottom"
+        context.fillText(`${dataName}: ${frames[frames.length - 1]}(avg ${(frames.reduce((a, b) => a + b, 0) / frames.length).toFixed(2)})`,
+            0, canvas.height
+        )
+
+        sprite.src = canvas.toDataURL("image/png");
+        return sprite
+    }
 };
 
 export {ImageFactory};

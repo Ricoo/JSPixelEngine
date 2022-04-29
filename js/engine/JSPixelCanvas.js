@@ -1,4 +1,5 @@
 import { Layer } from "../enum/Layer.js";
+import ImageFactory from "../resource/sprite/ImageFactory.js";
 import GameObjectManager from "./manager/GameObjectManager.js";
 
 export default class JSPixelCanvas {
@@ -9,6 +10,10 @@ export default class JSPixelCanvas {
         JSPixelCanvas.instance = this;
         
         [this._canvas, this._context] = JSPixelCanvas.canvasFactory(window.innerWidth, window.innerHeight)
+        this._frameData = [];
+        this._frameGraph = new Image()
+        this._framesElapsed = 0;
+        JSPixelCanvas.collectData()
     }
 
     static setRes({ x, y }) {
@@ -32,10 +37,39 @@ export default class JSPixelCanvas {
         }
 
         if (debug) {
-            GameObjectManager.instance.graphics().forEach(go => {
-                go.collider?.show(context)
-            })
+            JSPixelCanvas.debug();
         }
+        JSPixelCanvas.instance._framesElapsed += 1;
+    }
+
+    static debug() {
+        const {_context: context, _frameGraph: graph} = JSPixelCanvas.instance;
+        GameObjectManager.instance.colliders().forEach(go => {
+            go.collider?.show(context)
+        })
+        context.drawImage(graph, 5, 5);
+    }
+
+    static collectData() {
+        const {instance} = JSPixelCanvas
+        instance._frameData.push(JSPixelCanvas.instance._framesElapsed)
+        if (instance._frameData.length > 60) {
+            instance._frameData.shift()
+        }
+        instance._frameGraph = ImageFactory.renderDataGraph("FPS", instance._frameData)
+        instance._framesElapsed = 0;
+        setTimeout(JSPixelCanvas.collectData, 1000);
+    }
+
+    static collectEvents() {
+        const {instance} = JSPixelCanvas
+        instance._frameData.push(JSPixelCanvas.instance._framesElapsed)
+        if (instance._frameData.length > 60) {
+            instance._frameData.shift()
+        }
+        instance._frameGraph = ImageFactory.renderDataGraph("Events:", instance._frameData)
+        instance._framesElapsed = 0;
+        setTimeout(JSPixelCanvas.collectFrames, 1000);
     }
 
     static image() {
