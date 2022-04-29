@@ -11,7 +11,6 @@ import Collider from "../js/engine/properties/Collider.js";
 import CollisionManager from "../js/engine/manager/CollisionManager.js";
 import Vector2 from "../js/engine/math/Vector2.js";
 import {Layer} from "../js/enum/Layer.js";
-import {KeyCode} from "../js/enum/KeyCode.js";
 import {Event} from "../js/enum/Event.js";
 import {TextAlign} from "../js/enum/TextAlign.js";
 import {Trigger} from "../js/enum/Trigger.js";
@@ -137,34 +136,34 @@ class Missile extends GameObject {
         let keys = EventManager.keys;
         let mouse = EventManager.mouse;
 
-        if (keys.includes(KeyCode.arrowUp)) {
+        if (keys.includes("ArrowUp")) {
             this.ship.y -= 5;
         }
-        else if (keys.includes(KeyCode.arrowDown)) {
+        else if (keys.includes("ArrowDown")) {
             this.ship.y += 5;
         }
-        if (keys.includes(KeyCode.spacebar)) {
+        if (keys.includes(" ")) {
             this.ship.fire();
         }
-        if (keys.includes(KeyCode.num4)) {
+        if (keys.includes("4")) {
             CollisionManager.instance.addGroup(["Enemy","Missile"]);
         }
-        if (keys.includes(KeyCode.num5)) {
+        if (keys.includes("5")) {
             CollisionManager.instance.removeGroup(["Enemy","Missile"]);
         }
-        if (keys.includes(KeyCode.num3)) {
+        if (keys.includes("3")) {
             console.log(GameObjectManager.instance._list);
         }
-        if (keys.includes(KeyCode.num1)) {
+        if (keys.includes("1")) {
             this._debug.colliders = false;
         }
-        if (keys.includes(KeyCode.num2)) {
+        if (keys.includes("2")) {
             this._debug.colliders = true;
         }
-        if (keys.includes(KeyCode.i)) {
+        if (keys.includes("i")) {
             this.ship["collider"].rigid = false;
         }
-        if (keys.includes(KeyCode.o)) {
+        if (keys.includes("o")) {
             this.ship["collider"].rigid = true;
         }
         if (this.ship["collider"].raycast(mouse.x, mouse.y) && mouse.click) {

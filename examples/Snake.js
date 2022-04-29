@@ -2,7 +2,6 @@ import JSPixelApp from "../js/engine/JSPixelApp.js";
 import GameObject from "../js/engine/GameObject.js";
 import Graphic from "../js/engine/properties/Graphic.js";
 import ResourceManager from "../js/resource/ResourceManager.js";
-import {KeyCode} from "../js/enum/KeyCode.js";
 import {Layer} from "../js/enum/Layer.js";
 import EventManager from "../js/engine/manager/EventManager.js";
 
@@ -145,16 +144,16 @@ class Game extends JSPixelApp {
 
         let keys = EventManager.keys;
 
-        if (keys.includes(KeyCode.arrowRight)) {
+        if (keys.includes("ArrowRight")) {
             this._snake.setDirection(Direction.RIGHT);
         }
-        else if (keys.includes(KeyCode.arrowLeft)) {
+        else if (keys.includes("ArrowLeft")) {
             this._snake.setDirection(Direction.LEFT);
         }
-        else if (keys.includes(KeyCode.arrowUp)) {
+        else if (keys.includes("ArrowUp")) {
             this._snake.setDirection(Direction.UP);
         }
-        else if (keys.includes(KeyCode.arrowDown)) {
+        else if (keys.includes("ArrowDown")) {
             this._snake.setDirection(Direction.DOWN);
         }
     }

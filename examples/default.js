@@ -12,7 +12,6 @@ import Collider from "../js/engine/properties/Collider.js";
 import Particle from "../js/engine/properties/Particle.js";
 import Force from "../js/engine/properties/Force.js";
 import {Layer} from "../js/enum/Layer.js";
-import {KeyCode} from "../js/enum/KeyCode.js";
 import {Event} from "../js/enum/Event.js";
 import {ParticleType} from "../js/enum/ParticleType.js";
 import {Trigger} from "../js/enum/Trigger.js";
@@ -165,13 +164,13 @@ class Game extends JSPixelApp {
 
     frame() {
         let keys = EventManager.keys;
-        if (keys.includes(KeyCode.arrowRight)) {
+        if (keys.includes("ArrowRight")) {
             this.hero.orientation = "right";
             this.hero.x += 3;
             this.hero["animator"].play("character_right");
             this.hero["particle"].run();
         }
-        else if (keys.includes(KeyCode.arrowLeft)) {
+        else if (keys.includes("ArrowLeft")) {
             this.hero.orientation = "left";
             this.hero.x -= 3;
             this.hero["animator"].play("character_left");
@@ -185,26 +184,29 @@ class Game extends JSPixelApp {
             this.hero["animator"].play("character_idle_left");
             this.hero["particle"].stop();
         }
-        if (keys.includes(KeyCode.num1)) {
+        if (keys.includes("1")) {
             this._debug = {};
         }
-        if (keys.includes(KeyCode.num2)) {
+        if (keys.includes("2")) {
             this._debug.colliders = true;
         }
-        if (keys.includes(KeyCode.num3)) {
+        if (keys.includes("3")) {
             this._debug.fps = true;
         }
-        if (keys.includes(KeyCode.num4)) {
+        if (keys.includes("4")) {
             this._debug.events = true;
         }
-        if (keys.includes(KeyCode.num5)) {
-            this._debug = {colliders: true, fps: true, events: true}
+        if (keys.includes("5")) {
+            this._debug.keys = true;
         }
-        if (keys.includes(KeyCode.spacebar) && !this.jump) {
+        if (keys.includes("6")) {
+            this._debug = {colliders: true, fps: true, events: true, keys: true}
+        }
+        if (keys.includes(" ") && !this.jump) {
             this.jump = true;
             this.hero["force"].apply(new Vector2(0,-5));
         }
-        else if (!keys.includes(KeyCode.spacebar) && this.hero["force"].stopped){
+        else if (!keys.includes(" ") && this.hero["force"].stopped){
             this.jump = false;
         }
     }
