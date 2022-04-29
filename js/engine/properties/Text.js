@@ -68,12 +68,12 @@ export default class Text extends Property {
     getDimensions(context = JSPixelCanvas.context()) {
         context.save();
         context.font = this.size + "px " + this.font;
-        context.textAlign = this.align;
-        context.fillStyle = this.color;
-        const {width, fontBoundingBoxAscent, fontBoundingBoxDescent} = context.measureText(this._text)
-        let dimensions = new Vector2(width, (fontBoundingBoxAscent + fontBoundingBoxDescent) * (Array.isArray(this._text) ? this._text.length : 1));
+        const {width, fontBoundingBoxAscent, fontBoundingBoxDescent} = (Array.isArray(this._text) ? this._text.reduce((res, line) => {
+            const {width, fontBoundingBoxAscent, fontBoundingBoxDescent} = context.measureText(line)
+            return {width : (width > res.width ? width : res.width), fontBoundingBoxAscent, fontBoundingBoxDescent}
+        }, {width: 0, fontBoundingBoxAscent: 0, fontBoundingBoxDescent: 0}) : context.measureText(this._text))
         context.restore();
-        return dimensions;
+        return new Vector2(width, (fontBoundingBoxAscent + fontBoundingBoxDescent) * (Array.isArray(this._text) ? this._text.length : 1));
     }
 
     setStyle(style) {
