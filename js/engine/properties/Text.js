@@ -84,7 +84,6 @@ export default class Text extends Property {
     }
 
     updateRender() {
-        console.log(this.size)
         this.rendered = ImageFactory.renderText(this)
     }
 
