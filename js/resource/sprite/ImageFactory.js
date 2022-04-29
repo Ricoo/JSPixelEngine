@@ -46,7 +46,6 @@ export default class ImageFactory {
         context.textBaseline = "top"
         context.fillStyle = color;
         if (Array.isArray(text)) {
-            console.log(dimensions.y / text.length)
             text.forEach((line, index) => context[type](line, 0, (dimensions.y / text.length) * (index)))
         }
         else {

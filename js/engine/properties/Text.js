@@ -32,7 +32,6 @@ export default class Text extends Property {
      */
     constructor(txt="", {font, size, color, type, align} = ResourceManager.getStyle("DEFAULT_STYLE"), offset=new Vector2(0,0)) {
         super();
-        console.log(size)
         this._PROPERTY_NAME = "text";
         this._text = txt;
         this.offset = offset;
@@ -64,21 +63,7 @@ export default class Text extends Property {
             posX + this.offset.x ,
             -this.rendered.height/2 + this.offset.y, this.rendered.width, this.rendered.height);
         context.restore();
-        // context.save();
-        // context.font = this.size + "px " + this.font;
-        // context.textAlign = this.align;
-        // context.fillStyle = this.color;
-        // if (Array.isArray(this._text)) {
-        //     for (let line = 0; line < this._text.length; line++) {
-        //         context[this.type](this._text[line], this._gameObject.position.x + this.offset.x,
-        //                                   this._gameObject.position.y + this.offset.y + this.size * line);
-        //     }
-        // }
-        // else {
-        //     context[this.type](this._text, this._gameObject.x + this.offset.x, this._gameObject.y + this.offset.y);
-        // }
-        // context.restore()
-    }
+}
 
     getDimensions(context = JSPixelCanvas.context()) {
         context.save();
