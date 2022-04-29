@@ -15,6 +15,7 @@ export default class JSPixelEngine {
 
         this._app = []; //This might be changed into a list in case we need to manage several canvas at once
         this._time = undefined;
+        this.loops = 0;
         new JSPixelCanvas();
         new GameObjectManager();
         new CollisionManager();
@@ -80,6 +81,7 @@ export default class JSPixelEngine {
         CollisionManager.instance.checkCollision();
 
         //TODO add custom event handling from EventManager
+        this.loops += 1
     }
 
     /**

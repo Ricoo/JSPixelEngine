@@ -1,5 +1,6 @@
 import { Layer } from "../enum/Layer.js";
 import ImageFactory from "../resource/sprite/ImageFactory.js";
+import JSPixelEngine from "./JSPixelEngine.js";
 import GameObjectManager from "./manager/GameObjectManager.js";
 
 export default class JSPixelCanvas {
@@ -11,7 +12,9 @@ export default class JSPixelCanvas {
         
         [this._canvas, this._context] = JSPixelCanvas.canvasFactory(window.innerWidth, window.innerHeight)
         this._frameData = [];
+        this._eventData = [];
         this._frameGraph = new Image()
+        this._eventGraph = new Image()
         this._framesElapsed = 0;
         JSPixelCanvas.collectData()
     }
@@ -37,17 +40,32 @@ export default class JSPixelCanvas {
         }
 
         if (debug) {
-            JSPixelCanvas.debug();
+            JSPixelCanvas.debug(debug);
         }
         JSPixelCanvas.instance._framesElapsed += 1;
     }
 
-    static debug() {
-        const {_context: context, _frameGraph: graph} = JSPixelCanvas.instance;
-        GameObjectManager.instance.colliders().forEach(go => {
-            go.collider?.show(context)
-        })
-        context.drawImage(graph, 5, 5);
+    static debug(debug) {
+        const {
+            _context: context,
+            _frameGraph: frameGraph,
+            _eventGraph: eventGraph
+        } = JSPixelCanvas.instance;
+        let x = 5;
+
+        if (debug.colliders){
+            GameObjectManager.instance.colliders().forEach(go => {
+                go.collider?.show(context)
+            })
+        }
+        if (debug.fps) {
+            context.drawImage(frameGraph, x, 5);
+            x += frameGraph.width + 5;
+        }
+        if (debug.events) {
+            context.drawImage(eventGraph, x, 5);
+        }
+
     }
 
     static collectData() {
@@ -58,6 +76,13 @@ export default class JSPixelCanvas {
         }
         instance._frameGraph = ImageFactory.renderDataGraph("FPS", instance._frameData)
         instance._framesElapsed = 0;
+
+        instance._eventData.push(JSPixelEngine.instance.loops)
+        if (instance._eventData.length > 60) {
+            instance._eventData.shift()
+        }
+        instance._eventGraph = ImageFactory.renderDataGraph("Eventloops", instance._eventData)
+        JSPixelEngine.instance.loops = 0;
         setTimeout(JSPixelCanvas.collectData, 1000);
     }
 
