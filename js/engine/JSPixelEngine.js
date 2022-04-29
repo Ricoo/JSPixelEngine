@@ -38,9 +38,9 @@ export default class JSPixelEngine {
      * @desc loads the given resource pack into memory before running the engine
      * @param {{audio:*[],sprites:*[]}} resourcePack the resource pack descriptor
      */
-    preLoad(resourcePack) {
+    preLoad(resourcePack, canvas) {
         if (this._resourceManager === undefined) {
-            this._resourceManager = new ResourceManager();
+            this._resourceManager = new ResourceManager(canvas);
             this._resourceManager.loadResources(resourcePack);
         }
         if (this._resourceManager.done === false) {

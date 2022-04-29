@@ -2,9 +2,11 @@ import Sprite from "./sprite/Sprite.js";
 import Sound from "./sound/Sound.js";
 import SpriteAtlas from "./sprite/SpriteAtlas.js";
 import {DefaultValues} from "../enum/DefaultValues.js";
+import JSPixelEngine from "../engine/JSPixelEngine.js";
+import JSPixelCanvas from "../engine/JSPixelCanvas.js";
 
 export default class ResourceManager {
-    constructor() {
+    constructor(canvas) {
         if (ResourceManager.instance !== undefined) {
             return ResourceManager.instance;
         }
@@ -16,6 +18,7 @@ export default class ResourceManager {
         this._count = 0;
         this._total = 0;
         this._done = false;
+        this.canvas = canvas;
     }
 
     /**
@@ -24,15 +27,22 @@ export default class ResourceManager {
      * @callback this function sets this._done to true after the resources have been loaded
      */
     loadResources(packageDescriptor) {
+        const testPromises = 100;
         this._done = false;
-        this._total = packageDescriptor.sprites.length + packageDescriptor.audio.length;
         let {sprites, audio, styles} = packageDescriptor;
-        this._total = [...sprites, ...audio].length;
+        this._total = [...sprites, ...audio].length + testPromises;
         let callback = () => {
             this._count += 1;
+            JSPixelCanvas.loader(this.canvas, this._count, this._total)
             if (this._count === this._total) {
                 console.log("Finished loading  ["+this._total+"/"+this._total+"]");
-                this._done = true;}};
+                this._done = true;}
+        };
+        Array.from({length: testPromises}, (v, i) => i).forEach(()=>{
+            new Promise(resolve => {
+                setTimeout(resolve, Math.random() * 5000);
+            }).then(callback)
+        });
         this._sprites.push(new Sprite(DefaultValues.EMPTY_IMAGE.src,
             DefaultValues.EMPTY_IMAGE.name,  DefaultValues.EMPTY_IMAGE.res, ()=>{}));
         sprites?.forEach((elem) => {

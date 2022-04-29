@@ -1,3 +1,4 @@
+import { DefaultValues } from "../enum/DefaultValues.js";
 import { Layer } from "../enum/Layer.js";
 import ImageFactory from "../resource/sprite/ImageFactory.js";
 import JSPixelEngine from "./JSPixelEngine.js";
@@ -17,6 +18,11 @@ export default class JSPixelCanvas {
         this._frameGraph = new Image()
         this._eventGraph = new Image()
         this._framesElapsed = 0;
+        this._logo = (()=>{
+            const logo = new Image();
+            logo.src = DefaultValues.LOGO_JSPENGINE.src
+            return logo
+        })();
         JSPixelCanvas.collectData()
     }
 
@@ -44,6 +50,26 @@ export default class JSPixelCanvas {
             JSPixelCanvas.debug(debug);
         }
         JSPixelCanvas.instance._framesElapsed += 1;
+    }
+
+    static loader(canvas, count, total) {
+        const context = canvas.getContext("2d");
+        const logo = JSPixelCanvas.instance._logo;
+        const x = canvas.width / 2 - logo.width / 2;
+        const y = canvas.height / 2 - logo.height / 2;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.beginPath();
+        context.strokeStyle = "#301010"
+        context.fillStyle = "#7f3434"
+        context.rect(canvas.width / 2 - 150, y + 5, 302, 42)
+        context.fillRect(canvas.width / 2 - 150 + 1, y + 6, 300 * (count/total), 40)
+        context.font = "18px Arial";
+        context.fillText(`loading resources${".".repeat(count % 5) +
+            " ".repeat(5 - count % 5)} ${count + '/' + total}`,
+            x - 30, y + 70)
+        context.stroke();
+        context.closePath();
+        context.drawImage(logo, x, y);
     }
 
     static debug(debug) {

@@ -20,7 +20,7 @@ export default class JSPixelApp {
 
         this._engine = new JSPixelEngine();
         this._engine.register(this);
-        this._engine.preLoad(resourcePack);
+        this._engine.preLoad(resourcePack, this._canvas);
 
         if (settings === null) {
             settings = new JSPixelSettings();
