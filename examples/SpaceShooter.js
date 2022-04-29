@@ -146,6 +146,12 @@ class Missile extends GameObject {
         if (keys.includes(KeyCode.spacebar)) {
             this.ship.fire();
         }
+        if (keys.includes(KeyCode.num4)) {
+            CollisionManager.instance.addGroup(["Enemy","Missile"]);
+        }
+        if (keys.includes(KeyCode.num5)) {
+            CollisionManager.instance.removeGroup(["Enemy","Missile"]);
+        }
         if (keys.includes(KeyCode.num3)) {
             console.log(GameObjectManager.instance._list);
         }
