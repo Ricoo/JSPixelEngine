@@ -56,6 +56,15 @@ export default class GameObjectManager {
     }
 
     /**
+     * @desc fetches a list of all GameObjects having a drawable property (ie: Text or Graphic) and returns it
+     * @returns {GameObject[]}
+     */
+    drawables() {
+        this._list.sort((a, b) => a.graphic?.layer - b.graphic?.layer || a.position.y - b.position.y);
+        return this._list.filter(go => go.hasProperty("graphic") || go.hasProperty("text"));
+    }
+
+    /**
      * @desc fetches a list of all GameObjects having a Force property and returns it
      * @returns {GameObject[]}
      */
