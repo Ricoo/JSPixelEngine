@@ -1,6 +1,7 @@
 import Property from "./properties/Property.js";
 import Vector2 from "./math/Vector2.js";
 import GameObjectManager from "./manager/GameObjectManager.js";
+import UUID from "./math/UUID.js";
 
 export default class GameObject {
     name;
@@ -12,6 +13,8 @@ export default class GameObject {
      * @param {number} angle the angle our object should be displayed with (if necessary)
      */
     constructor(name = "", x = 0, y = 0, angle = 0) {
+        this._uuid = UUID.generateUUID();
+        console.log(this._uuid);
         this._position = new Vector2(x, y);
         this._angle = angle;
         this.name = name;
