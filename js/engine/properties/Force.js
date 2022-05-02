@@ -17,7 +17,7 @@ export default class Force extends Property {
      * @param {boolean} bounce whether our object is bouncing or not
      */
     constructor(gravity = 0, weight = 0, bounce=false) {
-        super();
+        super(arguments);
         this._PROPERTY_NAME = "force";
         this.gravity = gravity;
         this.weight = weight;

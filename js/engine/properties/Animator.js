@@ -8,7 +8,7 @@ export default class Animator extends Property {
      * @param {Animation[]} list the array of animations affected to our GameObject
      */
     constructor(list=undefined) {
-        super();
+        super(arguments);
         this._PROPERTY_NAME = "animator";
         this._animations = (list ? list : []);
         this._running = null;

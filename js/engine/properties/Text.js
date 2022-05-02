@@ -31,7 +31,7 @@ export default class Text extends Property {
      * @param {Vector2} offset the offset with which we want to start writing
      */
     constructor(txt="", {font, size, color, type, align} = ResourceManager.getStyle("DEFAULT_STYLE"), offset=new Vector2(0,0)) {
-        super();
+        super(arguments);
         this._PROPERTY_NAME = "text";
         this._text = txt;
         this.offset = offset;

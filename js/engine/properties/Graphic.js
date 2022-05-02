@@ -25,7 +25,7 @@ export default class Graphic extends Property {
      * @param {number} tile if we plan on using a SpriteAtlas, the tile id of our sprite within the atlas
      */
     constructor(spriteName = DefaultValues.EMPTY_IMAGE.name, layer=Layer.CHARACTERS, scale=1.0, alpha=1.0, tile=0) {
-        super();
+        super(arguments);
         this._PROPERTY_NAME = "graphic";
         this._spriteName = spriteName;
         this.sprite = ResourceManager.getSprite(spriteName);

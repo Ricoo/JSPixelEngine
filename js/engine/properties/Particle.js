@@ -42,7 +42,7 @@ export default class Particle extends Property {
      * @param {Vector2} offset the offset of our particle
      */
     constructor(spriteName = DefaultValues.EMPTY_IMAGE.name, type=ParticleType.Fall, amount=1, lifetime=1000, period=20, fadeout=false, scale=1.0, tileId=0, speed=undefined, offset=undefined) {
-        super();
+        super(arguments);
         this._PROPERTY_NAME = "particle";
         this.sprite = ResourceManager.getSprite(spriteName);
         this._tile = tileId;
