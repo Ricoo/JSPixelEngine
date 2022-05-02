@@ -16,7 +16,7 @@ import {Event} from "../js/enum/Event.js";
 import {ParticleType} from "../js/enum/ParticleType.js";
 import {Trigger} from "../js/enum/Trigger.js";
 import TiledGraphic from "../js/engine/properties/TiledGraphic.js";
-import Scene from "../js/engine/Scene.js";
+import Scene, { Scene2 } from "../js/engine/Scene.js";
 import { TextType } from "../js/enum/TextType.js";
 import { TextAlign } from "../js/enum/TextAlign.js";
 
@@ -148,6 +148,10 @@ class Game extends JSPixelApp {
         console.log("my super game have been initialized !");
         this.scene = new Scene();
         this.scene.load();
+        let scene = new Scene2()
+        scene.register(this.hero);
+        scene.register(this.tickbox);
+        console.log(scene.serialize());
     }
 
     move() {

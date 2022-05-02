@@ -2,7 +2,80 @@ import GameObject from "./GameObject.js";
 import Vector2 from "./math/Vector2.js";
 import {Layer} from "../enum/Layer.js";
 import {Trigger} from "../enum/Trigger.js";
+import ResourceManager from "../resource/ResourceManager.js";
 
+
+export class Scene2 {
+    constructor(json = "{}") {
+        this._gameObjects = [];
+        this._objects = {};
+        this._json = JSON.parse(json); 
+    }
+
+    register(gameObject) {
+        this._gameObjects.push(gameObject)
+    }
+
+    unregister(gameObject) {
+        this._gameObjects.splice(this._gameObjects.indexOf(gameObject), 1)
+    }
+
+    async preload() {
+        this._gameObjects = Object.keys(this._json).map(key => {
+            // return this.instantiate(this._json.)
+        });
+    }
+
+    async load() {
+        Scene2.current.unload().then(()=>{
+            Scene2.current = this;
+            Promise.all(Object.values(this._object).map(key => {
+                return this.instantiate(this._object[key]);
+            }))
+        });
+    }
+
+    async unload() {
+        this.serialize()
+        this._gameObjects.forEach(go => go.delete())
+        return
+    }
+    
+    async instantiate(object) {
+        const {x, y, angle, name, cls} = object[key];
+    }
+    
+    serialize() {
+        let cache = [];
+        this._objects = this._gameObjects.reduce((acc, go) => {
+            acc[go.uuid] = {
+                "_cls": go.constructor.name,
+                "args": go.args,
+                "props": go.properties.map(prop => ({
+                        "_cls": prop.constructor.name,
+                        "args": prop.arguments
+                    }
+                )),
+                "children": go.children
+            }
+            return acc;
+            // JSON.stringify(go, (key, value) => {
+            //     if (typeof value === 'object' && value !== null) {
+            //         if (cache.includes(value)) {
+            //             return value?.uuid;
+            //         }
+            //         cache.push(value)
+            //     }
+            //     return value;
+            // },);
+        }, {});
+        return this._objects
+    }
+
+    toString() {
+        return this._objects.toString()
+    }
+}
 export default class Scene {
     constructor(sceneJSON) {
         sceneJSON = {
