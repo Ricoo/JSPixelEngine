@@ -9,7 +9,6 @@ export default class Property {
             throw TypeError("You have to extend this class");
         }
         this._arguments = [...args]
-        console.log(this._arguments)
     }
 
     /**

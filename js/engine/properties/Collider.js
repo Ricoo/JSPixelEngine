@@ -27,7 +27,7 @@ export default class Collider extends Property {
         super(arguments);
         this._PROPERTY_NAME = "collider";
         this.dimensions = dimensions;
-        this.offset = offset;
+        this.offset = offset || new Vector2();
         this.callback = callback;
         this.trigger = trigger;
         this._rigid = rigid;
