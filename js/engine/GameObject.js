@@ -14,7 +14,6 @@ export default class GameObject {
      */
     constructor(name = "", x = 0, y = 0, angle = 0) {
         this._uuid = UUID.generateUUID();
-        console.log(this._uuid);
         this._position = new Vector2(x, y);
         this._angle = angle;
         this.name = name;

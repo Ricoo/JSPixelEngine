@@ -10,6 +10,7 @@ export class Scene2 {
         this._gameObjects = [];
         this._objects = JSON.parse(json);
         this._json = json;
+        this._preloaded = false;
     }
 
     register(gameObject) {
@@ -21,17 +22,24 @@ export class Scene2 {
     }
 
     async preload() {
-        this._gameObjects = Object.keys(this._json).map(key => {
-            // return this.instantiate(this._json.)
-        });
+        this._objects = JSON.parse(this._json)
+            Promise.all(Object.keys(this._objects).map(key => {
+                return this.instantiate(this._objects[key]);
+            })).then(gos => gos.forEach(go => {
+                this._gameObjects.push(go);
+                go.disable();
+            }))
+        this._preloaded = true;
     }
 
     async load() {
         this._objects = JSON.parse(this._json)
         const instanciation = () => {
+            if (this._preloaded) {
+                this._gameObjects.forEach(go => go.enable());
+                return;
+            }
             Promise.all(Object.keys(this._objects).map(key => {
-                console.log(key);
-                console.log(this._objects);
                 return this.instantiate(this._objects[key]);
             })).then(gos => gos.forEach(go => this._gameObjects.push(go)))
         }
@@ -41,6 +49,7 @@ export class Scene2 {
         else (
             instanciation()
         )
+        this._preloaded = false;
     }
 
     async unload() {
@@ -75,16 +84,8 @@ export class Scene2 {
                 "children": go.children
             }
             return acc;
-            // JSON.stringify(go, (key, value) => {
-            //     if (typeof value === 'object' && value !== null) {
-            //         if (cache.includes(value)) {
-            //             return value?.uuid;
-            //         }
-            //         cache.push(value)
-            //     }
-            //     return value;
-            // },);
         }, {});
+        console.log(objects)
         this._json = JSON.stringify(objects);
         return this._json;
     }
