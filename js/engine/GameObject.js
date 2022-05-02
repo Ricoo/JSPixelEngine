@@ -186,4 +186,5 @@ export default class GameObject {
 
     get children() {return this._children;}
     get parent() {return this._parent;}
+    get uuid() {return this._uuid;}
 };
