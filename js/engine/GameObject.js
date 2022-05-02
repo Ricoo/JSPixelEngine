@@ -188,4 +188,5 @@ export default class GameObject {
     get parent() {return this._parent;}
     get uuid() {return this._uuid;}
     set forceUuid(uuid) {this._uuid = uuid;}
+    get properties() {return this._properties.map(key=>this[key]);}
 };
