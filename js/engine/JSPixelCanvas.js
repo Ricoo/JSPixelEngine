@@ -121,17 +121,6 @@ export default class JSPixelCanvas {
         setTimeout(JSPixelCanvas.collectData, 1000);
     }
 
-    static collectEvents() {
-        const {instance} = JSPixelCanvas
-        instance._frameData.push(JSPixelCanvas.instance._framesElapsed)
-        if (instance._frameData.length > 60) {
-            instance._frameData.shift()
-        }
-        instance._frameGraph = ImageFactory.renderDataGraph("Events:", instance._frameData)
-        instance._framesElapsed = 0;
-        setTimeout(JSPixelCanvas.collectFrames, 1000);
-    }
-
     static image() {
         return JSPixelCanvas.instance._canvas;
     }
