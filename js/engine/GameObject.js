@@ -22,6 +22,7 @@ export default class GameObject {
         this._enabled = true;
         this._children = [];
         this._parent = undefined;
+        this._arguments = [...arguments]
         GameObjectManager.register(this);
     }
 
@@ -189,4 +190,5 @@ export default class GameObject {
     get uuid() {return this._uuid;}
     set forceUuid(uuid) {this._uuid = uuid;}
     get properties() {return this._properties.map(key=>this[key]);}
+    get arguments() {return this._arguments;}
 };

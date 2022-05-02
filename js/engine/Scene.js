@@ -8,8 +8,8 @@ import ResourceManager from "../resource/ResourceManager.js";
 export class Scene2 {
     constructor(json = "{}") {
         this._gameObjects = [];
-        this._objects = {};
-        this._json = JSON.parse(json); 
+        this._objects = JSON.parse(json);
+        this._json = json;
     }
 
     register(gameObject) {
@@ -27,30 +27,46 @@ export class Scene2 {
     }
 
     async load() {
-        Scene2.current.unload().then(()=>{
-            Scene2.current = this;
-            Promise.all(Object.values(this._object).map(key => {
-                return this.instantiate(this._object[key]);
-            }))
-        });
+        this._objects = JSON.parse(this._json)
+        const instanciation = () => {
+            Promise.all(Object.keys(this._objects).map(key => {
+                console.log(key);
+                console.log(this._objects);
+                return this.instantiate(this._objects[key]);
+            })).then(gos => gos.forEach(go => this._gameObjects.push(go)))
+        }
+        if (Scene.current) {
+            Scene2.current.unload().then(instanciation);
+        }
+        else (
+            instanciation()
+        )
     }
 
     async unload() {
         this.serialize()
         this._gameObjects.forEach(go => go.delete())
+        this._gameObjects = []
         return
     }
     
     async instantiate(object) {
-        const {x, y, angle, name, cls} = object[key];
+        const {args, _cls: cls, props} = object;
+        console.log(args)
+        const go = new GameObject(...args);
+        props.forEach(async ({_cls, args}) => {
+            const cls = await import("./properties/" + _cls + ".js")
+            go.attach(new cls.default(...args));
+        })
+        return go;
     }
     
     serialize() {
         let cache = [];
-        this._objects = this._gameObjects.reduce((acc, go) => {
+        const objects = this._gameObjects.reduce((acc, go) => {
             acc[go.uuid] = {
                 "_cls": go.constructor.name,
-                "args": go.args,
+                "args": go.arguments,
                 "props": go.properties.map(prop => ({
                         "_cls": prop.constructor.name,
                         "args": prop.arguments
@@ -69,11 +85,12 @@ export class Scene2 {
             //     return value;
             // },);
         }, {});
-        return this._objects
+        this._json = JSON.stringify(objects);
+        return this._json;
     }
 
     toString() {
-        return this._objects.toString()
+        return this._json;
     }
 }
 export default class Scene {
