@@ -52,14 +52,8 @@ export default class Graphic extends Property {
         }
     }
 
-    // set spriteName(value) {
-    //     this.spriteName = value;
-    //     this._sprite = ResourceManager.getSprite(this.spriteName);
-    // }
     set alpha(a) {this._alpha = (a > 1.0 ? 1.0 : (a < 0.0 ? 0.0 : a));}
     get alpha() {return this._alpha;}
-    get sprite() {return this._sprite;}
     get image(){return this._image;}
-    set image(value){this._image = value;}
     toggle(){this.visible = !this.visible;}
 };
