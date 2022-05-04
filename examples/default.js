@@ -19,6 +19,7 @@ import TiledGraphic from "../js/engine/properties/TiledGraphic.js";
 import Scene, { Scene2 } from "../js/engine/Scene.js";
 import { TextType } from "../js/enum/TextType.js";
 import { TextAlign } from "../js/enum/TextAlign.js";
+import Path from "../js/resource/sprite/Path.js";
 
 const resourceList = {
     audio:[
@@ -46,6 +47,14 @@ const animationList = {
     pendulum_tick : new Animation("pendulum_tick", [0,1,2,3], 200, 0),
     missile_fire : new Animation("missile_fire",[1,2,3,4],100,4)
 };
+
+class Square extends GameObject {
+    constructor(x, y) {
+        super("square", x, y);
+        const path = new Path("M0 0 h 80 v 80 h -80 Z", "squarePath", [80, 80]);
+        this.attach(new Graphic(path.get(370, 170, 4, "yellow", "rgba(0,0,0,.5)"), Layer.GUI));
+    }
+}
 
 class Tickbox extends GameObject {
     constructor(x, y, text="") {
@@ -143,6 +152,8 @@ class Game extends JSPixelApp {
         this.moveX = new Lerp(this.marine, "x", () => {this.move();});
         this.moved = true;
         this.move();
+
+        this.square = new Square(200, 100);
 
         EventManager.registerHandler(Event.MouseDown, () => {clickSound.play();});
         console.log("my super game have been initialized !");
