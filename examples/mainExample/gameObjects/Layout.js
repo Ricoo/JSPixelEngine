@@ -18,7 +18,7 @@ class Tab extends GameObject {
                     `rgba(221,${active ? 200 : 180},125,1)`
                 ))
         );
-        this.attach(new Collider(new Vector2(100, 50), undefined, (_, mouse) => {
+        this.attach(new Collider(new Vector2(80, 50), undefined, (_, mouse) => {
             if (mouse.click) {
                 callback()
             }

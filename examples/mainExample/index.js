@@ -1,4 +1,5 @@
 import JSPixelApp from "../../js/engine/JSPixelApp.js";
+import EventManager from "../../js/engine/manager/EventManager.js";
 import { TextAlign } from "../../js/enum/TextAlign.js";
 import { TextType } from "../../js/enum/TextType.js";
 import SceneMain from "./scenes/SceneMain.js";
@@ -38,7 +39,25 @@ class Game extends JSPixelApp {
     }
 
     frame() {
-
+        const keys = EventManager.keys;
+        if (keys.includes("1")) {
+            this._debug = {};
+        }
+        if (keys.includes("2")) {
+            this._debug.colliders = true;
+        }
+        if (keys.includes("3")) {
+            this._debug.fps = true;
+        }
+        if (keys.includes("4")) {
+            this._debug.events = true;
+        }
+        if (keys.includes("5")) {
+            this._debug.keys = true;
+        }
+        if (keys.includes("6")) {
+            this._debug = {colliders: true, fps: true, events: true, keys: true}
+        }
     }
 }
 
