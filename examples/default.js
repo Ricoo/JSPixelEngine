@@ -16,7 +16,7 @@ import {Event} from "../js/enum/Event.js";
 import {ParticleType} from "../js/enum/ParticleType.js";
 import {Trigger} from "../js/enum/Trigger.js";
 import TiledGraphic from "../js/engine/properties/TiledGraphic.js";
-import Scene, { Scene2 } from "../js/engine/Scene.js";
+import Scene from "../js/engine/Scene.js";
 import { TextType } from "../js/enum/TextType.js";
 import { TextAlign } from "../js/enum/TextAlign.js";
 
@@ -54,12 +54,11 @@ const animationList = {
 
 class Square extends GameObject {
     constructor(x, y) {
-        super("square", x, y);
+        super("square", x, y, Layer.PARTICLE);
         this.attach(
             new Graphic(
                 ResourceManager.getPath("roundRectangle")
-                    .get(370, 170, 4, "yellow", "rgba(0,0,0,.5)"),
-                Layer.PARTICLE
+                    .get(370, 170, 4, "yellow", "rgba(0,0,0,.5)")
             )
         );
     }
@@ -67,8 +66,8 @@ class Square extends GameObject {
 
 class Tickbox extends GameObject {
     constructor(x, y, text="") {
-        super("tickbox", x, y);
-        this.attach(new Graphic("tickbox", Layer.GUI, 1, 1));
+        super("tickbox", x, y, Layer.GUI);
+        this.attach(new Graphic("tickbox", 1, 1));
         this._ticked = false;
 
         this.tooltip = new GUIText("tooltip", text, x + 20, y, ResourceManager.getStyle("tooltipText"));
@@ -96,8 +95,8 @@ class Tickbox extends GameObject {
 
 class Clock extends GameObject {
     constructor(x, y) {
-        super("clock", x, y);
-        this.attach(new Graphic("clock", Layer.BACKGROUND, 4));
+        super("clock", x, y, Layer.BACKGROUND);
+        this.attach(new Graphic("clock", 4));
         this.attach(new Animator([animationList.pendulum_tick]));
         this["animator"].play("pendulum_tick");
     }
@@ -105,8 +104,8 @@ class Clock extends GameObject {
 
 class Hero extends GameObject {
     constructor(x, y, sprite) {
-        super("hero", x, y);
-        this.attach(new Graphic(sprite, Layer.CHARACTERS, 4));
+        super("hero", x, y, Layer.CHARACTERS);
+        this.attach(new Graphic(sprite, 4));
         this.attach(new Collider(new Vector2(50, 110), new Vector2(0,10), ()=>{}, Trigger.COLLIDER, true));
         this.attach(new Animator([animationList.character_left,
             animationList.character_right,
@@ -119,8 +118,8 @@ class Hero extends GameObject {
 
 class Marine extends GameObject {
     constructor(x, y, sprite) {
-        super("marine", x, y);
-        this.attach(new Graphic(sprite, Layer.CHARACTERS, 4));
+        super("marine", x, y, Layer.CHARACTERS);
+        this.attach(new Graphic(sprite, 4));
         this.attach(new Collider(new Vector2(50, 90), new Vector2(0,0), ()=>{}, Trigger.COLLIDER, true));
         this.attach(new Animator([animationList.character_left, animationList.character_right]));
         this.attach(new Force(20, 10, true));
@@ -129,22 +128,14 @@ class Marine extends GameObject {
 
 class Platform extends GameObject {
     constructor(x, y) {
-        super("platform", x, y);
-        this.attach(new TiledGraphic("platform", Layer.BACKGROUND, 4, 0, 1, 2, 6));
+        super("platform", x, y, Layer.BACKGROUND);
+        this.attach(new TiledGraphic("platform", 4, 0, 1, 2, 6));
         this.attach(new Collider(new Vector2(700, 40), new Vector2(0, -10), ()=>{}, Trigger.COLLIDER, true));
     }
 }
 
-class Game extends JSPixelApp {
-    constructor() {
-        super("game", resourceList);
-        if (Game.instance)
-            return Game.instance;
-        else
-            Game.instance = this;
-    }
-
-    initialize() {
+class LandingScene extends Scene {
+    init() {
         let clickSound = ResourceManager.getSound("click");
         clickSound.volume = 0.2;
         clickSound.speed = 1;
@@ -166,12 +157,55 @@ class Game extends JSPixelApp {
 
         EventManager.registerHandler(Event.MouseDown, () => {clickSound.play();});
         console.log("my super game have been initialized !");
-        this.scene = new Scene();
-        this.scene.load();
-        let scene = new Scene2()
-        scene.register(this.hero);
-        scene.register(this.tickbox);
-        console.log(scene.serialize());
+    }
+
+    update(deltaTime) {
+        let keys = EventManager.keys;
+        if (keys.includes("ArrowRight")) {
+            this.hero.orientation = "right";
+            this.hero.x += 300 * deltaTime / 1000;
+            this.hero["animator"].play("character_right");
+            this.hero["particle"].run();
+        }
+        else if (keys.includes("ArrowLeft")) {
+            this.hero.orientation = "left";
+            this.hero.x -= 300 * deltaTime / 1000;
+            this.hero["animator"].play("character_left");
+            this.hero["particle"].run();
+        }
+        else if (this.hero.orientation === "right") {
+            this.hero["animator"].play("character_idle_right");
+            this.hero["particle"].stop();
+        }
+        else {
+            this.hero["animator"].play("character_idle_left");
+            this.hero["particle"].stop();
+        }
+        if (keys.includes("1")) {
+            this.app._debug = {};
+        }
+        if (keys.includes("2")) {
+            this.app._debug.colliders = true;
+        }
+        if (keys.includes("3")) {
+            this.app._debug.fps = true;
+        }
+        if (keys.includes("4")) {
+            this.app._debug.events = true;
+        }
+        if (keys.includes("5")) {
+            this.app._debug.keys = true;
+        }
+        if (keys.includes("6")) {
+            this.app._debug = {colliders: true, fps: true, events: true, keys: true}
+        }
+        if (keys.includes(" ") && !this.jump) {
+            this.jump = true;
+            this.hero["force"].apply(new Vector2(0,-5));
+        }
+        else if (!keys.includes(" ") && this.hero["force"].stopped){
+            this.jump = false;
+        }
     }
 
     move() {
@@ -186,53 +220,24 @@ class Game extends JSPixelApp {
         }
     }
 
+}
+
+class Game extends JSPixelApp {
+    constructor() {
+        super("game", resourceList);
+        if (Game.instance)
+            return Game.instance;
+        else
+            Game.instance = this;
+    }
+
+    initialize() {
+        let scene = new LandingScene(this)
+        scene.load();
+    }
+
+
     frame() {
-        let keys = EventManager.keys;
-        if (keys.includes("ArrowRight")) {
-            this.hero.orientation = "right";
-            this.hero.x += 3;
-            this.hero["animator"].play("character_right");
-            this.hero["particle"].run();
-        }
-        else if (keys.includes("ArrowLeft")) {
-            this.hero.orientation = "left";
-            this.hero.x -= 3;
-            this.hero["animator"].play("character_left");
-            this.hero["particle"].run();
-        }
-        else if (this.hero.orientation === "right") {
-            this.hero["animator"].play("character_idle_right");
-            this.hero["particle"].stop();
-        }
-        else {
-            this.hero["animator"].play("character_idle_left");
-            this.hero["particle"].stop();
-        }
-        if (keys.includes("1")) {
-            this._debug = {};
-        }
-        if (keys.includes("2")) {
-            this._debug.colliders = true;
-        }
-        if (keys.includes("3")) {
-            this._debug.fps = true;
-        }
-        if (keys.includes("4")) {
-            this._debug.events = true;
-        }
-        if (keys.includes("5")) {
-            this._debug.keys = true;
-        }
-        if (keys.includes("6")) {
-            this._debug = {colliders: true, fps: true, events: true, keys: true}
-        }
-        if (keys.includes(" ") && !this.jump) {
-            this.jump = true;
-            this.hero["force"].apply(new Vector2(0,-5));
-        }
-        else if (!keys.includes(" ") && this.hero["force"].stopped){
-            this.jump = false;
-        }
     }
 }
 
