@@ -45,6 +45,9 @@ export default class CollisionManager {
         let list = Scene.colliders().filter(elem => elem["collider"].trigger[(click ? "click" : "hover")]);
         let res = undefined;
         for (let obj of list) {
+            if (!obj.collider) {
+                continue;
+            }
             if (obj["collider"].raycast(x,y)) {
                 res = obj;
                 if (!click) {
