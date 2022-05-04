@@ -36,6 +36,9 @@ const resourceList = {
     ],
     styles:[
         {name:"tooltipText",font: "Arial",size: 13,color: "#000000",type: TextType.fill,align: TextAlign.start}
+    ],
+    paths:[
+        {name:"square", svg:"M0 0 h 80 v 80 h -80 Z", res:[80, 80]}
     ]
 };
 
@@ -51,8 +54,13 @@ const animationList = {
 class Square extends GameObject {
     constructor(x, y) {
         super("square", x, y);
-        const path = new Path("M0 0 h 80 v 80 h -80 Z", "squarePath", [80, 80]);
-        this.attach(new Graphic(path.get(370, 170, 4, "yellow", "rgba(0,0,0,.5)"), Layer.GUI));
+        this.attach(
+            new Graphic(
+                ResourceManager.getPath("square")
+                    .get(370, 170, 4, "yellow", "rgba(0,0,0,.5)"),
+                Layer.PARTICLE
+            )
+        );
     }
 }
 
