@@ -19,7 +19,6 @@ import TiledGraphic from "../js/engine/properties/TiledGraphic.js";
 import Scene, { Scene2 } from "../js/engine/Scene.js";
 import { TextType } from "../js/enum/TextType.js";
 import { TextAlign } from "../js/enum/TextAlign.js";
-import Path from "../js/resource/sprite/Path.js";
 
 const resourceList = {
     audio:[
@@ -38,7 +37,9 @@ const resourceList = {
         {name:"tooltipText",font: "Arial",size: 13,color: "#000000",type: TextType.fill,align: TextAlign.start}
     ],
     paths:[
-        {name:"square", svg:"M0 0 h 80 v 80 h -80 Z", res:[80, 80]}
+        {name:"square", svg:"M0 0 h 80 v 80 h -80 Z", res:[80, 80]},
+        {name:"roundRectangle", svg:"M 26 10 L 74 10 C 82.837 10 90 17.163 90 26 L 90 74 C 90 82.836 82.837 90 74 90 L 26 90 C 17.164 90 10 82.836 10 74 L 10 26 C 10 17.163 17.164 10 26 10 Z", res: [100,100]},
+        {name:"star", svg:"M 50 10 L 59.888 39.912 L 90 40.557 L 66 59.689 L 74.721 90 L 50 71.912 L 25.279 90 L 34 59.689 L 10 40.557 L 40.112 39.912 Z", res: [100,100]},
     ]
 };
 
@@ -56,7 +57,7 @@ class Square extends GameObject {
         super("square", x, y);
         this.attach(
             new Graphic(
-                ResourceManager.getPath("square")
+                ResourceManager.getPath("roundRectangle")
                     .get(370, 170, 4, "yellow", "rgba(0,0,0,.5)"),
                 Layer.PARTICLE
             )
