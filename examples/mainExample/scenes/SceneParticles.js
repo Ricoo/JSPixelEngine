@@ -1,24 +1,24 @@
 import Scene from "../../../js/engine/Scene.js";
-import Layout from "../gameObjects/Layout.js";
+import SceneMain from "./SceneMain.js";
 import SceneAnimation from "./SceneAnimation.js";
 import SceneCollider from "./SceneCollider.js";
 import SceneForce from "./SceneForce.js";
 import SceneGraphic from "./SceneGraphic.js";
-import SceneParticles from "./SceneParticles.js";
 import SceneText from "./SceneText.js";
+import Layout from "../gameObjects/Layout.js";
 
-export default class SceneMain extends Scene {
+export default class SceneParticles extends Scene {
     init() {
         const scenes = [
-            this,
+            new SceneMain(),
             new SceneGraphic(),
             new SceneAnimation(),
-            new SceneParticles(),
+            this,
             new SceneText(),
             new SceneForce(),
             new SceneCollider(),
         ];
-        new Layout(0, ["Main", "Graphic", "Animation", "Particles", "Text", "Force", "Collider"],
+        new Layout(3, ["Main", "Graphic", "Animation", "Particles", "Text", "Force", "Collider"],
             index => scenes[index].load()
         )
     }
