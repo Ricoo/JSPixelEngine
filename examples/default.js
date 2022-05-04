@@ -235,10 +235,6 @@ class Game extends JSPixelApp {
         let scene = new LandingScene(this)
         scene.load();
     }
-
-
-    frame() {
-    }
 }
 
 // Simply create a new instance of your inherited JSPixelApp class

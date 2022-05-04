@@ -12,7 +12,6 @@ export default class JSPixelApp {
         //Abstract class
         if (new.target === JSPixelApp) {throw TypeError("You have to inherit this class first");}
         if (this.initialize === undefined) {throw SyntaxError("You cannot leave the void:initialize() method unimplemented");}
-        if (this.frame === undefined) {throw SyntaxError("You cannot leave the void:frame() method unimplemented");}
 
         this._name = canvasName;
         this._canvas = document.getElementById(canvasName);
