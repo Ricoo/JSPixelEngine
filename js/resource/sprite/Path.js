@@ -14,7 +14,7 @@ export default class Path {
     }
 
     get(x, y, lineWidth, strokeColor=this._stroke, fillColor=this._fill) {
-        let name = `${this._name}:${x}x${y}`
+        let name = `${this._name}:${x}x${y}:${strokeColor}:${fillColor}`
         let sprite = ResourceManager.getSprite(name);
         if (sprite) {
             return name;
@@ -32,8 +32,9 @@ export default class Path {
             [x, y],
             ()=>{}
         );
-        console.log(sprite);
         ResourceManager.addSprite(sprite);
         return name;
     }
+
+    get name() {return this._name}
 }
