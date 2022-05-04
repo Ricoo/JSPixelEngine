@@ -94,7 +94,7 @@ export default class JSPixelEngine {
                 const {context} = this._app;
                 const {canvas} = context;
 
-                this._app.frame();
+                this._app.frame?.();
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 context.drawImage(JSPixelCanvas.image(), 0,0)
 
