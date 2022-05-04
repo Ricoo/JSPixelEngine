@@ -8,11 +8,12 @@ export default class ImageFactory {
         }
         ImageFactory.instance = this;
 
-        [this._canvas] = JSPixelCanvas.canvasFactory();
+        [this._canvas, this._context] = JSPixelCanvas.canvasFactory();
 
     }
 
-    get canvas(){return this._canvas; }
+    get canvas(){return this._canvas;}
+    get context(){return this._context;}
 
     static merge(...images) {
         //TODO use previous version filter system to merge images
@@ -33,9 +34,9 @@ export default class ImageFactory {
      * @returns {HTMLImageElement}
      */
     static renderText({text, dimensions, font, size, color, type}) {
-        const context = ImageFactory.instance.canvas.getContext("2d");
+        const context = ImageFactory.instance.context;
         const canvas = ImageFactory.instance.canvas;
-        let renderedText = new Image();
+        const renderedText = new Image();
 
         context.save()
         canvas.width = dimensions.x
@@ -68,9 +69,9 @@ export default class ImageFactory {
         if (!ImageFactory.instance) {
             new ImageFactory();
         }
-        let context = ImageFactory.instance.canvas.getContext("2d");
-        let canvas = ImageFactory.instance.canvas;
-        let sprite = new Image();
+        const context = ImageFactory.instance.context;
+        const canvas = ImageFactory.instance.canvas;
+        const sprite = new Image();
 
         canvas.width = end.x - start.x;
         canvas.height = end.y - start.y;
@@ -88,7 +89,7 @@ export default class ImageFactory {
         if (!ImageFactory.instance) {
             new ImageFactory();
         }
-        const context = ImageFactory.instance.canvas.getContext("2d");
+        const context = ImageFactory.instance.context;
         const canvas = ImageFactory.instance.canvas;
         const highest = Math.max(...frames);
         const sprite = new Image();
