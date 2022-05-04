@@ -1,7 +1,8 @@
 import Property from "./properties/Property.js";
 import Vector2 from "./math/Vector2.js";
-import GameObjectManager from "./manager/GameObjectManager.js";
 import UUID from "./math/UUID.js";
+import { Layer } from "../enum/Layer.js";
+import Scene from "./Scene.js";
 
 export default class GameObject {
     name;
@@ -22,7 +23,7 @@ export default class GameObject {
         this._children = [];
         this._parent = undefined;
         this._arguments = [...arguments]
-        GameObjectManager.register(this);
+        Scene.register(this);
     }
 
     /**
@@ -156,7 +157,7 @@ export default class GameObject {
             this[prop].delete();
             delete this[prop];
         }
-        GameObjectManager.instance.remove(this);
+        Scene.unregister(this);
         delete this;
     }
 
@@ -179,7 +180,7 @@ export default class GameObject {
     get position() {return this._position;}
     set position(position) {
         this._position.x = position.x;
-        this._position.y = position.y;
+        this._position.y = position.y
     }
     get angle() {return this._angle;}
     set angle(a) {this._angle = (a > 360 ? a - 360 : (a < 0 ? a + 360 : a));}
@@ -190,4 +191,5 @@ export default class GameObject {
     set forceUuid(uuid) {this._uuid = uuid;}
     get properties() {return this._properties.map(key=>this[key]);}
     get arguments() {return this._arguments;}
+    get enabled() {return this._enabled;}
 };

@@ -1,5 +1,5 @@
 import Vector2 from "../math/Vector2.js";
-import GameObjectManager from "./GameObjectManager.js";
+import Scene from "../Scene.js";
 
 export default class CollisionManager {
     constructor() {
@@ -14,7 +14,7 @@ export default class CollisionManager {
      * @desc checks if for any collision group, our corresponding colliders overlap
      */
     checkCollision() {
-        let list = GameObjectManager.instance.colliders().filter(elem => elem["collider"].trigger.collide);
+        let list = Scene.colliders().filter(elem => elem["collider"].trigger.collide);
         for (let g = 0; g < this._groups.length; g++) {
             for (let g1 = 0; g1 < list.length; g1++) {
                 if(list[g1].constructor.name === this._groups[g][0]) {
@@ -42,7 +42,7 @@ export default class CollisionManager {
      * @returns {GameObject}
      */
     checkRaycast(x, y, click) {
-        let list = GameObjectManager.instance.colliders().filter(elem => elem["collider"].trigger[(click ? "click" : "hover")]);
+        let list = Scene.colliders().filter(elem => elem["collider"].trigger[(click ? "click" : "hover")]);
         let res = undefined;
         for (let obj of list) {
             if (obj["collider"].raycast(x,y)) {
@@ -77,7 +77,7 @@ export default class CollisionManager {
         let tmp = oldPos.sub(newPos).normalize;
 
         if (tmp.length) {
-            GameObjectManager.instance.rigids().forEach(obj => {
+            Scene.rigids().forEach(obj => {
                 if (go !== obj && go.collider.collide(obj.collider, newPos)) {
                     go.force?.stop(prop)
                     while ((tmp.length !== 0) && go.collider.collide(obj.collider, newPos)) {

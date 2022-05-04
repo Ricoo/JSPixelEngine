@@ -5,6 +5,7 @@ import JSPixelApp from "./JSPixelApp.js";
 import JSPixelCanvas from "./JSPixelCanvas.js";
 import ResourceManager from "../resource/ResourceManager.js";
 import {Layer} from "../enum/Layer.js";
+import Scene from "./Scene.js";
 
 export default class JSPixelEngine {
     constructor() {
@@ -17,7 +18,6 @@ export default class JSPixelEngine {
         this._time = undefined;
         this.loops = 0;
         new JSPixelCanvas();
-        new GameObjectManager();
         new CollisionManager();
         new EventManager();
     }
@@ -77,7 +77,8 @@ export default class JSPixelEngine {
         const delta = time - this._time;
         this._time = time;
 
-        GameObjectManager.instance.forces().forEach(go => go.force.update(delta));
+        Scene.current.update(delta);
+        Scene.forces().forEach(go => go.force.update(delta));
         CollisionManager.instance.checkCollision();
 
         //TODO add custom event handling from EventManager

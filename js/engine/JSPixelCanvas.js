@@ -1,9 +1,8 @@
 import { DefaultValues } from "../enum/DefaultValues.js";
-import { Layer } from "../enum/Layer.js";
 import ImageFactory from "../resource/sprite/ImageFactory.js";
 import JSPixelEngine from "./JSPixelEngine.js";
 import EventManager from "./manager/EventManager.js";
-import GameObjectManager from "./manager/GameObjectManager.js";
+import Scene from "./Scene.js";
 
 export default class JSPixelCanvas {
     constructor() {
@@ -39,12 +38,10 @@ export default class JSPixelCanvas {
         const context = JSPixelCanvas.instance._context;
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 
-        for (const layer in Layer) {
-            GameObjectManager.instance.layer(Layer[layer]).forEach(go=>{
-                go.graphic?.draw(context);
-                go.text?.write(context);
-            })
-        }
+        Scene.graphics().forEach(go=>{
+            go.graphic?.draw(context);
+            go.text?.write(context);
+        })
 
         if (debug && debug !== {}) {
             JSPixelCanvas.debug(debug);
@@ -81,7 +78,7 @@ export default class JSPixelCanvas {
         let x = 5;
 
         if (debug.colliders){
-            GameObjectManager.instance.colliders().forEach(go => {
+            Scene.colliders().forEach(go => {
                 go.collider?.show(context)
             })
         }
