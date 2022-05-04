@@ -106,14 +106,9 @@ export default class ImageFactory {
         return sprite;
     }
 
-    static renderDataGraph(dataName, frames) {
-        if (!ImageFactory.instance) {
-            new ImageFactory();
-        }
-        const context = ImageFactory.instance.context;
-        const canvas = ImageFactory.instance.canvas;
-        const highest = Math.max(...frames);
-        const sprite = new Image();
+    static renderDataGraph(dataName, data, canvas) {
+        const context = canvas.getContext("2d");
+        const highest = Math.max(...data);
         const height = 60
 
         canvas.width = 242;
@@ -125,13 +120,13 @@ export default class ImageFactory {
         context.stroke();
         context.closePath();
 
-        frames.forEach((amount, index) => {
+        data.forEach((amount, index) => {
             if (!highest) {
                 return;
             }
             context.beginPath();
             const {width} = canvas;
-            const x = width + 4 * (- frames.length + index) + 1;
+            const x = width + 4 * (- data.length + index) + 1;
             context.moveTo(x, height - 1);
             context.lineTo(x, height - (height  - 1) * (amount / highest));
             context.lineWidth = 4;
@@ -147,13 +142,8 @@ export default class ImageFactory {
         context.font = "10px Arial";
         context.fillStyle = "#ffffff"
         context.textBaseline = "bottom"
-        context.fillText(`${dataName}: ${frames[frames.length - 1]}(avg ${(frames.reduce((a, b) => a + b, 0) / frames.length).toFixed(2)})`,
+        context.fillText(`${dataName}: ${data[data.length - 1]}(avg ${(data.reduce((a, b) => a + b, 0) / data.length).toFixed(2)})`,
             0, canvas.height
         )
-
-        sprite.src = canvas.toDataURL("image/png");
-        return sprite
     }
-};
-
-export {ImageFactory};
+}

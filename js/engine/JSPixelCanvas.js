@@ -15,8 +15,8 @@ export default class JSPixelCanvas {
         [this._canvas, this._context] = JSPixelCanvas.canvasFactory(window.innerWidth, window.innerHeight)
         this._frameData = [];
         this._eventData = [];
-        this._frameGraph = new Image()
-        this._eventGraph = new Image()
+        [this._frameGraph] = JSPixelCanvas.canvasFactory(242, 60);
+        [this._eventGraph] = JSPixelCanvas.canvasFactory(242, 60);
         this._framesElapsed = 0;
         this._logo = (()=>{
             const logo = new Image();
@@ -109,15 +109,16 @@ export default class JSPixelCanvas {
         if (instance._frameData.length > 60) {
             instance._frameData.shift()
         }
-        instance._frameGraph = ImageFactory.renderDataGraph("FPS", instance._frameData)
+        ImageFactory.renderDataGraph("FPS", instance._frameData, instance._frameGraph)
         instance._framesElapsed = 0;
 
         instance._eventData.push(JSPixelEngine.instance.loops)
         if (instance._eventData.length > 60) {
             instance._eventData.shift()
         }
-        instance._eventGraph = ImageFactory.renderDataGraph("Eventloops", instance._eventData)
+        ImageFactory.renderDataGraph("Eventloops", instance._eventData, instance._eventGraph)
         JSPixelEngine.instance.loops = 0;
+
         setTimeout(JSPixelCanvas.collectData, 1000);
     }
 
