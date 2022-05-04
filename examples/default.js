@@ -181,24 +181,6 @@ class LandingScene extends Scene {
             this.hero["animator"].play("character_idle_left");
             this.hero["particle"].stop();
         }
-        if (keys.includes("1")) {
-            this.app._debug = {};
-        }
-        if (keys.includes("2")) {
-            this.app._debug.colliders = true;
-        }
-        if (keys.includes("3")) {
-            this.app._debug.fps = true;
-        }
-        if (keys.includes("4")) {
-            this.app._debug.events = true;
-        }
-        if (keys.includes("5")) {
-            this.app._debug.keys = true;
-        }
-        if (keys.includes("6")) {
-            this.app._debug = {colliders: true, fps: true, events: true, keys: true}
-        }
         if (keys.includes(" ") && !this.jump) {
             this.jump = true;
             this.hero["force"].apply(new Vector2(0,-5));
@@ -234,6 +216,28 @@ class Game extends JSPixelApp {
     initialize() {
         let scene = new LandingScene(this)
         scene.load();
+    }
+
+    frame() {
+        const keys = EventManager.keys;
+        if (keys.includes("1")) {
+            this._debug = {};
+        }
+        if (keys.includes("2")) {
+            this._debug.colliders = true;
+        }
+        if (keys.includes("3")) {
+            this._debug.fps = true;
+        }
+        if (keys.includes("4")) {
+            this._debug.events = true;
+        }
+        if (keys.includes("5")) {
+            this._debug.keys = true;
+        }
+        if (keys.includes("6")) {
+            this._debug = {colliders: true, fps: true, events: true, keys: true}
+        }
     }
 }
 
