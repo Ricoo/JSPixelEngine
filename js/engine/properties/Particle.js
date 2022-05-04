@@ -3,7 +3,6 @@ import Property from "./Property.js";
 import GameObject from "../GameObject.js";
 import Graphic from "./Graphic.js";
 import {ParticleType} from "../../enum/ParticleType.js";
-import {Layer} from "../../enum/Layer.js";
 import Vector2 from "../math/Vector2.js";
 import {DefaultValues} from "../../enum/DefaultValues.js";
 
@@ -15,7 +14,6 @@ export default class Particle extends Property {
     fadeout;
     type;
     speed;
-    layer;
     offset;
     _valueType = {
         amount:"Number",
@@ -25,7 +23,6 @@ export default class Particle extends Property {
         fadeout:"Boolean",
         type:"ParticleType",
         speed:"Vector2",
-        layer:"Layer",
         offset:"Vector2"
     };
     /**
@@ -54,7 +51,6 @@ export default class Particle extends Property {
         this._scale = scale;
         this.speed = (speed === undefined ? new Vector2(type.speed[0],type.speed[1]) : speed);
         this._angle = type.angle;
-        this.layer = Layer.PARTICLE;
         this.offset = (offset === undefined ? new Vector2(0,0) : offset);
         this._running = false;
     }
@@ -109,7 +105,7 @@ export default class Particle extends Property {
             scale = Math.random() * (this._scale[1] - this._scale[0]) + this._scale[0];
         }
 
-        obj.attach(new Graphic(this.sprite.name, this.layer, scale, 1.0, tile));
+        obj.attach(new Graphic(this.sprite.name, scale, 1.0, tile));
 
         obj.speed = Math.random() * (this.speed.y - this.speed.x) + this.speed.x;
         obj.angle = Math.random() * (this.type.angle[1] - this.type.angle[0]) + this.type.angle[0];

@@ -19,17 +19,15 @@ export default class Graphic extends Property {
     /**
      * @desc the displayable format of property, allowing us to show our GameObject
      * @param {string} spriteName the identifying string of the desired sprite
-     * @param {Layer} layer the layer we want our sprite to be drawn at
      * @param {number} scale the display scale
      * @param {number} alpha the transparency of our display
      * @param {number} tile if we plan on using a SpriteAtlas, the tile id of our sprite within the atlas
      */
-    constructor(spriteName = DefaultValues.EMPTY_IMAGE.name, layer=Layer.CHARACTERS, scale=1.0, alpha=1.0, tile=0) {
+    constructor(spriteName = DefaultValues.EMPTY_IMAGE.name, scale=1.0, alpha=1.0, tile=0) {
         super(arguments);
         this._PROPERTY_NAME = "graphic";
         this._spriteName = spriteName;
         this.sprite = ResourceManager.getSprite(spriteName);
-        this.layer = layer;
         this.scale = scale;
         this._alpha = alpha;
         this.tile = tile;

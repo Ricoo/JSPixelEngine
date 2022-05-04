@@ -13,7 +13,7 @@ export default class GameObject {
      * @param {number} y the y position of our object
      * @param {number} angle the angle our object should be displayed with (if necessary)
      */
-    constructor(name = "", x = 0, y = 0, angle = 0) {
+    constructor(name = "", x = 0, y = 0, layer=Layer.CHARACTERS, angle = 0) {
         this._uuid = UUID.generateUUID();
         this._position = new Vector2(x, y);
         this._angle = angle;
@@ -22,6 +22,7 @@ export default class GameObject {
         this._enabled = true;
         this._children = [];
         this._parent = undefined;
+        this.layer = layer;
         this._arguments = [...arguments]
         Scene.register(this);
     }
