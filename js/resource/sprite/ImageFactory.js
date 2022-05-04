@@ -27,6 +27,27 @@ export default class ImageFactory {
 
     }
 
+    static buildPath(path, matrix, dimensions, lineWidth, strokeColor, fillColor) {
+        const context = ImageFactory.instance.context;
+        const canvas = ImageFactory.instance.canvas;
+        const altPath = new Path2D();
+
+        altPath.addPath(path, matrix);
+
+        canvas.width = dimensions.x;
+        canvas.height = dimensions.y;
+
+        context.save();
+        context.fillStyle = fillColor;
+        context.strokeStyle = strokeColor;
+        context.lineWidth = lineWidth;
+        context.fill(altPath);
+        context.stroke(altPath);
+        context.restore();
+
+        return canvas.toDataURL("image/png")
+    }
+
     /**
      * @desc cuts a sprite in a rectangle between two points and returns the result
      * @param {Text} text the text property to render

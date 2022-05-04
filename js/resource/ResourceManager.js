@@ -64,6 +64,8 @@ export default class ResourceManager {
     static getSound(name){return ResourceManager.sounds.find(elem=> elem.name === name)};
     static getStyle(name) {return ResourceManager.styles.find(elem => elem.name === name)};
 
+    static addSprite(sprite) {ResourceManager.sprites.push(sprite);}
+
     static get sounds() {return ResourceManager.instance._sounds;}
     static get sprites() {return ResourceManager.instance._sprites;}
     static get styles() {return ResourceManager.instance._styles;}
