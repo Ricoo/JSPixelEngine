@@ -1,4 +1,6 @@
 import JSPixelCanvas from "../../engine/JSPixelCanvas.js";
+import ResourceManager from "../ResourceManager.js";
+import Sprite from "./Sprite.js";
 
 export default class ImageFactory {
     constructor() {
@@ -55,6 +57,11 @@ export default class ImageFactory {
      * @returns {HTMLImageElement}
      */
     static renderText({text, dimensions, font, size, color, type}) {
+        const name = `text:${text}:${dimensions.x}x${dimensions.y}:${font}:${size}:${color}:${type}`;
+        let sprite = ResourceManager.getSprite(name)
+        if (sprite) {
+            return sprite.image;
+        }
         const context = ImageFactory.instance.context;
         const canvas = ImageFactory.instance.canvas;
         const renderedText = new Image();
@@ -75,8 +82,13 @@ export default class ImageFactory {
         }
         context.restore()
         
-        renderedText.src = canvas.toDataURL("image/png");
-        return renderedText
+        sprite = new Sprite(
+            canvas.toDataURL("image/png"),
+            name,
+            [dimensions.x, dimensions.y],
+            ()=>{})
+        ResourceManager.addSprite(sprite)
+        return sprite.image
     }
 
     /**
