@@ -24,6 +24,7 @@ export default class GameObject {
         this._parent = undefined;
         this.layer = layer;
         this._arguments = [...arguments]
+        this._scene = Scene.current || Scene.initializing;
         Scene.register(this);
     }
 
@@ -155,10 +156,10 @@ export default class GameObject {
             this.removeChild(child);
         }
         for (let prop of this._properties) {
-            this[prop].delete();
+            this[prop]?.delete();
             delete this[prop];
         }
-        Scene.unregister(this);
+        this._scene.remove(this);
         delete this;
     }
 

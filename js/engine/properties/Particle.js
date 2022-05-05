@@ -68,7 +68,7 @@ export default class Particle extends Property {
                     obj.moveY += .1;
                 }
 
-                if (this.fadeout) {
+                if (this.fadeout && obj.graphic) {
                     obj["graphic"].alpha = obj.lifetime / this.lifetime;
                 }
                 obj.lifetime -= 17;
