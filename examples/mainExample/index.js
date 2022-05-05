@@ -34,7 +34,7 @@ class Game extends JSPixelApp {
     }
 
     initialize() {
-        const mainScene = new SceneMain()
+        const mainScene = new SceneMain(this)
         mainScene.load();
     }
 
