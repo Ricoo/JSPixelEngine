@@ -28,10 +28,10 @@ class Tab extends GameObject {
 
 export default class Layout extends GameObject {
     constructor(activeTab, tabLabels, callback) {
-        const [x, y] = [1600, 1000];
-        super("layout", x / 2, 50 + y / 2, Layer.ANIMATION)
+        const [x, y] = [window.innerWidth, window.innerHeight - 70];
+        super("layout", x / 2, 70 + y / 2, Layer.ANIMATION)
         this.attach(new Graphic(
-            ResourceManager.getPath("roundRectangle")
+            ResourceManager.getPath("square")
                 .get(x, y, 4, "black", `rgba(221,180,125,1)`)))
         tabLabels.forEach((label, index) => {
             new Tab(activeTab === index, 50+ 80*index, 50, label, () => {
