@@ -68,4 +68,5 @@ export default class Force extends Property {
     get x(){return this._force.x;}
     set x(value){this._force.x = value;}
     get stopped(){return this._stopped;}
+    get value(){return this._force;}
 };

@@ -82,16 +82,35 @@ export default class CollisionManager {
         if (tmp.length) {
             Scene.rigids().forEach(obj => {
                 if (go !== obj && go.collider.collide(obj.collider, newPos)) {
-                    go.force?.stop(prop)
+                    if (go.force?.weight && obj.force?.weight) {
+                        const m1 = go.force.weight;
+                        const m2 = obj.force.weight;
+                        const v1 = go.force.value.copy.mult(tmp.axis);
+                        const v2 = obj.force.value.copy.mult(tmp.axis);
+                        
+                        // New speeds calculations
+                        const goForce = v2.copy
+                            .mult(2 * m2)
+                            .add(v1.copy.mult(m1 - m2))
+                            .mult(1 / (m1 + m2))
+                            .sub(v1)
+                        const objForce = v1.copy
+                            .mult(2 * m1)
+                            .add(v2.copy.mult(m2 - m1))
+                            .mult(1 / (m1 + m2))
+                            .sub(v2)
+                        obj.force.add(objForce)
+                        go.force.add(goForce)
+                    }
+                    else {
+                        go.force?.stop(prop)
+                    }
                     while ((tmp.length !== 0) && go.collider.collide(obj.collider, newPos)) {
                         newPos.add(tmp);
                     }
-                    // return true;
                 }
-                // return false;
             })
         }
-        // console.log(newPos)
         return newPos;
     }
 
