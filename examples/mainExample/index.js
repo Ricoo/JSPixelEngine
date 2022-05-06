@@ -15,7 +15,8 @@ const resourcePack = {
         {src:"../resource/texture/Platform_stone.png",name:"platform",res:[96,32],atlas:[3,1]},
         {src:"../resource/texture/BasicShip.png",name:"ship",res:[318,64],atlas:[5,1]},
         {src:"../resource/texture/Tickbox.png",name:"tickbox",res:[32,16],atlas:[2,1]},
-        {src:"../resource/texture/Particle.png",name:"particle",res:[128,16],atlas:[4,1]}
+        {src:"../resource/texture/Particle.png",name:"particle",res:[64,16],atlas:[4,1]},
+        {src:"../resource/texture/Flame.png",name:"flame",res:[64,16],atlas:[4,1]},
     ],
     styles:[
         {name:"tooltipText",font: "Arial",size: 13,color: "#000000",type: TextType.fill,align: TextAlign.start},

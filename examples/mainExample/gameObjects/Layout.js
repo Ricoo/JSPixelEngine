@@ -21,8 +21,12 @@ class Tab extends GameObject {
         this.attach(new Collider(new Vector2(80, 50), undefined, (_, mouse) => {
             if (mouse.click) {
                 callback()
+            } else if (mouse.hover) {
+                this.text.setStyle({color: "#FFFFFF"})
+            } else {
+                this.text.setStyle({color: "#000000"})
             }
-        }, Trigger.CLICK))
+        }, Trigger.MOUSE))
     }
 }
 
