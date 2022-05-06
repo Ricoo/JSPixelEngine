@@ -11,7 +11,9 @@ export default class Scene {
 
     async preload() {
         this.load()
+        console.log("Preloading scene: " + this.constructor.name)
         this._gameObjects.forEach(go => {go.disable();});
+        this._preloaded = true;
     }
 
     async load() {
@@ -22,7 +24,12 @@ export default class Scene {
             Scene.current.unload();
         }
         Scene.initializing = this;
-        this.init();
+        console.log("Loading scene: " + this.constructor.name)
+        if (this._preloaded) {
+            this._gameObjects.forEach(go => {go.enable();})
+        } else {
+            this.init();
+        }
         Scene.initializing = undefined;
         Scene.current = this;
     }
@@ -35,7 +42,10 @@ export default class Scene {
 
     async unload() {
         Scene.unloading = this;
-        this._gameObjects.forEach(go => {go.delete();})
+        console.log("Unloading scene: " + this.constructor.name)
+        while (this._gameObjects.length) {
+            this._gameObjects.pop().delete();
+        }
         this._gameObjects = []
         Scene.unloading = undefined;
         Scene.current = undefined;
