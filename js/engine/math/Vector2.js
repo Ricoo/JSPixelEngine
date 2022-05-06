@@ -30,14 +30,21 @@ export default class Vector2 {
 
     /**
      * @desc multiplies the vector by provided value
-     * @param {number} number the value to multiply the vector with
+     * @param {number | Vector2} value the value to multiply the vector with
      * @returns {Vector2} the updated vector
      */
-    mult(number) {
-        this.x *= number;
-        this.y *= number;
+    mult(value) {
+        if (value instanceof Vector2) {
+            this.x *= value.x;
+            this.y *= value.y;
+        } else {
+            this.x *= value;
+            this.y *= value;
+        }
         return this
     }
+
+
 
     /**
      * @desc returns a fresh copy of this Vector2
@@ -49,7 +56,7 @@ export default class Vector2 {
      * @desc returns the length this Vector2
      * @returns {number}
      */
-     get length() {return Math.sqrt(this.x**2 + this.y**2)}
+    get length() {return Math.sqrt(this.x**2 + this.y**2)}
 
     /**
      * @desc returns a directional vector with length 1
@@ -66,11 +73,19 @@ export default class Vector2 {
      * @desc returns a directional vector with values either 0, -1 and 1
      * @returns {Vector2}
      */
-     get cardinal() {
+    get cardinal() {
         const {x, y} = this
         return new Vector2(
             (x > 0 ? 1 : x < 0 ? -1 : 0),
             (y > 0 ? 1 : y < 0 ? -1 : 0)
             )
+    }
+
+    get axis() {
+        const {x, y} = this
+        return new Vector2(
+            (x !== 0 ? 1 : 0),
+            (y !== 0 ? 1 : 0),
+        )
     }
 };
