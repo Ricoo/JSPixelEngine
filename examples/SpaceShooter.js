@@ -1,6 +1,5 @@
 import JSPixelApp from "../js/engine/JSPixelApp.js";
 import ResourceManager from "../js/resource/ResourceManager.js";
-import GameObjectManager from "../js/engine/manager/GameObjectManager.js";
 import EventManager from "../js/engine/manager/EventManager.js";
 import GameObject from "../js/engine/GameObject.js";
 import GUIText from "../js/engine/gui/GUIText.js";
@@ -150,7 +149,7 @@ class MainScene extends Scene {
             CollisionManager.instance.removeGroup(["Enemy","Missile"]);
         }
         if (keys.includes("3")) {
-            console.log(GameObjectManager.instance._list);
+            console.log(Scene.current._gameObjects);
         }
         if (keys.includes("i")) {
             this.ship["collider"].rigid = false;

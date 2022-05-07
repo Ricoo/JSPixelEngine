@@ -8,7 +8,7 @@ export default class GameObject {
     name;
     /**
      * @desc a gameObject, the standardized way to create and manipulate game elements
-     * @param {string} name the assigned name of this object so we can find it using its name in GameObjectManager
+     * @param {string} name the assigned name of this object so we can find it using its name in the Scene
      * @param {number} x the x position of our object
      * @param {number} y the y position of our object
      * @param {number} angle the angle our object should be displayed with (if necessary)

@@ -1,10 +1,8 @@
 import CollisionManager from "./manager/CollisionManager.js";
 import EventManager from "./manager/EventManager.js";
-import GameObjectManager from "./manager/GameObjectManager.js";
 import JSPixelApp from "./JSPixelApp.js";
 import JSPixelCanvas from "./JSPixelCanvas.js";
 import ResourceManager from "../resource/ResourceManager.js";
-import {Layer} from "../enum/Layer.js";
 import Scene from "./Scene.js";
 
 export default class JSPixelEngine {
