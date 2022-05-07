@@ -14,6 +14,7 @@ import {Layer} from "../js/enum/Layer.js";
 import {Event} from "../js/enum/Event.js";
 import {TextAlign} from "../js/enum/TextAlign.js";
 import {Trigger} from "../js/enum/Trigger.js";
+import Scene from "../js/engine/Scene.js";
 
 const resourceList = {
     audio:[
@@ -35,8 +36,8 @@ const animationList = {
 
 class Ship extends GameObject {
     constructor(x,y) {
-        super("ship",x,y);
-        this.attach(new Graphic("ship", Layer.CHARACTERS,2,1));
+        super("ship",x,y, Layer.CHARACTERS);
+        this.attach(new Graphic("ship", 2, 1));
         this.attach(new Collider(new Vector2(100,100), undefined, ()=>{}, Trigger.COLLIDER, true));
         this._fire = false;
     }
@@ -53,8 +54,8 @@ class Ship extends GameObject {
 
 class Enemy extends GameObject {
     constructor(x,y) {
-        super("ship", x, y, 180);
-        this.attach(new Graphic("ship", Layer.CHARACTERS,2,1));
+        super("ship", x, y, Layer.CHARACTERS, 180);
+        this.attach(new Graphic("ship",2,1));
         this.attach(new Collider(new Vector2(120,100), undefined, ()=>{
             this.generate();
         }, Trigger.COLLIDER, true));
@@ -83,11 +84,11 @@ class Enemy extends GameObject {
 class Missile extends GameObject {
     constructor(x,y) {
         super("missile", x, y);
-        this.attach(new Graphic("ship", Layer.BACKGROUND,1,1,1));
+        this.attach(new Graphic("ship", Layer.ANIMATION, 1, 1, 1));
         this.attach(new Animator([animationList.missile_fire]));
         this.attach(new Collider(new Vector2(50,20), undefined, ()=>{
-            Game.score += 1;
-            Game.scoreText.txt = "Score : "+ Game.score;
+            MainScene.score += 1;
+            MainScene.scoreText.txt = "Score : "+ MainScene.score;
             this.delete();
         }));
         this["animator"].play("missile_fire", false);
@@ -107,12 +108,9 @@ class Missile extends GameObject {
     }
 }
 
- class Game extends JSPixelApp {
-    constructor() {
-        super("game", resourceList);
-    }
 
-    initialize() {
+class MainScene extends Scene {
+    init() {
         let clickSound = ResourceManager.getSound("click");
         clickSound.volume = 0.2;
         clickSound.speed = 1;
@@ -127,20 +125,20 @@ class Missile extends GameObject {
         console.log("my super game have been initialized !");
         new Enemy(1000, Math.floor((Math.random() * 500) + 1));
 
-        Game.score = 0;
-        Game.scoreText = new GUIText("score", "Score : " + Game.score, 70, 35);
-        Game.scoreText["text"].align = TextAlign.center;
+        MainScene.score = 0;
+        MainScene.scoreText = new GUIText("score", "Score : " + MainScene.score, 70, 35);
+        MainScene.scoreText["text"].align = TextAlign.center;        
     }
 
-    frame() {
+    update(deltaTime) {
         let keys = EventManager.keys;
         let mouse = EventManager.mouse;
 
         if (keys.includes("ArrowUp")) {
-            this.ship.y -= 5;
+            this.ship.y -= 500 * deltaTime / 1000;
         }
         else if (keys.includes("ArrowDown")) {
-            this.ship.y += 5;
+            this.ship.y += 500 * deltaTime / 1000;
         }
         if (keys.includes(" ")) {
             this.ship.fire();
@@ -153,12 +151,6 @@ class Missile extends GameObject {
         }
         if (keys.includes("3")) {
             console.log(GameObjectManager.instance._list);
-        }
-        if (keys.includes("1")) {
-            this._debug.colliders = false;
-        }
-        if (keys.includes("2")) {
-            this._debug.colliders = true;
         }
         if (keys.includes("i")) {
             this.ship["collider"].rigid = false;
@@ -175,6 +167,26 @@ class Missile extends GameObject {
         }
         if (this.drag) {
             this.ship.position.y = mouse.y;
+        }
+    }
+}
+class Game extends JSPixelApp {
+    constructor() {
+        super("game", resourceList);
+    }
+
+    initialize() {
+        new MainScene(this).load()
+    }
+
+    frame() {
+        const keys = EventManager.keys
+
+        if (keys.includes("1")) {
+            this._debug.colliders = false;
+        }
+        if (keys.includes("2")) {
+            this._debug.colliders = true;
         }
     }
 }
