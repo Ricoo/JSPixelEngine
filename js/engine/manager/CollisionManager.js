@@ -14,24 +14,21 @@ export default class CollisionManager {
      * @desc checks if for any collision group, our corresponding colliders overlap
      */
     checkCollision() {
-        let list = Scene.colliders().filter(elem => elem["collider"].trigger.collide);
-        for (let g = 0; g < this._groups.length; g++) {
-            for (let g1 = 0; g1 < list.length; g1++) {
-                if(list[g1].constructor.name === this._groups[g][0]) {
-                    for (let g2 = 0; g2 < list.length; g2++) {
-                        if (g1 !== g2 && list[g2].constructor.name === this._groups[g][1]) {
-                            let c1 = list[g1]["collider"];
-                            let c2 = list[g2]["collider"];
-                            if (c1 && c2 && c1.collide(c2)) {
-                                c1.callback(g1, g2);
-                                c2.callback(g2, g1);
-                                console.log(list[g1].constructor.name + " collides with " + list[g2].constructor.name);
-                            }
+        this._groups.forEach(([group1, group2]) => {
+            const targetGroup = Scene.colliders().filter(go => go.constructor.name === group2 && go.collider.trigger.collide)
+
+            Scene.colliders()
+                .filter(go => go.constructor.name === group1 && go.collider.trigger.collide)
+                .forEach(go => {
+                    targetGroup.forEach(other => {
+                        if (go.collider?.collide(other.collider)) {
+                            go.collider.callback(go, other)
+                            other.collider.callback(other, go)
+                            console.log(`${go.name}:${go.uuid} collides with ${other.name}:${other.uuid}`)
                         }
-                    }
-                }
-            }
-        }
+                    })
+                })
+        });
     }
 
     /**
