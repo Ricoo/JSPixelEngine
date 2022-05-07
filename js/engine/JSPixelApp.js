@@ -12,7 +12,6 @@ export default class JSPixelApp {
         //Abstract class
         if (new.target === JSPixelApp) {throw TypeError("You have to inherit this class first");}
         if (this.initialize === undefined) {throw SyntaxError("You cannot leave the void:initialize() method unimplemented");}
-        if (this.frame === undefined) {throw SyntaxError("You cannot leave the void:frame() method unimplemented");}
 
         this._name = canvasName;
         this._canvas = document.getElementById(canvasName);
@@ -20,7 +19,7 @@ export default class JSPixelApp {
 
         this._engine = new JSPixelEngine();
         this._engine.register(this);
-        this._engine.preLoad(resourcePack);
+        this._engine.preLoad(resourcePack, this._canvas);
 
         if (settings === null) {
             settings = new JSPixelSettings();
@@ -29,9 +28,6 @@ export default class JSPixelApp {
         this._settings = settings;
         this._context.canvas.width = this._settings.resX;
         this._context.canvas.height = this._settings.resY;
-        this._context.webkitImageSmoothingEnabled = false;
-        this._context.mozImageSmoothingEnabled = false;
-        this._context.imageSmoothingEnabled = false;
         window.onresize = ()=>{
             if (this._settings.resize) {
                 this._settings.resX = window.innerWidth;
@@ -41,7 +37,7 @@ export default class JSPixelApp {
             }
         }
 
-        this._debug = false;
+        this._debug = {colliders: false, fps: false, events: false, keys: false};
     }
 
     //Getters and setters

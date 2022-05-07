@@ -1,4 +1,5 @@
-import GameObjectManager from "./GameObjectManager.js";
+import Vector2 from "../math/Vector2.js";
+import Scene from "../Scene.js";
 
 export default class CollisionManager {
     constructor() {
@@ -13,24 +14,21 @@ export default class CollisionManager {
      * @desc checks if for any collision group, our corresponding colliders overlap
      */
     checkCollision() {
-        let list = GameObjectManager.instance.colliders().filter(elem => elem["collider"].trigger.collide);
-        for (let g = 0; g < this._groups.length; g++) {
-            for (let g1 = 0; g1 < list.length; g1++) {
-                if(list[g1].constructor.name === this._groups[g][0]) {
-                    for (let g2 = 0; g2 < list.length; g2++) {
-                        if (g1 !== g2 && list[g2].constructor.name === this._groups[g][1]) {
-                            let c1 = list[g1]["collider"];
-                            let c2 = list[g2]["collider"];
-                            if (c1 && c2 && c1.collide(c2)) {
-                                c1.callback(g1, g2);
-                                c2.callback(g2, g1);
-                                console.log(list[g1].constructor.name + " collides with " + list[g2].constructor.name);
-                            }
+        this._groups.forEach(([group1, group2]) => {
+            const targetGroup = Scene.colliders().filter(go => go.constructor.name === group2 && go.collider.trigger.collide)
+
+            Scene.colliders()
+                .filter(go => go.constructor.name === group1 && go.collider.trigger.collide)
+                .forEach(go => {
+                    targetGroup.forEach(other => {
+                        if (go.collider?.collide(other.collider)) {
+                            go.collider.callback(go, other)
+                            other.collider.callback(other, go)
+                            console.log(`${go.name}:${go.uuid} collides with ${other.name}:${other.uuid}`)
                         }
-                    }
-                }
-            }
-        }
+                    })
+                })
+        });
     }
 
     /**
@@ -41,9 +39,12 @@ export default class CollisionManager {
      * @returns {GameObject}
      */
     checkRaycast(x, y, click) {
-        let list = GameObjectManager.instance.colliders().filter(elem => elem["collider"].trigger[(click ? "click" : "hover")]);
+        let list = Scene.colliders().filter(elem => elem["collider"].trigger[(click ? "click" : "hover")]);
         let res = undefined;
         for (let obj of list) {
+            if (!obj.collider) {
+                continue;
+            }
             if (obj["collider"].raycast(x,y)) {
                 res = obj;
                 if (!click) {
@@ -72,19 +73,40 @@ export default class CollisionManager {
      * @returns {Vector2} the final position of our object
      */
     checkRigid(go, newPos, prop) {
-        let oldPos = go.position;
-        let list = GameObjectManager.instance.rigids();
-        let tmp = oldPos.copy.sub(newPos).normalize;
-        for (let obj of list) {
-            if (go !== obj && go["collider"].collide(obj["collider"], newPos)) {
-                if (go.hasProperty("force")) {
-                    go["force"].stop(prop);
+        let oldPos = go.position.copy;
+        let tmp = oldPos.sub(newPos).normalize;
+
+        if (tmp.length) {
+            Scene.rigids().forEach(obj => {
+                if (go !== obj && go.collider.collide(obj.collider, newPos)) {
+                    if (go.force?.weight && obj.force?.weight) {
+                        const m1 = go.force.weight;
+                        const m2 = obj.force.weight;
+                        const v1 = go.force.value.copy.mult(tmp.axis);
+                        const v2 = obj.force.value.copy.mult(tmp.axis);
+                        
+                        // New speeds calculations
+                        const goForce = v2.copy
+                            .mult(2 * m2)
+                            .add(v1.copy.mult(m1 - m2))
+                            .mult(1 / (m1 + m2))
+                            .sub(v1)
+                        const objForce = v1.copy
+                            .mult(2 * m1)
+                            .add(v2.copy.mult(m2 - m1))
+                            .mult(1 / (m1 + m2))
+                            .sub(v2)
+                        obj.force.add(objForce)
+                        go.force.add(goForce)
+                    }
+                    else {
+                        go.force?.stop(prop)
+                    }
+                    while ((tmp.length !== 0) && go.collider.collide(obj.collider, newPos)) {
+                        newPos.add(tmp);
+                    }
                 }
-                while ((tmp.x !== 0 || tmp.y !== 0) && go["collider"].collide(obj["collider"], newPos)) {
-                    newPos.add(tmp);
-                }
-                break;
-            }
+            })
         }
         return newPos;
     }
@@ -94,6 +116,16 @@ export default class CollisionManager {
      * @param {String[]} group an array of two classnames that are supposed to collide
      */
     addGroup(group) {
-        this._groups.push(group);
+        if (this._groups.every(([g1, g2]) => g1 !== group[0] && g2 !== group[1])) {
+            this._groups.push(group);
+        }
+    }
+
+    /**
+     * @desc removes a group from the manager
+     * @param {String[]} group an array of two classnames that are supposed to collide
+     */
+    removeGroup(group) {
+        this._groups = this._groups.filter(([g1, g2]) => g1 !== group[0] && g2 !== group[1])
     }
 };

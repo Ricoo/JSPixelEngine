@@ -24,10 +24,10 @@ export default class Collider extends Property {
      * @note the boolean value in the callback designs whether the mouse have been clicked or not
      */
     constructor(dimensions=new Vector2(), offset=new Vector2(), callback=()=>{}, trigger=Trigger.COLLIDER, rigid=false) {
-        super();
+        super(arguments);
         this._PROPERTY_NAME = "collider";
         this.dimensions = dimensions;
-        this.offset = offset;
+        this.offset = offset || new Vector2();
         this.callback = callback;
         this.trigger = trigger;
         this._rigid = rigid;

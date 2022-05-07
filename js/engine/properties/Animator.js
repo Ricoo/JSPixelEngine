@@ -8,7 +8,7 @@ export default class Animator extends Property {
      * @param {Animation[]} list the array of animations affected to our GameObject
      */
     constructor(list=undefined) {
-        super();
+        super(arguments);
         this._PROPERTY_NAME = "animator";
         this._animations = (list ? list : []);
         this._running = null;
@@ -61,7 +61,6 @@ export default class Animator extends Property {
         if (this._running !== null) {
             if (this._playing !== null) {
                 this._current = 0;
-                this._gameObject["graphic"].image = this._element[this._playing.end];
                 this._gameObject["graphic"].tile = this._playing.end;
             }
             clearInterval(this._running);
@@ -72,7 +71,6 @@ export default class Animator extends Property {
     }
 
     _animate(animation) {
-        this._gameObject["graphic"].image = this._element[this._playing.frames[this._current]];
         this._gameObject["graphic"].tile = this._playing.frames[this._current];
         this._current++;
         if (this._current === animation.size) {

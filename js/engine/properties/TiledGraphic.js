@@ -28,8 +28,8 @@ export default class TiledGraphic extends Graphic {
      * @param {number} endTile the ending tile
      * @param {number} amount the number of repeats
      */
-    constructor(spriteName=DefaultValues.EMPTY_IMAGE.name, layer=Layer.BACKGROUND, scale=1, startingTile=0, middleTile=1, endTile=2, amount=3) {
-        super(spriteName, layer, scale);
+    constructor(spriteName=DefaultValues.EMPTY_IMAGE.name, scale=1, startingTile=0, middleTile=1, endTile=2, amount=3) {
+        super(spriteName, scale, [...arguments].slice(3, arguments.length - 1));
         if (!this.sprite instanceof SpriteAtlas) {
             throw TypeError("Cannot have a TiledGraphic without a SpriteAtlas !");
         }

@@ -1,12 +1,14 @@
 export default class Property {
+    _arguments
     /**
      * @desc the mother class of all our attachable properties
      */
-    constructor() {
+    constructor(args) {
         this._PROPERTY_NAME = undefined;
         if (new.target === Property) {
             throw TypeError("You have to extend this class");
         }
+        this._arguments = [...args]
     }
 
     /**
@@ -22,6 +24,7 @@ export default class Property {
      * @returns {GameObject}
      */
     get gameObject() {return this._gameObject;}
+    get arguments() {return this._arguments;}
 
     delete() {}
 };

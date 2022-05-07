@@ -2,9 +2,11 @@ import Sprite from "./sprite/Sprite.js";
 import Sound from "./sound/Sound.js";
 import SpriteAtlas from "./sprite/SpriteAtlas.js";
 import {DefaultValues} from "../enum/DefaultValues.js";
+import JSPixelCanvas from "../engine/JSPixelCanvas.js";
+import Path from "./sprite/Path.js";
 
 export default class ResourceManager {
-    constructor() {
+    constructor(canvas) {
         if (ResourceManager.instance !== undefined) {
             return ResourceManager.instance;
         }
@@ -12,9 +14,12 @@ export default class ResourceManager {
 
         this._sprites = [];
         this._sounds = [];
+        this._styles = [];
+        this._svgs = [];
         this._count = 0;
         this._total = 0;
         this._done = false;
+        this.canvas = canvas;
     }
 
     /**
@@ -23,18 +28,28 @@ export default class ResourceManager {
      * @callback this function sets this._done to true after the resources have been loaded
      */
     loadResources(packageDescriptor) {
+        const testPromises = 0;
         this._done = false;
-        this._total = packageDescriptor.sprites.length + packageDescriptor.audio.length;
-        let {sprites, audio} = packageDescriptor;
-        this._total = [...sprites, ...audio].length;
+        let {sprites, audio, styles, paths} = packageDescriptor;
+        this._total = [...sprites, ...audio].length + testPromises;
         let callback = () => {
             this._count += 1;
+            JSPixelCanvas.loader(this.canvas, this._count, this._total)
             if (this._count === this._total) {
                 console.log("Finished loading  ["+this._total+"/"+this._total+"]");
-                this._done = true;}};
+                this._done = true;
+            }
+        };
+        Array.from({length: testPromises}, (v, i) => i).forEach(()=>{
+            new Promise(resolve => {
+                setTimeout(resolve, Math.random() * 5000);
+            }).then(callback)
+        });
+
+        // Add a default empty image to handle inexistant images
         this._sprites.push(new Sprite(DefaultValues.EMPTY_IMAGE.src,
             DefaultValues.EMPTY_IMAGE.name,  DefaultValues.EMPTY_IMAGE.res, ()=>{}));
-        sprites.forEach((elem) => {
+        sprites?.forEach((elem) => {
             if (elem.hasOwnProperty("atlas")) {
                 this._sprites.push(new SpriteAtlas(elem["src"],elem["name"],elem["res"], callback, elem["atlas"]));
             }
@@ -42,16 +57,28 @@ export default class ResourceManager {
                 this._sprites.push(new Sprite(elem["src"],elem["name"],elem["res"], callback));
             }
         });
-        audio.forEach((elem) => {
+
+        audio?.forEach((elem) => {
             this._sounds.push(new Sound(elem["src"],elem["name"], callback));
         });
+        this._styles.push(DefaultValues.DEFAULT_STYLE)
+
+        styles?.forEach(elem => this._styles.push(elem))
+
+        paths?.forEach(elem => this._svgs.push(new Path(elem.svg, elem.name, elem.res, elem.stroke, elem.fill)));
     }
 
     static getSprite(name){return ResourceManager.sprites.find(elem=> elem.name === name)};
     static getSound(name){return ResourceManager.sounds.find(elem=> elem.name === name)};
+    static getStyle(name) {return ResourceManager.styles.find(elem => elem.name === name)};
+    static getPath(name) {return ResourceManager.paths.find(elem => elem.name === name)};
+
+    static addSprite(sprite) {ResourceManager.sprites.push(sprite);}
 
     static get sounds() {return ResourceManager.instance._sounds;}
     static get sprites() {return ResourceManager.instance._sprites;}
+    static get styles() {return ResourceManager.instance._styles;}
+    static get paths() {return ResourceManager.instance._svgs;}
     get done() {return this._done;}
 
     get count() {return this._count;}

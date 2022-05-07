@@ -1,87 +1,107 @@
 import GameObject from "./GameObject.js";
-import Vector2 from "./math/Vector2.js";
-import {Layer} from "../enum/Layer.js";
-import {Trigger} from "../enum/Trigger.js";
 
 export default class Scene {
-    constructor(sceneJSON) {
-        sceneJSON = {
-            "name":"Scene1",
-            "gameObjects" : [
-                {
-                    "name":"figure",
-                    "args":[
-                        "test",
-                        100,
-                        200],
-                    "props":{
-                        "Graphic":["hero","Layer.CHARACTERS",2],
-                        "Force":["1","10"],
-                        "Collider":["new Vector2(10,10)","undefined","()=>{}","Trigger.COLLIDER","true"]
-                    },
-                    "children": [
-                        {
-                            "name":"text",
-                            "cls":"GUIText",
-                            "path":"./gui/GUIText.js",
-                            "args":[
-                                "test",
-                                "this is a test text",
-                                100,
-                                100],
-                            "props":{
-                                "Collider":["new Vector2(40,40)","undefined","()=>{}","Trigger.COLLIDER","true"]
-                            }
-                        },
-                    ]
-                },
-            ]
-        };
-        this._json = sceneJSON;
-        this._objects = [];
+    constructor(app) {
+        if (new.target === Scene) {throw TypeError("Scene isn't instanciable, inherit it first");}
+        if(this.init === undefined) {throw SyntaxError("Scene instance must implement an init() => void method")}
+        if(this.update === undefined) {throw SyntaxError("Scene instance must implement a update() => void method")}
+        this._gameObjects = []
+        this._app = app;
     }
 
-    load() {
-        for (let obj of this._json.gameObjects) {
-            this.createGameObject(obj).then(go => {this._objects.push(go);});
+    async preload() {
+        this.load()
+        console.log("Preloading scene: " + this.constructor.name)
+        this._gameObjects.forEach(go => {go.disable();});
+        this._preloaded = true;
+    }
+
+    async load() {
+        if (Scene.current === this) {
+            return;
         }
+        if (Scene.current) {
+            Scene.current.unload();
+        }
+        Scene.initializing = this;
+        console.log("Loading scene: " + this.constructor.name)
+        if (this._preloaded) {
+            this._gameObjects.forEach(go => {go.enable();})
+        } else {
+            this.init();
+        }
+        Scene.initializing = undefined;
+        Scene.current = this;
     }
 
-    unload() {
-
+    async reload() {
+        this.unload();
+        Scene.current = undefined;
+        this.load();
     }
 
-    async createGameObject(obj) {
-        let go = {};
-        if (obj.path !== undefined) {
-            await import(obj.path).then(
-                (cls) => {
-                    go = new cls.default(...(obj.args));
-                }
-            );
+    async unload() {
+        Scene.unloading = this;
+        console.log("Unloading scene: " + this.constructor.name)
+        while (this._gameObjects.length) {
+            this._gameObjects.pop().delete();
+        }
+        this._gameObjects = []
+        Scene.unloading = undefined;
+        Scene.current = undefined;
+    }
+
+    add(go) {
+        if (go instanceof GameObject) {
+            this._gameObjects.push(go);
         }
         else {
-            go = new GameObject(...(obj.args));
+            throw TypeError("You must provide an instance of GameObject");
         }
-        for (let prop in obj.props) {
-            let args = [];
-            await import(obj.props[prop].path || "./properties/" + prop + ".js").then(
-                (cls) => {
-                    for (let arg of obj.props[prop]) {
-                        try {
-                            let tmp = eval(arg);
-                            args.push(tmp);
-                        }
-                        catch (ReferenceError) {
-                            args.push(arg);
-                        }
-                    }
-                    go.attach(new cls.default(...args));
-                }
-            );
-        }
-        if (obj.children !== undefined)
-            obj.children.forEach(child => this.createGameObject(child).then(newChild => go.addChild(newChild)));
-        return Promise.resolve(go);
     }
+
+    remove(go) {
+        this._gameObjects.splice(this._gameObjects.indexOf(go), 1);
+    }
+
+    static forces() {
+        return Scene.current?.gameObjects.filter(go => go.enabled && go.hasProperty("force")) || []
+    }
+
+    static graphics() {
+        return Scene.current?.gameObjects
+            .filter(go => go.enabled && (go.hasProperty("graphic") || go.hasProperty("text")))
+            .sort((a, b) => a.layer - b.layer || a.position.y - b.position.y) || []
+    }
+
+    static colliders() {
+        return Scene.current?.gameObjects.filter(go => go.enabled && go.hasProperty("collider")) || []
+    }
+
+    static rigids() {
+        return Scene.current?.gameObjects.filter(go => go.enabled && go.hasProperty("collider") && go["collider"].rigid) || []
+    }
+
+    static find(name) {
+        return Scene.current.gameObjects.filter(go => go.name === name)
+    }
+
+    static register(go) {
+        if (Scene.initializing) {
+            Scene.initializing.add(go);
+        } else {
+            Scene.current.add(go);
+        }
+    }
+
+    static unregister(go) {
+        if (Scene.unloading) {
+            Scene.unloading.remove(go);
+        } else {
+            Scene.current.remove(go);
+        }    
+    }
+
+    get gameObjects() {return this._gameObjects;}
+    get app() {return this._app;}
 }

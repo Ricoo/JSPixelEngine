@@ -1,17 +1,20 @@
 import Property from "./properties/Property.js";
 import Vector2 from "./math/Vector2.js";
-import GameObjectManager from "./manager/GameObjectManager.js";
+import UUID from "./math/UUID.js";
+import { Layer } from "../enum/Layer.js";
+import Scene from "./Scene.js";
 
 export default class GameObject {
     name;
     /**
      * @desc a gameObject, the standardized way to create and manipulate game elements
-     * @param {string} name the assigned name of this object so we can find it using its name in GameObjectManager
+     * @param {string} name the assigned name of this object so we can find it using its name in the Scene
      * @param {number} x the x position of our object
      * @param {number} y the y position of our object
      * @param {number} angle the angle our object should be displayed with (if necessary)
      */
-    constructor(name = "", x = 0, y = 0, angle = 0) {
+    constructor(name = "", x = 0, y = 0, layer=Layer.CHARACTERS, angle = 0) {
+        this._uuid = UUID.generateUUID();
         this._position = new Vector2(x, y);
         this._angle = angle;
         this.name = name;
@@ -19,7 +22,10 @@ export default class GameObject {
         this._enabled = true;
         this._children = [];
         this._parent = undefined;
-        GameObjectManager.register(this);
+        this.layer = layer;
+        this._arguments = [...arguments]
+        this._scene = Scene.current || Scene.initializing;
+        Scene.register(this);
     }
 
     /**
@@ -150,10 +156,10 @@ export default class GameObject {
             this.removeChild(child);
         }
         for (let prop of this._properties) {
-            this[prop].delete();
+            this[prop]?.delete();
             delete this[prop];
         }
-        GameObjectManager.instance.remove(this);
+        this._scene.remove(this);
         delete this;
     }
 
@@ -176,11 +182,16 @@ export default class GameObject {
     get position() {return this._position;}
     set position(position) {
         this._position.x = position.x;
-        this._position.y = position.y;
+        this._position.y = position.y
     }
     get angle() {return this._angle;}
     set angle(a) {this._angle = (a > 360 ? a - 360 : (a < 0 ? a + 360 : a));}
 
     get children() {return this._children;}
     get parent() {return this._parent;}
+    get uuid() {return this._uuid;}
+    set forceUuid(uuid) {this._uuid = uuid;}
+    get properties() {return this._properties.map(key=>this[key]);}
+    get arguments() {return this._arguments;}
+    get enabled() {return this._enabled;}
 };

@@ -51,17 +51,16 @@ export default class EventManager {
 
     keyDown(ev) {
         //ev.preventDefault();
-        if (!this._keysPressed.includes(ev.keyCode))
-            this._keysPressed.push(ev.keyCode);
+        if (!this._keysPressed.includes(ev.key))
+            this._keysPressed.push(ev.key);
         for (let handler of this._handlers[Event.KeyDown]) {
             handler(this._keysPressed);
         }
-        //    console.log(Array.from(this._keysPressed, (x) => {return Object.keys(KeyCode).find(key => KeyCode[key] === x)}));
     }
 
     keyUp(ev) {
         //ev.preventDefault();
-        this._keysPressed.splice(this._keysPressed.indexOf(ev.keyCode), 1);
+        this._keysPressed.splice(this._keysPressed.indexOf(ev.key), 1);
         for (let handler of this._handlers[Event.KeyUp]) {
             handler(this._keysPressed);
         }

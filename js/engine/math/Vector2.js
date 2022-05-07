@@ -29,17 +29,63 @@ export default class Vector2 {
     }
 
     /**
+     * @desc multiplies the vector by provided value
+     * @param {number | Vector2} value the value to multiply the vector with
+     * @returns {Vector2} the updated vector
+     */
+    mult(value) {
+        if (value instanceof Vector2) {
+            this.x *= value.x;
+            this.y *= value.y;
+        } else {
+            this.x *= value;
+            this.y *= value;
+        }
+        return this
+    }
+
+
+
+    /**
      * @desc returns a fresh copy of this Vector2
      * @returns {Vector2}
      */
     get copy() {return new Vector2(this.x, this.y);}
 
     /**
-     * @desc returns a directional vector with values between -1 and 1
+     * @desc returns the length this Vector2
+     * @returns {number}
+     */
+    get length() {return Math.sqrt(this.x**2 + this.y**2)}
+
+    /**
+     * @desc returns a directional vector with length 1
      * @returns {Vector2}
      */
-    get normalize() {return new Vector2(
-        (this.x > 0 ? 1 : (this.x < 0 ? -1 : 0)),
-        (this.y > 0 ? 1 : (this.y < 0 ? -1 : 0)));
+    get normalize() {
+        if (this.x === 0 && this.y === 0) {
+            return new Vector2(0,0);
+        }
+        return new Vector2(this.x, this.y).mult(1/this.length);
+    }
+
+    /**
+     * @desc returns a directional vector with values either 0, -1 and 1
+     * @returns {Vector2}
+     */
+    get cardinal() {
+        const {x, y} = this
+        return new Vector2(
+            (x > 0 ? 1 : x < 0 ? -1 : 0),
+            (y > 0 ? 1 : y < 0 ? -1 : 0)
+            )
+    }
+
+    get axis() {
+        const {x, y} = this
+        return new Vector2(
+            (x !== 0 ? 1 : 0),
+            (y !== 0 ? 1 : 0),
+        )
     }
 };

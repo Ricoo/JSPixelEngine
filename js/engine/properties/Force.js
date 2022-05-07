@@ -17,7 +17,7 @@ export default class Force extends Property {
      * @param {boolean} bounce whether our object is bouncing or not
      */
     constructor(gravity = 0, weight = 0, bounce=false) {
-        super();
+        super(arguments);
         this._PROPERTY_NAME = "force";
         this.gravity = gravity;
         this.weight = weight;
@@ -26,11 +26,16 @@ export default class Force extends Property {
         this._stopped = false;
     }
 
-    //TODO
-    update() {
-        this._force.add(new Vector2(0, this.gravity));
-        this._gameObject.x += this._force.x;
-        this._gameObject.y += this._force.y;
+    update(delay = 0) {
+        this._force.add(new Vector2(0, this.gravity * delay / 1000));
+
+        const apply = new Vector2(Math.round(this._force.x), Math.round(this._force.y))
+        if (apply.x !== 0) {
+            this._gameObject.x += apply.x;
+        }
+        if (apply.y !== 0) {
+            this._gameObject.y += apply.y; 
+        }
     }
 
     apply(value) {
@@ -46,11 +51,9 @@ export default class Force extends Property {
         this._stopped = true;
         if (direction === "y" && this.bounce) {
             this._force.y *= -1;
-            this.update()
         }
         else if (this.bounce) {
             this._force.x *= -1;
-            this.update()
         }
         else if (direction === "y") {
             this._force.y = 0;
@@ -65,4 +68,5 @@ export default class Force extends Property {
     get x(){return this._force.x;}
     set x(value){this._force.x = value;}
     get stopped(){return this._stopped;}
+    get value(){return this._force;}
 };

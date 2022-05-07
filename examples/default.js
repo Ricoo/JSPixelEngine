@@ -12,12 +12,13 @@ import Collider from "../js/engine/properties/Collider.js";
 import Particle from "../js/engine/properties/Particle.js";
 import Force from "../js/engine/properties/Force.js";
 import {Layer} from "../js/enum/Layer.js";
-import {KeyCode} from "../js/enum/KeyCode.js";
 import {Event} from "../js/enum/Event.js";
 import {ParticleType} from "../js/enum/ParticleType.js";
 import {Trigger} from "../js/enum/Trigger.js";
 import TiledGraphic from "../js/engine/properties/TiledGraphic.js";
 import Scene from "../js/engine/Scene.js";
+import { TextType } from "../js/enum/TextType.js";
+import { TextAlign } from "../js/enum/TextAlign.js";
 
 const resourceList = {
     audio:[
@@ -31,6 +32,14 @@ const resourceList = {
         {src:"./resource/texture/BasicShip.png",name:"ship",res:[318,64],atlas:[5,1]},
         {src:"./resource/texture/Tickbox.png",name:"tickbox",res:[32,16],atlas:[2,1]},
         {src:"./resource/texture/Particle.png",name:"particle",res:[128,16],atlas:[4,1]}
+    ],
+    styles:[
+        {name:"tooltipText",font: "Arial",size: 13,color: "#000000",type: TextType.fill,align: TextAlign.start}
+    ],
+    paths:[
+        {name:"square", svg:"M0 0 h 80 v 80 h -80 Z", res:[80, 80]},
+        {name:"roundRectangle", svg:"M 26 10 L 74 10 C 82.837 10 90 17.163 90 26 L 90 74 C 90 82.836 82.837 90 74 90 L 26 90 C 17.164 90 10 82.836 10 74 L 10 26 C 10 17.163 17.164 10 26 10 Z", res: [100,100]},
+        {name:"star", svg:"M 50 10 L 59.888 39.912 L 90 40.557 L 66 59.689 L 74.721 90 L 50 71.912 L 25.279 90 L 34 59.689 L 10 40.557 L 40.112 39.912 Z", res: [100,100]},
     ]
 };
 
@@ -43,23 +52,34 @@ const animationList = {
     missile_fire : new Animation("missile_fire",[1,2,3,4],100,4)
 };
 
+class Square extends GameObject {
+    constructor(x, y) {
+        super("square", x, y, Layer.PARTICLE);
+        this.attach(
+            new Graphic(
+                ResourceManager.getPath("roundRectangle")
+                    .get(370, 170, 4, "yellow", "rgba(0,0,0,.5)")
+            )
+        );
+    }
+}
+
 class Tickbox extends GameObject {
     constructor(x, y, text="") {
-        super("tickbox", x, y);
-        this.attach(new Graphic("tickbox", Layer.GUI, 1, 1));
+        super("tickbox", x, y, Layer.GUI);
+        this.attach(new Graphic("tickbox", 1, 1));
         this._ticked = false;
 
-        this.tooltip = new GUIText("tooltip", text, x + 20, y);
+        this.tooltip = new GUIText("tooltip", text, x + 20, y, ResourceManager.getStyle("tooltipText"));
         let dimensions = this.tooltip.text.getDimensions(Game.instance.context);
         this.tooltip.attach(new Collider(new Vector2(dimensions.x,dimensions.y), new Vector2(dimensions.x/2, 0), (obj, mouse)=>{
             if (mouse.hover) {
-                obj.text.color = "#FFFFFF";
+                obj.text.setStyle({color: "#FFFFFF"})
             }
             else {
-                obj.text.color = "#000000";
+                obj.text.setStyle({color: "#000000"})
             }
         }, Trigger.HOVER));
-        this.tooltip.text.size = 13;
         this.tooltip.disable();
 
         this.attach(new Collider(new Vector2(20,20), undefined, (obj, mouse) =>{
@@ -75,8 +95,8 @@ class Tickbox extends GameObject {
 
 class Clock extends GameObject {
     constructor(x, y) {
-        super("clock", x, y);
-        this.attach(new Graphic("clock", Layer.BACKGROUND, 4));
+        super("clock", x, y, Layer.BACKGROUND);
+        this.attach(new Graphic("clock", 4));
         this.attach(new Animator([animationList.pendulum_tick]));
         this["animator"].play("pendulum_tick");
     }
@@ -84,56 +104,47 @@ class Clock extends GameObject {
 
 class Hero extends GameObject {
     constructor(x, y, sprite) {
-        super("hero", x, y);
-        this.attach(new Graphic(sprite, Layer.CHARACTERS, 4));
+        super("hero", x, y, Layer.CHARACTERS);
+        this.attach(new Graphic(sprite, 4));
         this.attach(new Collider(new Vector2(50, 110), new Vector2(0,10), ()=>{}, Trigger.COLLIDER, true));
         this.attach(new Animator([animationList.character_left,
             animationList.character_right,
             animationList.character_idle_left,
             animationList.character_idle_right]));
         this.attach(new Particle("particle", ParticleType.Fall, 1, 500, 30, true, [2,3], [0,1,2,3], new Vector2(10,20), new Vector2(0,60)));
-        this.attach(new Force(1, 10, false));
+        this.attach(new Force(20, 10, false));
     }
 }
 
 class Marine extends GameObject {
     constructor(x, y, sprite) {
-        super("marine", x, y);
-        this.attach(new Graphic(sprite, Layer.CHARACTERS, 4));
+        super("marine", x, y, Layer.CHARACTERS);
+        this.attach(new Graphic(sprite, 4));
         this.attach(new Collider(new Vector2(50, 90), new Vector2(0,0), ()=>{}, Trigger.COLLIDER, true));
         this.attach(new Animator([animationList.character_left, animationList.character_right]));
-        this.attach(new Force(1, 10, true));
+        this.attach(new Force(20, 10, true));
     }
 }
 
 class Platform extends GameObject {
     constructor(x, y) {
-        super("platform", x, y);
-        this.attach(new TiledGraphic("platform", Layer.BACKGROUND, 4, 0, 1, 2, 6));
+        super("platform", x, y, Layer.BACKGROUND);
+        this.attach(new TiledGraphic("platform", 4, 0, 1, 2, 6));
         this.attach(new Collider(new Vector2(700, 40), new Vector2(0, -10), ()=>{}, Trigger.COLLIDER, true));
     }
 }
 
-class Game extends JSPixelApp {
-    constructor() {
-        super("game", resourceList);
-        if (Game.instance)
-            return Game.instance;
-        else
-            Game.instance = this;
-    }
-
-    initialize() {
+class LandingScene extends Scene {
+    init() {
         let clickSound = ResourceManager.getSound("click");
         clickSound.volume = 0.2;
         clickSound.speed = 1;
-        this._debug = true;
 
-        this.marine = new Marine(200,100, "marine");
+        this.marine = new Marine(300,100, "marine");
         this.hero = new Hero(100,100, "hero");
         this.jump = false;
 
-        this.tickbox = new Tickbox(20, 100, "Hey you ticked me !");
+        this.tickbox = new Tickbox(20, 100, ["Hey you ticked me !", "test"]);
         this.tickbox2 = new Tickbox(20, 120, "Why do you keep ticking us ??");
         this.clock = new Clock(640, 615);
         this.test = new Platform(400,710);
@@ -142,10 +153,41 @@ class Game extends JSPixelApp {
         this.moved = true;
         this.move();
 
+        this.square = new Square(200, 100);
+
         EventManager.registerHandler(Event.MouseDown, () => {clickSound.play();});
         console.log("my super game have been initialized !");
-        this.scene = new Scene();
-        this.scene.load();
+    }
+
+    update(deltaTime) {
+        let keys = EventManager.keys;
+        if (keys.includes("ArrowRight")) {
+            this.hero.orientation = "right";
+            this.hero.x += 300 * deltaTime / 1000;
+            this.hero["animator"].play("character_right");
+            this.hero["particle"].run();
+        }
+        else if (keys.includes("ArrowLeft")) {
+            this.hero.orientation = "left";
+            this.hero.x -= 300 * deltaTime / 1000;
+            this.hero["animator"].play("character_left");
+            this.hero["particle"].run();
+        }
+        else if (this.hero.orientation === "right") {
+            this.hero["animator"].play("character_idle_right");
+            this.hero["particle"].stop();
+        }
+        else {
+            this.hero["animator"].play("character_idle_left");
+            this.hero["particle"].stop();
+        }
+        if (keys.includes(" ") && !this.jump) {
+            this.jump = true;
+            this.hero["force"].apply(new Vector2(0,-5));
+        }
+        else if (!keys.includes(" ") && this.hero["force"].stopped){
+            this.jump = false;
+        }
     }
 
     move() {
@@ -160,41 +202,41 @@ class Game extends JSPixelApp {
         }
     }
 
-    frame() {
-        let keys = EventManager.keys;
-        if (keys.includes(KeyCode.arrowRight)) {
-            this.hero.orientation = "right";
-            this.hero.x += 3;
-            this.hero["animator"].play("character_right");
-            this.hero["particle"].run();
-        }
-        else if (keys.includes(KeyCode.arrowLeft)) {
-            this.hero.orientation = "left";
-            this.hero.x -= 3;
-            this.hero["animator"].play("character_left");
-            this.hero["particle"].run();
-        }
-        else if (this.hero.orientation === "right") {
-            this.hero["animator"].play("character_idle_right");
-            this.hero["particle"].stop();
-        }
-        else {
-            this.hero["animator"].play("character_idle_left");
-            this.hero["particle"].stop();
-        }
-        if (keys.includes(KeyCode.num1)) {
-            this._debug = false;
-        }
-        if (keys.includes(KeyCode.num2)) {
-            this._debug = true;
-        }
+}
 
-        if (keys.includes(KeyCode.spacebar) && !this.jump) {
-            this.jump = true;
-            this.hero["force"].apply(new Vector2(0,-20));
+class Game extends JSPixelApp {
+    constructor() {
+        super("game", resourceList);
+        if (Game.instance)
+            return Game.instance;
+        else
+            Game.instance = this;
+    }
+
+    initialize() {
+        let scene = new LandingScene(this)
+        scene.load();
+    }
+
+    frame() {
+        const keys = EventManager.keys;
+        if (keys.includes("1")) {
+            this._debug = {};
         }
-        else if (!keys.includes(KeyCode.spacebar) && this.hero["force"].stopped){
-            this.jump = false;
+        if (keys.includes("2")) {
+            this._debug.colliders = true;
+        }
+        if (keys.includes("3")) {
+            this._debug.fps = true;
+        }
+        if (keys.includes("4")) {
+            this._debug.events = true;
+        }
+        if (keys.includes("5")) {
+            this._debug.keys = true;
+        }
+        if (keys.includes("6")) {
+            this._debug = {colliders: true, fps: true, events: true, keys: true}
         }
     }
 }
